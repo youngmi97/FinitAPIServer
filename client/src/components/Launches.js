@@ -2,7 +2,11 @@ import React, { Component, Fragment } from 'react';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import LaunchItem from './LaunchItem'
-
+import Navigation_Button from './Navigation_Button'
+import Navigation_Search from './Navigation_Search'
+import { Container, Row, Col, Navbar, NavbarBrand, NavLink, Nav, Form, FormControl, Button } from 'react-bootstrap';
+import Test1 from './Test1'
+import Navigation_Profile from './Navigation_Profile';
 
 const LAUNCHES_QUERY = gql`
     query LaunchesQuery {
@@ -19,22 +23,18 @@ export class Launches extends Component {
     render() {
         return (
           <Fragment>
-            <h1 className="display-4 my-3"> Missions</h1>
-            <Query query={LAUNCHES_QUERY}>
-              {({ loading, err, data }) => {
-                if (loading) return <h4>Loading ...</h4>;
-                if (err) console.log("err", err);
-                //console.log("data", data);
-
-                return <Fragment>
-                    {
-                        data.launches.map(launch => (
-                            <LaunchItem key={launch.flight_number} launch={launch}/>
-                        ))
-                    }
-                </Fragment>;
-              }}
-            </Query>
+            <Container>
+              <Row>
+                <Col>
+                <Navigation_Button/>
+                </Col>
+                <Col>
+                <Navigation_Search/></Col>
+                <Col style = {{alignItems : "right"}}>
+                <Navigation_Profile/>
+                </Col>
+              </Row>
+            </Container>
           </Fragment>
         );
     }
