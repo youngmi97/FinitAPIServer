@@ -28,11 +28,6 @@ export class Launches extends Component {
                 <Col>
                 <Navigation_Button/>
                 </Col>
-                <Col>
-                <Navigation_Search/></Col>
-                <Col style = {{alignItems : "right"}}>
-                <Navigation_Profile/>
-                </Col>
               </Row>
             </Container>
           </Fragment>

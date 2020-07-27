@@ -15,7 +15,7 @@ class Profile_Buttons extends Component {
                         <Card.Title style = {{fontSize : 15}}>
                             <Row inline>
                                 <Col md = {6}>MY TITLES</Col>
-                                <Col md = {{span : 6, offset:7}}><Button variant = "light" style = {{fontSize : 8}}>See more ></Button></Col>
+                                <Col md = {{span : 6, offset:7}}><Button variant = "light" style = {{fontSize : 8}}>See more</Button></Col>
                             </Row>
                         </Card.Title>
                         <Button variant="light" style = {{fontSize : 10}}>Film Lover</Button>
