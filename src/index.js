@@ -4,12 +4,18 @@ import { ApolloServer, gql } from 'apollo-server-express';
 import typeDefs from './typeDefs';
 import resolvers from './resolvers';
 
+
 const express = require('express');
+const redis = require("redis");
 const graphqlHTTP = require('express-graphql');
 const schema = require('./schema.js');
 const plaid = require('plaid');
-const dotenv = require('dotenv');
+const path = require('path');
+const dotenv = require('dotenv').config({path: require("find-config")(".env")});
 const bodyParser = require('body-parser');
+const session = require('express-session');
+const connectRedis = require('connect-redis');
+
 const cors = require('cors');
 const connectDB = require('./models/connection.js');
 
@@ -26,21 +32,69 @@ app.use(cors());
 
 
 const {
-    NODE_ENV = 'development'
+    NODE_ENV = 'development',
+    SESS_NAME = 'sid',
+    SESS_SECRET = 'ssh!secret!',
+    SESS_LIFETIME = 1000 * 60 * 60 * 2, //2 hours 
+    REDIS_HOST,
+    REDIS_PORT,
+    REDIS_PASSWORD,
 } = process.env;
+const IN_PROD = NODE_ENV === 'production';
 
-//Setup ApolloSever MiddleWare
+// Use sandbox credentials loaded onto env variable for the following
+//dotenv.config();
+app.use(bodyParser.json());
+
+// Have to create Redis cluster on aws --> Create Redis DB
+// Detailed instructions on redislabs documentation --> RaaS
+// https://docs.redislabs.com/latest/rs/administering/database-operations/creating-database/
+const RedisStore = connectRedis(session);
+
+// Generate redis client
+let redisClient = redis.createClient({
+  host: REDIS_HOST,
+  port: REDIS_PORT,
+  no_ready_check: true,
+  auth_pass: REDIS_PASSWORD,
+});
+
+
+const store = new RedisStore({
+    client: redisClient
+});
+
+app.use(session({
+    store,
+    name: SESS_NAME,
+    secret: SESS_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: Number(SESS_LIFETIME),
+        sameSite: true,
+        secure: IN_PROD
+    }
+}));
+
+
+//Setup ApolloSever MiddleWare 
+//enable access to req object from the resolver by passing the 'context' 
+//cors: false disables query from other endpoints (for security) 
+//request.credentials to visualize session cookies from graphiql 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  playground: NODE_ENV !== 'production'
+  cors: false,
+  playground: IN_PROD ? false : {
+      settings: {
+          'request.credentials': 'include'
+      }
+  },
+  context: ({ req, res }) => ({ req, res })
 });
 
 server.applyMiddleware({ app });
-
-// Use sandbox credentials loaded onto env variable for the following
-dotenv.config();
-app.use(bodyParser.json());
 
 // Save the below fields in the .env file for now
 /* const client = new plaid.Client(
