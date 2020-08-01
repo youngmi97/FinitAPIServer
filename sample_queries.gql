@@ -1,0 +1,37 @@
+
+mutation {
+    signUp (email: "finit@gmail.com", name: "Finit", username: "finit", password: "Finit7331!") {
+        id
+    }
+}
+
+mutation {
+    signIn (email: "finit@gmail.com", password: "Finit7331!") {
+        id
+    }
+}
+
+mutation {
+    signOut
+}
+
+{
+    me {
+        id
+        name
+        email
+    }
+}
+
+{
+    users {
+        id
+    }
+}
+
+{
+    user(id: "5f218c1e3fffd56ef2f45075"){
+        id
+    }
+}
+

@@ -3,6 +3,10 @@
 import { ApolloServer, gql } from 'apollo-server-express';
 import typeDefs from './typeDefs';
 import resolvers from './resolvers';
+//import AuthDirective from './directives/auth';
+//import GuestDirective from './directives/guest';
+
+import schemaDirectives from './directives';
 
 
 const express = require('express');
@@ -68,7 +72,8 @@ app.use(session({
     store,
     name: SESS_NAME,
     secret: SESS_SECRET,
-    resave: false,
+    resave: true,
+    rolling: true,
     saveUninitialized: false,
     cookie: {
         maxAge: Number(SESS_LIFETIME),
@@ -76,6 +81,8 @@ app.use(session({
         secure: IN_PROD
     }
 }));
+
+// ttl on redis-cli to check session expiration time
 
 
 //Setup ApolloSever MiddleWare 
@@ -85,7 +92,7 @@ app.use(session({
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  cors: false,
+  schemaDirectives,
   playground: IN_PROD ? false : {
       settings: {
           'request.credentials': 'include'
@@ -94,7 +101,7 @@ const server = new ApolloServer({
   context: ({ req, res }) => ({ req, res })
 });
 
-server.applyMiddleware({ app });
+server.applyMiddleware({ app, cors: false });
 
 // Save the below fields in the .env file for now
 /* const client = new plaid.Client(

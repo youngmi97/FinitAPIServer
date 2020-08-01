@@ -5,6 +5,7 @@ import { User } from './models'
 const dotenv = require('dotenv').config({path: require("find-config")(".env")})
 
 export const attemptSignIn = async (email, password) => {
+    //console.log("email", email)
     const user = await User.findOne({ email })
 
     if (!user) {
