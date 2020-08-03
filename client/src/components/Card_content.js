@@ -13,17 +13,19 @@ import PeopleIcon from '@material-ui/icons/SupervisedUserCircleRounded';
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 200,
+    maxWidth: 186,
   },
   media: {
-    height: 200,
+    height: 186,
   },
   overlay: {
     position: 'absolute',
-    top: '2%',
-    left: '77%',
-    color: 'white',
+    top: '0%',
+    left: '75%',
  },
+  Buttoncolor : {
+    color:'#800080'
+  }
 });
 
 export default function MediaCard() {
@@ -38,7 +40,7 @@ export default function MediaCard() {
           title="Contemplative Reptile"
         />
         <div className={classes.overlay}>
-          <IconButton variant='outlined' color='primary'>
+          <IconButton variant='outlined' className={classes.Buttoncolor}>
               <PeopleIcon/>
           </IconButton>
         </div>

@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
-import LaunchItem from './LaunchItem'
 import Navigation_Button from './Navigation_Button'
 import Navigation_Search from './Navigation_Search'
 import { Container, Row, Col, Navbar, NavbarBrand, NavLink, Nav, Form, FormControl, Button } from 'react-bootstrap';

@@ -18,6 +18,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 const PurpleTextTypography = withStyles({
   root: {
@@ -26,10 +27,8 @@ const PurpleTextTypography = withStyles({
 })(Typography);
 
 const AntTabs = withStyles({
-  root: {
-  },
   indicator: {
-    backgroundColor: '#1890ff',
+    backgroundColor: '#ffffff',
   },
 })(Tabs);
 
@@ -82,8 +81,15 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   appBar: {
-    width: `calc(100%)`
+    width: `calc(100%)`,
+    height : 50,
+    margin : 0,
   },
+  toolBar:{
+    height : 30,
+    marginTop : 0,
+  },
+
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -232,7 +238,8 @@ export default function PrimarySearchAppBar() {
   return (
     <div className={classes.grow}>
       <AppBar position="fixed" color = 'white' className = {classes.appBar}>
-        <Toolbar>
+      <CssBaseline/>
+        <Toolbar className = {classes.toolBar} variant='dense'>
           <PurpleTextTypography className={classes.title} variant="h6" noWrap>
             Surplus
           </PurpleTextTypography>
@@ -251,8 +258,8 @@ export default function PrimarySearchAppBar() {
           </div>
           <div className = {classes.InputTab}>
           <AntTabs value={value} onChange={handleChange} aria-label="ant example">
-            <AntTab label = "Discover"/>
             <AntTab label = "Subscription"/>
+            <AntTab label = "Discover"/>
           </AntTabs>
           </div>
           <div className = {classes.InputTab}/>
