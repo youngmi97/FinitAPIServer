@@ -39,7 +39,7 @@ const {
     NODE_ENV = 'development',
     SESS_NAME = 'sid',
     SESS_SECRET = 'ssh!secret!',
-    SESS_LIFETIME = 1000 * 60 * 60 * 2, //2 hours 
+    SESS_LIFETIME = 1000 * 60 * 60 * 2, // 2 hours 
     REDIS_HOST,
     REDIS_PORT,
     REDIS_PASSWORD,
@@ -47,7 +47,7 @@ const {
 const IN_PROD = NODE_ENV === 'production';
 
 // Use sandbox credentials loaded onto env variable for the following
-//dotenv.config();
+// dotenv.config();
 app.use(bodyParser.json());
 
 // Have to create Redis cluster on aws --> Create Redis DB
@@ -113,13 +113,13 @@ server.applyMiddleware({ app, cors: false });
 
 
 //single endpoint
-app.use('/graphql', graphqlHTTP({
-    schema,
+//app.use('/graphql', graphqlHTTP({
+    //schema,
     //client to make req to server
-    graphiql: process.env.NODE_ENV === 'development',
+    //graphiql: process.env.NODE_ENV === 'development',
     //graphiql: false,
     //point at an js object which have all the resolver functions --> need to match schema endpoints by name
-}));
+//}));
 
 app.use(express.static("public"));
 

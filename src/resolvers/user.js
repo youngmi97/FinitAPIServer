@@ -8,10 +8,10 @@ import { attemptSignIn, signOut } from '../auth';
 export default {
   Query: {
 
-    me: (root, args, context, info) => {
+    me: async (root, args, context, info) => {
         //Auth.checkSignedIn(context.req)
-
-        return User.findById(context.req.session.userId)
+        //console.log(User.findById(context.req.session.userId));
+        return await User.findById(context.req.session.userId)
     },
 
     users: (root, args, { req }, info) => {
