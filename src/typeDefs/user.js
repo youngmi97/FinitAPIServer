@@ -7,6 +7,7 @@ export default gql`
         me: User @auth
         user(id: ID!): User @auth
         users: [User!]! @auth
+        getUsers: [User]
     }
 
     extend type Mutation {

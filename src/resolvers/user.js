@@ -33,6 +33,11 @@ export default {
 
       return User.findById(id);
     },
+
+    async getUsers() {
+      const users = await User.find({});
+      return users;
+    }
   },
 
   Mutation: {
