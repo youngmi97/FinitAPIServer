@@ -10,16 +10,19 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 
 import MenuBar from "./components/MenuBar";
+import { AuthProvider } from './context/auth';
 
 
 function App() {
   return (
-    <Router>
-      <MenuBar/>
-      <Route exact path='/'component={Home}/>
-      <Route exact path='/login' component={Login}/>
-      <Route exact path='/register' component={Register}/>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <MenuBar />
+        <Route exact path="/" component={Home} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/register" component={Register} />
+      </Router>
+    </AuthProvider>
   );
 }
 

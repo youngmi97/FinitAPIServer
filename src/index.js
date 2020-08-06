@@ -111,16 +111,6 @@ server.applyMiddleware({ app, cors: false });
     process.env.PLAID_ENV
 ) */
 
-
-//single endpoint
-//app.use('/graphql', graphqlHTTP({
-    //schema,
-    //client to make req to server
-    //graphiql: process.env.NODE_ENV === 'development',
-    //graphiql: false,
-    //point at an js object which have all the resolver functions --> need to match schema endpoints by name
-//}));
-
 app.use(express.static("public"));
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
