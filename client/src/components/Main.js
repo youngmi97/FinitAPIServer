@@ -1,4 +1,5 @@
 import React from "react";
+import clsx from "clsx";
 import { fade, makeStyles, withStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
@@ -27,12 +28,13 @@ import ViewModuleIcon from "@material-ui/icons/ViewModule";
 import SearchIcon from "@material-ui/icons/Search";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import SwapIcon from "@material-ui/icons/SwapVert";
-
+import PeopleIcon from "@material-ui/icons/SupervisedUserCircleRounded";
 import Profile_Card from "./Profile_Card";
 import List_item_discover from "./List_item_discover";
 import Active_content from "./Active_content";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import List_item_right from "./List_item_right";
-
+import List_Viewbreak from "./List_viewbreak";
 import withWidth from "@material-ui/core/withWidth";
 
 const drawerWidth = 256;
@@ -116,6 +118,9 @@ const useStyles = makeStyles((theme) => ({
 	grow: {
 		flexGrow: 1,
 	},
+	Buttoncolor: {
+		color: theme.palette.primary.main,
+	},
 	demo1: {
 		backgroundColor: theme.palette.background.paper,
 	},
@@ -141,6 +146,8 @@ const useStyles = makeStyles((theme) => ({
 	},
 	drawer2: {
 		width: drawerWidth2,
+		height: "100%",
+
 		flexShrink: 0,
 	},
 	search: {
@@ -187,18 +194,30 @@ const useStyles = makeStyles((theme) => ({
 			width: 0,
 		},
 	},
-	drawerPaper2: {
-		width: "20%",
-		top: 121,
+	mainbreak: {
+		marginLeft: 256,
+		[theme.breakpoints.down(1024)]: {
+			marginLeft: 0,
+		},
 		[theme.breakpoints.down(608)]: {
-			width: 0,
+			marginRight: 0,
 		},
 	},
-	drawerPaper3: {
-		marginTop: 32,
-		marginLeft: 32,
-		marginRight: 32,
+	drawerPaper2: {
+		width: 305,
+		top: 121,
 	},
+	overlay: {
+		position: "absolute",
+		bottom: "10px",
+		right: "0px",
+	},
+	overlay1: {
+		position: "absolute",
+		bottom: "131px",
+		right: "0px",
+	},
+	drawerPaper3: {},
 	drawerContainer: {
 		overflow: "auto",
 	},
@@ -244,15 +263,40 @@ const useStyles = makeStyles((theme) => ({
 		padding: 0,
 		fontSize: "0.5rem",
 	},
+	content: {
+		flexGrow: 1,
+		padding: theme.spacing(3),
+		transition: theme.transitions.create("margin", {
+			easing: theme.transitions.easing.sharp,
+			duration: theme.transitions.duration.leavingScreen,
+		}),
+		marginRight: 0,
+	},
+	contentShift: {
+		transition: theme.transitions.create("margin", {
+			easing: theme.transitions.easing.easeOut,
+			duration: theme.transitions.duration.enteringScreen,
+		}),
+		marginRight: 305,
+	},
 }));
 
 export default function Main(props) {
 	const classes = useStyles();
 	const { width } = props;
 	const [value, setValue] = React.useState(0);
+	const [open, setOpen] = React.useState(true);
+	const [view, setView] = React.useState(true);
 
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
+	};
+	const handleDrawerOpen = () => {
+		setOpen(true);
+	};
+
+	const handleDrawerClose = () => {
+		setOpen(false);
 	};
 
 	return (
@@ -267,78 +311,85 @@ export default function Main(props) {
 			>
 				<TextTypography1>All subcriptions</TextTypography1>
 			</Box>
-			<Box mx="auto" bgcolor="background.paper" p={4}>
-				<Grid container spacing={1}>
-					<Grid item lg={2} md={0} className={classes.drawerPaper}>
-						<Drawer
-							className={classes.drawer}
-							variant="permanent"
-							classes={{
-								paper: classes.drawerPaper,
-							}}
-							anchor="left"
-						>
-							<List_item_discover />
-						</Drawer>
-					</Grid>
-
-					<Grid item lg={10}>
-						<Grid container>
-							<Grid
-								item
-								xs={8}
-								className={classes.drawerPaper3}
-								alignContent="center"
-							>
-								<div className={classes.grow}>
-									<Toolbar variant="dense">
-										<IconButton className={classes.ListItemSize2}>
-											<ViewListIcon />
-										</IconButton>
-										<div className={classes.grow} />
-										<div className={classes.search}>
-											<div className={classes.searchIcon}>
-												<SearchIcon />
-											</div>
-											<InputBase
-												placeholder="  Search"
-												classes={{
-													root: classes.inputRoot,
-													input: classes.inputInput,
-												}}
-												inputProps={{ "aria-label": "search" }}
-											/>
+			<Drawer
+				className={classes.drawer}
+				variant="permanent"
+				classes={{
+					paper: classes.drawerPaper,
+				}}
+				anchor="left"
+			>
+				<List_item_discover />
+			</Drawer>
+			<Drawer
+				className={classes.drawer2}
+				variant="persistent"
+				classes={{
+					paper: classes.drawerPaper2,
+				}}
+				anchor="right"
+				open={open}
+			>
+				<List_item_right />
+				<div className={classes.overlay1}>
+					<IconButton
+						className={classes.Buttoncolor}
+						onClick={handleDrawerClose}
+					>
+						<ArrowForwardIosIcon />
+					</IconButton>
+				</div>
+			</Drawer>
+			<main
+				className={clsx(classes.content, {
+					[classes.contentShift]: open,
+				})}
+			>
+				<Box mx="auto" bgcolor="background.paper" className={classes.mainbreak}>
+					<Grid container spacing={1}>
+						<Grid item className={classes.drawerPaper3} alignContent="center">
+							<div className={classes.grow}>
+								<Toolbar variant="dense">
+									<IconButton
+										className={classes.ListItemSize2}
+										onClick={() => setView(!view)}
+									>
+										<ViewListIcon />
+									</IconButton>
+									<div className={classes.grow} />
+									<div className={classes.search}>
+										<div className={classes.searchIcon}>
+											<SearchIcon />
 										</div>
-										<IconButton className={classes.ListItemSize2}>
-											<SwapIcon />
-										</IconButton>
-										<IconButton className={classes.ListItemSize4}>
-											<Add />
-										</IconButton>
-									</Toolbar>
-								</div>
-								<main className={classes.content}>
-									<Active_content />
-								</main>
-							</Grid>
-
-							<Grid item desktop={2} tablet={0}>
-								<Toolbar />
-								<Drawer
-									className={classes.drawer2}
-									variant="permanent"
-									classes={{
-										paper: classes.drawerPaper2,
-									}}
-									anchor="right"
-								>
-									<List_item_right />
-								</Drawer>
-							</Grid>
+										<InputBase
+											placeholder="  Search"
+											classes={{
+												root: classes.inputRoot,
+												input: classes.inputInput,
+											}}
+											inputProps={{ "aria-label": "search" }}
+										/>
+									</div>
+									<IconButton className={classes.ListItemSize2}>
+										<SwapIcon />
+									</IconButton>
+									<IconButton className={classes.ListItemSize4}>
+										<Add />
+									</IconButton>
+								</Toolbar>
+							</div>
+							<main className={classes.content}>
+								{view !== true ? <Active_content /> : <List_Viewbreak />}
+							</main>
 						</Grid>
 					</Grid>
-				</Grid>
-			</Box>
+				</Box>
+			</main>
+			<div className={classes.overlay}>
+				<IconButton onClick={handleDrawerOpen}>
+					<ArrowForwardIosIcon />
+				</IconButton>
+			</div>
 		</div>
 	);
 }

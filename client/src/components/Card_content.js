@@ -6,6 +6,7 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
+import AutoScale from "react-auto-scale";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { CardHeader } from "reactstrap";
@@ -26,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 	overlay: {
 		position: "absolute",
 		top: "0%",
-		left: "75%",
+		left: "80%",
 	},
 	Buttoncolor: {
 		color: theme.palette.primary.main,
@@ -37,14 +38,16 @@ export default function MediaCard() {
 	const classes = useStyles();
 
 	return (
-		<Card className={classes.root}>
-			<CardActionArea>
-				<CardMedia
-					className={classes.media}
-					image="netflix.jpeg"
-					title="Contemplative Reptile"
-				/>
-			</CardActionArea>
-		</Card>
+		<AutoScale Width={316} maxHeight={400} maxScale={2}>
+			<Card className={classes.root}>
+				<CardActionArea>
+					<CardMedia
+						className={classes.media}
+						image="netflix.jpeg"
+						title="Contemplative Reptile"
+					/>
+				</CardActionArea>
+			</Card>
+		</AutoScale>
 	);
 }
