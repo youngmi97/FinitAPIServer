@@ -33,6 +33,8 @@ import List_item_discover from "./List_item_discover";
 import Active_content from "./Active_content";
 import List_item_right from "./List_item_right";
 
+import withWidth from "@material-ui/core/withWidth";
+
 const drawerWidth = 256;
 const drawerWidth2 = 305;
 
@@ -95,7 +97,12 @@ const AntTab = withStyles((theme) => ({
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		display: "flex",
+		// display: "flex",
+		flexGrow: 1,
+	},
+	paper: {
+		padding: theme.spacing(2),
+		justifyContent: "center",
 	},
 	icon_root: {
 		flexGrow: 1,
@@ -123,7 +130,10 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: 0,
 		marginLeft: 256,
 		height: 60,
-		width: 1440 - 256,
+		width: "100%",
+		[theme.breakpoints.down(1024)]: {
+			marginLeft: 0,
+		},
 	},
 	drawer: {
 		width: drawerWidth,
@@ -173,15 +183,21 @@ const useStyles = makeStyles((theme) => ({
 	drawerPaper: {
 		marginTop: 61,
 		width: 256,
+		[theme.breakpoints.down(1024)]: {
+			width: 0,
+		},
 	},
 	drawerPaper2: {
-		width: drawerWidth2,
+		width: "20%",
 		top: 121,
+		[theme.breakpoints.down(608)]: {
+			width: 0,
+		},
 	},
 	drawerPaper3: {
 		marginTop: 32,
 		marginLeft: 32,
-		width: 1440 - 256,
+		marginRight: 32,
 	},
 	drawerContainer: {
 		overflow: "auto",
@@ -230,8 +246,9 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function Main() {
+export default function Main(props) {
 	const classes = useStyles();
+	const { width } = props;
 	const [value, setValue] = React.useState(0);
 
 	const handleChange = (event, newValue) => {
@@ -250,72 +267,78 @@ export default function Main() {
 			>
 				<TextTypography1>All subcriptions</TextTypography1>
 			</Box>
-			<Grid container spacing={1}>
-				<Grid item xs={2} className={classes.drawerPaper}>
-					<Drawer
-						className={classes.drawer}
-						variant="permanent"
-						classes={{
-							paper: classes.drawerPaper,
-						}}
-						anchor="left"
-					>
-						<List_item_discover />
-					</Drawer>
-				</Grid>
-				<Grid
-					item
-					xs={7}
-					className={classes.drawerPaper3}
-					alignContent="center"
-				>
-					<div className={classes.grow}>
-						<Toolbar variant="dense">
-							<IconButton className={classes.ListItemSize2}>
-								<ViewListIcon />
-							</IconButton>
-							<div className={classes.grow} />
-							<div className={classes.search}>
-								<div className={classes.searchIcon}>
-									<SearchIcon />
+			<Box mx="auto" bgcolor="background.paper" p={4}>
+				<Grid container spacing={1}>
+					<Grid item lg={2} md={0} className={classes.drawerPaper}>
+						<Drawer
+							className={classes.drawer}
+							variant="permanent"
+							classes={{
+								paper: classes.drawerPaper,
+							}}
+							anchor="left"
+						>
+							<List_item_discover />
+						</Drawer>
+					</Grid>
+
+					<Grid item lg={10}>
+						<Grid container>
+							<Grid
+								item
+								xs={8}
+								className={classes.drawerPaper3}
+								alignContent="center"
+							>
+								<div className={classes.grow}>
+									<Toolbar variant="dense">
+										<IconButton className={classes.ListItemSize2}>
+											<ViewListIcon />
+										</IconButton>
+										<div className={classes.grow} />
+										<div className={classes.search}>
+											<div className={classes.searchIcon}>
+												<SearchIcon />
+											</div>
+											<InputBase
+												placeholder="  Search"
+												classes={{
+													root: classes.inputRoot,
+													input: classes.inputInput,
+												}}
+												inputProps={{ "aria-label": "search" }}
+											/>
+										</div>
+										<IconButton className={classes.ListItemSize2}>
+											<SwapIcon />
+										</IconButton>
+										<IconButton className={classes.ListItemSize4}>
+											<Add />
+										</IconButton>
+									</Toolbar>
 								</div>
-								<InputBase
-									placeholder="  Search"
+								<main className={classes.content}>
+									<Active_content />
+								</main>
+							</Grid>
+
+							<Grid item desktop={2} tablet={0}>
+								<Toolbar />
+								<Drawer
+									className={classes.drawer2}
+									variant="permanent"
 									classes={{
-										root: classes.inputRoot,
-										input: classes.inputInput,
+										paper: classes.drawerPaper2,
 									}}
-									inputProps={{ "aria-label": "search" }}
-								/>
-							</div>
-							<IconButton className={classes.ListItemSize2}>
-								<SwapIcon />
-							</IconButton>
-							<IconButton className={classes.ListItemSize4}>
-								<Add />
-							</IconButton>
-						</Toolbar>
-					</div>
-
-					<main className={classes.content}>
-						<Active_content />
-					</main>
+									anchor="right"
+								>
+									<List_item_right />
+								</Drawer>
+							</Grid>
+						</Grid>
+					</Grid>
 				</Grid>
-
-				<Grid item xs={3}>
-					<Toolbar />
-					<Drawer
-						className={classes.drawer2}
-						variant="permanent"
-						classes={{
-							paper: classes.drawerPaper2,
-						}}
-						anchor="right"
-					>
-						<List_item_right />
-					</Drawer>
-				</Grid>
-			</Grid>
+			</Box>
 		</div>
 	);
 }
