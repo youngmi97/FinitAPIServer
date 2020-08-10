@@ -1,6 +1,6 @@
 # FinitServerClient
 
-Both Server and CLient side of surPlus service's POC release. 
+Both Server and Client side of surPlus service's POC release. 
 
 ## Installation
 
