@@ -1,7 +1,6 @@
 import React from "react";
-//import ApolloClient from 'apollo-boost';
-//import {ApolloProvider} from 'react-apollo';
 import { createMuiTheme, ThemeProvider, fade } from "@material-ui/core/styles";
+
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";

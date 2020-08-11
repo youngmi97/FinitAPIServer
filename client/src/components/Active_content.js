@@ -1,8 +1,11 @@
 //Main contents displayed in the center of the screen
 import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
+
+//Cards to be displayed in the screen
 import Card_content from "./cards/Card_content";
 import Card_internal from "./cards/Card_internal";
+import HoveringCard from "./cards/HoveringCard";
 
 import { fade, makeStyles, withStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
@@ -43,6 +46,9 @@ export default function Active_content() {
             >
               {hover !== true ? <Card_content /> : <Card_internal />}
             </Grid>
+          </Grid>
+          <Grid item xs className={classes.root}>
+            <HoveringCard />
           </Grid>
           <Grid item xs className={classes.root}>
             <Card_content />
