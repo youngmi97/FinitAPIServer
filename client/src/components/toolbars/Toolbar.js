@@ -1,7 +1,6 @@
 import React from "react";
 
 import { fade, makeStyles } from "@material-ui/core/styles";
-// import { ThemeProvider } from "react-bootstrap";
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -22,6 +21,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
+  space: {
+      width: 100%
+  },
   search: {
     position: "relative",
     borderRadius: 8,
@@ -31,7 +33,6 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
     marginLeft: 0,
-    marginRight: `calc(1em-${theme.spacing(4)}px)`,
     width: 160,
   },
   searchIcon: {
@@ -79,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SearchAppBar() {
+export default function SurplusToolbar() {
   const classes = useStyles();
 
   return (
