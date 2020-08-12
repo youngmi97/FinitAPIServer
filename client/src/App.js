@@ -29,6 +29,10 @@ const theme = createMuiTheme({
       dark: "#2F0459",
       contrastText: "#FFFFFF",
     },
+    grey: {
+      main: "#666666",
+      grey4: "#EFEFF4",
+    },
   },
   background: {
     default: "#FAFAFA",
@@ -73,6 +77,19 @@ const theme = createMuiTheme({
         borderColor: "#8a8a8f",
         borderRadius: 20,
         Height: 32,
+      },
+    },
+    MuiToolbar: {
+      dense: {
+        minHeight: 40,
+      },
+    },
+    MuiIconButton: {
+      root: {
+        width: 40,
+        height: 40,
+        alignItems: "center",
+        alignSelf: "flex-end",
       },
     },
   },

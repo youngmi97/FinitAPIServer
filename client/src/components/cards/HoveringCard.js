@@ -16,7 +16,7 @@ const DisplayOver = styled.div({
   zIndex: 2,
   transition: "background-color 350ms ease",
   backgroundColor: "transparent",
-  padding: "20px 20px 0 20px",
+  padding: "20px 20px 20px 20px",
   boxSizing: "border-box",
   borderRadius: 4,
 });
@@ -63,16 +63,16 @@ const Background = styled.div({
   },
 });
 
-const CTA = styled.a({
+const CTA = styled.div({
   position: "absolute",
   bottom: "20px",
   left: "20px",
 });
 
-class App extends Component {
+class HoveringCard extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="HoveringCard">
         <Background>
           <DisplayOver>
             <Hover>
@@ -91,4 +91,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default HoveringCard;

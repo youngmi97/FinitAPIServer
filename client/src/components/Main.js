@@ -37,6 +37,8 @@ import List_item_right from "./List_item_right";
 import List_Viewbreak from "./List_viewbreak";
 import withWidth from "@material-ui/core/withWidth";
 
+import SubscriptionToolbar from "./toolbars/Toolbar";
+
 const drawerWidth = 256;
 const drawerWidth2 = 305;
 
@@ -309,7 +311,7 @@ export default function Main(props) {
         className={classes.toolBar}
         alignItems="center"
       >
-        <TextTypography1>All subcriptions</TextTypography1>
+        <TextTypography1>All subscriptions</TextTypography1>
       </Box>
       <Drawer
         className={classes.drawer}
@@ -349,34 +351,7 @@ export default function Main(props) {
           <Grid container spacing={1}>
             <Grid item className={classes.drawerPaper3} alignContent="center">
               <div className={classes.grow}>
-                <Toolbar variant="dense">
-                  <IconButton
-                    className={classes.ListItemSize2}
-                    onClick={() => setView(!view)}
-                  >
-                    <ViewListIcon />
-                  </IconButton>
-                  <div className={classes.grow} />
-                  <div className={classes.search}>
-                    <div className={classes.searchIcon}>
-                      <SearchIcon />
-                    </div>
-                    <InputBase
-                      placeholder="  Search"
-                      classes={{
-                        root: classes.inputRoot,
-                        input: classes.inputInput,
-                      }}
-                      inputProps={{ "aria-label": "search" }}
-                    />
-                  </div>
-                  <IconButton className={classes.ListItemSize2}>
-                    <SwapIcon />
-                  </IconButton>
-                  <IconButton className={classes.ListItemSize4}>
-                    <Add />
-                  </IconButton>
-                </Toolbar>
+                <SubscriptionToolbar />
               </div>
               <main className={classes.content}>
                 {view !== true ? <Active_content /> : <List_Viewbreak />}
