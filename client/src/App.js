@@ -89,7 +89,7 @@ const theme = createMuiTheme({
         width: 40,
         height: 40,
         alignItems: "center",
-        alignSelf: "flex-end",
+        // alignSelf: "flex-end",
       },
     },
   },

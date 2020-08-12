@@ -51,7 +51,7 @@ export default function Active_content() {
             <HoveringCard />
           </Grid>
           <Grid item xs className={classes.root}>
-            <Card_content />
+            {/* <Card_content /> */}
           </Grid>
           <Grid item xs className={classes.root}>
             <Card_content />

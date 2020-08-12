@@ -21,9 +21,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  space: {
-      width: 100%
-  },
   search: {
     position: "relative",
     borderRadius: 8,
@@ -80,14 +77,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SurplusToolbar() {
+export default function SubscriptionToolbar({ changeView }) {
   const classes = useStyles();
+  const [listView, setListView] = React.useState(true);
 
   return (
     <div className={classes.root}>
       <Toolbar variant="dense">
-        <IconButton edge="start" className={classes.regularButton}>
-          <FormatListBulletedRoundedIcon fontSize="small" />
+        <IconButton
+          edge="start"
+          className={classes.regularButton}
+          onClick={() => {
+            changeView();
+            setListView(!listView);
+          }}
+        >
+          {listView ? (
+            <FormatListBulletedRoundedIcon fontSize="small" />
+          ) : (
+            <ViewModuleRoundedIcon fontSize="small" />
+          )}
         </IconButton>
         <div className={classes.search}>
           <div className={classes.searchIcon}>
@@ -112,7 +121,7 @@ export default function SurplusToolbar() {
           <AddRoundedIcon
             fontSize="small"
             alignItems="center"
-            alignSelf="flex-end"
+            // alignSelf="flex-end"
           />
         </IconButton>
       </Toolbar>

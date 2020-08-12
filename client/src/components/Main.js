@@ -288,7 +288,7 @@ export default function Main(props) {
   const { width } = props;
   const [value, setValue] = React.useState(0);
   const [open, setOpen] = React.useState(true);
-  const [view, setView] = React.useState(true);
+  const [view, setView] = React.useState(false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -351,7 +351,7 @@ export default function Main(props) {
           <Grid container spacing={1}>
             <Grid item className={classes.drawerPaper3} alignContent="center">
               <div className={classes.grow}>
-                <SubscriptionToolbar />
+                <SubscriptionToolbar changeView={() => setView(!view)} />
               </div>
               <main className={classes.content}>
                 {view !== true ? <Active_content /> : <List_Viewbreak />}
