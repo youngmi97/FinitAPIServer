@@ -2,7 +2,7 @@
 
 Both Server and Client side of surPlus service's POC release. 
 
-<img src="https://github.com/youngmi97/FinitAPIServer/tree/master/mainpage.png" width=500 dimension=500 />
+<img src="https://github.com/youngmi97/FinitAPIServer/blob/master/mainpage.png" width=500 dimension=500 />
 
 ## Installation
 
