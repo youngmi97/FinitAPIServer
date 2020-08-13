@@ -5,14 +5,15 @@ import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
-import Grid from "@material-ui/core/Grid";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
+// import Grid from "@material-ui/core/Grid";
+// import List from "@material-ui/core/List";
+// import ListItem from "@material-ui/core/ListItem";
+// import ListItemText from "@material-ui/core/ListItemText";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
+import SubscriptionDetail from "../SubscriptionDetail";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -62,6 +63,9 @@ const useStyles = makeStyles((theme) => ({
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
     color: "#fff",
+    alignContent: "center",
+    flexWrap: "wrap",
+    display: "flex",
   },
   Buttoncolor: {
     color: theme.palette.primary.main,
@@ -123,51 +127,7 @@ export default function Card_internal() {
               open={open}
               onClick={handleClose}
             >
-              <Paper>
-                <List
-                  component="nav"
-                  aria-labelledby="nested-list-subheader"
-                  className={classes.list}
-                >
-                  <ListItem button>
-                    <Grid
-                      container
-                      spacing={0}
-                      align="center"
-                      justify="center"
-                      direction="row"
-                    >
-                      <Grid item xs>
-                        <Avatar
-                          variant="square"
-                          className={classes.small}
-                          src="Netflix_small.png"
-                        />
-                      </Grid>
-                      <Grid item xs>
-                        <ListItemText
-                          className={classes.ListItemSize}
-                          primary="Netflix"
-                        />
-                      </Grid>
-                      <Grid item xs></Grid>
-                    </Grid>
-                  </ListItem>
-                  <ListItemText
-                    className={classes.ListItemSize2}
-                    primary="TeamPlan"
-                  />
-                  <ListItemText
-                    className={classes.ListItemSize2}
-                    primary="USD $12.00"
-                  />
-                  <br />
-                  <ListItemText
-                    className={classes.ListItemSize4}
-                    primary="Monthly Payment"
-                  />
-                </List>
-              </Paper>
+              <SubscriptionDetail />
             </Backdrop>
           </div>
         </CardActionArea>

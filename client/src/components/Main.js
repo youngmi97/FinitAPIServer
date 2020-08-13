@@ -8,13 +8,11 @@ import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import clsx from "clsx";
 import React from "react";
 
-
 import ACTIVE_CONTENT from "./Active_content";
 import LIST_ITEM_DISCOVER from "./List_item_discover";
 import LIST_ITEM_RIGHT from "./List_item_right";
 import LIST_VIEWBREAK from "./List_viewbreak";
 import SubscriptionToolbar from "./toolbars/Toolbar";
-
 
 const drawerWidth = 256;
 const drawerWidth2 = 305;

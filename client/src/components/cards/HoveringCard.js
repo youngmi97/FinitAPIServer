@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "@emotion/styled/macro";
 
 const Hover = styled.div({
@@ -39,6 +39,18 @@ const SubTitle = styled.h4({
 });
 
 const Paragraph = styled.p({
+  fontFamily: [
+    "-apple-system",
+    "BlinkMacSystemFont",
+    '"Segoe UI"',
+    "Roboto",
+    '"Helvetica Neue"',
+    "Arial",
+    "sans-serif",
+    '"Apple Color Emoji"',
+    '"Segoe UI Emoji"',
+    '"Segoe UI Symbol"',
+  ].join(","),
   transform: "translate3d(0,50px,0)",
   transition: "transform 350ms ease",
 });
@@ -69,26 +81,37 @@ const CTA = styled.div({
   left: "20px",
 });
 
-class HoveringCard extends Component {
-  render() {
-    return (
-      <div className="HoveringCard">
-        <Background>
-          <DisplayOver>
-            <Hover>
-              <SubTitle>Netflix</SubTitle>
-              <Paragraph>
-                USD $12.00/mo
-                <br />
-                Next payment is in 3 days
-              </Paragraph>
-              <CTA>View Details</CTA>
-            </Hover>
-          </DisplayOver>
-        </Background>
-      </div>
-    );
-  }
-}
+export default function HoveringCard() {
+  // const [open, setOpen] = React.useState(false);
 
-export default HoveringCard;
+  // const handleClick = () => {
+  //   setOpen(true);
+  // };
+  // const handleClose = (event, reason) => {
+  //   if (reason === "clickaway") {
+  //     return;
+  //   }
+
+  //   setOpen(false);
+  // };
+
+  return (
+    <div className="HoveringCard">
+      <Background>
+        <DisplayOver>
+          <Hover
+          // onClick={handleClick}
+          >
+            <SubTitle>Netflix</SubTitle>
+            <Paragraph>
+              USD $12.00/mo
+              <br />
+              Next payment is in 3 days
+            </Paragraph>
+            <CTA>View Details</CTA>
+          </Hover>
+        </DisplayOver>
+      </Background>
+    </div>
+  );
+}

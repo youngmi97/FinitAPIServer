@@ -10,10 +10,6 @@ import SortRoundedIcon from "@material-ui/icons/SortRounded";
 import ViewModuleRoundedIcon from "@material-ui/icons/ViewModuleRounded";
 import React from "react";
 
-
-
-
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -23,11 +19,14 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 8,
     border: "1px solid #EFEFF4",
     backgroundColor: fade(theme.palette.common.white, 0.15),
+    display: "flex",
+    flexWrap: "wrap",
     "&:hover": {
       border: "1px solid #7610EB",
     },
     marginLeft: "auto",
-    width: 160,
+    minWidth: 160,
+    alignItems: "center",
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
@@ -44,11 +43,13 @@ const useStyles = makeStyles((theme) => ({
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
-    // padding: 11,
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
-    width: "100%",
+    width: "50%",
+    "&:focus": {
+      width: "100%",
+    },
   },
   highlightButton: {
     disableRipple: true,
