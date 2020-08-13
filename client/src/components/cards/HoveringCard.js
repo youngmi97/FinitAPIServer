@@ -4,6 +4,8 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { Backdrop } from "@material-ui/core";
 import SubscriptionDetail from "../SubscriptionDetail";
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+
 // import SubDets from "../SubDets";
 
 const useStyles = makeStyles((theme) => ({
@@ -109,31 +111,50 @@ export default function HoveringCard() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
+
   const handleToggle = () => {
     setOpen(!open);
   };
 
+  const handleClick = () => {
+    setOpen((prev) => !prev);
+  };
+
+  const handleClickAway = () => {
+    setOpen(false);
+  };
+
   return (
-    <div className="HoveringCard">
-      <Background>
-        <DisplayOver onClick={handleToggle}>
-          <Hover>
-            <SubTitle>Netflix</SubTitle>
-            <Paragraph>
-              USD $12.00/mo
-              <br />
-              Next payment is in 3 days
-            </Paragraph>
-            <CTA>View Details</CTA>
-          </Hover>
-        </DisplayOver>
-      </Background>
-      <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
-        <SubscriptionDetail open={!open} />
-      </Backdrop>
-    </div>
+    <ClickAwayListener onClickAway={handleClickAway}>
+      <div className="HoveringCard">
+        <Background>
+          <DisplayOver onClick={handleClick}>
+            <Hover>
+              <SubTitle>Netflix</SubTitle>
+              <Paragraph>
+                USD $12.00/mo
+                <br />
+                Next payment is in 3 days
+              </Paragraph>
+              <CTA>View Details</CTA>
+            </Hover>
+          </DisplayOver>
+        </Background>
+        <Backdrop
+          className={classes.backdrop}
+          open={open}
+          // onClick={handleClose}
+        >
+          {open ? (
+            <div>
+              <SubscriptionDetail className={classes.backdrop} open={!open} />
+            </div>
+          ) : null}
+        </Backdrop>
+      </div>
+    </ClickAwayListener>
   );
 }

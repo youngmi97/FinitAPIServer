@@ -16,19 +16,9 @@ const Card = styled.div({
   width: "590px",
   height: "454px",
   position: "relative",
-  backgroundColor: "#FFFFFF",
+  backgroundColor: "white",
   borderRadius: 4,
   cursor: "default",
-});
-
-const TitleBg = styled.div({
-  position: "absolute",
-  backgroundColor: "#000000",
-  width: 590,
-  heigh: 166,
-  left: `calc(50% - 590px/2)`,
-  top: 0,
-  borderRadius: "4px 4px 0px 0px",
 });
 
 const Badge = styled.div({
@@ -65,6 +55,10 @@ const Title = styled.h3({
     '"Segoe UI Symbol"',
   ].join(","),
   color: "black",
+  fontStyle: "normal",
+  fontWeight: 600,
+  fontSize: 24,
+  // lineHeight: 29,
 });
 
 const SubTitle = styled.p({
@@ -97,7 +91,11 @@ export default function SubscriptionDetail() {
             src="/static/images/avatars/Netflix.svg"
           />
           <Title>Netflix</Title>
-          <SubTitle>Standard Plan, monthly payment • 8 members</SubTitle>
+          <SubTitle>
+            Standard Plan, monthly payment • 8 members
+            <br />
+            Next payment is in 3 days
+          </SubTitle>
         </Content>
       </Card>
     </div>
