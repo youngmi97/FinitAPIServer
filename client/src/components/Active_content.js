@@ -6,6 +6,7 @@ import React from "react";
 import CardContent from "./cards/Card_content";
 import CardInternal from "./cards/Card_internal";
 import HoveringCard from "./cards/HoveringCard";
+import SubscriptionCard from "./cards/SubscriptionCard";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,7 +46,7 @@ export default function Active_content() {
             </Grid>
           </Grid>
           <Grid item xs className={classes.root}>
-            <HoveringCard />
+            <SubscriptionCard />
           </Grid>
           <Grid item xs className={classes.root}>
             <HoveringCard />

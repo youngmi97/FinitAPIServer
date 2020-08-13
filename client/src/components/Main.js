@@ -266,7 +266,7 @@ export default function Main(props) {
       >
         <Box mx="auto" bgcolor="background.paper" className={classes.mainbreak}>
           <Grid container spacing={1}>
-            <Grid item className={classes.drawerPaper3} alignContent="center">
+            <Grid item className={classes.drawerPaper3}>
               <div className={classes.grow}>
                 <SubscriptionToolbar changeView={() => setView(!view)} />
               </div>

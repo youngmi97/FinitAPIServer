@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Typography from "@material-ui/core/Typography";
 
@@ -7,17 +8,18 @@ const images = [
   {
     url: "/static/images/Netflix.svg",
     title: "Netflix",
-    width: "40%",
+    width: "100%",
   },
 ];
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: "100%",
+    // height: "100%",
     display: "flex",
     flexWrap: "wrap",
-    minWidth: 300,
-    width: "100%",
+    width: 217,
+    height: 217,
+    borderRadius: 4,
   },
   image: {
     position: "relative",
@@ -69,6 +71,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.common.black,
     opacity: 0.4,
     transition: theme.transitions.create("opacity"),
+    borderRadius: 4,
   },
   imageTitle: {
     position: "relative",
@@ -84,6 +87,9 @@ const useStyles = makeStyles((theme) => ({
     bottom: -2,
     left: "calc(50% - 9px)",
     transition: theme.transitions.create("opacity"),
+  },
+  cardHeader: {
+    backgroundColor: "transparent",
   },
 }));
 

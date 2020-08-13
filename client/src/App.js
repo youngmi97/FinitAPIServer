@@ -105,6 +105,21 @@ const theme = createMuiTheme({
         height: 40,
       },
     },
+    MuiCardActionArea: {
+      root: {
+        "&:focus": {
+          outline: "none",
+        },
+      },
+    },
+    MuiButtonBase: {
+      root: {
+        "&:focus": {
+          outline: "none",
+        },
+        flex: "flex-start",
+      },
+    },
   },
 });
 

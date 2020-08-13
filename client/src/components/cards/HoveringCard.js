@@ -1,6 +1,20 @@
 import React from "react";
 import styled from "@emotion/styled/macro";
+import { makeStyles } from "@material-ui/core/styles";
 
+import { Backdrop } from "@material-ui/core";
+import SubscriptionDetail from "../SubscriptionDetail";
+
+const useStyles = makeStyles((theme) => ({
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: "#fff",
+    alignContent: "center",
+    flexWrap: "wrap",
+    display: "flex",
+    cursor: "zoom-out",
+  },
+}));
 const Hover = styled.div({
   opacity: 0,
   transition: "opacity 350ms ease",
@@ -34,6 +48,9 @@ const SubTitle = styled.h4({
     '"Segoe UI Emoji"',
     '"Segoe UI Symbol"',
   ].join(","),
+  fontSize: "14px",
+  fontWeight: "500px",
+  left: "20px",
   transform: "translate3d(0,50px,0)",
   transition: "transform 350ms ease",
 });
@@ -51,6 +68,7 @@ const Paragraph = styled.p({
     '"Segoe UI Emoji"',
     '"Segoe UI Symbol"',
   ].join(","),
+  left: "20px",
   transform: "translate3d(0,50px,0)",
   transition: "transform 350ms ease",
 });
@@ -82,26 +100,22 @@ const CTA = styled.div({
 });
 
 export default function HoveringCard() {
-  // const [open, setOpen] = React.useState(false);
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
 
-  // const handleClick = () => {
-  //   setOpen(true);
-  // };
-  // const handleClose = (event, reason) => {
-  //   if (reason === "clickaway") {
-  //     return;
-  //   }
-
-  //   setOpen(false);
-  // };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleToggle = () => {
+    setOpen(!open);
+  };
 
   return (
+    // <ButtonBase>
     <div className="HoveringCard">
       <Background>
-        <DisplayOver>
-          <Hover
-          // onClick={handleClick}
-          >
+        <DisplayOver onClick={handleToggle}>
+          <Hover>
             <SubTitle>Netflix</SubTitle>
             <Paragraph>
               USD $12.00/mo
@@ -112,6 +126,10 @@ export default function HoveringCard() {
           </Hover>
         </DisplayOver>
       </Background>
+      <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
+        <SubscriptionDetail open={!open} />
+      </Backdrop>
     </div>
+    // </ButtonBase>
   );
 }

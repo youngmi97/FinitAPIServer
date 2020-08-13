@@ -7,6 +7,7 @@ const Card = styled.div({
   position: "relative",
   backgroundColor: "#FFFFFF",
   borderRadius: 4,
+  cursor: "default",
 });
 
 const Content = styled.div({
@@ -20,7 +21,7 @@ const Content = styled.div({
   boxSizing: "border-box",
 });
 
-const Title = styled.h4({
+const Title = styled.h3({
   fontFamily: [
     "-apple-system",
     "BlinkMacSystemFont",
