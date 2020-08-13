@@ -1,77 +1,19 @@
-import React from "react";
-import { fade, makeStyles, withStyles } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import IconButton from "@material-ui/core/IconButton";
-import Button from "@material-ui/core/Button";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
+import Drawer from "@material-ui/core/Drawer";
 import Grid from "@material-ui/core/Grid";
-import InputBase from "@material-ui/core/InputBase";
-
-import Launches from "./Launches";
-
 import Paper from "@material-ui/core/Paper";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
+import { fade, makeStyles } from "@material-ui/core/styles";
+import Toolbar from "@material-ui/core/Toolbar";
+import React from "react";
+import LIST_ITEM_INSIGHT from "./List_Insight";
+import LIST_ITEM_RIGHT from "./List_item_right";
+import PROFILE_CARD from "./Profile_Card";
 
-import Profile_Card from "./Profile_Card";
-import List_item_Insight from "./List_Insight";
-import Active_content from "./Active_content";
-import List_item_right from "./List_item_right";
+
+
 
 const drawerWidth = 240;
 const drawerWidth2 = 300;
-
-const StyledButton = withStyles({
-	root: {
-		color: "purple",
-		fontSize: "0.5rem",
-	},
-	label: {
-		fontSize: "3",
-		textTransform: "capitalize",
-	},
-})(Button);
-
-const AntTabs = withStyles({
-	root: {},
-})(Tabs);
-
-const AntTab = withStyles((theme) => ({
-	root: {
-		textTransform: "none",
-		fontSize: 10,
-		inlineSize: 10,
-		minWidth: 72,
-		fontWeight: theme.typography.fontWeightRegular,
-		fontFamily: [
-			"-apple-system",
-			"BlinkMacSystemFont",
-			'"Segoe UI"',
-			"Roboto",
-			'"Helvetica Neue"',
-			"Arial",
-			"sans-serif",
-			'"Apple Color Emoji"',
-			'"Segoe UI Emoji"',
-			'"Segoe UI Symbol"',
-		].join(","),
-		"&:hover": {
-			color: "#40a9ff",
-			opacity: 1,
-		},
-		"&$selected": {
-			color: "#800080",
-			fontWeight: theme.typography.fontWeightMedium,
-		},
-		"&:focus": {
-			color: "#40a9ff",
-		},
-	},
-	selected: {},
-}))((props) => <Tab disableRipple {...props} />);
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -191,40 +133,35 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Main_Insight() {
 	const classes = useStyles();
-	const [value, setValue] = React.useState(0);
-
-	const handleChange = (event, newValue) => {
-		setValue(newValue);
-	};
 
 	return (
-		<Paper className={classes.paperContainer}>
-			{/* <AppBar position="fixed" className={classes.appBar}>
+    <Paper className={classes.paperContainer}>
+      {/* <AppBar position="fixed" className={classes.appBar}>
         <Launches />
       </AppBar> */}
-			<Grid container>
-				<Grid item xs={1} className={classes.drawerPaper}></Grid>
-				<Grid item xs={2} className={classes.drawerPaper}>
-					<CssBaseline />
-					<Profile_Card />
-					<List_item_Insight />
-				</Grid>
-				<Grid item xs={5} className={classes.drawerPaper3}></Grid>
+      <Grid container>
+        <Grid item xs={1} className={classes.drawerPaper}></Grid>
+        <Grid item xs={2} className={classes.drawerPaper}>
+          <CssBaseline />
+          <PROFILE_CARD />
+          <LIST_ITEM_INSIGHT />
+        </Grid>
+        <Grid item xs={5} className={classes.drawerPaper3}></Grid>
 
-				<Grid item xs={2}>
-					<Toolbar />
-					<Drawer
-						className={classes.drawer2}
-						variant="permanent"
-						classes={{
-							paper: classes.drawerPaper2,
-						}}
-						anchor="right"
-					>
-						<List_item_right />
-					</Drawer>
-				</Grid>
-			</Grid>
-		</Paper>
-	);
+        <Grid item xs={2}>
+          <Toolbar />
+          <Drawer
+            className={classes.drawer2}
+            variant="permanent"
+            classes={{
+              paper: classes.drawerPaper2,
+            }}
+            anchor="right"
+          >
+            <LIST_ITEM_RIGHT />
+          </Drawer>
+        </Grid>
+      </Grid>
+    </Paper>
+  );
 }

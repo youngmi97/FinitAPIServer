@@ -1,21 +1,12 @@
-import React from "react";
 import {
-	fade,
-	makeStyles,
-	withStyles,
-	createMuiTheme,
-} from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Launches from "../components/Home_Login_AppBar";
-import {
-	Paper,
-	MuiThemeProvider,
-	Container,
 	Box,
-	Button,
+	Button, MuiThemeProvider
 } from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => ({}));
+import {
+	createMuiTheme,
+	withStyles
+} from "@material-ui/core/styles";
+import React from "react";
 
 const theme = createMuiTheme({
 	palette: {
@@ -83,7 +74,6 @@ const StyledButton = withStyles({
 })(Button);
 
 export default function Home_Local() {
-	const classes = useStyles();
 	return (
 		<MuiThemeProvider theme={theme}>
 			{/* <AppBar position="fixed">

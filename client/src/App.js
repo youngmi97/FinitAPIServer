@@ -1,19 +1,19 @@
-import React from "react";
-import { createMuiTheme, ThemeProvider, fade } from "@material-ui/core/styles";
-
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import "./App.css";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import "bootstrap/dist/css/bootstrap.min.css";
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import "semantic-ui-css/semantic.min.css";
-
+import "./App.css";
+import Main from "./components/Main";
+import Main_Insight from "./components/Main_Insight";
+import MenuBar from "./components/MenuBar";
+import { AuthProvider } from "./context/auth";
 import Home_Local from "./pages/Home_Local";
 import Login_Local from "./pages/Login_Local";
 import Register_Local from "./pages/Register_Local";
-import Main from "./components/Main";
-import Main_Insight from "./components/Main_Insight";
 
-import MenuBar from "./components/MenuBar";
-import { AuthProvider } from "./context/auth";
+
+
 
 const theme = createMuiTheme({
   palette: {
@@ -69,6 +69,9 @@ const theme = createMuiTheme({
         borderRadius: 4,
         padding: "0 16px",
         // boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
+        "&:focus": {
+          outline: "none",
+        },
       },
       outlined: {
         fontWeight: 600,
@@ -77,6 +80,9 @@ const theme = createMuiTheme({
         borderColor: "#8a8a8f",
         borderRadius: 20,
         Height: 32,
+        "&:focus": {
+          outline: "none",
+        },
       },
     },
     MuiToolbar: {
@@ -90,6 +96,9 @@ const theme = createMuiTheme({
         height: 40,
         alignItems: "center",
         // alignSelf: "flex-end",
+        "&:focus": {
+          outline: "none",
+        },
       },
     },
   },

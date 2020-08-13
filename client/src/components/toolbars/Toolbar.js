@@ -1,21 +1,18 @@
-import React from "react";
-
-import { fade, makeStyles } from "@material-ui/core/styles";
-
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import InputBase from "@material-ui/core/InputBase";
-
 import IconButton from "@material-ui/core/IconButton";
-
+import InputBase from "@material-ui/core/InputBase";
+import { fade, makeStyles } from "@material-ui/core/styles";
+import Toolbar from "@material-ui/core/Toolbar";
+import AddRoundedIcon from "@material-ui/icons/AddRounded";
+import FilterListRoundedIcon from "@material-ui/icons/FilterListRounded";
 import FormatListBulletedRoundedIcon from "@material-ui/icons/FormatListBulletedRounded";
-import ViewModuleRoundedIcon from "@material-ui/icons/ViewModuleRounded";
 import SearchRoundedIcon from "@material-ui/icons/SearchRounded";
 import SortRoundedIcon from "@material-ui/icons/SortRounded";
-import FilterListRoundedIcon from "@material-ui/icons/FilterListRounded";
-import AddRoundedIcon from "@material-ui/icons/AddRounded";
-import { Icon } from "@material-ui/core";
+import ViewModuleRoundedIcon from "@material-ui/icons/ViewModuleRounded";
+import React from "react";
+
+
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,9 +24,9 @@ const useStyles = makeStyles((theme) => ({
     border: "1px solid #EFEFF4",
     backgroundColor: fade(theme.palette.common.white, 0.15),
     "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
+      border: "1px solid #7610EB",
     },
-    marginLeft: 0,
+    marginLeft: "auto",
     width: 160,
   },
   searchIcon: {
@@ -47,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
-    padding: 11,
+    // padding: 11,
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
@@ -55,7 +52,6 @@ const useStyles = makeStyles((theme) => ({
   },
   highlightButton: {
     disableRipple: true,
-
     padding: 11,
     height: "100%",
     borderRadius: 8,

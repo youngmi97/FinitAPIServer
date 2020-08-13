@@ -1,84 +1,22 @@
-import React from "react";
-import { fade, makeStyles, withStyles } from "@material-ui/core/styles";
-
-import Button from "@material-ui/core/Button";
-
+import Avatar from "@material-ui/core/Avatar";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import ListSubheader from "@material-ui/core/ListSubheader";
-import Drawer from "@material-ui/core/Drawer";
-import Avatar from "@material-ui/core/Avatar";
-
-import ToggleOnIcon from "@material-ui/icons/ToggleOn";
-import ToggleOffIcon from "@material-ui/icons/ToggleOn";
+import { fade, makeStyles } from "@material-ui/core/styles";
+import AppsIcon from "@material-ui/icons/Apps";
 import EqualizerIcon from "@material-ui/icons/Equalizer";
 import EventNoteIcon from "@material-ui/icons/EventNote";
-import AppsIcon from "@material-ui/icons/Apps";
-import PersonIcon from "@material-ui/icons/Person";
 import GroupIcon from "@material-ui/icons/Group";
-import TvIcon from "@material-ui/icons/Tv";
-import BrushIcon from "@material-ui/icons/Brush";
-import DescriptionIcon from "@material-ui/icons/Description";
-import SportsEsportsIcon from "@material-ui/icons/SportsEsports";
-import HeadsetIcon from "@material-ui/icons/Headset";
+import React from "react";
+import { Link } from "react-router-dom";
 
-import { Link, LinkProps } from "react-router-dom";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
+
+
+
 
 const drawerWidth = 300;
 const drawerWidth2 = 300;
-
-const StyledButton = withStyles({
-  root: {
-    color: "purple",
-    fontSize: "0.5rem",
-  },
-  label: {
-    fontSize: "3",
-    textTransform: "capitalize",
-  },
-})(Button);
-
-const AntTabs = withStyles({
-  root: {},
-})(Tabs);
-
-const AntTab = withStyles((theme) => ({
-  root: {
-    textTransform: "none",
-    fontSize: 10,
-    inlineSize: 10,
-    minWidth: 72,
-    fontWeight: theme.typography.fontWeightRegular,
-    fontFamily: [
-      "-apple-system",
-      "BlinkMacSystemFont",
-      '"Segoe UI"',
-      "Roboto",
-      '"Helvetica Neue"',
-      "Arial",
-      "sans-serif",
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(","),
-    "&:hover": {
-      color: "#40a9ff",
-      opacity: 1,
-    },
-    "&$selected": {
-      color: "#800080",
-      fontWeight: theme.typography.fontWeightMedium,
-    },
-    "&:focus": {
-      color: "#40a9ff",
-    },
-  },
-  selected: {},
-}))((props) => <Tab disableRipple {...props} />);
 
 const useStyles = makeStyles((theme) => ({
   root: {

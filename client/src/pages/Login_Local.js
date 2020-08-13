@@ -1,35 +1,21 @@
-import React, { useContext, useState } from "react";
-import { fade, makeStyles, withStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Launches from "../components/Home_Login_AppBar";
-import {
-	Paper,
-	MuiThemeProvider,
-	Container,
-	Box,
-	Button,
-	Typography,
-	Avatar,
-	TextField,
-} from "@material-ui/core";
-import { Form } from "semantic-ui-react";
-
-import { createMuiTheme } from "@material-ui/core/styles";
-import { Link, LinkProps } from "react-router-dom";
-
-import gql from "graphql-tag";
-import "../App.css";
-import { useForm } from "../hooks";
 import { useMutation } from "@apollo/react-hooks";
+import {
+	Avatar, Box,
+	Button, Paper,
+	Typography
+} from "@material-ui/core";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+import gql from "graphql-tag";
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { Form } from "semantic-ui-react";
+import "../App.css";
 import { AuthContext } from "../context/auth";
+import { useForm } from "../hooks";
 
-const theme = createMuiTheme({
-	palette: {
-		background: {
-			default: "#ffffff",
-		},
-	},
-});
+
+
+
 const StyledButton = withStyles({
 	root: {
 		color: "white",

@@ -1,14 +1,13 @@
 //Main contents displayed in the center of the screen
-import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
-
+import { makeStyles } from "@material-ui/core/styles";
+import React from "react";
 //Cards to be displayed in the screen
-import Card_content from "./cards/Card_content";
-import Card_internal from "./cards/Card_internal";
+import CardContent from "./cards/Card_content";
+import CardInternal from "./cards/Card_internal";
 import HoveringCard from "./cards/HoveringCard";
 
-import { fade, makeStyles, withStyles } from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,7 +34,7 @@ export default function Active_content() {
               precision={0.5}
               onClick={() => sethover1(!hover1)}
             >
-              {hover1 !== true ? <Card_content /> : <Card_internal />}
+              {hover1 !== true ? <CardContent /> : <CardInternal />}
             </Grid>
           </Grid>
           <Grid item xs className={classes.root}>
@@ -44,7 +43,7 @@ export default function Active_content() {
               onMouseEnter={() => sethover(true)}
               onMouseLeave={() => sethover(false)}
             >
-              {hover !== true ? <Card_content /> : <Card_internal />}
+              {hover !== true ? <CardContent /> : <CardInternal />}
             </Grid>
           </Grid>
           <Grid item xs className={classes.root}>
@@ -54,13 +53,13 @@ export default function Active_content() {
             {/* <Card_content /> */}
           </Grid>
           <Grid item xs className={classes.root}>
-            <Card_content />
+            <CardContent />
           </Grid>
           <Grid item xs className={classes.root}>
-            <Card_content />
+            <CardContent />
           </Grid>
           <Grid item xs className={classes.root}>
-            <Card_content />
+            <CardContent />
           </Grid>
           <Grid item xs className={classes.root}></Grid>
           <Grid item xs className={classes.root}></Grid>

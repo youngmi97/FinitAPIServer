@@ -1,22 +1,15 @@
-import React from "react";
-import { fade, makeStyles, withStyles } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import AppBar from "@material-ui/core/AppBar";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import IconButton from "@material-ui/core/IconButton";
-import Button from "@material-ui/core/Button";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import Grid from "@material-ui/core/Grid";
-import InputBase from "@material-ui/core/InputBase";
-import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
+import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
+import { fade, makeStyles, withStyles } from "@material-ui/core/styles";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import React from "react";
 
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
 
 const drawerWidth = 240;
 const drawerWidth2 = 300;
@@ -31,44 +24,6 @@ const StyledButton = withStyles({
 		textTransform: "capitalize",
 	},
 })(Button);
-
-const AntTabs = withStyles({
-	root: {},
-})(Tabs);
-
-const AntTab = withStyles((theme) => ({
-	root: {
-		textTransform: "none",
-		fontSize: 10,
-		inlineSize: 10,
-		minWidth: 72,
-		fontWeight: theme.typography.fontWeightRegular,
-		fontFamily: [
-			"-apple-system",
-			"BlinkMacSystemFont",
-			'"Segoe UI"',
-			"Roboto",
-			'"Helvetica Neue"',
-			"Arial",
-			"sans-serif",
-			'"Apple Color Emoji"',
-			'"Segoe UI Emoji"',
-			'"Segoe UI Symbol"',
-		].join(","),
-		"&:hover": {
-			color: "#40a9ff",
-			opacity: 1,
-		},
-		"&$selected": {
-			color: "#800080",
-			fontWeight: theme.typography.fontWeightMedium,
-		},
-		"&:focus": {
-			color: "#40a9ff",
-		},
-	},
-	selected: {},
-}))((props) => <Tab disableRipple {...props} />);
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -197,7 +152,7 @@ export default function List_item_right() {
 					<div className={classes.grow} />
 				</div>
 				<div>
-					<StyledButton>View all></StyledButton>
+					<StyledButton>View all </StyledButton>
 				</div>
 			</Toolbar>
 
@@ -289,7 +244,7 @@ export default function List_item_right() {
 					<div className={classes.grow} />
 				</div>
 				<div>
-					<StyledButton>View all></StyledButton>
+					<StyledButton>View all </StyledButton>
 				</div>
 			</Toolbar>
 		</div>

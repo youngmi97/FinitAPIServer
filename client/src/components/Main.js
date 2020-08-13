@@ -1,43 +1,20 @@
-import React from "react";
-import clsx from "clsx";
-import { fade, makeStyles, withStyles } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import AppBar from "@material-ui/core/AppBar";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import IconButton from "@material-ui/core/IconButton";
-import Button from "@material-ui/core/Button";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import Grid from "@material-ui/core/Grid";
-import InputBase from "@material-ui/core/InputBase";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import ListItem from "@material-ui/core/ListItem";
-import Add from "@material-ui/icons/Add";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListSubheader from "@material-ui/core/ListSubheader";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
-import Launches from "./Launches";
-import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import ViewListIcon from "@material-ui/icons/ViewList";
-import ViewModuleIcon from "@material-ui/icons/ViewModule";
-import SearchIcon from "@material-ui/icons/Search";
-import FilterListIcon from "@material-ui/icons/FilterList";
-import SwapIcon from "@material-ui/icons/SwapVert";
-import PeopleIcon from "@material-ui/icons/SupervisedUserCircleRounded";
-import Profile_Card from "./Profile_Card";
-import List_item_discover from "./List_item_discover";
-import Active_content from "./Active_content";
+import Drawer from "@material-ui/core/Drawer";
+import Grid from "@material-ui/core/Grid";
+import IconButton from "@material-ui/core/IconButton";
+import { fade, makeStyles, withStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-import List_item_right from "./List_item_right";
-import List_Viewbreak from "./List_viewbreak";
-import withWidth from "@material-ui/core/withWidth";
+import clsx from "clsx";
+import React from "react";
 
+
+import ACTIVE_CONTENT from "./Active_content";
+import LIST_ITEM_DISCOVER from "./List_item_discover";
+import LIST_ITEM_RIGHT from "./List_item_right";
+import LIST_VIEWBREAK from "./List_viewbreak";
 import SubscriptionToolbar from "./toolbars/Toolbar";
+
 
 const drawerWidth = 256;
 const drawerWidth2 = 305;
@@ -49,55 +26,6 @@ const TextTypography1 = withStyles({
     marginLeft: 10,
   },
 })(Typography);
-
-const StyledButton = withStyles({
-  root: {
-    color: "purple",
-    fontSize: "0.5rem",
-  },
-  label: {
-    fontSize: "3",
-    textTransform: "capitalize",
-  },
-})(Button);
-
-const AntTabs = withStyles({
-  root: {},
-})(Tabs);
-
-const AntTab = withStyles((theme) => ({
-  root: {
-    textTransform: "none",
-    fontSize: 10,
-    inlineSize: 10,
-    minWidth: 72,
-    fontWeight: theme.typography.fontWeightRegular,
-    fontFamily: [
-      "-apple-system",
-      "BlinkMacSystemFont",
-      '"Segoe UI"',
-      "Roboto",
-      '"Helvetica Neue"',
-      "Arial",
-      "sans-serif",
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(","),
-    "&:hover": {
-      color: "#40a9ff",
-      opacity: 1,
-    },
-    "&$selected": {
-      color: "#800080",
-      fontWeight: theme.typography.fontWeightMedium,
-    },
-    "&:focus": {
-      color: "#40a9ff",
-    },
-  },
-  selected: {},
-}))((props) => <Tab disableRipple {...props} />);
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -223,10 +151,6 @@ const useStyles = makeStyles((theme) => ({
   drawerContainer: {
     overflow: "auto",
   },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-  },
   paperContainer: {
     height: 260,
     width: 1440,
@@ -285,14 +209,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Main(props) {
   const classes = useStyles();
-  const { width } = props;
-  const [value, setValue] = React.useState(0);
   const [open, setOpen] = React.useState(true);
   const [view, setView] = React.useState(false);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -321,7 +240,7 @@ export default function Main(props) {
         }}
         anchor="left"
       >
-        <List_item_discover />
+        <LIST_ITEM_DISCOVER />
       </Drawer>
       <Drawer
         className={classes.drawer2}
@@ -332,7 +251,7 @@ export default function Main(props) {
         anchor="right"
         open={open}
       >
-        <List_item_right />
+        <LIST_ITEM_RIGHT />
         <div className={classes.overlay1}>
           <IconButton
             className={classes.Buttoncolor}
@@ -354,7 +273,7 @@ export default function Main(props) {
                 <SubscriptionToolbar changeView={() => setView(!view)} />
               </div>
               <main className={classes.content}>
-                {view !== true ? <Active_content /> : <List_Viewbreak />}
+                {view !== true ? <ACTIVE_CONTENT /> : <LIST_VIEWBREAK />}
               </main>
             </Grid>
           </Grid>
