@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { Backdrop } from "@material-ui/core";
 import SubscriptionDetail from "../SubscriptionDetail";
+// import SubDets from "../SubDets";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -14,7 +15,12 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     cursor: "zoom-out",
   },
+  sub: {
+    zIndex: theme.zIndex.drawer,
+  },
 }));
+
+// emotion-styled
 const Hover = styled.div({
   opacity: 0,
   transition: "opacity 350ms ease",
@@ -111,7 +117,6 @@ export default function HoveringCard() {
   };
 
   return (
-    // <ButtonBase>
     <div className="HoveringCard">
       <Background>
         <DisplayOver onClick={handleToggle}>
@@ -130,6 +135,5 @@ export default function HoveringCard() {
         <SubscriptionDetail open={!open} />
       </Backdrop>
     </div>
-    // </ButtonBase>
   );
 }
