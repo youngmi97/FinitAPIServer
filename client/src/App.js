@@ -12,9 +12,6 @@ import Home_Local from "./pages/Home_Local";
 import Login_Local from "./pages/Login_Local";
 import Register_Local from "./pages/Register_Local";
 
-
-
-
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -96,6 +93,13 @@ const theme = createMuiTheme({
         height: 40,
         alignItems: "center",
         // alignSelf: "flex-end",
+        "&:focus": {
+          outline: "none",
+        },
+      },
+    },
+    MuiButtonBase: {
+      root: {
         "&:focus": {
           outline: "none",
         },
