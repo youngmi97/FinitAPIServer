@@ -1,24 +1,22 @@
 import React from "react";
 import styled from "@emotion/styled/macro";
 import { makeStyles } from "@material-ui/core/styles";
+import "../../index.css";
 
-import { Backdrop } from "@material-ui/core";
 import SubscriptionDetail from "../SubscriptionDetail";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-
-// import SubDets from "../SubDets";
+import { Modal } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-  backdrop: {
-    zIndex: theme.zIndex.drawer + 1,
-    color: "#fff",
+  modalStyle: {
     alignContent: "center",
+    justifyContent: "space-around",
     flexWrap: "wrap",
     display: "flex",
     cursor: "zoom-out",
   },
-  sub: {
-    zIndex: theme.zIndex.drawer,
+  detail: {
+    position: "relative",
+    transform: "translate(-50%, -50%)",
   },
 }));
 
@@ -44,18 +42,6 @@ const DisplayOver = styled.div({
 });
 
 const SubTitle = styled.h4({
-  fontFamily: [
-    "-apple-system",
-    "BlinkMacSystemFont",
-    '"Segoe UI"',
-    "Roboto",
-    '"Helvetica Neue"',
-    "Arial",
-    "sans-serif",
-    '"Apple Color Emoji"',
-    '"Segoe UI Emoji"',
-    '"Segoe UI Symbol"',
-  ].join(","),
   fontSize: "14px",
   fontWeight: "500px",
   left: "20px",
@@ -64,18 +50,6 @@ const SubTitle = styled.h4({
 });
 
 const Paragraph = styled.p({
-  fontFamily: [
-    "-apple-system",
-    "BlinkMacSystemFont",
-    '"Segoe UI"',
-    "Roboto",
-    '"Helvetica Neue"',
-    "Arial",
-    "sans-serif",
-    '"Apple Color Emoji"',
-    '"Segoe UI Emoji"',
-    '"Segoe UI Symbol"',
-  ].join(","),
   left: "20px",
   transform: "translate3d(0,50px,0)",
   transition: "transform 350ms ease",
@@ -111,50 +85,38 @@ export default function HoveringCard() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
-
-  const handleToggle = () => {
-    setOpen(!open);
+  const handleOpen = () => {
+    setOpen(true);
   };
 
-  const handleClick = () => {
-    setOpen((prev) => !prev);
-  };
-
-  const handleClickAway = () => {
+  const handleClose = () => {
     setOpen(false);
   };
 
   return (
-    <ClickAwayListener onClickAway={handleClickAway}>
-      <div className="HoveringCard">
-        <Background>
-          <DisplayOver onClick={handleClick}>
-            <Hover>
-              <SubTitle>Netflix</SubTitle>
-              <Paragraph>
-                USD $12.00/mo
-                <br />
-                Next payment is in 3 days
-              </Paragraph>
-              <CTA>View Details</CTA>
-            </Hover>
-          </DisplayOver>
-        </Background>
-        <Backdrop
-          className={classes.backdrop}
-          open={open}
-          // onClick={handleClose}
-        >
-          {open ? (
-            <div>
-              <SubscriptionDetail className={classes.backdrop} open={!open} />
-            </div>
-          ) : null}
-        </Backdrop>
-      </div>
-    </ClickAwayListener>
+    <div className="HoveringCard">
+      <Background>
+        <DisplayOver type="button" onClick={handleOpen}>
+          <Hover>
+            <SubTitle>Netflix</SubTitle>
+            <Paragraph>
+              USD $12.00/mo
+              <br />
+              Next payment is in 3 days
+            </Paragraph>
+            <CTA>View Details</CTA>
+          </Hover>
+        </DisplayOver>
+      </Background>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="subscription-title"
+        aria-describedby="subscription-detail"
+        class={classes.modalStyle}
+      >
+        <SubscriptionDetail class={classes.detail} />
+      </Modal>
+    </div>
   );
 }

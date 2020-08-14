@@ -22,6 +22,7 @@ export default function Active_content() {
   const classes = useStyles();
   const [hover, sethover] = React.useState(false);
   const [hover1, sethover1] = React.useState(false);
+
   return (
     <div>
       {/* <Box mx="auto" bgcolor="background.paper" p={4}> */}
@@ -49,6 +50,7 @@ export default function Active_content() {
             <SubscriptionCard />
           </Grid>
           <Grid item xs className={classes.root}>
+            {/* <SubscriptionToolbar changeView={() => setView(!view)} /> */}
             <HoveringCard />
           </Grid>
           <Grid item xs className={classes.root}>
