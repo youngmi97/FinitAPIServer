@@ -11,10 +11,6 @@ import GroupIcon from "@material-ui/icons/Group";
 import React from "react";
 import { Link } from "react-router-dom";
 
-
-
-
-
 const drawerWidth = 300;
 const drawerWidth2 = 300;
 

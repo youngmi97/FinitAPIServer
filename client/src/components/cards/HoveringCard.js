@@ -9,7 +9,7 @@ import { Modal } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   modalStyle: {
     alignContent: "center",
-    justifyContent: "space-around",
+    justifyContent: "center",
     flexWrap: "wrap",
     display: "flex",
     cursor: "zoom-out",
