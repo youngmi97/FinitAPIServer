@@ -1,7 +1,8 @@
-//Main contents displayed in the center of the screen
+//Active contents displayed in the center of the screen
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
+
 //Cards to be displayed in the screen
 import CardContent from "./cards/Card_content";
 import CardInternal from "./cards/Card_internal";
