@@ -10,7 +10,7 @@ import clsx from "clsx";
 import React from "react";
 
 import ACTIVE_CONTENT from "./Active_content";
-import LIST_ITEM_DISCOVER from "./List_item_discover";
+import LIST_ITEM_DISCOVER from "./Listupcoming";
 import LIST_ITEM_RIGHT from "./List_item_right";
 import LIST_VIEWBREAK from "./List_viewbreak";
 import SubscriptionToolbar from "./toolbars/Toolbar";
@@ -233,7 +233,7 @@ export default function Main(props) {
         className={classes.toolBar}
         alignItems="center"
       >
-        <TextTypography1>All subscriptions</TextTypography1>
+        <TextTypography1>Upcoming Events</TextTypography1>
       </Box>
       <Drawer
         className={classes.drawer}

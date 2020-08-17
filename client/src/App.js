@@ -5,7 +5,9 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import "semantic-ui-css/semantic.min.css";
 import "./App.css";
 import Main from "./components/Main";
-import Main_Insight from "./components/Main_Insight";
+import MainShared from "./components/MainShared";
+import Mainupcoming from "./components/Mainupcoming";
+import MainInsight from "./components/MainInsight";
 import MenuBar from "./components/MenuBar";
 import { AuthProvider } from "./context/auth";
 import Home_Local from "./pages/Home_Local";
@@ -115,7 +117,9 @@ function App() {
         <ThemeProvider theme={theme}>
           <MenuBar />
           <Route exact path="/subscriptions" component={Main} />
-          <Route exact path="/discover" component={Main_Insight} />
+          <Route exact path="/shared" component={MainShared} />
+          <Route exact path="/upcoming" component={Mainupcoming} />
+          <Route exact path="/insight" component={MainInsight} />
           <Route exact path="/" component={Home_Local} />
           <Route exact path="/login" component={Login_Local} />
           <Route exact path="/register" component={Register_Local} />

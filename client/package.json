@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@devexpress/dx-react-chart": "^2.7.0",
+    "@devexpress/dx-react-chart-material-ui": "^2.7.0",
+    "@devexpress/dx-react-core": "^2.7.0",
     "@emotion/babel-preset-css-prop": "^10.0.27",
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
@@ -14,6 +17,7 @@
     "antd": "^4.5.3",
     "apollo-boost": "^0.4.9",
     "bootstrap": "^4.5.0",
+    "d3-scale-chromatic": "^1.5.0",
     "emotion-theming": "^10.0.27",
     "esm": "^3.2.25",
     "graphql": "^15.3.0",
@@ -25,6 +29,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.3",
     "reactstrap": "^8.5.1",
+    "recharts": "^1.8.5",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^1.1.1",
     "styled-components": "^5.1.1"
