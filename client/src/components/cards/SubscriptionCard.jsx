@@ -27,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
     height: 217,
     borderRadius: 4,
   },
+  contents: {
+    padding: "16px 16px 16px 16px",
+  },
   image: {
     position: "relative",
     height: "100%",
@@ -144,7 +147,6 @@ export default function ButtonBases() {
           />
           <span className={classes.imageBackdrop} />
           <span className={classes.imageButton}>
-            {/* <Typography variant="h4">{image.title}</Typography> */}
             <Typography
               component="span"
               variant="subtitle1"

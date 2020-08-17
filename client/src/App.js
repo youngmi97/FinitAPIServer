@@ -39,19 +39,39 @@ const theme = createMuiTheme({
     three: "#F7F7F7",
     four: "#E9E9EA",
   },
-  typography: {
-    fontFamily: [
-      "-apple-system",
-      "BlinkMacSystemFont",
-      '"Segoe UI"',
-      "Roboto",
-      '"Helvetica Neue"',
-      "Arial",
-      "sans-serif",
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(","),
+  Muitypography: {
+    root: {
+      fontFamily: [
+        "-apple-system",
+        "BlinkMacSystemFont",
+        '"Segoe UI"',
+        "Roboto",
+        '"Helvetica Neue"',
+        "Arial",
+        "sans-serif",
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+      ].join(","),
+    },
+    h1: {
+      /* Heading 1 [17] SB */
+      fontStyle: "normal",
+      fontWeight: 500,
+      fontSize: "72px",
+      lineHeight: "70px",
+      letterSpacing: "0.25px",
+      color: "#000000",
+    },
+    h2: {
+      /* Heading 2 [14] SB */
+
+      fontStyle: "normal",
+      fontWeight: 600,
+      fontSize: 14,
+      lineHeight: 17,
+      color: "#000000",
+    },
   },
   breakpoints: {
     values: {
