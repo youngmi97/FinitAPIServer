@@ -8,6 +8,7 @@ import Main from "./components/Main";
 import MainShared from "./components/MainShared";
 import Mainupcoming from "./components/Mainupcoming";
 import MainInsight from "./components/MainInsight";
+import MainWallet from "./components/MainWallet";
 import MenuBar from "./components/MenuBar";
 import { AuthProvider } from "./context/auth";
 import Home_Local from "./pages/Home_Local";
@@ -138,6 +139,7 @@ function App() {
           <MenuBar />
           <Route exact path="/subscriptions" component={Main} />
           <Route exact path="/shared" component={MainShared} />
+          <Route exact path="/wallet" component={MainWallet} />
           <Route exact path="/upcoming" component={Mainupcoming} />
           <Route exact path="/insight" component={MainInsight} />
           <Route exact path="/" component={Home_Local} />

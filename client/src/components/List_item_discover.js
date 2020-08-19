@@ -167,9 +167,9 @@ export default function List_Active() {
         </ListSubheader>
         <ListItem
           button
-          selected={selectedIndex === 5}
-          onClick={(event) => handleListItemClick(event, 5)}
-          {...{ to: "/" }}
+          selected={selectedIndex === 4}
+          onClick={(event) => handleListItemClick(event, 4)}
+          {...{ to: "/wallet" }}
           component={Link}
         >
           <ListItemIcon className={classes.ListItemSize}>
