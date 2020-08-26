@@ -131,6 +131,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   drawerPaper2: {
+    marginTop: 61,
     width: 305,
   },
   drawerHeader: {
@@ -148,7 +149,7 @@ const useStyles = makeStyles((theme) => ({
   },
   overlay1: {
     position: "absolute",
-    bottom: "10px",
+    bottom: "70px",
     right: "10px",
   },
   drawerContainer: {
@@ -251,15 +252,13 @@ export default function Main(props) {
         })}
       >
         <Box mx="auto" bgcolor="background.paper" className={classes.mainbreak}>
-          <Grid container spacing={1}>
-            <Grid item className={classes.drawerPaper3} alignContent="center">
-              <div className={classes.grow}>
-                <SubscriptionToolbar changeView={() => setView(!view)} />
-              </div>
-              <main className={classes.content}>
-                {view !== true ? <ACTIVE_CONTENT /> : <LIST_VIEWBREAK />}
-              </main>
-            </Grid>
+          <Grid item className={classes.drawerPaper3} alignContent="center">
+            <div className={classes.grow}>
+              <SubscriptionToolbar changeView={() => setView(!view)} />
+            </div>
+            <main className={classes.content}>
+              {view !== true ? <ACTIVE_CONTENT /> : <LIST_VIEWBREAK />}
+            </main>
           </Grid>
         </Box>
       </main>

@@ -129,6 +129,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   drawerPaper2: {
+    marginTop: 61,
     width: 305,
   },
   drawerHeader: {
@@ -146,7 +147,7 @@ const useStyles = makeStyles((theme) => ({
   },
   overlay1: {
     position: "absolute",
-    bottom: "10px",
+    bottom: "70px",
     right: "10px",
   },
   drawerContainer: {

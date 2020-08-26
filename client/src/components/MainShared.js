@@ -12,7 +12,7 @@ import React from "react";
 import ACTIVE_CONTENT from "./Active_content";
 import LIST_ITEM_DISCOVER from "./Listshared";
 import LIST_ITEM_RIGHT from "./List_item_right";
-import LIST_VIEWBREAK from "./List_viewbreak";
+import EmptyContent from "./EmptyContent";
 import SubscriptionToolbar from "./toolbars/Toolbar";
 
 const drawerWidth = 256;
@@ -131,6 +131,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   drawerPaper2: {
+    marginTop: 61,
     width: 305,
   },
   drawerHeader: {
@@ -148,7 +149,7 @@ const useStyles = makeStyles((theme) => ({
   },
   overlay1: {
     position: "absolute",
-    bottom: "10px",
+    bottom: "70px",
     right: "10px",
   },
   drawerContainer: {
@@ -251,15 +252,13 @@ export default function Main(props) {
         })}
       >
         <Box mx="auto" bgcolor="background.paper" className={classes.mainbreak}>
-          <Grid container spacing={1}>
-            <Grid item className={classes.drawerPaper3} alignContent="center">
-              <div className={classes.grow}>
-                <SubscriptionToolbar changeView={() => setView(!view)} />
-              </div>
-              <main className={classes.content}>
-                {view !== true ? <ACTIVE_CONTENT /> : <LIST_VIEWBREAK />}
-              </main>
-            </Grid>
+          <Grid item alignContent="center">
+            <div className={classes.grow}>
+              <SubscriptionToolbar changeView={() => setView(!view)} />
+            </div>
+            <main className={classes.content}>
+              <EmptyContent />
+            </main>
           </Grid>
         </Box>
       </main>

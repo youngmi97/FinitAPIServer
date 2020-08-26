@@ -1,4 +1,4 @@
-import { CardHeader, Box, IconButton } from "@material-ui/core";
+import { CardHeader, Box, IconButton, Typography } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
@@ -9,10 +9,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
-import Typography from "@material-ui/core/Typography";
+import WalletToolbar from "../toolbars/WalletToolbar";
 import React from "react";
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,37 +46,16 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     borderRadius: 5,
   },
-  ListItemSize2: {
-    color: "black",
-    borderColor: "white",
-    fontSize: "17px",
-  },
   ListItemSize3: {
-    color: "black",
-    borderColor: "white",
     fontSize: "14px",
-    fontWeight: 400,
-    alignItems: "center",
-    borderRadius: 5,
-    height: "40px",
-    textTransform: "none",
-    marginLeft: "5px",
-  },
-  ListItemSize4: {
-    color: "black",
-    fontSize: "24px",
   },
   ListItemSize5: {
-    color: "#7610EB",
-    borderColor: "white",
-    backgroundColor: "white",
     fontSize: "14px",
-    fontWeight: 400,
-    alignItems: "center",
-    borderRadius: 5,
-    textTransform: "none",
-    height: "40px",
-    marginLeft: "16px",
+    fontWeight: "1000",
+  },
+  ListItemSize2: {
+    fontSize: "14px",
+    color: "#7610EB",
   },
   Buttoncolor: {
     color: theme.palette.primary.main,
@@ -87,12 +66,6 @@ export default function Card_internal() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [secondary, setSecondary] = React.useState(false);
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleToggle = () => {
-    setOpen(!open);
-  };
   return (
     <Card className={classes.root}>
       {/* <CardHeader></CardHeader> */}
@@ -107,48 +80,110 @@ export default function Card_internal() {
             </IconButton>
           </Box>
         </Box>
+        <WalletToolbar />
         <List>
           <ListItem divider>
-            <ListItemAvatar>
-              <Avatar
-                variant="square"
-                className={classes.rect}
-                src="static/images/Visa.svg"
-              ></Avatar>
-            </ListItemAvatar>
-            <ListItemText
-              primary="VISA ****-****-****-9322"
-              secondary={secondary ? "Secondary text" : null}
-            />
+            <Grid container>
+              <Grid xs={3}>
+                <Typography className={classes.ListItemSize5}>Date</Typography>
+              </Grid>
+              <Grid xs={4}>
+                <Typography className={classes.ListItemSize5}>
+                  Subscription
+                </Typography>
+              </Grid>
+              <Grid xs={3}>
+                <Typography className={classes.ListItemSize5}>Type</Typography>
+              </Grid>
+              <Grid xs={2}>
+                <Typography className={classes.ListItemSize5}>
+                  Amount
+                </Typography>
+              </Grid>
+            </Grid>
           </ListItem>
           <ListItem divider>
-            <ListItemAvatar>
-              <Avatar
-                variant="square"
-                className={classes.rect}
-                src="static/images/UnionPay.svg"
-              ></Avatar>
-            </ListItemAvatar>
-            <ListItemText
-              primary="UNION ****-****-****-9322"
-              secondary={secondary ? "Secondary text" : null}
-            />
+            <Grid container alignItems="center">
+              <Grid xs={3}>
+                <Typography className={classes.ListItemSize3}>
+                  04/21/20
+                </Typography>
+              </Grid>
+              <Grid xs={4}>
+                <Box display="flex" alignItems="center" margin="0">
+                  <Avatar variant="square" src="static/images/Medium.svg" />
+                  <Box p={1}>
+                    <Typography className={classes.ListItemSize5}>
+                      Medium
+                    </Typography>
+                  </Box>
+                </Box>
+              </Grid>
+              <Grid xs={3}>
+                <Typography className={classes.ListItemSize3}>
+                  Reward
+                </Typography>
+              </Grid>
+              <Grid xs={2}>
+                <Typography className={classes.ListItemSize2}>+ $ 1</Typography>
+              </Grid>
+            </Grid>
           </ListItem>
           <ListItem divider>
-            <ListItemAvatar>
-              <Avatar
-                variant="square"
-                className={classes.rect}
-                src="static/images/Visa.svg"
-              ></Avatar>
-            </ListItemAvatar>
-            <ListItemText
-              primary="VISA ****-****-****-9322"
-              secondary={secondary ? "Secondary text" : null}
-            />
+            <Grid container alignItems="center">
+              <Grid xs={3}>
+                <Typography className={classes.ListItemSize3}>
+                  04/21/25
+                </Typography>
+              </Grid>
+              <Grid xs={4}>
+                <Box display="flex" alignItems="center" margin="0">
+                  <Avatar variant="square" src="static/images/Medium.svg" />
+                  <Box p={1}>
+                    <Typography className={classes.ListItemSize5}>
+                      Medium
+                    </Typography>
+                  </Box>
+                </Box>
+              </Grid>
+              <Grid xs={3}>
+                <Typography className={classes.ListItemSize3}>
+                  Collect
+                </Typography>
+              </Grid>
+              <Grid xs={2}>
+                <Typography className={classes.ListItemSize2}>+ $ 4</Typography>
+              </Grid>
+            </Grid>
+          </ListItem>
+          <ListItem divider>
+            <Grid container alignItems="center" justifyContent="center">
+              <Grid xs={3}>
+                <Typography className={classes.ListItemSize3}>
+                  04/21/20
+                </Typography>
+              </Grid>
+              <Grid xs={4}>
+                <Box display="flex" alignItems="center" margin="0">
+                  <Avatar variant="square" src="static/images/Medium.svg" />
+                  <Box p={1}>
+                    <Typography className={classes.ListItemSize5}>
+                      Medium
+                    </Typography>
+                  </Box>
+                </Box>
+              </Grid>
+              <Grid xs={3}>
+                <Typography className={classes.ListItemSize3}>
+                  Reward
+                </Typography>
+              </Grid>
+              <Grid xs={2}>
+                <Typography className={classes.ListItemSize2}>+ $ 1</Typography>
+              </Grid>
+            </Grid>
           </ListItem>
         </List>
-        <Button className={classes.ListItemSize5}>+ Add Payment Methods</Button>
       </CardContent>
     </Card>
   );
