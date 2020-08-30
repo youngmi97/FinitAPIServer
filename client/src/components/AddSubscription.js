@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "@emotion/styled/macro";
 
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Box from "@material-ui/core/Box";
 
-const useStyles = makeStyles((theme) => ({
-  ListItemSize2: {
-    fontSize: "14px",
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   ListItemSize2: {
+//     fontSize: "14px",
+//   },
+// }));
 
 const Card = styled.div({
   width: "590px",
@@ -20,14 +20,14 @@ const Card = styled.div({
   cursor: "default",
 });
 
-const Badge = styled.div({
-  position: "absolute",
-  width: 28,
-  height: 28,
-  left: `calc(50% - 28px/2 + 265px)`,
-  top: `calc(50% - 28px/2 - 197px)`,
-  backgroundImage: "url(/static/images/badges/GroupBadge.svg)",
-});
+// const Badge = styled.div({
+//   position: "absolute",
+//   width: 28,
+//   height: 28,
+//   left: `calc(50% - 28px/2 + 265px)`,
+//   top: `calc(50% - 28px/2 - 197px)`,
+//   backgroundImage: "url(/static/images/badges/GroupBadge.svg)",
+// });
 
 const Content = styled.div({
   height: "100%",
@@ -60,7 +60,7 @@ const currencies = [
 ];
 
 export default function SubscriptionDetail() {
-  const classes = useStyles();
+  // const classes = useStyles();
 
   const [currency, setCurrency] = React.useState("USD");
 

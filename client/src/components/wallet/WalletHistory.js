@@ -1,15 +1,15 @@
-import { CardHeader, Box, IconButton, Typography } from "@material-ui/core";
+import { Box, IconButton, Typography } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
+// import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
+// import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import ListItemText from "@material-ui/core/ListItemText";
+// import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+// import ListItemText from "@material-ui/core/ListItemText";
 import WalletToolbar from "../toolbars/WalletToolbar";
 import React from "react";
 import Grid from "@material-ui/core/Grid";
@@ -64,8 +64,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Card_internal() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const [secondary, setSecondary] = React.useState(false);
+  // const [open, setOpen] = React.useState(false);
+  // const [secondary, setSecondary] = React.useState(false);
   return (
     <Card className={classes.root}>
       {/* <CardHeader></CardHeader> */}

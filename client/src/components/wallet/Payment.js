@@ -1,17 +1,17 @@
-import { CardHeader, Box, IconButton } from "@material-ui/core";
+import { Box, IconButton } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
+// import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+// import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
-import Typography from "@material-ui/core/Typography";
+// import Typography from "@material-ui/core/Typography";
 import React from "react";
 
 const useStyles = makeStyles((theme) => ({
@@ -85,14 +85,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Card_internal() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const [secondary, setSecondary] = React.useState(false);
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleToggle = () => {
-    setOpen(!open);
-  };
+  // const [open, setOpen] = React.useState(false);
+  const [secondary] = React.useState(false);
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
+  // const handleToggle = () => {
+  //   setOpen(!open);
+  // };
   return (
     <Card className={classes.root}>
       {/* <CardHeader></CardHeader> */}

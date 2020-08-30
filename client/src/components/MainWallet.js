@@ -7,9 +7,9 @@ import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import clsx from "clsx";
 import React from "react";
-import My_wallet from "./wallet/Mywallet";
-import Payment_Methods from "./wallet/Payment";
-import Wallet_History from "./wallet/WalletHistory";
+import MY_WALLET from "./wallet/Mywallet";
+import PAYMENT_METHODS from "./wallet/Payment";
+import WALLET_HISTORY from "./wallet/WalletHistory";
 import LIST_ITEM_DISCOVER from "./Listwallet";
 import LIST_ITEM_RIGHT from "./List_item_right";
 
@@ -250,13 +250,13 @@ export default function MainWallet(props) {
       >
         <Box mx="auto" bgcolor="background.paper" className={classes.mainbreak}>
           <Box>
-            <My_wallet />
+            <MY_WALLET />
           </Box>
           <Box marginTop="10px" marginBottom="10px">
-            <Payment_Methods />
+            <PAYMENT_METHODS />
           </Box>
           <Box>
-            <Wallet_History />
+            <WALLET_HISTORY />
           </Box>
         </Box>
       </main>

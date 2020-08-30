@@ -22,6 +22,7 @@ import FormControl from "@material-ui/core/FormControl";
 
 import InputBase from "@material-ui/core/InputBase";
 import { Select } from "@material-ui/core";
+
 import MenuItem from "@material-ui/core/MenuItem";
 
 import Grid from "@material-ui/core/Grid";
@@ -188,7 +189,7 @@ function ArrowTooltip(props) {
 export default function SubscriptionToolbar({ changeView }) {
   const classes = useStyles();
   const [listView, setListView] = React.useState(true);
-  const [value, setValue] = React.useState("");
+  const [setValue] = React.useState("");
   const [sort, setSort] = React.useState(true);
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -223,7 +224,7 @@ export default function SubscriptionToolbar({ changeView }) {
             <Select
               labelId="customized-select-label"
               id="customized-select"
-              value={value}
+              defaultValue={0}
               onChange={handleChange}
               input={<BootstrapInput />}
             >

@@ -10,12 +10,12 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Fade from "@material-ui/core/Fade";
 
 import Toolbar from "@material-ui/core/Toolbar";
-import AddRoundedIcon from "@material-ui/icons/AddRounded";
+// import AddRoundedIcon from "@material-ui/icons/AddRounded";
 import FilterListRoundedIcon from "@material-ui/icons/FilterListRounded";
-import FormatListBulletedRoundedIcon from "@material-ui/icons/FormatListBulletedRounded";
+// import FormatListBulletedRoundedIcon from "@material-ui/icons/FormatListBulletedRounded";
 import SearchRoundedIcon from "@material-ui/icons/SearchRounded";
 import SortRoundedIcon from "@material-ui/icons/SortRounded";
-import ViewModuleRoundedIcon from "@material-ui/icons/ViewModuleRounded";
+// import ViewModuleRoundedIcon from "@material-ui/icons/ViewModuleRounded";
 import React from "react";
 
 const useStyles = makeStyles((theme) => ({
@@ -123,7 +123,7 @@ function ArrowTooltip(props) {
 
 export default function SubscriptionToolbar({ changeView }) {
   const classes = useStyles();
-  const [listView, setListView] = React.useState(true);
+  // const [listView, setListView] = React.useState(true);
 
   return (
     <div className={classes.root}>

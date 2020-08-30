@@ -58,7 +58,7 @@ export default function Active_content() {
         flexDirection="column"
       >
         <Box p={1}>
-          <img src={"static/images/sitting 1.svg"}></img>
+          <img src={"static/images/sitting 1.svg"} alt={"text"}></img>
         </Box>
         <Box p={1}>
           <Typography className={classes.ListItemSize2}>

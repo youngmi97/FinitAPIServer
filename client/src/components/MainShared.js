@@ -9,7 +9,7 @@ import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import clsx from "clsx";
 import React from "react";
 
-import ACTIVE_CONTENT from "./Active_content";
+// import ACTIVE_CONTENT from "./Active_content";
 import LIST_ITEM_DISCOVER from "./Listshared";
 import LIST_ITEM_RIGHT from "./List_item_right";
 import EmptyContent from "./EmptyContent";

@@ -1,6 +1,6 @@
 import Box from "@material-ui/core/Box";
 import Drawer from "@material-ui/core/Drawer";
-import Grid from "@material-ui/core/Grid";
+// import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import { fade, makeStyles, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -213,7 +213,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Main(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
-  const [view, setView] = React.useState(false);
+  // const [view, setView] = React.useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
