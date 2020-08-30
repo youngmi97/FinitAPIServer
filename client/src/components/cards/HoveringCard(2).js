@@ -4,7 +4,7 @@ import styled from "@emotion/styled/macro";
 const Hover = styled.div({
   opacity: 0,
   transition: "opacity 350ms ease",
-  borderRadius: 6,
+  borderRadius: 4,
 });
 
 const DisplayOver = styled.div({
@@ -18,7 +18,7 @@ const DisplayOver = styled.div({
   backgroundColor: "transparent",
   padding: "20px 20px 20px 20px",
   boxSizing: "border-box",
-  borderRadius: 6,
+  borderRadius: 4,
 });
 
 const SubTitle = styled.h4({
@@ -51,7 +51,6 @@ const Background = styled.div({
   width: "217px",
   height: "217px",
   cursor: "pointer",
-  borderRadius: 6,
   backgroundImage: "url(/static/images/Netflix.svg)",
   [`:hover ${DisplayOver}`]: {
     backgroundColor: "rgba(0,0,0,.5)",

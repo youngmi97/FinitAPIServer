@@ -37,40 +37,7 @@ const theme = createMuiTheme({
     three: "#F7F7F7",
     four: "#E9E9EA",
   },
-  Muitypography: {
-    root: {
-      fontFamily: [
-        "-apple-system",
-        "BlinkMacSystemFont",
-        '"Segoe UI"',
-        "Roboto",
-        '"Helvetica Neue"',
-        "Arial",
-        "sans-serif",
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"',
-      ].join(","),
-    },
-    h1: {
-      /* Heading 1 [17] SB */
-      fontStyle: "normal",
-      fontWeight: 500,
-      fontSize: "72px",
-      lineHeight: "70px",
-      letterSpacing: "0.25px",
-      color: "#000000",
-    },
-    h2: {
-      /* Heading 2 [14] SB */
 
-      fontStyle: "normal",
-      fontWeight: 600,
-      fontSize: 14,
-      lineHeight: 17,
-      color: "#000000",
-    },
-  },
   breakpoints: {
     values: {
       iphone: 375,
@@ -79,11 +46,20 @@ const theme = createMuiTheme({
       desktop: 1440,
     },
   },
+
   overrides: {
+    MuiCardContent: {
+      root: {
+        padding: 0,
+        "&:last-child": {
+          paddingBottom: 20,
+        },
+      },
+    },
     MuiButton: {
       root: {
         fontSize: "17px",
-        borderRadius: 4,
+        borderRadius: 8,
         padding: "0 16px",
         // boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
         "&:focus": {
@@ -123,6 +99,65 @@ const theme = createMuiTheme({
         "&:focus": {
           outline: "none",
         },
+      },
+    },
+    MuiInputBase: {
+      root: {
+        "&:hover": {
+          height: 40,
+        },
+      },
+    },
+    MuiTypography: {
+      root: {
+        fontFamily: [
+          "-apple-system",
+          "BlinkMacSystemFont",
+          '"Segoe UI"',
+          "Roboto",
+          '"Helvetica Neue"',
+          "Arial",
+          "sans-serif",
+          '"Apple Color Emoji"',
+          '"Segoe UI Emoji"',
+          '"Segoe UI Symbol"',
+        ].join(","),
+      },
+      h1: {
+        /* Heading 1 [17] SB */
+        fontFamily: [
+          "-apple-system",
+          "BlinkMacSystemFont",
+          '"Segoe UI"',
+          "Roboto",
+          '"Helvetica Neue"',
+          "Arial",
+          "sans-serif",
+          '"Apple Color Emoji"',
+          '"Segoe UI Emoji"',
+          '"Segoe UI Symbol"',
+        ].join(","),
+        fontStyle: "normal",
+        fontWeight: 500,
+        fontSize: "72px",
+      },
+      h2: {
+        /* Heading 2 [14] SB */
+        fontFamily: [
+          "-apple-system",
+          "BlinkMacSystemFont",
+          '"Segoe UI"',
+          "Roboto",
+          '"Helvetica Neue"',
+          "Arial",
+          "sans-serif",
+          '"Apple Color Emoji"',
+          '"Segoe UI Emoji"',
+          '"Segoe UI Symbol"',
+        ].join(","),
+        fontStyle: "normal",
+        fontWeight: 600,
+        fontSize: 16,
       },
     },
   },
