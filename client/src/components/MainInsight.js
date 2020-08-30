@@ -9,11 +9,10 @@ import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import clsx from "clsx";
 import React from "react";
 
-import ACTIVE_CONTENT from "./Active_content";
-import LIST_ITEM_DISCOVER from "./List_item_discover";
+import Chart from "./Insight/Chart";
+import Spendlist from "./Insight/spendlist";
+import LIST_ITEM_DISCOVER from "./Listinsight";
 import LIST_ITEM_RIGHT from "./List_item_right";
-import LIST_VIEWBREAK from "./List_viewbreak";
-import SubscriptionToolbar from "./toolbars/Toolbar";
 
 const drawerWidth = 256;
 const drawerWidth2 = 305;
@@ -234,7 +233,7 @@ export default function Main(props) {
         className={classes.toolBar}
         alignItems="center"
       >
-        <TextTypography1>All subscriptions</TextTypography1>
+        <TextTypography1>Insight</TextTypography1>
       </Box>
       <Drawer
         className={classes.drawer}
@@ -252,14 +251,8 @@ export default function Main(props) {
         })}
       >
         <Box mx="auto" bgcolor="background.paper" className={classes.mainbreak}>
-          <Grid item className={classes.drawerPaper3} alignContent="center">
-            <div className={classes.grow}>
-              <SubscriptionToolbar changeView={() => setView(!view)} />
-            </div>
-            <main className={classes.content}>
-              {view !== true ? <ACTIVE_CONTENT /> : <LIST_VIEWBREAK />}
-            </main>
-          </Grid>
+          <Chart />
+          <Spendlist />
         </Box>
       </main>
       <Drawer

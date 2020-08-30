@@ -1,6 +1,5 @@
 import Box from "@material-ui/core/Box";
 import Drawer from "@material-ui/core/Drawer";
-import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import { fade, makeStyles, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -8,12 +7,11 @@ import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import clsx from "clsx";
 import React from "react";
-
-import ACTIVE_CONTENT from "./Active_content";
-import LIST_ITEM_DISCOVER from "./List_item_discover";
+import My_wallet from "./wallet/Mywallet";
+import Payment_Methods from "./wallet/Payment";
+import Wallet_History from "./wallet/WalletHistory";
+import LIST_ITEM_DISCOVER from "./Listwallet";
 import LIST_ITEM_RIGHT from "./List_item_right";
-import LIST_VIEWBREAK from "./List_viewbreak";
-import SubscriptionToolbar from "./toolbars/Toolbar";
 
 const drawerWidth = 256;
 const drawerWidth2 = 305;
@@ -211,10 +209,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Main(props) {
+export default function MainWallet(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
-  const [view, setView] = React.useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -234,7 +231,7 @@ export default function Main(props) {
         className={classes.toolBar}
         alignItems="center"
       >
-        <TextTypography1>All subscriptions</TextTypography1>
+        <TextTypography1>My Wallet</TextTypography1>
       </Box>
       <Drawer
         className={classes.drawer}
@@ -252,14 +249,15 @@ export default function Main(props) {
         })}
       >
         <Box mx="auto" bgcolor="background.paper" className={classes.mainbreak}>
-          <Grid item className={classes.drawerPaper3} alignContent="center">
-            <div className={classes.grow}>
-              <SubscriptionToolbar changeView={() => setView(!view)} />
-            </div>
-            <main className={classes.content}>
-              {view !== true ? <ACTIVE_CONTENT /> : <LIST_VIEWBREAK />}
-            </main>
-          </Grid>
+          <Box>
+            <My_wallet />
+          </Box>
+          <Box marginTop="10px" marginBottom="10px">
+            <Payment_Methods />
+          </Box>
+          <Box>
+            <Wallet_History />
+          </Box>
         </Box>
       </main>
       <Drawer

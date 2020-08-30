@@ -138,7 +138,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function List_Active() {
   const classes = useStyles();
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const [selectedIndex, setSelectedIndex] = React.useState(2);
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
   };

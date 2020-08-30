@@ -14,9 +14,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     margin: 16,
     minWidth: 217,
-    maxWidth: "100%",
+    maxWidth: 217,
     minHeight: 217,
-    maxHeight: "100%",
+    maxHeight: 217,
   },
 }));
 
@@ -28,7 +28,7 @@ export default function Active_content() {
     <div>
       {/* <Box mx="auto" bgcolor="background.paper" p={4}> */}
       <Grid>
-        <Grid container spacing={0}>
+        <Grid container spacing={0} alignItems="center" justify="center">
           <Grid item xs className={classes.root}>
             <Grid
               name="hover-feedback"

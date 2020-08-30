@@ -10,9 +10,9 @@ import clsx from "clsx";
 import React from "react";
 
 import ACTIVE_CONTENT from "./Active_content";
-import LIST_ITEM_DISCOVER from "./List_item_discover";
+import LIST_ITEM_DISCOVER from "./Listshared";
 import LIST_ITEM_RIGHT from "./List_item_right";
-import LIST_VIEWBREAK from "./List_viewbreak";
+import EmptyContent from "./EmptyContent";
 import SubscriptionToolbar from "./toolbars/Toolbar";
 
 const drawerWidth = 256;
@@ -234,7 +234,7 @@ export default function Main(props) {
         className={classes.toolBar}
         alignItems="center"
       >
-        <TextTypography1>All subscriptions</TextTypography1>
+        <TextTypography1>Shared subscriptions</TextTypography1>
       </Box>
       <Drawer
         className={classes.drawer}
@@ -252,12 +252,12 @@ export default function Main(props) {
         })}
       >
         <Box mx="auto" bgcolor="background.paper" className={classes.mainbreak}>
-          <Grid item className={classes.drawerPaper3} alignContent="center">
+          <Grid item alignContent="center">
             <div className={classes.grow}>
               <SubscriptionToolbar changeView={() => setView(!view)} />
             </div>
             <main className={classes.content}>
-              {view !== true ? <ACTIVE_CONTENT /> : <LIST_VIEWBREAK />}
+              <EmptyContent />
             </main>
           </Grid>
         </Box>
