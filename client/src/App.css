@@ -36,3 +36,7 @@
   border-radius: 4px;
   height: 32px;
 }
+
+.ui.secondary.menu a.item.logo:hover {
+  background: none;
+}

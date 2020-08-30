@@ -176,8 +176,10 @@ function App() {
             style={{
               zIndex: 100,
               position: "fixed",
+              height: "60px",
               width: "100%",
               backgroundColor: "#ffffff",
+              borderBottom: "1px solid #D3D3D3",
             }}
           >
             <Sticky>
