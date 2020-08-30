@@ -29,6 +29,8 @@ const TextTypography1 = withStyles({
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+    zIndex: 50,
+    position: "relative",
   },
   paper: {
     padding: theme.spacing(2),

@@ -14,6 +14,7 @@ import { AuthProvider } from "./context/auth";
 import Home_Local from "./pages/Home_Local";
 import Login_Local from "./pages/Login_Local";
 import Register_Local from "./pages/Register_Local";
+import { Sticky } from "semantic-ui-react";
 
 const theme = createMuiTheme({
   palette: {
@@ -169,19 +170,34 @@ const theme = createMuiTheme({
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <ThemeProvider theme={theme}>
-          <MenuBar />
-          <Route exact path="/subscriptions" component={Main} />
-          <Route exact path="/shared" component={MainShared} />
-          <Route exact path="/wallet" component={MainWallet} />
-          <Route exact path="/upcoming" component={Mainupcoming} />
-          <Route exact path="/insight" component={MainInsight} />
-          <Route exact path="/" component={Home_Local} />
-          <Route exact path="/login" component={Login_Local} />
-          <Route exact path="/register" component={Register_Local} />
-        </ThemeProvider>
-      </Router>
+      <div>
+        <Router>
+          <div
+            style={{
+              zIndex: 100,
+              position: "fixed",
+              width: "100%",
+              backgroundColor: "#ffffff",
+            }}
+          >
+            <Sticky>
+              <MenuBar />
+            </Sticky>
+          </div>
+          <div style={{ position: "relative", zIndex: 50, top: "60px" }}>
+            <ThemeProvider theme={theme}>
+              <Route exact path="/subscriptions" component={Main} />
+              <Route exact path="/shared" component={MainShared} />
+              <Route exact path="/wallet" component={MainWallet} />
+              <Route exact path="/upcoming" component={Mainupcoming} />
+              <Route exact path="/insight" component={MainInsight} />
+              <Route exact path="/" component={Home_Local} />
+              <Route exact path="/login" component={Login_Local} />
+              <Route exact path="/register" component={Register_Local} />
+            </ThemeProvider>
+          </div>
+        </Router>
+      </div>
     </AuthProvider>
   );
 }
