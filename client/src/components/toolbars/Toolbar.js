@@ -113,11 +113,7 @@ const useStyles = makeStyles((theme) => ({
   sortStyle: {
     width: "fit-content",
     borderRadius: 8,
-    "& hr": {
-      height: 32,
-      marginTop: 4,
-      marginBottom: 4,
-    },
+    height: 40,
   },
   menuItemStyle: {
     fontFamily: [
