@@ -80,16 +80,22 @@ export default function SimpleListMenu(props) {
     "My Wallet",
     "All Subscriptions",
     "Shared Subscriptions",
-    "Upcoming Eevnts",
+    "Upcoming Events",
     "Insight",
+  ];
+
+  const redirect = [
+    "/wallet",
+    "/subscriptions",
+    "/shared",
+    "/upcoming",
+    "/insight",
   ];
 
   const options = [
     <ListItem
       className={classes.ListItem}
       onClick={(event) => handleListItemClick(event, 0)}
-      {...{ to: "/wallet" }}
-      component={Link}
     >
       <ListItemIcon className={classes.ListItemSize}>
         <CreditCardIcon />
@@ -100,8 +106,6 @@ export default function SimpleListMenu(props) {
     <ListItem
       className={classes.ListItem}
       onClick={(event) => handleListItemClick(event, 1)}
-      {...{ to: "/subscriptions" }}
-      component={Link}
     >
       <ListItemIcon className={classes.ListItemSize}>
         <AppsIcon />
@@ -115,8 +119,6 @@ export default function SimpleListMenu(props) {
     <ListItem
       className={classes.ListItem}
       onClick={(event) => handleListItemClick(event, 2)}
-      {...{ to: "/shared" }}
-      component={Link}
     >
       <ListItemIcon className={classes.ListItemSize}>
         <GroupIcon />
@@ -130,8 +132,6 @@ export default function SimpleListMenu(props) {
     <ListItem
       className={classes.ListItem}
       onClick={(event) => handleListItemClick(event, 3)}
-      {...{ to: "/upcoming" }}
-      component={Link}
     >
       <ListItemIcon className={classes.ListItemSize}>
         <EventNoteIcon />
@@ -145,8 +145,6 @@ export default function SimpleListMenu(props) {
     <ListItem
       className={classes.ListItem}
       onClick={(event) => handleListItemClick(event, 4)}
-      {...{ to: "/insight" }}
-      component={Link}
     >
       <ListItemIcon className={classes.ListItemSize}>
         <EqualizerIcon />
@@ -185,6 +183,8 @@ export default function SimpleListMenu(props) {
             key={option}
             selected={index === selectedIndex}
             onClick={(event) => handleMenuItemClick(event, index)}
+            {...{ to: redirect[index] }}
+            component={Link}
           >
             {option}
           </MenuItem>
