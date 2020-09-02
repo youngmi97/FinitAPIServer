@@ -7,13 +7,14 @@ import Typography from "@material-ui/core/Typography";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import clsx from "clsx";
-import React from "react";
+import React, { useLayoutEffect, useState } from "react";
 
 import ACTIVE_CONTENT from "./Active_content";
 import LIST_ITEM_DISCOVER from "./Listupcoming";
 import LIST_ITEM_RIGHT from "./List_item_right";
 import LIST_VIEWBREAK from "./List_viewbreak";
 import SubscriptionToolbar from "./toolbars/Toolbar";
+import LIST_ITEM_DISCOVER_MINI from "./List_item_discover_mini";
 
 const drawerWidth = 256;
 const drawerWidth2 = 305;
@@ -211,8 +212,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function useWindowSize() {
+  const [size, setSize] = useState([0, 0]);
+  useLayoutEffect(() => {
+    function updateSize() {
+      console.log("window width", window.innerWidth);
+      setSize([window.innerWidth, window.innerHeight]);
+    }
+    window.addEventListener("resize", updateSize);
+    updateSize();
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+  return size;
+}
+
 export default function Main(props) {
   const classes = useStyles();
+  const [width] = useWindowSize();
+  const isReduced = width <= 1023;
+
   const [open, setOpen] = React.useState(true);
   const [view, setView] = React.useState(false);
 
@@ -224,6 +242,12 @@ export default function Main(props) {
     setOpen(false);
   };
 
+  const menuTitle = isReduced ? (
+    <LIST_ITEM_DISCOVER_MINI index="3" />
+  ) : (
+    <TextTypography1>Upcoming Events</TextTypography1>
+  );
+
   return (
     <div>
       <Box
@@ -234,7 +258,7 @@ export default function Main(props) {
         className={classes.toolBar}
         alignItems="center"
       >
-        <TextTypography1>Upcoming Events</TextTypography1>
+        {menuTitle}
       </Box>
       <Drawer
         className={classes.drawer}
