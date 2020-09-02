@@ -29,38 +29,26 @@ export default function Active_content() {
       {/* <Box mx="auto" bgcolor="background.paper" p={4}> */}
       <Grid>
         <Grid container spacing={0} alignItems="center" justify="center">
-          <Grid item xs className={classes.root}>
-            <Grid
-              name="hover-feedback"
-              precision={0.5}
-              onClick={() => sethover1(!hover1)}
-            >
-              {hover1 !== true ? <CardContent /> : <CardInternal />}
-            </Grid>
-          </Grid>
-          <Grid item xs className={classes.root}>
-            <Grid
-              name="hover-feedback"
-              onMouseEnter={() => sethover(true)}
-              onMouseLeave={() => sethover(false)}
-            >
-              {hover !== true ? <CardContent /> : <CardInternal />}
-            </Grid>
-          </Grid>
-          <Grid item xs className={classes.root}>
+          {/* <Grid item xs className={classes.root}>
             <HoveringCard />
+          </Grid> */}
+          <Grid item xs className={classes.root}>
+            <Details />
           </Grid>
           <Grid item xs className={classes.root}>
             <Details />
           </Grid>
           <Grid item xs className={classes.root}>
-            <CardContent />
+            <Details />
           </Grid>
           <Grid item xs className={classes.root}>
-            <CardContent />
+            <Details />
           </Grid>
           <Grid item xs className={classes.root}>
-            <CardContent />
+            <Details />
+          </Grid>
+          <Grid item xs className={classes.root}>
+            <Details />
           </Grid>
           <Grid item xs className={classes.root}></Grid>
           <Grid item xs className={classes.root}></Grid>

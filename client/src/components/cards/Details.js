@@ -27,7 +27,7 @@ export default function ResponsiveDialog() {
   return (
     <div>
       <ButtonBase onClick={handleClickOpen}>
-        <HoveringCard />
+        <HoveringCard name="Spotify" />
       </ButtonBase>
       <Dialog
         fullScreen={fullScreen}

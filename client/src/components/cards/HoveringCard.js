@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "@emotion/styled/macro";
+import styled1 from "@emotion/styled";
 
 const Hover = styled.div({
   opacity: 0,
@@ -43,7 +44,7 @@ const Paragraph = styled.p({
   transition: "transform 350ms ease",
 });
 
-const Background = styled.div({
+const Background1 = styled.div({
   backgroundSize: "cover",
   backgroundRepeat: "no-repeat",
   color: "#FFF",
@@ -53,6 +54,57 @@ const Background = styled.div({
   cursor: "pointer",
   borderRadius: 6,
   backgroundImage: "url(/static/images/Netflix.svg)",
+  [`:hover ${DisplayOver}`]: {
+    backgroundColor: "rgba(0,0,0,.5)",
+  },
+  [`:hover ${SubTitle}, :hover ${Paragraph}`]: {
+    transform: "translate3d(0,0,0)",
+  },
+  [`:hover ${Hover}`]: {
+    opacity: 1,
+  },
+});
+
+const Background = styled1.div`
+  backgroundSize: cover;
+  backgroundRepeat: no-repeat;
+  color: #FFF;
+  position: relative;
+  width: 217px;
+  height: 217px;
+  cursor: pointer;
+  borderRadius: 6;
+  background: url(/static/images/${(props) => props.name}.svg) ;
+  &:hover {
+    ${DisplayOver} {
+      backgroundColor: rgba(0,0,0,.5);
+    }
+  }
+  &:hover {
+    ${SubTitle} {
+      transform: translate3d(0,0,0);
+    }
+    ${Paragraph} {
+      transform: translate3d(0,0,0);
+    }
+  }
+  &:hover {
+    ${Hover} {  
+      opacity: 1;
+    }
+  }
+  `;
+
+const Background2 = styled.div({
+  backgroundSize: "cover",
+  backgroundRepeat: "no-repeat",
+  color: "#FFF",
+  position: "relative",
+  width: "217px",
+  height: "217px",
+  cursor: "pointer",
+  borderRadius: 6,
+  backgroundImage: "url(/static/images/Spotify.svg)",
   [`:hover ${DisplayOver}`]: {
     backgroundColor: "rgba(0,0,0,.5)",
   },
@@ -74,7 +126,7 @@ class HoveringCard extends Component {
   render() {
     return (
       <div className="HoveringCard">
-        <Background>
+        <Background {...this.props}>
           <DisplayOver>
             <Hover>
               <SubTitle>Netflix</SubTitle>
