@@ -4,9 +4,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 
 //Cards to be displayed in the screen
-import CardContent from "./cards/Card_content";
-import CardInternal from "./cards/Card_internal";
-import HoveringCard from "./cards/HoveringCard";
 // import SubscriptionCard from "./cards/SubscriptionCard";
 import Details from "./cards/Details";
 
@@ -20,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Active_content() {
+export default function Active_content(props) {
   const classes = useStyles();
   const [hover, sethover] = React.useState(false);
   const [hover1, sethover1] = React.useState(false);
@@ -29,40 +26,16 @@ export default function Active_content() {
       {/* <Box mx="auto" bgcolor="background.paper" p={4}> */}
       <Grid>
         <Grid container spacing={0} alignItems="center" justify="center">
-          <Grid item xs className={classes.root}>
-            <Grid
-              name="hover-feedback"
-              precision={0.5}
-              onClick={() => sethover1(!hover1)}
-            >
-              {hover1 !== true ? <CardContent /> : <CardInternal />}
-            </Grid>
-          </Grid>
-          <Grid item xs className={classes.root}>
-            <Grid
-              name="hover-feedback"
-              onMouseEnter={() => sethover(true)}
-              onMouseLeave={() => sethover(false)}
-            >
-              {hover !== true ? <CardContent /> : <CardInternal />}
-            </Grid>
-          </Grid>
-          <Grid item xs className={classes.root}>
+          {/* <Grid item xs className={classes.root}>
             <HoveringCard />
-          </Grid>
-          <Grid item xs className={classes.root}>
-            <Details />
-          </Grid>
-          <Grid item xs className={classes.root}>
-            <CardContent />
-          </Grid>
-          <Grid item xs className={classes.root}>
-            <CardContent />
-          </Grid>
-          <Grid item xs className={classes.root}>
-            <CardContent />
-          </Grid>
-          <Grid item xs className={classes.root}></Grid>
+          </Grid> */}
+          {props.cards.map((card, index) => {
+            return (
+              <Grid item xs className={classes.root}>
+                <Details name={card.name} key={index} />
+              </Grid>
+            );
+          })}
           <Grid item xs className={classes.root}></Grid>
         </Grid>
       </Grid>

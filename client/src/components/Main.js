@@ -234,7 +234,12 @@ export default function Main(props) {
   const isReduced = width <= 1023;
 
   const [open, setOpen] = React.useState(true);
+  const [state, setState] = React.useState(1);
   const [view, setView] = React.useState(false);
+
+  const handleState = () => {
+    setState(state * -1);
+  };
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -250,6 +255,17 @@ export default function Main(props) {
     <TextTypography1>All Subscriptions</TextTypography1>
   );
 
+  const cards = [
+    { name: "Netflix", order: 3 },
+    { name: "Spotify", order: 1 },
+    { name: "Netflix", order: 5 },
+    { name: "Notability", order: 2 },
+    { name: "GoogleDrive", order: 7 },
+    { name: "Spotify", order: 4 },
+    { name: "Youtube", order: 6 },
+    { name: "Youtube", order: 8 },
+  ];
+  const sortedcards = cards.sort((a, b) => (a.order - b.order) * state);
   return (
     <div>
       <Box
@@ -280,10 +296,17 @@ export default function Main(props) {
         <Box mx="auto" bgcolor="background.paper" className={classes.mainbreak}>
           <Grid item className={classes.drawerPaper3} alignContent="center">
             <div className={classes.grow}>
-              <SubscriptionToolbar changeView={() => setView(!view)} />
+              <SubscriptionToolbar
+                changeView={() => setView(!view)}
+                changeSort={() => handleState()}
+              />
             </div>
             <main className={classes.content}>
-              {view !== true ? <ACTIVE_CONTENT /> : <LIST_VIEWBREAK />}
+              {view !== true ? (
+                <ACTIVE_CONTENT cards={cards} />
+              ) : (
+                <LIST_VIEWBREAK />
+              )}
             </main>
           </Grid>
         </Box>

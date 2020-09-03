@@ -182,7 +182,7 @@ function ArrowTooltip(props) {
   return <Tooltip arrow classes={classes} {...props} />;
 }
 
-export default function SubscriptionToolbar({ changeView }) {
+export default function SubscriptionToolbar({ changeView, changeSort }) {
   const classes = useStyles();
   const [listView, setListView] = React.useState(true);
   const [setValue] = React.useState("");
@@ -247,6 +247,7 @@ export default function SubscriptionToolbar({ changeView }) {
               onChange={handleChange}
               onClick={() => {
                 setSort(!sort);
+                changeSort();
               }}
             >
               {sort ? (
