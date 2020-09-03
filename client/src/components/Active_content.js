@@ -4,9 +4,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 
 //Cards to be displayed in the screen
-import CardContent from "./cards/Card_content";
-import CardInternal from "./cards/Card_internal";
-import HoveringCard from "./cards/HoveringCard";
 // import SubscriptionCard from "./cards/SubscriptionCard";
 import Details from "./cards/Details";
 
@@ -20,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Active_content() {
+export default function Active_content(props) {
   const classes = useStyles();
   const [hover, sethover] = React.useState(false);
   const [hover1, sethover1] = React.useState(false);
@@ -32,25 +29,13 @@ export default function Active_content() {
           {/* <Grid item xs className={classes.root}>
             <HoveringCard />
           </Grid> */}
-          <Grid item xs className={classes.root}>
-            <Details />
-          </Grid>
-          <Grid item xs className={classes.root}>
-            <Details />
-          </Grid>
-          <Grid item xs className={classes.root}>
-            <Details />
-          </Grid>
-          <Grid item xs className={classes.root}>
-            <Details />
-          </Grid>
-          <Grid item xs className={classes.root}>
-            <Details />
-          </Grid>
-          <Grid item xs className={classes.root}>
-            <Details />
-          </Grid>
-          <Grid item xs className={classes.root}></Grid>
+          {props.cards.map((card, index) => {
+            return (
+              <Grid item xs className={classes.root}>
+                <Details name={card.name} key={index} />
+              </Grid>
+            );
+          })}
           <Grid item xs className={classes.root}></Grid>
         </Grid>
       </Grid>

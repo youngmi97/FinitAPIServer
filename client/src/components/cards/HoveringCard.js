@@ -74,7 +74,7 @@ const Background = styled1.div`
   height: 217px;
   cursor: pointer;
   borderRadius: 6;
-  background: url(/static/images/${(props) => props.name}.svg) ;
+  background: url(/static/images/cardBackgrounds/${(props) => props.name}.svg) ;
   &:hover {
     ${DisplayOver} {
       backgroundColor: rgba(0,0,0,.5);
