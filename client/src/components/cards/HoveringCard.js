@@ -81,6 +81,9 @@ const Background = styled1.div`
     }
   }
   &:hover {
+    ${DisplayOver} {
+      backgroundColor: rgba(0,0,0,.5);
+    }
     ${SubTitle} {
       transform: translate3d(0,0,0);
     }

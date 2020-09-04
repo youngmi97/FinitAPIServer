@@ -1,10 +1,10 @@
-<svg width="218" height="218" viewBox="0 0 218 218" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="0.586021" y="0.586021" width="216.828" height="216.828" rx="5.41398" fill="white" stroke="#C8C7CC" stroke-width="1.17204"/>
+<svg width="217" height="217" viewBox="0 0 217 217" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="0.583333" y="0.583333" width="215.833" height="215.833" rx="5.41667" fill="white" stroke="#C8C7CC" stroke-width="1.16667"/>
 <g clip-path="url(#clip0)">
 <path d="M89.44 134.96L79 116.888L98.56 83L109 101.072L89.44 134.96Z" fill="#0D9661"/>
-<path d="M89.4404 134.96L99.8684 116.888H139L128.56 134.96H89.4404Z" fill="#3078DE"/>
+<path d="M89.4399 134.96L99.8679 116.888H139L128.56 134.96H89.4399Z" fill="#3078DE"/>
 <path d="M139 116.888H118.12L98.5601 83H119.44L139 116.888Z" fill="#F2BA42"/>
-<path d="M109 116.888H99.8684L89.4404 134.96L109 116.888Z" fill="#2E6ECC"/>
+<path d="M109 116.888H99.8679L89.4399 134.96L109 116.888Z" fill="#2E6ECC"/>
 <path d="M118.12 116.888H139L113.56 108.98L118.12 116.888Z" fill="#DBA83D"/>
 <path d="M104.44 108.98L109 101.072L98.5601 83L104.44 108.98Z" fill="#0D8A59"/>
 </g>
