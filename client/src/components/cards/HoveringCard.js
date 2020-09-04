@@ -35,13 +35,16 @@ const SubTitle = styled.h4({
     '"Segoe UI Emoji"',
     '"Segoe UI Symbol"',
   ].join(","),
+  textAlign: "left",
   transform: "translate3d(0,50px,0)",
   transition: "transform 350ms ease",
 });
 
 const Paragraph = styled.p({
+  left: "0",
   transform: "translate3d(0,50px,0)",
   transition: "transform 350ms ease",
+  textAlign: "left",
 });
 
 const Background1 = styled.div({
@@ -80,14 +83,6 @@ const Background = styled1.div`
     ${DisplayOver} {
       background-color: rgba(0,0,0,.5);
     }
-<<<<<<< HEAD
-  }
-  &:hover {
-    ${DisplayOver} {
-      backgroundColor: rgba(0,0,0,.5);
-    }
-=======
->>>>>>> f999575d54adae8c4827268ec95c86b60ed283d4
     ${SubTitle} {
       transform: translate3d(0,0,0);
     }
