@@ -74,24 +74,26 @@ const Background = styled1.div`
   height: 217px;
   cursor: pointer;
   borderRadius: 6;
-  background: url(/static/images/cardBackgrounds/${(props) => props.name}.svg) ;
+  background-image: url(/static/images/cardBackgrounds/${(props) =>
+    props.name}.svg) ;
   &:hover {
     ${DisplayOver} {
-      backgroundColor: rgba(0,0,0,.5);
+      background-color: rgba(0,0,0,.5);
     }
+<<<<<<< HEAD
   }
   &:hover {
     ${DisplayOver} {
       backgroundColor: rgba(0,0,0,.5);
     }
+=======
+>>>>>>> f999575d54adae8c4827268ec95c86b60ed283d4
     ${SubTitle} {
       transform: translate3d(0,0,0);
     }
     ${Paragraph} {
       transform: translate3d(0,0,0);
     }
-  }
-  &:hover {
     ${Hover} {  
       opacity: 1;
     }
