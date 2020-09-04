@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 217,
     minHeight: 217,
     maxHeight: 217,
-    align: "left",
   },
 }));
 
