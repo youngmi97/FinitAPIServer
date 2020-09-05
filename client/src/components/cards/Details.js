@@ -1,10 +1,9 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
+
 import Dialog from "@material-ui/core/Dialog";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 
 import DialogContent from "@material-ui/core/DialogContent";
 import AvatarGroup from "@material-ui/lab/AvatarGroup";
@@ -92,7 +91,12 @@ export default function ResponsiveDialog(props) {
       <ButtonBase onClick={handleClickOpen}>
         <HoveringCard name={props.name} />
       </ButtonBase>
-      <Dialog fullScreen={fullScreen} open={open} onClose={handleClose}>
+      <Dialog
+        fullScreen={fullScreen}
+        open={open}
+        onClose={handleClose}
+        margin="100"
+      >
         <div className={classes.root}>
           <DialogTitle className={classes.Avatar}>
             <Avatar variant="square" src="static/images/Medium.svg" />

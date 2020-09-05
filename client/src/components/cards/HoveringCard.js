@@ -47,27 +47,6 @@ const Paragraph = styled.p({
   textAlign: "left",
 });
 
-const Background1 = styled.div({
-  backgroundSize: "cover",
-  backgroundRepeat: "no-repeat",
-  color: "#FFF",
-  position: "relative",
-  width: "217px",
-  height: "217px",
-  cursor: "pointer",
-  borderRadius: 6,
-  backgroundImage: "url(/static/images/Netflix.svg)",
-  [`:hover ${DisplayOver}`]: {
-    backgroundColor: "rgba(0,0,0,.5)",
-  },
-  [`:hover ${SubTitle}, :hover ${Paragraph}`]: {
-    transform: "translate3d(0,0,0)",
-  },
-  [`:hover ${Hover}`]: {
-    opacity: 1,
-  },
-});
-
 const Background = styled1.div`
   backgroundSize: cover;
   backgroundRepeat: no-repeat;
@@ -94,27 +73,6 @@ const Background = styled1.div`
     }
   }
   `;
-
-const Background2 = styled.div({
-  backgroundSize: "cover",
-  backgroundRepeat: "no-repeat",
-  color: "#FFF",
-  position: "relative",
-  width: "217px",
-  height: "217px",
-  cursor: "pointer",
-  borderRadius: 6,
-  backgroundImage: "url(/static/images/Spotify.svg)",
-  [`:hover ${DisplayOver}`]: {
-    backgroundColor: "rgba(0,0,0,.5)",
-  },
-  [`:hover ${SubTitle}, :hover ${Paragraph}`]: {
-    transform: "translate3d(0,0,0)",
-  },
-  [`:hover ${Hover}`]: {
-    opacity: 1,
-  },
-});
 
 const CTA = styled.div({
   position: "absolute",

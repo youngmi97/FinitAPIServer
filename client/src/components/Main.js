@@ -265,7 +265,6 @@ export default function Main(props) {
     { name: "Youtube", order: 6 },
     { name: "Youtube", order: 8 },
   ];
-  const sortedcards = cards.sort((a, b) => (a.order - b.order) * state);
   return (
     <div>
       <Box

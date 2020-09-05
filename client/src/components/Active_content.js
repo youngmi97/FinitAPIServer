@@ -19,8 +19,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Active_content(props) {
   const classes = useStyles();
-  const [hover, sethover] = React.useState(false);
-  const [hover1, sethover1] = React.useState(false);
   return (
     <div>
       <Grid>

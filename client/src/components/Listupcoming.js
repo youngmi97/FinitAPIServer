@@ -1,15 +1,10 @@
-import Avatar from "@material-ui/core/Avatar";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
+import Typography from "@material-ui/core/Typography";
 import { fade, makeStyles } from "@material-ui/core/styles";
-import AppsIcon from "@material-ui/icons/Apps";
-import EqualizerIcon from "@material-ui/icons/Equalizer";
-import CreditCardIcon from "@material-ui/icons/CreditCard";
-import EventNoteIcon from "@material-ui/icons/EventNote";
-import GroupIcon from "@material-ui/icons/Group";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -26,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
   list: {
     backgroundColor: theme.palette.background.paper,
-    blockSize: 5,
+    padding: 12,
   },
   small: {
     width: 24,
@@ -92,6 +87,12 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
   },
+  imageIcon: {
+    height: "100%",
+  },
+  iconRoot: {
+    textAlign: "center",
+  },
   drawerPaper: {
     marginTop: 44,
   },
@@ -112,24 +113,29 @@ const useStyles = makeStyles((theme) => ({
     width: 1440,
   },
   ListItemSize: {
-    minWidth: 40,
+    minWidth: 36,
     "& span, & svg": {
       fontSize: "24px",
     },
   },
+  ListItemSize1: {
+    marginTop: 4,
+    marginBottom: 4,
+    borderRadius: 6,
+  },
   ListItemSize2: {
     padding: 0,
     "& span, & svg": {
-      fontSize: "17px",
+      fontSize: "14px",
       color: "grey",
     },
   },
-  ListItemSize3: {
-    marginLeft: 20,
-    fontSize: 16,
-  },
   ListItemSize4: {
-    fontSize: 13,
+    fontSize: 11,
+    height: 32,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
   },
   item: {
     padding: 0,
@@ -138,7 +144,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function List_Active() {
   const classes = useStyles();
-  const [selectedIndex, setSelectedIndex] = React.useState(2);
+  const [selectedIndex, setSelectedIndex] = React.useState(3);
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
   };
@@ -150,20 +156,8 @@ export default function List_Active() {
         aria-labelledby="nested-list-subheader"
         className={classes.list}
       >
-        <ListItem button {...{ to: "/" }} component={Link}>
-          <Avatar
-            variant="circle"
-            src="Ellipse 2.svg"
-            className={classes.small}
-          />
-          <ListItemText className={classes.ListItemSize3} primary="Elice Yoo" />
-        </ListItem>
-        <ListSubheader
-          className={classes.ListItemSize4}
-          component="div"
-          id="nested-list-subheader"
-        >
-          MY ACCOUNT
+        <ListSubheader component="div" id="nested-list-subheader">
+          <Typography className={classes.ListItemSize4}>MY WALLET</Typography>
         </ListSubheader>
         <ListItem
           button
@@ -171,9 +165,16 @@ export default function List_Active() {
           onClick={(event) => handleListItemClick(event, 4)}
           {...{ to: "/wallet" }}
           component={Link}
+          dense={true}
+          disableRipple={true}
+          className={classes.ListItemSize1}
         >
           <ListItemIcon className={classes.ListItemSize}>
-            <CreditCardIcon />
+            <img
+              className={classes.imageIcon}
+              src="/static/icons/Wallet.svg"
+              alt="wallet"
+            />
           </ListItemIcon>
           <ListItemText className={classes.ListItemSize2} primary="My Wallet" />
         </ListItem>
@@ -184,12 +185,10 @@ export default function List_Active() {
         aria-labelledby="nested-list-subheader"
         className={classes.list}
       >
-        <ListSubheader
-          className={classes.ListItemSize4}
-          component="div"
-          id="nested-list-subheader"
-        >
-          MY SUBSCRIPTIONS
+        <ListSubheader component="div" id="nested-list-subheader">
+          <Typography className={classes.ListItemSize4}>
+            MY SUBSCRIPTIONS
+          </Typography>
         </ListSubheader>
 
         <ListItem
@@ -198,9 +197,16 @@ export default function List_Active() {
           onClick={(event) => handleListItemClick(event, 0)}
           {...{ to: "/subscriptions" }}
           component={Link}
+          dense={true}
+          disableRipple={true}
+          className={classes.ListItemSize1}
         >
           <ListItemIcon className={classes.ListItemSize}>
-            <AppsIcon />
+            <img
+              className={classes.imageIcon}
+              src="/static/icons/AllSubscriptions.svg"
+              alt="all"
+            />
           </ListItemIcon>
           <ListItemText
             className={classes.ListItemSize2}
@@ -213,9 +219,16 @@ export default function List_Active() {
           onClick={(event) => handleListItemClick(event, 1)}
           {...{ to: "/shared" }}
           component={Link}
+          dense={true}
+          className={classes.ListItemSize1}
+          disableRipple={true}
         >
           <ListItemIcon className={classes.ListItemSize}>
-            <GroupIcon />
+            <img
+              className={classes.imageIcon}
+              src="/static/icons/SharedSubscriptions.svg"
+              alt="share"
+            />
           </ListItemIcon>
           <ListItemText
             className={classes.ListItemSize2}
@@ -228,9 +241,16 @@ export default function List_Active() {
           onClick={(event) => handleListItemClick(event, 2)}
           {...{ to: "/upcoming" }}
           component={Link}
+          dense={true}
+          disableRipple={true}
+          className={classes.ListItemSize1}
         >
           <ListItemIcon className={classes.ListItemSize}>
-            <EventNoteIcon />
+            <img
+              className={classes.imageIcon}
+              src="/static/icons/Upcoming.svg"
+              alt="upcoming"
+            />
           </ListItemIcon>
           <ListItemText
             className={classes.ListItemSize2}
@@ -243,9 +263,16 @@ export default function List_Active() {
           onClick={(event) => handleListItemClick(event, 3)}
           {...{ to: "/insight" }}
           component={Link}
+          dense={true}
+          className={classes.ListItemSize1}
+          disableRipple={true}
         >
           <ListItemIcon className={classes.ListItemSize}>
-            <EqualizerIcon />
+            <img
+              className={classes.imageIcon}
+              src="/static/icons/Insight.svg"
+              alt="insight"
+            />
           </ListItemIcon>
           <ListItemText className={classes.ListItemSize2} primary="Insight" />
         </ListItem>
