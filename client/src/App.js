@@ -145,6 +145,7 @@ const theme = createMuiTheme({
         fontWeight: 500,
         fontSize: "72px",
       },
+
       h2: {
         /* Heading 2 [14] SB */
         fontFamily: [

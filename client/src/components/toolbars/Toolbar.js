@@ -1,13 +1,29 @@
 // import Button from "@material-ui/core/Button";
 
 import IconButton from "@material-ui/core/IconButton";
-import { fade, makeStyles, withStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import {
+  fade,
+  makeStyles,
+  withStyles,
+  useTheme,
+} from "@material-ui/core/styles";
 // import AppBar from "@material-ui/core/AppBar";
 
-import Box from "@material-ui/core/Box";
+import FormHelperText from "@material-ui/core/FormHelperText";
+
+import List from "@material-ui/core/List";
+import ListSubheader from "@material-ui/core/ListSubheader";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import CloseIcon from "@material-ui/icons/Close";
+import DialogContent from "@material-ui/core/DialogContent";
 import Tooltip from "@material-ui/core/Tooltip";
 import Fade from "@material-ui/core/Fade";
 
+import Dialog from "@material-ui/core/Dialog";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Toolbar from "@material-ui/core/Toolbar";
 import AddRoundedIcon from "@material-ui/icons/AddRounded";
 import FormatListBulletedRoundedIcon from "@material-ui/icons/FormatListBulletedRounded";
@@ -16,7 +32,7 @@ import ArrowUpwardRoundedIcon from "@material-ui/icons/ArrowUpwardRounded";
 import ArrowDownwardRoundedIcon from "@material-ui/icons/ArrowDownwardRounded";
 import ViewModuleRoundedIcon from "@material-ui/icons/ViewModuleRounded";
 import React from "react";
-
+import { ButtonBase, Typography, Avatar, Box } from "@material-ui/core";
 //Sort
 import FormControl from "@material-ui/core/FormControl";
 
@@ -32,6 +48,17 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     bottom: 0,
+  },
+  Dialog: {
+    minWidth: "375px",
+    height: "600px",
+  },
+  Dialog1: {
+    width: "448px",
+    height: "563px",
+  },
+  Avatar: {
+    marginTop: "24px",
   },
   marginStyle: {
     flexGrow: 1,
@@ -51,6 +78,29 @@ const useStyles = makeStyles((theme) => ({
       // border: `1px solid ${theme.palette.primary.main}`,
       boxShadow: "0 0 0 0.2rem rgba(118, 16, 235, 0.25)",
     },
+  },
+  search1: {
+    position: "relative",
+    borderRadius: 8,
+    border: "1px solid #EFEFF4",
+    backgroundColor: fade(theme.palette.common.white, 0.15),
+    marginRight: 2,
+    marginTop: 12,
+    height: "100%",
+    width: "auto",
+    "&:hover": {
+      borderRadius: 8,
+      // backgroundColor: fade(theme.palette.common.white, 0.25),
+      // border: `1px solid ${theme.palette.primary.main}`,
+      boxShadow: "0 0 0 0.2rem rgba(118, 16, 235, 0.25)",
+    },
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
@@ -78,6 +128,14 @@ const useStyles = makeStyles((theme) => ({
     "&:focus": {
       width: "20ch",
     },
+  },
+  inputInput1: {
+    padding: "10.5px 26px 10.5px 12px",
+    fontSize: "14px",
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    transition: theme.transitions.create("width"),
+    width: "20ch",
   },
   highlightButton: {
     padding: "11px",
@@ -115,6 +173,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 8,
     height: 40,
   },
+
   menuItemStyle: {
     fontFamily: [
       "-apple-system",
@@ -128,6 +187,37 @@ const useStyles = makeStyles((theme) => ({
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"',
     ].join(","),
+  },
+  Title: {
+    fontSize: "24px",
+    flexGrow: 1,
+  },
+  closeButton: {
+    position: "absolute",
+    right: theme.spacing(1),
+    top: theme.spacing(1),
+    fontSize: 32,
+    "&:hover, &:focus": {
+      backgroundColor: "#ffffff",
+      borderColor: "#ffffff",
+    },
+  },
+  closeButton1: {
+    position: "absolute",
+    left: theme.spacing(1),
+    top: theme.spacing(1),
+    fontSize: 32,
+    "&:hover, &:focus": {
+      backgroundColor: "#ffffff",
+      borderColor: "#ffffff",
+    },
+  },
+  ListItemSize4: {
+    fontSize: 11,
+    height: 32,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
   },
 }));
 
@@ -186,10 +276,52 @@ export default function SubscriptionToolbar({ changeView, changeSort }) {
   const classes = useStyles();
   const [listView, setListView] = React.useState(true);
   const [setValue] = React.useState("");
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const [secondary] = React.useState(false);
   const [sort, setSort] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
+  const [plan, setPlan] = React.useState("");
+  const [price, setPrice] = React.useState("");
+  const [temporalname, setName] = React.useState(false);
+
+  const [open1, setOpen1] = React.useState(false);
+
   const handleChange = (event) => {
     setValue(event.target.value);
   };
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const changeName = (name) => {
+    setName(name);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleClickOpen1 = () => {
+    setOpen1(true);
+  };
+
+  const handleClose1 = () => {
+    setOpen1(false);
+  };
+
+  const lists = [
+    "Netflix",
+    "Disney Plus",
+    "Apple TV Plus",
+    "Hulu",
+    "Spotify",
+    "Youtube",
+    "Notion",
+    "Amazon",
+    "Twitch",
+  ];
+  lists.sort();
+
+  const Netflix_plan = ["Basic", "Standard", "Premium"];
 
   return (
     <div className={classes.root}>
@@ -272,13 +404,16 @@ export default function SubscriptionToolbar({ changeView, changeSort }) {
             inputProps={{ "aria-label": "search" }}
           />
         </div>
-
         <ArrowTooltip
           title="Add Subscription"
           TransitionComponent={Fade}
           enterDelay={500}
         >
-          <IconButton className={classes.highlightButton} disableRipple={true}>
+          <IconButton
+            className={classes.highlightButton}
+            disableRipple={true}
+            onClick={handleClickOpen}
+          >
             <AddRoundedIcon
               fontSize="small"
               alignItems="center"
@@ -286,6 +421,132 @@ export default function SubscriptionToolbar({ changeView, changeSort }) {
             />
           </IconButton>
         </ArrowTooltip>
+        <Dialog fullScreen={fullScreen} open={open} onClose={handleClose}>
+          <div className={classes.Dialog}>
+            <DialogContent className={classes.Avatar}>
+              <Typography align="center" className={classes.Title}>
+                Add Subscriptions
+              </Typography>
+              <div className={classes.search1}>
+                <div className={classes.searchIcon}>
+                  <SearchRoundedIcon />
+                </div>
+                <InputBase
+                  placeholder="Search Subscriptions"
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput1,
+                  }}
+                  inputProps={{ "aria-label": "search" }}
+                />
+              </div>
+              <div>
+                <List className={classes.List}>
+                  <ListSubheader component="div" id="nested-list-subheader">
+                    <Typography className={classes.ListItemSize4}>
+                      ALL
+                    </Typography>
+                  </ListSubheader>
+                  {lists.map((name) => {
+                    return (
+                      <ListItem
+                        button
+                        className={classes.List}
+                        onClick={() => {
+                          handleClickOpen1();
+                          handleClose();
+                          changeName(name);
+                        }}
+                      >
+                        <ListItemIcon className={classes.ListItemSize}>
+                          <img
+                            className={classes.imageIcon}
+                            src={"/static/avatar/" + name + "[48].svg"}
+                            alt="upcoming"
+                          />
+                        </ListItemIcon>
+                        {name}
+                        <ListItemSecondaryAction>
+                          <img src="/static/icons/symbols/MovetoPage.svg" />
+                        </ListItemSecondaryAction>
+                      </ListItem>
+                    );
+                  })}
+                </List>
+              </div>
+            </DialogContent>
+
+            <IconButton
+              aria-label="close"
+              className={classes.closeButton}
+              onClick={handleClose}
+              disableRipple={true}
+              disableFocusRipple={true}
+            >
+              <img src="static/icons/symbols/Exit.svg" />
+            </IconButton>
+          </div>
+        </Dialog>
+
+        <Dialog
+          fullScreen={fullScreen}
+          open={open1}
+          onClose={() => {
+            handleClickOpen();
+            handleClose1();
+          }}
+        >
+          <div className={classes.Dialog1}>
+            <DialogContent className={classes.Avatar}>
+              <Typography align="center" className={classes.Title}>
+                <img
+                  className={classes.imageIcon}
+                  src={"/static/avatar/" + temporalname + "[48].svg"}
+                  alt="upcoming"
+                />
+              </Typography>
+              <Typography align="center" className={classes.Title}>
+                {temporalname}
+              </Typography>
+              <Typography align="center" className={classes.Title}>
+                {plan}
+              </Typography>
+              <Typography align="center" className={classes.Title}>
+                {price}
+              </Typography>
+            </DialogContent>
+            <div>
+              <FormControl className={classes.formControl}>
+                <Select
+                  value={plan}
+                  onChange={handleChange}
+                  displayEmpty
+                  className={classes.selectEmpty}
+                  inputProps={{ "aria-label": "Without label" }}
+                >
+                  <MenuItem value="" disabled>
+                    Placeholder
+                  </MenuItem>
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
+            <IconButton
+              aria-label="back"
+              className={classes.closeButton1}
+              onClick={() => {
+                handleClickOpen();
+                handleClose1();
+              }}
+              disableRipple={true}
+              disableFocusRipple={true}
+            >
+              <img src="static/icons/symbols/Back.svg" />
+            </IconButton>
+          </div>
+        </Dialog>
       </Toolbar>
     </div>
   );

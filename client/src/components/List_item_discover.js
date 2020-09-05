@@ -172,7 +172,7 @@ export default function List_Active() {
           <ListItemIcon className={classes.ListItemSize}>
             <img
               className={classes.imageIcon}
-              src="/static/icons/Wallet.svg"
+              src="/static/icons/drawer/Wallet.svg"
               alt="wallet"
             />
           </ListItemIcon>
@@ -204,7 +204,7 @@ export default function List_Active() {
           <ListItemIcon className={classes.ListItemSize}>
             <img
               className={classes.imageIcon}
-              src="/static/icons/AllSubscriptions.svg"
+              src="/static/icons/drawer/AllSubscriptions.svg"
               alt="all"
             />
           </ListItemIcon>
@@ -226,7 +226,7 @@ export default function List_Active() {
           <ListItemIcon className={classes.ListItemSize}>
             <img
               className={classes.imageIcon}
-              src="/static/icons/SharedSubscriptions.svg"
+              src="/static/icons/drawer/SharedSubscriptions.svg"
               alt="share"
             />
           </ListItemIcon>
@@ -248,7 +248,7 @@ export default function List_Active() {
           <ListItemIcon className={classes.ListItemSize}>
             <img
               className={classes.imageIcon}
-              src="/static/icons/Upcoming.svg"
+              src="/static/icons/drawer/Upcoming.svg"
               alt="upcoming"
             />
           </ListItemIcon>
@@ -270,7 +270,7 @@ export default function List_Active() {
           <ListItemIcon className={classes.ListItemSize}>
             <img
               className={classes.imageIcon}
-              src="/static/icons/Insight.svg"
+              src="/static/icons/drawer/Insight.svg"
               alt="insight"
             />
           </ListItemIcon>
