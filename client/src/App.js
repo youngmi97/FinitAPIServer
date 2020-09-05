@@ -106,11 +106,7 @@ const theme = createMuiTheme({
       },
     },
     MuiInputBase: {
-      root: {
-        "&:hover": {
-          height: 40,
-        },
-      },
+      root: {},
     },
     MuiTypography: {
       root: {

@@ -1,7 +1,13 @@
 // import Button from "@material-ui/core/Button";
 
 import IconButton from "@material-ui/core/IconButton";
-import Button from "@material-ui/core/Button";
+import InputLabel from "@material-ui/core/InputLabel";
+import DateFnsUtils from "@date-io/date-fns"; // choose your lib
+import EventRoundedIcon from "@material-ui/icons/EventRounded";
+import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import TextField from "@material-ui/core/TextField";
+import AttachMoneyRoundedIcon from "@material-ui/icons/AttachMoneyRounded";
+import UpdateRoundedIcon from "@material-ui/icons/UpdateRounded";
 import {
   fade,
   makeStyles,
@@ -97,10 +103,29 @@ const useStyles = makeStyles((theme) => ({
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 120,
+    minWidth: "384px",
+    marginTop: 4,
   },
   selectEmpty: {
-    marginTop: theme.spacing(2),
+    width: 384,
+  },
+  selectEmpty1: {
+    width: 150,
+  },
+  left: {
+    marginLeft: 32,
+    marginRight: 32,
+    marginTop: 20,
+    backgroundColor: "rgba(0, 0, 0, 0.04)",
+  },
+  left1: {
+    marginLeft: 32,
+    marginRight: 32,
+    marginTop: 20,
+  },
+  forgrid: {
+    backgroundColor: "rgba(0, 0, 0, 0.04)",
+    margin: 6,
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
@@ -219,6 +244,10 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
   },
+  inputmargin: {
+    margin: 0,
+    height: 40,
+  },
 }));
 
 const useStylesArrow = makeStyles((theme) => ({
@@ -281,9 +310,12 @@ export default function SubscriptionToolbar({ changeView, changeSort }) {
   const [secondary] = React.useState(false);
   const [sort, setSort] = React.useState(true);
   const [open, setOpen] = React.useState(false);
+  const [index, setIndex] = React.useState(0);
   const [plan, setPlan] = React.useState("");
   const [price, setPrice] = React.useState("");
   const [temporalname, setName] = React.useState(false);
+
+  const [selectedDate, handleDateChange] = React.useState(new Date());
 
   const [open1, setOpen1] = React.useState(false);
 
@@ -307,6 +339,11 @@ export default function SubscriptionToolbar({ changeView, changeSort }) {
   const handleClose1 = () => {
     setOpen1(false);
   };
+  const handleIndex = (event) => {
+    setIndex(event.target.value);
+    setPlan(Netflix_plan[event.target.value]);
+    setPrice(Netflix_price[event.target.value]);
+  };
 
   const lists = [
     "Netflix",
@@ -321,7 +358,8 @@ export default function SubscriptionToolbar({ changeView, changeSort }) {
   ];
   lists.sort();
 
-  const Netflix_plan = ["Basic", "Standard", "Premium"];
+  const Netflix_plan = ["", "Basic", "Standard", "Premium"];
+  const Netflix_price = ["", "$8.99", "$12.99", "$15.99"];
 
   return (
     <div className={classes.root}>
@@ -516,22 +554,97 @@ export default function SubscriptionToolbar({ changeView, changeSort }) {
               </Typography>
             </DialogContent>
             <div>
-              <FormControl className={classes.formControl}>
-                <Select
-                  value={plan}
-                  onChange={handleChange}
-                  displayEmpty
-                  className={classes.selectEmpty}
-                  inputProps={{ "aria-label": "Without label" }}
-                >
-                  <MenuItem value="" disabled>
-                    Placeholder
-                  </MenuItem>
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-              </FormControl>
+              <div className={classes.left}>
+                <FormControl className={classes.formControl}>
+                  <InputLabel shrink htmlFor="age-native-simple">
+                    Plan
+                  </InputLabel>
+                  <Select
+                    value={index}
+                    onChange={(event) => {
+                      handleIndex(event);
+                    }}
+                    displayEmpty
+                    className={classes.selectEmpty}
+                    label="hihi"
+                    inputProps={{
+                      name: "age",
+                      id: "age-native-simple",
+                    }}
+                  >
+                    <MenuItem value={0} disabled>
+                      Select Plan
+                    </MenuItem>
+                    <MenuItem value={1}>Basic</MenuItem>
+                    <MenuItem value={2}>Standard</MenuItem>
+                    <MenuItem value={3}>Premium</MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
+
+              <div className={classes.left1}>
+                <Grid container spacing={0} alignItems="center">
+                  <Grid item className={classes.forgrid}>
+                    <Grid container spacing={1} alignItems="center">
+                      <Grid item>
+                        <AttachMoneyRoundedIcon />
+                      </Grid>
+                      <Grid item>
+                        <InputLabel
+                          shrink
+                          htmlFor="standard-adornment-password"
+                        >
+                          Price
+                        </InputLabel>
+                        <TextField
+                          id="standard-adornment-password"
+                          disabled
+                          value={price}
+                          className={classes.inputmargin}
+                        />
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                  <Grid item className={classes.forgrid}>
+                    <Grid container spacing={1} alignItems="center">
+                      <Grid item>
+                        <UpdateRoundedIcon />
+                      </Grid>
+                      <Grid item>
+                        <TextField
+                          id="standard-select-currency"
+                          select
+                          label="Cycle"
+                          value={index}
+                          onChange={(event) => {
+                            handleIndex(event);
+                          }}
+                          className={classes.selectEmpty1}
+                        >
+                          <MenuItem value={1}>Monthly</MenuItem>
+                          <MenuItem value={2}>Monthly</MenuItem>
+                          <MenuItem value={3}>Monthly</MenuItem>
+                        </TextField>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </div>
+              <div className={classes.left}>
+                <Grid container spacing={1} alignItems="center">
+                  <Grid item>
+                    <EventRoundedIcon />
+                  </Grid>
+                  <Grid item>
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                      <DatePicker
+                        value={selectedDate}
+                        onChange={handleDateChange}
+                      />
+                    </MuiPickersUtilsProvider>
+                  </Grid>
+                </Grid>
+              </div>
             </div>
             <IconButton
               aria-label="back"
