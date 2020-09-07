@@ -233,7 +233,7 @@ export default function Main(props) {
   const [width] = useWindowSize();
   const isReduced = width <= 1023;
 
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const [state, setState] = React.useState(1);
   const [view, setView] = React.useState(false);
 
@@ -265,6 +265,7 @@ export default function Main(props) {
     { name: "Youtube", order: 6 },
     { name: "Youtube", order: 8 },
   ];
+
   cards.sort((a, b) => (a.order - b.order) * state);
   return (
     <div>
@@ -311,7 +312,7 @@ export default function Main(props) {
           </Grid>
         </Box>
       </main>
-      <Drawer
+      {/* <Drawer
         className={classes.drawer2}
         variant="persistent"
         classes={{
@@ -329,7 +330,7 @@ export default function Main(props) {
             <ArrowForwardIosIcon />
           </IconButton>
         </div>
-      </Drawer>
+      </Drawer> */}
       <div className={classes.overlay}>
         <IconButton onClick={handleDrawerOpen}>
           <ArrowBackIosIcon />
