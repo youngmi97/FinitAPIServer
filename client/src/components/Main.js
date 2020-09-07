@@ -331,11 +331,11 @@ export default function Main(props) {
           </IconButton>
         </div>
       </Drawer> */}
-      <div className={classes.overlay}>
+      {/* <div className={classes.overlay}>
         <IconButton onClick={handleDrawerOpen}>
           <ArrowBackIosIcon />
         </IconButton>
-      </div>
+      </div> */}
     </div>
   );
 }
