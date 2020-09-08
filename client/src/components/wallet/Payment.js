@@ -9,6 +9,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+
+import Link from "../Link";
 // import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 // import Typography from "@material-ui/core/Typography";
@@ -87,12 +89,7 @@ export default function Card_internal() {
   const classes = useStyles();
   // const [open, setOpen] = React.useState(false);
   const [secondary] = React.useState(false);
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
-  // const handleToggle = () => {
-  //   setOpen(!open);
-  // };
+
   return (
     <Card className={classes.root}>
       {/* <CardHeader></CardHeader> */}
@@ -148,7 +145,8 @@ export default function Card_internal() {
             />
           </ListItem>
         </List>
-        <Button className={classes.ListItemSize5}>+ Add Payment Methods</Button>
+        {/* <Button className={classes.ListItemSize5}>+ Add Payment Methods</Button> */}
+        <Link />
       </CardContent>
     </Card>
   );

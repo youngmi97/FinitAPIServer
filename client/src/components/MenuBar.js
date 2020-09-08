@@ -2,7 +2,16 @@ import React, { useContext } from "react";
 import { Menu } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth";
+import gql from "graphql-tag";
+import { Mutation } from "react-apollo";
 import "../App.css";
+
+// Mutation Component doesnt do shit
+const LOGOUT_USER = gql`
+  mutation logOut {
+    signOut
+  }
+`;
 
 function MenuBar() {
   const { user, logout } = useContext(AuthContext);
@@ -33,20 +42,29 @@ function MenuBar() {
       </Menu.Item>
 
       <Menu.Menu position="right">
-        <Menu.Item
-          style={{
-            backgroundColor: "#7610EB",
-            color: "#ffffff",
-            alignSelf: "center",
-            marginRight: "20px",
-            fontSize: "14px",
-            fontWeight: "400",
+        <Mutation
+          mutation={LOGOUT_USER}
+          update={(cache, _) => {
+            console.log(cache);
           }}
-          name="logout"
-          onClick={logout}
-          as={Link}
-          to="/"
-        />
+        >
+          {() => (
+            <Menu.Item
+              style={{
+                backgroundColor: "#7610EB",
+                color: "#ffffff",
+                alignSelf: "center",
+                marginRight: "20px",
+                fontSize: "14px",
+                fontWeight: "400",
+              }}
+              name="logout"
+              onClick={logout}
+              as={Link}
+              to="/"
+            />
+          )}
+        </Mutation>
       </Menu.Menu>
     </Menu>
   ) : (

@@ -1,17 +1,16 @@
-import { User } from '../models';
+import { User } from "../models";
 import Joi from "@hapi/joi";
-import mongoose from 'mongoose';
-import { UserInputError } from 'apollo-server-express';
-import { signUp, signIn } from '../objectSchemas';
-import { attemptSignIn, signOut } from '../auth';
+import mongoose from "mongoose";
+import { UserInputError } from "apollo-server-express";
+import { signUp, signIn } from "../objectSchemas";
+import { attemptSignIn, signOut } from "../auth";
 
 export default {
   Query: {
-
     me: async (root, args, context, info) => {
-        //Auth.checkSignedIn(context.req)
-        //console.log(User.findById(context.req.session.userId));
-        return await User.findById(context.req.session.userId)
+      //Auth.checkSignedIn(context.req)
+      //console.log(User.findById(context.req.session.userId));
+      return await User.findById(context.req.session.userId);
     },
 
     users: (root, args, { req }, info) => {
@@ -37,11 +36,10 @@ export default {
     async getUsers() {
       const users = await User.find({});
       return users;
-    }
+    },
   },
 
   Mutation: {
-
     signUp: async (root, args, { req }, info) => {
       //TODO: not auth
       //Auth.checkSignedOut(req);
@@ -57,19 +55,21 @@ export default {
     },
 
     signIn: async (root, args, context, info) => {
+      await signIn.validateAsync(args);
 
-        await signIn.validateAsync(args);
+      const user = await attemptSignIn(args.email, args.password);
 
-        const user = await attemptSignIn(args.email, args.password);
+      context.req.session.userId = user.id;
 
-        context.req.session.userId = user.id;
-        return user;
+      // what exactly is req and res --> how to check res is for the client??
+      console.log("signIn called from resolvers");
+      return user;
     },
 
     signOut: (root, args, context, info) => {
-        //Auth.checkSignedIn(context.req);
-
-        return signOut(context.req, context.res);
-    }
+      //Auth.checkSignedIn(context.req);
+      console.log("signOut called from resolvers");
+      return signOut(context.req, context.res);
+    },
   },
 };
