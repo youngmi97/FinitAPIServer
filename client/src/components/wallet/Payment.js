@@ -13,6 +13,7 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemText from "@material-ui/core/ListItemText";
 // import Typography from "@material-ui/core/Typography";
 import React from "react";
+import PlaidLogin from "../PlaidLogin";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -148,7 +149,8 @@ export default function Card_internal() {
             />
           </ListItem>
         </List>
-        <Button className={classes.ListItemSize5}>+ Add Payment Methods</Button>
+        {/* <Button className={classes.ListItemSize5}>+ Add Payment Methods</Button> */}
+        <PlaidLogin />
       </CardContent>
     </Card>
   );

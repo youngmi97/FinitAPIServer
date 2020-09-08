@@ -30,6 +30,7 @@
     "react-auto-scale": "^1.0.4",
     "react-bootstrap": "^1.2.2",
     "react-dom": "^16.13.1",
+    "react-plaid-link": "^3.0.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.3",
     "reactstrap": "^8.5.1",

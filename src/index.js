@@ -8,6 +8,7 @@ import resolvers from "./resolvers";
 
 import schemaDirectives from "./directives";
 
+var moment = require("moment");
 const express = require("express");
 const redis = require("redis");
 const graphqlHTTP = require("express-graphql");
@@ -15,7 +16,7 @@ const schema = require("./schema.js");
 const plaid = require("plaid");
 const path = require("path");
 const dotenv = require("dotenv").config({
-	path: require("find-config")(".env"),
+  path: require("find-config")(".env"),
 });
 const bodyParser = require("body-parser");
 const session = require("express-session");
@@ -36,13 +37,13 @@ app.disable("x-powered-by");
 app.use(cors());
 
 const {
-	NODE_ENV = "development",
-	SESS_NAME = "sid",
-	SESS_SECRET = "ssh!secret!",
-	SESS_LIFETIME = 1000 * 60 * 60 * 2, // 2 hours
-	REDIS_HOST,
-	REDIS_PORT,
-	REDIS_PASSWORD,
+  NODE_ENV = "development",
+  SESS_NAME = "sid",
+  SESS_SECRET = "ssh!secret!",
+  SESS_LIFETIME = 1000 * 60 * 60 * 2, // 2 hours
+  REDIS_HOST,
+  REDIS_PORT,
+  REDIS_PASSWORD,
 } = process.env;
 const IN_PROD = NODE_ENV === "production";
 
@@ -57,30 +58,30 @@ const RedisStore = connectRedis(session);
 
 // Generate redis client
 let redisClient = redis.createClient({
-	host: REDIS_HOST,
-	port: REDIS_PORT,
-	no_ready_check: true,
-	auth_pass: REDIS_PASSWORD,
+  host: REDIS_HOST,
+  port: REDIS_PORT,
+  no_ready_check: true,
+  auth_pass: REDIS_PASSWORD,
 });
 
 const store = new RedisStore({
-	client: redisClient,
+  client: redisClient,
 });
 
 app.use(
-	session({
-		store,
-		name: SESS_NAME,
-		secret: SESS_SECRET,
-		resave: true,
-		rolling: true,
-		saveUninitialized: false,
-		cookie: {
-			maxAge: Number(SESS_LIFETIME),
-			sameSite: true,
-			secure: IN_PROD,
-		},
-	})
+  session({
+    store,
+    name: SESS_NAME,
+    secret: SESS_SECRET,
+    resave: true,
+    rolling: true,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: Number(SESS_LIFETIME),
+      sameSite: true,
+      secure: IN_PROD,
+    },
+  })
 );
 
 // ttl on redis-cli to check session expiration time
@@ -90,28 +91,73 @@ app.use(
 //cors: false disables query from other endpoints (for security)
 //request.credentials to visualize session cookies from graphiql
 const server = new ApolloServer({
-	typeDefs,
-	resolvers,
-	schemaDirectives,
-	playground: IN_PROD
-		? false
-		: {
-				settings: {
-					"request.credentials": "include",
-				},
-		  },
-	context: ({ req, res }) => ({ req, res }),
+  typeDefs,
+  resolvers,
+  schemaDirectives,
+  playground: IN_PROD
+    ? false
+    : {
+        settings: {
+          "request.credentials": "include",
+        },
+      },
+  context: ({ req, res }) => ({ req, res }),
 });
 
 server.applyMiddleware({ app, cors: false });
 
 // Save the below fields in the .env file for now
-/* const client = new plaid.Client(
-    process.env.PLAID_CLIENT_ID,
-    process.env.PLAID_SECRET,
-    process.env.PLAID_PUBLIC_KEY,
-    process.env.PLAID_ENV
-) */
+const client = new plaid.Client(
+  process.env.PLAID_CLIENT_ID,
+  process.env.PLAID_SECRET,
+  process.env.PLAID_PUBLIC_KEY,
+  plaid.environments.sandbox
+);
+
+var PUBLIC_TOKEN = null;
+var ACCESS_TOKEN = null;
+var ITEM_ID = null;
+
+app.post("/auth/public_token", async (req, res) => {
+  // First, receive the public token and set it to a variable
+  let PUBLIC_TOKEN = req.body.public_token;
+  // Second, exchange the public token for an access token
+  client.exchangePublicToken(PUBLIC_TOKEN, function (error, tokenResponse) {
+    ACCESS_TOKEN = tokenResponse.access_token;
+    ITEM_ID = tokenResponse.item_id;
+    res.json({
+      access_token: ACCESS_TOKEN,
+      item_id: ITEM_ID,
+    });
+    console.log("access token below");
+    console.log("ACCESS_TOKEN", ACCESS_TOKEN);
+    console.log("PUBLIC_TOKEN", PUBLIC_TOKEN);
+  });
+});
+
+app.get("/transactions", async (req, res) => {
+  // Pull transactions for the last 30 days
+  let startDate = moment().subtract(30, "days").format("YYYY-MM-DD");
+  let endDate = moment().format("YYYY-MM-DD");
+  console.log("made it past variables");
+  client.getTransactions(
+    ACCESS_TOKEN,
+    startDate,
+    endDate,
+    {
+      count: 250,
+      offset: 0,
+    },
+    function (error, transactionsResponse) {
+      res.json({ transactions: transactionsResponse });
+      // TRANSACTIONS LOGGED BELOW!
+      // They will show up in the terminal that you are running nodemon in.
+      console.log(transactionsResponse);
+    }
+  );
+});
+
+// LOOKUP LINK TOKEN --> from Plaid documentation --> why is it better??
 
 app.use(express.static("public"));
 
