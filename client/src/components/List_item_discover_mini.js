@@ -67,11 +67,6 @@ export default function SimpleListMenu(props) {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleMenuItemClick = (event, index) => {
-    setSelectedIndex(index);
-    setAnchorEl(null);
-  };
-
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -92,13 +87,25 @@ export default function SimpleListMenu(props) {
     "/insight",
   ];
 
+  const tickImage = (
+    <img
+      className={classes.imageIcon}
+      src="/static/icons/drawer/drawer_tick.svg"
+      alt="tick"
+    />
+  );
+
   const options = [
     <ListItem
       className={classes.ListItem}
       onClick={(event) => handleListItemClick(event, 0)}
     >
       <ListItemIcon className={classes.ListItemSize}>
-        <CreditCardIcon />
+        <img
+          className={classes.imageIcon}
+          src="/static/icons/drawer/Wallet.svg"
+          alt="wallet"
+        />
       </ListItemIcon>
       <ListItemText className={classes.ListItemSize2} primary="My Wallet" />
     </ListItem>,
@@ -108,7 +115,11 @@ export default function SimpleListMenu(props) {
       onClick={(event) => handleListItemClick(event, 1)}
     >
       <ListItemIcon className={classes.ListItemSize}>
-        <AppsIcon />
+        <img
+          className={classes.imageIcon}
+          src="/static/icons/drawer/AllSubscriptions.svg"
+          alt="all"
+        />
       </ListItemIcon>
       <ListItemText
         className={classes.ListItemSize2}
@@ -121,7 +132,11 @@ export default function SimpleListMenu(props) {
       onClick={(event) => handleListItemClick(event, 2)}
     >
       <ListItemIcon className={classes.ListItemSize}>
-        <GroupIcon />
+        <img
+          className={classes.imageIcon}
+          src="/static/icons/drawer/SharedSubscriptions.svg"
+          alt="share"
+        />
       </ListItemIcon>
       <ListItemText
         className={classes.ListItemSize2}
@@ -134,7 +149,11 @@ export default function SimpleListMenu(props) {
       onClick={(event) => handleListItemClick(event, 3)}
     >
       <ListItemIcon className={classes.ListItemSize}>
-        <EventNoteIcon />
+        <img
+          className={classes.imageIcon}
+          src="/static/icons/drawer/Upcoming.svg"
+          alt="upcoming"
+        />
       </ListItemIcon>
       <ListItemText
         className={classes.ListItemSize2}
@@ -147,11 +166,30 @@ export default function SimpleListMenu(props) {
       onClick={(event) => handleListItemClick(event, 4)}
     >
       <ListItemIcon className={classes.ListItemSize}>
-        <EqualizerIcon />
+        <img
+          className={classes.imageIcon}
+          src="/static/icons/drawer/Insight.svg"
+          alt="insight"
+        />
       </ListItemIcon>
       <ListItemText className={classes.ListItemSize2} primary="Insight" />
     </ListItem>,
   ];
+
+  const handleMenuItemClick = (event, index) => {
+    // Handle Dynamic Tick Image Render
+    /* console.log("item component", options[index]);
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].props.children.length > 2) {
+        options[i].props.children.pop();
+      }
+    }
+
+    options[index].props.children.push(tickImage); */
+
+    setSelectedIndex(index);
+    setAnchorEl(null);
+  };
 
   return (
     <div className={classes.root}>
@@ -177,6 +215,7 @@ export default function SimpleListMenu(props) {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
+        style={{ marginTop: "63px" }}
       >
         {options.map((option, index) => (
           <MenuItem
