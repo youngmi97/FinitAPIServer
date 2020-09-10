@@ -186,6 +186,21 @@ const useStyles = makeStyles((theme) => ({
     transition: theme.transitions.create("width"),
     width: "20ch",
   },
+
+  Switchstyle: {
+    height: "40px",
+  },
+  regularButton: {
+    padding: "11px",
+    height: "100%",
+    borderRadius: 8,
+    margin: theme.spacing(1),
+    // border: "1px solid #EFEFF4",
+    color: theme.palette.grey.main,
+    "&:focus": {
+      boxShadow: "0 0 0 0.2rem rgba(239, 239, 244, 0.25)",
+    },
+  },
   highlightButton: {
     padding: "11px",
     height: "100%",
@@ -197,19 +212,6 @@ const useStyles = makeStyles((theme) => ({
     "&:hover, &:focus": {
       backgroundColor: "#7C45BA",
       borderColor: "#5C0CB8",
-    },
-  },
-  Switchstyle: {
-    height: "40px",
-  },
-  regularButton: {
-    padding: "11px",
-    marginRight: theme.spacing(1),
-    borderRadius: 8,
-    // border: "1px solid #EFEFF4",
-    color: theme.palette.grey.main,
-    "&:focus": {
-      boxShadow: "0 0 0 0.2rem rgba(239, 239, 244, 0.25)",
     },
   },
   sortButton: {
