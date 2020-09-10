@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import CARD_INTERNAL from "./cards/Card_internal";
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: 16,
@@ -14,30 +13,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Active_content() {
+export default function Active_content(props) {
   const classes = useStyles();
   return (
     <div>
       {/* <Box mx="auto" bgcolor="background.paper" p={4}> */}
       <Grid>
         <Grid container spacing={0}>
-          <Grid item xs={12} className={classes.root}>
-            <CARD_INTERNAL />
-          </Grid>
-          <Grid item xs={12} className={classes.root}>
-            <CARD_INTERNAL />
-          </Grid>
-          <Grid item xs={12} className={classes.root}>
-            <CARD_INTERNAL />
-          </Grid>
-          <Grid item xs={12} className={classes.root}>
-            <CARD_INTERNAL />
-          </Grid>
-          <Grid item xs={12} className={classes.root}>
-            <CARD_INTERNAL />
-          </Grid>
-          <Grid item xs className={classes.root}></Grid>
-          <Grid item xs className={classes.root}></Grid>
+          {props.cards.map((card, index) => {
+            return (
+              <Grid item xs={12} className={classes.root}>
+                <CARD_INTERNAL
+                  name={card.name}
+                  price={card.price}
+                  plan={card.planName}
+                />
+              </Grid>
+            );
+          })}
         </Grid>
       </Grid>
       {/* </Box> */}

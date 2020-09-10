@@ -256,14 +256,19 @@ export default function Main(props) {
   );
 
   const cards = [
-    { name: "Netflix", order: 3 },
-    { name: "Spotify", order: 1 },
-    { name: "Netflix", order: 5 },
-    { name: "Notability", order: 2 },
-    { name: "GoogleDrive", order: 7 },
-    { name: "Spotify", order: 4 },
-    { name: "Youtube", order: 6 },
-    { name: "Youtube", order: 8 },
+    { name: "Netflix", order: 3, planName: "Standard", price: "USD 12.00/mo" },
+    { name: "Spotify", order: 1, planName: "Basic", price: "USD $8.00/mo" },
+    { name: "Netflix", order: 5, planName: "Premium", price: "USD $9.00/mo" },
+    { name: "Notability", order: 2, planName: "Basic", price: "USD $8.00/mo" },
+    {
+      name: "GoogleDrive",
+      order: 7,
+      planName: "Standard",
+      price: "USD $12.00/mo",
+    },
+    { name: "Spotify", order: 4, planName: "Standard", price: "USD $10.00/mo" },
+    { name: "Youtube", order: 6, planName: "Premium", price: "USD $11.00/mo" },
+    { name: "Youtube", order: 8, planName: "Standard", price: "USD $12.00/mo" },
   ];
 
   cards.sort((a, b) => (a.order - b.order) * state);
@@ -306,7 +311,7 @@ export default function Main(props) {
               {view !== true ? (
                 <ACTIVE_CONTENT cards={cards} />
               ) : (
-                <LIST_VIEWBREAK />
+                <LIST_VIEWBREAK cards={cards} />
               )}
             </main>
           </Grid>
