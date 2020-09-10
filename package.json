@@ -37,6 +37,7 @@
     "plaid": "^5.1.0",
     "redis": "^3.0.2",
     "redis-client": "^0.3.5",
+    "save": "^2.4.0",
     "styled-components": "^5.1.1",
     "validator": "^13.1.1"
   },

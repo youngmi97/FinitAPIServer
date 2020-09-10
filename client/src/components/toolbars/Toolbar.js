@@ -1,6 +1,7 @@
 // import Button from "@material-ui/core/Button";
 
 import IconButton from "@material-ui/core/IconButton";
+import Switch from "@material-ui/core/Switch";
 import InputLabel from "@material-ui/core/InputLabel";
 import DateFnsUtils from "@date-io/date-fns"; // choose your lib
 import EventRoundedIcon from "@material-ui/icons/EventRounded";
@@ -8,6 +9,7 @@ import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import TextField from "@material-ui/core/TextField";
 import AttachMoneyRoundedIcon from "@material-ui/icons/AttachMoneyRounded";
 import UpdateRoundedIcon from "@material-ui/icons/UpdateRounded";
+import Button from "@material-ui/core/Button";
 import {
   fade,
   makeStyles,
@@ -55,6 +57,17 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     bottom: 0,
   },
+  ListItemSize5: {
+    color: "white",
+    borderColor: "white",
+    backgroundColor: "#7610EB",
+    fontSize: "14px",
+    fontWeight: 400,
+    alignItems: "center",
+    borderRadius: 5,
+    textTransform: "none",
+    height: "40px",
+  },
   Dialog: {
     minWidth: "375px",
     height: "600px",
@@ -65,6 +78,10 @@ const useStyles = makeStyles((theme) => ({
   },
   Avatar: {
     marginTop: "24px",
+  },
+  Avatar1: {
+    backgroundColor: "rgba(0, 0, 0, 0.04)",
+    height: 183,
   },
   marginStyle: {
     flexGrow: 1,
@@ -125,7 +142,15 @@ const useStyles = makeStyles((theme) => ({
   },
   forgrid: {
     backgroundColor: "rgba(0, 0, 0, 0.04)",
-    margin: 6,
+    width: 188,
+    height: 56,
+    marginRight: 4,
+  },
+  forgrid1: {
+    backgroundColor: "rgba(0, 0, 0, 0.04)",
+    width: 188,
+    height: 56,
+    marginLeft: 4,
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
@@ -175,6 +200,9 @@ const useStyles = makeStyles((theme) => ({
       borderColor: "#5C0CB8",
     },
   },
+  Switchstyle: {
+    height: "40px",
+  },
   regularButton: {
     padding: "11px",
     marginRight: theme.spacing(1),
@@ -213,8 +241,16 @@ const useStyles = makeStyles((theme) => ({
       '"Segoe UI Symbol"',
     ].join(","),
   },
+  margins: {
+    marginTop: 24,
+  },
   Title: {
     fontSize: "24px",
+    flexGrow: 1,
+  },
+  Title1: {
+    fontSize: "14px",
+    color: "#666666",
     flexGrow: 1,
   },
   closeButton: {
@@ -247,6 +283,9 @@ const useStyles = makeStyles((theme) => ({
   inputmargin: {
     margin: 0,
     height: 40,
+  },
+  remind: {
+    fontSize: 16,
   },
 }));
 
@@ -314,6 +353,13 @@ export default function SubscriptionToolbar({ changeView, changeSort }) {
   const [plan, setPlan] = React.useState("");
   const [price, setPrice] = React.useState("");
   const [temporalname, setName] = React.useState(false);
+  const [state, setState] = React.useState({
+    checkedA: true,
+  });
+
+  const handleChangeSwitch = (event) => {
+    setState({ ...state, [event.target.name]: event.target.checked });
+  };
 
   const [selectedDate, handleDateChange] = React.useState(new Date());
 
@@ -535,23 +581,25 @@ export default function SubscriptionToolbar({ changeView, changeSort }) {
           }}
         >
           <div className={classes.Dialog1}>
-            <DialogContent className={classes.Avatar}>
-              <Typography align="center" className={classes.Title}>
-                <img
-                  className={classes.imageIcon}
-                  src={"/static/avatar/" + temporalname + "[48].svg"}
-                  alt="upcoming"
-                />
-              </Typography>
-              <Typography align="center" className={classes.Title}>
-                {temporalname}
-              </Typography>
-              <Typography align="center" className={classes.Title}>
-                {plan}
-              </Typography>
-              <Typography align="center" className={classes.Title}>
-                {price}
-              </Typography>
+            <DialogContent className={classes.Avatar1}>
+              <div className={classes.margins}>
+                <Typography align="center" className={classes.Title}>
+                  <img
+                    className={classes.imageIcon}
+                    src={"/static/avatar/" + temporalname + "[48].svg"}
+                    alt="upcoming"
+                  />
+                </Typography>
+                <Typography align="center" className={classes.Title}>
+                  {temporalname}
+                </Typography>
+                <Typography align="center" className={classes.Title1}>
+                  {plan}
+                </Typography>
+                <Typography align="center" className={classes.Title1}>
+                  {price}
+                </Typography>
+              </div>
             </DialogContent>
             <div>
               <div className={classes.left}>
@@ -605,7 +653,7 @@ export default function SubscriptionToolbar({ changeView, changeSort }) {
                       </Grid>
                     </Grid>
                   </Grid>
-                  <Grid item className={classes.forgrid}>
+                  <Grid item className={classes.forgrid1}>
                     <Grid container spacing={1} alignItems="center">
                       <Grid item>
                         <UpdateRoundedIcon />
@@ -646,6 +694,30 @@ export default function SubscriptionToolbar({ changeView, changeSort }) {
                 </Grid>
               </div>
             </div>
+            <div className={classes.left1}>
+              <Box display="flex" p={1} padding={0} margin={0}>
+                <Box p={1} flexGrow={1}>
+                  <Typography className={classes.remind}>Remind Me</Typography>
+                </Box>
+                <Box p={1}>
+                  <Switch
+                    className={classes.Switchstyle}
+                    checked={state.checkedA}
+                    onChange={handleChangeSwitch}
+                    name="checkedA"
+                    inputProps={{ "aria-label": "secondary checkbox" }}
+                  />
+                </Box>
+              </Box>
+            </div>
+            <Box display="flex" justifyContent="center">
+              <Box p={1}>
+                <Button className={classes.ListItemSize5} variant="outlined">
+                  Add subscriptions
+                </Button>
+              </Box>
+            </Box>
+
             <IconButton
               aria-label="back"
               className={classes.closeButton1}
