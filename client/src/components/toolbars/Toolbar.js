@@ -92,14 +92,8 @@ const useStyles = makeStyles((theme) => ({
     border: "1px solid #EFEFF4",
     backgroundColor: fade(theme.palette.common.white, 0.15),
     marginRight: 2,
-    height: "100%",
+    height: "40px",
     width: "auto",
-    "&:hover": {
-      borderRadius: 8,
-      // backgroundColor: fade(theme.palette.common.white, 0.25),
-      // border: `1px solid ${theme.palette.primary.main}`,
-      boxShadow: "0 0 0 0.2rem rgba(118, 16, 235, 0.25)",
-    },
   },
   search1: {
     position: "relative",
@@ -153,7 +147,7 @@ const useStyles = makeStyles((theme) => ({
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
-    height: "100%",
+    height: "40px",
     position: "absolute",
     pointerEvents: "none",
     display: "flex",
@@ -163,6 +157,7 @@ const useStyles = makeStyles((theme) => ({
   },
   inputRoot: {
     color: "inherit",
+    height: "100%",
     alignItems: "center",
     justifyItems: "center",
     borderRadius: 8,
@@ -174,8 +169,16 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
     width: "12ch",
+    "&:hover": {
+      borderRadius: 8,
+      // backgroundColor: fade(theme.palette.common.white, 0.25),
+      // border: `1px solid ${theme.palette.primary.main}`,
+      boxShadow: "0 0 0 0.2rem rgba(118, 16, 235, 0.25)",
+    },
     "&:focus": {
       width: "20ch",
+      borderRadius: 8,
+      boxShadow: "0 0 0 0.2rem rgba(118, 16, 235, 0.25)",
     },
   },
   inputInput1: {
@@ -191,7 +194,7 @@ const useStyles = makeStyles((theme) => ({
     height: "40px",
   },
   regularButton: {
-    padding: "11px",
+    padding: "9.5px",
     height: "100%",
     borderRadius: 8,
     margin: theme.spacing(1),
@@ -202,8 +205,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   highlightButton: {
-    padding: "11px",
-    height: "100%",
+    padding: "9.5px",
+    height: "40px",
     borderRadius: 8,
     backgroundColor: theme.palette.primary.light,
     color: "white",
@@ -215,7 +218,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   sortButton: {
-    padding: "11px",
+    padding: "9.5px",
     borderRadius: "0px 8px 8px 0px",
     color: theme.palette.grey.main,
   },
