@@ -310,6 +310,55 @@ const useStylesArrow = makeStyles((theme) => ({
       '"Segoe UI Symbol"',
     ].join(","),
     fontSize: "12px",
+    width: "80px",
+    textAlign: "center",
+  },
+}));
+
+const useStylesArrow2 = makeStyles((theme) => ({
+  arrow: {
+    // color: theme.palette.common.black,
+  },
+  tooltip: {
+    // backgroundColor: theme.palette.common.black,
+    top: "-16px",
+    fontFamily: [
+      "-apple-system",
+      "BlinkMacSystemFont",
+      '"Segoe UI"',
+      "Roboto",
+      '"Helvetica Neue"',
+      "Arial",
+      "sans-serif",
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(","),
+    fontSize: "12px",
+    width: "90px",
+    textAlign: "center",
+  },
+}));
+const useStylesArrow3 = makeStyles((theme) => ({
+  arrow: {
+    // color: theme.palette.common.black,
+  },
+  tooltip: {
+    // backgroundColor: theme.palette.common.black,
+    top: "-16px",
+    fontFamily: [
+      "-apple-system",
+      "BlinkMacSystemFont",
+      '"Segoe UI"',
+      "Roboto",
+      '"Helvetica Neue"',
+      "Arial",
+      "sans-serif",
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(","),
+    fontSize: "12px",
   },
 }));
 
@@ -341,9 +390,20 @@ function ArrowTooltip(props) {
   return <Tooltip arrow classes={classes} {...props} />;
 }
 
+function ArrowTooltip2(props) {
+  const classes = useStylesArrow2();
+
+  return <Tooltip arrow classes={classes} {...props} />;
+}
+function ArrowTooltip3(props) {
+  const classes = useStylesArrow3();
+
+  return <Tooltip arrow classes={classes} {...props} />;
+}
+
 export default function SubscriptionToolbar({ changeView, changeSort }) {
   const classes = useStyles();
-  const [listView, setListView] = React.useState(true);
+  const [listView, setListView] = React.useState(1);
   const [setValue] = React.useState("");
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
@@ -415,6 +475,7 @@ export default function SubscriptionToolbar({ changeView, changeSort }) {
           title={listView ? "List View" : "Card View"}
           TransitionComponent={Fade}
           enterDelay={500}
+          enterNextDelay={500}
         >
           <IconButton
             edge="start"
@@ -426,9 +487,9 @@ export default function SubscriptionToolbar({ changeView, changeSort }) {
             }}
           >
             {listView ? (
-              <FormatListBulletedRoundedIcon fontSize="small" />
+              <img src="static/icons/symbols/ListView.svg"></img>
             ) : (
-              <ViewModuleRoundedIcon fontSize="small" />
+              <img src="static/icons/symbols/GridView.svg"></img>
             )}
           </IconButton>
         </ArrowTooltip>
@@ -453,7 +514,7 @@ export default function SubscriptionToolbar({ changeView, changeSort }) {
             </Select>
           </FormControl>
           <Divider orientation="vertical" flexItem />
-          <ArrowTooltip
+          <ArrowTooltip2
             title={sort ? "Ascending" : "Descending"}
             TransitionComponent={Fade}
             margin={0}
@@ -473,7 +534,7 @@ export default function SubscriptionToolbar({ changeView, changeSort }) {
                 <ArrowDownwardRoundedIcon fontSize="small" />
               )}
             </IconButton>
-          </ArrowTooltip>
+          </ArrowTooltip2>
         </Grid>
         <Box className={classes.marginStyle} noWrap></Box>
         <div className={classes.search}>
@@ -489,7 +550,7 @@ export default function SubscriptionToolbar({ changeView, changeSort }) {
             inputProps={{ "aria-label": "search" }}
           />
         </div>
-        <ArrowTooltip
+        <ArrowTooltip3
           title="Add Subscription"
           TransitionComponent={Fade}
           enterDelay={500}
@@ -505,7 +566,7 @@ export default function SubscriptionToolbar({ changeView, changeSort }) {
               // alignSelf="flex-end"
             />
           </IconButton>
-        </ArrowTooltip>
+        </ArrowTooltip3>
         <Dialog fullScreen={fullScreen} open={open} onClose={handleClose}>
           <div className={classes.Dialog}>
             <DialogContent className={classes.Avatar}>
