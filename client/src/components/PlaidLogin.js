@@ -53,6 +53,7 @@ class PlaidLogin extends Component {
       .then((response) =>
         axios.get("http://localhost:5000/transactions").then((res) => {
           this.setState({ transactions: res.data });
+          console.log(this.state.transactions);
         })
       );
   }

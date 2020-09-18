@@ -155,6 +155,13 @@ app.get("/transactions", async (req, res) => {
       console.log(transactionsResponse);
     }
   );
+
+  /* client.getCategories(function (err, response) {
+    // Handle err
+    var categories = response.categories;
+	console.log(categories);
+	
+  }); */
 });
 
 // LOOKUP LINK TOKEN --> from Plaid documentation --> why is it better??

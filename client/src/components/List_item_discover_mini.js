@@ -26,7 +26,7 @@ const TextTypographyTitle = withStyles({
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.background.grey,
   },
   ListItemTitle: {
     width: "146px",
@@ -35,9 +35,8 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 24,
   },
   ListItem: {
-    width: "176px",
+    width: "230px",
     height: "20px",
-    marginRight: "80px",
   },
   ListItemSize: {
     minWidth: "35px",
@@ -51,6 +50,9 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "14px",
       color: "black",
     },
+  },
+  imageIconTick: {
+    display: "none",
   },
 }));
 
@@ -89,7 +91,7 @@ export default function SimpleListMenu(props) {
 
   const tickImage = (
     <img
-      className={classes.imageIcon}
+      className={classes.imageIconTick}
       src="/static/icons/drawer/drawer_tick.svg"
       alt="tick"
     />
@@ -108,6 +110,7 @@ export default function SimpleListMenu(props) {
         />
       </ListItemIcon>
       <ListItemText className={classes.ListItemSize2} primary="My Wallet" />
+      {tickImage}
     </ListItem>,
 
     <ListItem
@@ -125,6 +128,7 @@ export default function SimpleListMenu(props) {
         className={classes.ListItemSize2}
         primary="All Subscriptions"
       />
+      {tickImage}
     </ListItem>,
 
     <ListItem
@@ -142,6 +146,7 @@ export default function SimpleListMenu(props) {
         className={classes.ListItemSize2}
         primary="Shared Subscriptions"
       />
+      {tickImage}
     </ListItem>,
 
     <ListItem
@@ -159,6 +164,7 @@ export default function SimpleListMenu(props) {
         className={classes.ListItemSize2}
         primary="Upcoming Events"
       />
+      {tickImage}
     </ListItem>,
 
     <ListItem
@@ -173,19 +179,13 @@ export default function SimpleListMenu(props) {
         />
       </ListItemIcon>
       <ListItemText className={classes.ListItemSize2} primary="Insight" />
+      {tickImage}
     </ListItem>,
   ];
 
   const handleMenuItemClick = (event, index) => {
     // Handle Dynamic Tick Image Render
-    /* console.log("item component", options[index]);
-    for (let i = 0; i < options.length; i++) {
-      if (options[i].props.children.length > 2) {
-        options[i].props.children.pop();
-      }
-    }
-
-    options[index].props.children.push(tickImage); */
+    //event.currentTarget.children.item(0).children.item(2).style.display ="inline";
 
     setSelectedIndex(index);
     setAnchorEl(null);

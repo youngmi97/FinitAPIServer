@@ -54,6 +54,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     bottom: 0,
+    backgroundColor: "#fafafa",
   },
   Dialog: {
     minWidth: "375px",
@@ -278,12 +279,14 @@ const BootstrapInput = withStyles((theme) => ({
     height: "40px",
     width: "auto",
     borderRadius: 8,
+    backgroundColor: "#fafafa",
   },
   input: {
     borderRadius: 8,
     position: "relative",
     backgroundColor: theme.palette.common.white,
     fontSize: 16,
+    backgroundColor: "#fafafa",
     // color: "#666666",
     padding: "10.5px 26px 10.5px 12px",
     transition: theme.transitions.create(["border-color", "box-shadow"]),
@@ -365,6 +368,7 @@ export default function SubscriptionToolbar({ changeView, changeSort }) {
     <div className={classes.root}>
       <Toolbar variant="dense">
         <ArrowTooltip
+          style={{ backgroundColor: "#ffffff" }}
           title={listView ? "List View" : "Card View"}
           TransitionComponent={Fade}
           enterDelay={500}

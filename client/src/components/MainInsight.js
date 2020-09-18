@@ -22,7 +22,7 @@ const TextTypography1 = withStyles({
   root: {
     fontSize: 24,
     color: "#000000",
-    marginLeft: 10,
+    marginLeft: 16,
   },
 })(Typography);
 
@@ -67,6 +67,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down(1024)]: {
       marginLeft: 0,
     },
+    backgroundColor: "#fafafa",
   },
   drawer: {
     width: drawerWidth,
@@ -201,6 +202,7 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     marginRight: 0,
+    backgroundColor: "#fafafa",
   },
   contentShift: {
     transition: theme.transitions.create("margin", {
@@ -208,6 +210,18 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
     marginRight: 305,
+  },
+  divider: {
+    width: "1250px",
+    height: "1px",
+    backgroundColor: "#e5e5e5",
+    marginLeft: "272px",
+  },
+
+  dividerReduced: {
+    width: "100%",
+    height: "1px",
+    backgroundColor: "#e5e5e5",
   },
 }));
 
@@ -233,6 +247,12 @@ export default function Main(props) {
   const [width] = useWindowSize();
   const isReduced = width <= 1023;
 
+  const underlineBar = isReduced ? (
+    <div className={classes.dividerReduced}></div>
+  ) : (
+    <div className={classes.divider}></div>
+  );
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -253,12 +273,14 @@ export default function Main(props) {
         display="flex"
         bgcolor="white"
         borderColor="grey.500"
-        boxShadow="0px 0.5px 0px rgba(0, 0, 0, 0.3)"
         className={classes.toolBar}
         alignItems="center"
       >
         {menuTitle}
       </Box>
+
+      {underlineBar}
+
       <Drawer
         className={classes.drawer}
         variant="permanent"
