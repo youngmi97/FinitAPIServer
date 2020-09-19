@@ -1,6 +1,7 @@
 // import Button from "@material-ui/core/Button";
 
 import IconButton from "@material-ui/core/IconButton";
+import Switch from "@material-ui/core/Switch";
 import InputLabel from "@material-ui/core/InputLabel";
 import DateFnsUtils from "@date-io/date-fns"; // choose your lib
 import EventRoundedIcon from "@material-ui/icons/EventRounded";
@@ -8,6 +9,7 @@ import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import TextField from "@material-ui/core/TextField";
 import AttachMoneyRoundedIcon from "@material-ui/icons/AttachMoneyRounded";
 import UpdateRoundedIcon from "@material-ui/icons/UpdateRounded";
+import Button from "@material-ui/core/Button";
 import {
   fade,
   makeStyles,
@@ -23,7 +25,6 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import CloseIcon from "@material-ui/icons/Close";
 import DialogContent from "@material-ui/core/DialogContent";
 import Tooltip from "@material-ui/core/Tooltip";
 import Fade from "@material-ui/core/Fade";
@@ -56,6 +57,17 @@ const useStyles = makeStyles((theme) => ({
     bottom: 0,
     backgroundColor: "#fafafa",
   },
+  ListItemSize5: {
+    color: "white",
+    borderColor: "white",
+    backgroundColor: "#7610EB",
+    fontSize: "14px",
+    fontWeight: 400,
+    alignItems: "center",
+    borderRadius: 5,
+    textTransform: "none",
+    height: "40px",
+  },
   Dialog: {
     minWidth: "375px",
     height: "600px",
@@ -67,6 +79,10 @@ const useStyles = makeStyles((theme) => ({
   Avatar: {
     marginTop: "24px",
   },
+  Avatar1: {
+    backgroundColor: "rgba(0, 0, 0, 0.04)",
+    height: 183,
+  },
   marginStyle: {
     flexGrow: 1,
     display: "block",
@@ -77,14 +93,8 @@ const useStyles = makeStyles((theme) => ({
     border: "1px solid #EFEFF4",
     backgroundColor: fade(theme.palette.common.white, 0.15),
     marginRight: 2,
-    height: "100%",
+    height: "40px",
     width: "auto",
-    "&:hover": {
-      borderRadius: 8,
-      // backgroundColor: fade(theme.palette.common.white, 0.25),
-      // border: `1px solid ${theme.palette.primary.main}`,
-      boxShadow: "0 0 0 0.2rem rgba(118, 16, 235, 0.25)",
-    },
   },
   search1: {
     position: "relative",
@@ -126,11 +136,19 @@ const useStyles = makeStyles((theme) => ({
   },
   forgrid: {
     backgroundColor: "rgba(0, 0, 0, 0.04)",
-    margin: 6,
+    width: 188,
+    height: 56,
+    marginRight: 4,
+  },
+  forgrid1: {
+    backgroundColor: "rgba(0, 0, 0, 0.04)",
+    width: 188,
+    height: 56,
+    marginLeft: 4,
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
-    height: "100%",
+    height: "40px",
     position: "absolute",
     pointerEvents: "none",
     display: "flex",
@@ -140,6 +158,7 @@ const useStyles = makeStyles((theme) => ({
   },
   inputRoot: {
     color: "inherit",
+    height: "100%",
     alignItems: "center",
     justifyItems: "center",
     borderRadius: 8,
@@ -151,8 +170,16 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
     width: "12ch",
+    "&:hover": {
+      borderRadius: 8,
+      // backgroundColor: fade(theme.palette.common.white, 0.25),
+      // border: `1px solid ${theme.palette.primary.main}`,
+      boxShadow: "0 0 0 0.2rem rgba(118, 16, 235, 0.25)",
+    },
     "&:focus": {
       width: "20ch",
+      borderRadius: 8,
+      boxShadow: "0 0 0 0.2rem rgba(118, 16, 235, 0.25)",
     },
   },
   inputInput1: {
@@ -163,9 +190,24 @@ const useStyles = makeStyles((theme) => ({
     transition: theme.transitions.create("width"),
     width: "20ch",
   },
-  highlightButton: {
-    padding: "11px",
+
+  Switchstyle: {
+    height: "40px",
+  },
+  regularButton: {
+    padding: "9.5px",
     height: "100%",
+    borderRadius: 8,
+    margin: theme.spacing(1),
+    // border: "1px solid #EFEFF4",
+    color: theme.palette.grey.main,
+    "&:focus": {
+      boxShadow: "0 0 0 0.2rem rgba(239, 239, 244, 0.25)",
+    },
+  },
+  highlightButton: {
+    padding: "9.5px",
+    height: "40px",
     borderRadius: 8,
     backgroundColor: theme.palette.primary.light,
     color: "white",
@@ -176,18 +218,8 @@ const useStyles = makeStyles((theme) => ({
       borderColor: "#5C0CB8",
     },
   },
-  regularButton: {
-    padding: "11px",
-    marginRight: theme.spacing(1),
-    borderRadius: 8,
-    // border: "1px solid #EFEFF4",
-    color: theme.palette.grey.main,
-    "&:focus": {
-      boxShadow: "0 0 0 0.2rem rgba(239, 239, 244, 0.25)",
-    },
-  },
   sortButton: {
-    padding: "11px",
+    padding: "9.5px",
     borderRadius: "0px 8px 8px 0px",
     color: theme.palette.grey.main,
   },
@@ -214,8 +246,16 @@ const useStyles = makeStyles((theme) => ({
       '"Segoe UI Symbol"',
     ].join(","),
   },
+  margins: {
+    marginTop: 24,
+  },
   Title: {
     fontSize: "24px",
+    flexGrow: 1,
+  },
+  Title1: {
+    fontSize: "14px",
+    color: "#666666",
     flexGrow: 1,
   },
   closeButton: {
@@ -249,9 +289,61 @@ const useStyles = makeStyles((theme) => ({
     margin: 0,
     height: 40,
   },
+  remind: {
+    fontSize: 16,
+  },
 }));
 
 const useStylesArrow = makeStyles((theme) => ({
+  arrow: {
+    // color: theme.palette.common.black,
+  },
+  tooltip: {
+    // backgroundColor: theme.palette.common.black,
+    top: "-16px",
+    fontFamily: [
+      "-apple-system",
+      "BlinkMacSystemFont",
+      '"Segoe UI"',
+      "Roboto",
+      '"Helvetica Neue"',
+      "Arial",
+      "sans-serif",
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(","),
+    fontSize: "12px",
+    width: "80px",
+    textAlign: "center",
+  },
+}));
+
+const useStylesArrow2 = makeStyles((theme) => ({
+  arrow: {
+    // color: theme.palette.common.black,
+  },
+  tooltip: {
+    // backgroundColor: theme.palette.common.black,
+    top: "-16px",
+    fontFamily: [
+      "-apple-system",
+      "BlinkMacSystemFont",
+      '"Segoe UI"',
+      "Roboto",
+      '"Helvetica Neue"',
+      "Arial",
+      "sans-serif",
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(","),
+    fontSize: "12px",
+    width: "90px",
+    textAlign: "center",
+  },
+}));
+const useStylesArrow3 = makeStyles((theme) => ({
   arrow: {
     // color: theme.palette.common.black,
   },
@@ -304,9 +396,20 @@ function ArrowTooltip(props) {
   return <Tooltip arrow classes={classes} {...props} />;
 }
 
+function ArrowTooltip2(props) {
+  const classes = useStylesArrow2();
+
+  return <Tooltip arrow classes={classes} {...props} />;
+}
+function ArrowTooltip3(props) {
+  const classes = useStylesArrow3();
+
+  return <Tooltip arrow classes={classes} {...props} />;
+}
+
 export default function SubscriptionToolbar({ changeView, changeSort }) {
   const classes = useStyles();
-  const [listView, setListView] = React.useState(true);
+  const [listView, setListView] = React.useState(1);
   const [setValue] = React.useState("");
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
@@ -317,6 +420,13 @@ export default function SubscriptionToolbar({ changeView, changeSort }) {
   const [plan, setPlan] = React.useState("");
   const [price, setPrice] = React.useState("");
   const [temporalname, setName] = React.useState(false);
+  const [state, setState] = React.useState({
+    checkedA: true,
+  });
+
+  const handleChangeSwitch = (event) => {
+    setState({ ...state, [event.target.name]: event.target.checked });
+  };
 
   const [selectedDate, handleDateChange] = React.useState(new Date());
 
@@ -372,6 +482,7 @@ export default function SubscriptionToolbar({ changeView, changeSort }) {
           title={listView ? "List View" : "Card View"}
           TransitionComponent={Fade}
           enterDelay={500}
+          enterNextDelay={500}
         >
           <IconButton
             edge="start"
@@ -383,9 +494,9 @@ export default function SubscriptionToolbar({ changeView, changeSort }) {
             }}
           >
             {listView ? (
-              <FormatListBulletedRoundedIcon fontSize="small" />
+              <img src="static/icons/symbols/ListView.svg"></img>
             ) : (
-              <ViewModuleRoundedIcon fontSize="small" />
+              <img src="static/icons/symbols/GridView.svg"></img>
             )}
           </IconButton>
         </ArrowTooltip>
@@ -410,7 +521,7 @@ export default function SubscriptionToolbar({ changeView, changeSort }) {
             </Select>
           </FormControl>
           <Divider orientation="vertical" flexItem />
-          <ArrowTooltip
+          <ArrowTooltip2
             title={sort ? "Ascending" : "Descending"}
             TransitionComponent={Fade}
             margin={0}
@@ -430,7 +541,7 @@ export default function SubscriptionToolbar({ changeView, changeSort }) {
                 <ArrowDownwardRoundedIcon fontSize="small" />
               )}
             </IconButton>
-          </ArrowTooltip>
+          </ArrowTooltip2>
         </Grid>
         <Box className={classes.marginStyle} noWrap></Box>
         <div className={classes.search}>
@@ -446,7 +557,7 @@ export default function SubscriptionToolbar({ changeView, changeSort }) {
             inputProps={{ "aria-label": "search" }}
           />
         </div>
-        <ArrowTooltip
+        <ArrowTooltip3
           title="Add Subscription"
           TransitionComponent={Fade}
           enterDelay={500}
@@ -462,7 +573,7 @@ export default function SubscriptionToolbar({ changeView, changeSort }) {
               // alignSelf="flex-end"
             />
           </IconButton>
-        </ArrowTooltip>
+        </ArrowTooltip3>
         <Dialog fullScreen={fullScreen} open={open} onClose={handleClose}>
           <div className={classes.Dialog}>
             <DialogContent className={classes.Avatar}>
@@ -539,23 +650,25 @@ export default function SubscriptionToolbar({ changeView, changeSort }) {
           }}
         >
           <div className={classes.Dialog1}>
-            <DialogContent className={classes.Avatar}>
-              <Typography align="center" className={classes.Title}>
-                <img
-                  className={classes.imageIcon}
-                  src={"/static/avatar/" + temporalname + "[48].svg"}
-                  alt="upcoming"
-                />
-              </Typography>
-              <Typography align="center" className={classes.Title}>
-                {temporalname}
-              </Typography>
-              <Typography align="center" className={classes.Title}>
-                {plan}
-              </Typography>
-              <Typography align="center" className={classes.Title}>
-                {price}
-              </Typography>
+            <DialogContent className={classes.Avatar1}>
+              <div className={classes.margins}>
+                <Typography align="center" className={classes.Title}>
+                  <img
+                    className={classes.imageIcon}
+                    src={"/static/avatar/" + temporalname + "[48].svg"}
+                    alt="upcoming"
+                  />
+                </Typography>
+                <Typography align="center" className={classes.Title}>
+                  {temporalname}
+                </Typography>
+                <Typography align="center" className={classes.Title1}>
+                  {plan}
+                </Typography>
+                <Typography align="center" className={classes.Title1}>
+                  {price}
+                </Typography>
+              </div>
             </DialogContent>
             <div>
               <div className={classes.left}>
@@ -609,7 +722,7 @@ export default function SubscriptionToolbar({ changeView, changeSort }) {
                       </Grid>
                     </Grid>
                   </Grid>
-                  <Grid item className={classes.forgrid}>
+                  <Grid item className={classes.forgrid1}>
                     <Grid container spacing={1} alignItems="center">
                       <Grid item>
                         <UpdateRoundedIcon />
@@ -650,6 +763,30 @@ export default function SubscriptionToolbar({ changeView, changeSort }) {
                 </Grid>
               </div>
             </div>
+            <div className={classes.left1}>
+              <Box display="flex" p={1} padding={0} margin={0}>
+                <Box p={1} flexGrow={1}>
+                  <Typography className={classes.remind}>Remind Me</Typography>
+                </Box>
+                <Box p={1}>
+                  <Switch
+                    className={classes.Switchstyle}
+                    checked={state.checkedA}
+                    onChange={handleChangeSwitch}
+                    name="checkedA"
+                    inputProps={{ "aria-label": "secondary checkbox" }}
+                  />
+                </Box>
+              </Box>
+            </div>
+            <Box display="flex" justifyContent="center">
+              <Box p={1}>
+                <Button className={classes.ListItemSize5} variant="outlined">
+                  Add subscriptions
+                </Button>
+              </Box>
+            </Box>
+
             <IconButton
               aria-label="back"
               className={classes.closeButton1}
