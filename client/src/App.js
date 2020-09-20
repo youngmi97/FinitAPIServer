@@ -15,6 +15,8 @@ import Home_Local from "./pages/Home_Local";
 import Login_Local from "./pages/Login_Local";
 import Register_Local from "./pages/Register_Local";
 import { Sticky } from "semantic-ui-react";
+import AuthenticatedRoute from "./routes/AuthenticatedRoute";
+import UnauthenticatedRoute from "./routes/UnauthenticatedRoute";
 import "./App.css";
 
 const theme = createMuiTheme({
@@ -203,14 +205,35 @@ function App() {
             }}
           >
             <ThemeProvider theme={theme}>
-              <Route exact path="/subscriptions" component={Main} />
-              <Route exact path="/shared" component={MainShared} />
-              <Route exact path="/wallet" component={MainWallet} />
-              <Route exact path="/upcoming" component={Mainupcoming} />
-              <Route exact path="/insight" component={MainInsight} />
-              <Route exact path="/" component={Home_Local} />
-              <Route exact path="/login" component={Login_Local} />
-              <Route exact path="/register" component={Register_Local} />
+              {/* <Route exact path="/subscriptions" component={Main} /> */}
+              <AuthenticatedRoute
+                exact
+                path="/subscriptions"
+                component={Main}
+              />
+              <AuthenticatedRoute exact path="/shared" component={MainShared} />
+              <AuthenticatedRoute exact path="/wallet" component={MainWallet} />
+              <AuthenticatedRoute
+                exact
+                path="/upcoming"
+                component={Mainupcoming}
+              />
+              <AuthenticatedRoute
+                exact
+                path="/insight"
+                component={MainInsight}
+              />
+              <UnauthenticatedRoute exact path="/" component={Home_Local} />
+              <UnauthenticatedRoute
+                exact
+                path="/login"
+                component={Login_Local}
+              />
+              <UnauthenticatedRoute
+                exact
+                path="/register"
+                component={Register_Local}
+              />
             </ThemeProvider>
           </div>
         </Router>
