@@ -34,7 +34,12 @@ const app = express();
 app.disable("x-powered-by");
 
 //Allow cross-origin
-app.use(cors());
+const corsOptions = {
+  origin: "http://localhost:3000",
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 const {
   NODE_ENV = "development",

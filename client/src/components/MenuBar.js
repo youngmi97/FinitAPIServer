@@ -11,7 +11,6 @@ function MenuBar() {
   // configure path name parsing logic
   //const path = pathname === "/" ? "home" : pathname.substr(1);
   //const [activeItem, setActiveItem] = useState(path);
-
   //const handleItemClick = (e, { name }) => setActiveItem(name);
 
   //identify login state
@@ -20,8 +19,8 @@ function MenuBar() {
       <Menu.Item
         className={"logo"}
         name="Subscriptions"
-        //active={activeItem === "home"}
-        //onClick={handleItemClick}
+        // active={activeItem === "home"}
+        // onClick={handleItemClick}
         as={Link}
         to="/subscriptions"
       >
