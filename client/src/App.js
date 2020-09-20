@@ -15,6 +15,7 @@ import Home_Local from "./pages/Home_Local";
 import Login_Local from "./pages/Login_Local";
 import Register_Local from "./pages/Register_Local";
 import { Sticky } from "semantic-ui-react";
+import "./App.css";
 
 const theme = createMuiTheme({
   palette: {
@@ -44,6 +45,7 @@ const theme = createMuiTheme({
     two: "#F9F9F9",
     three: "#F7F7F7",
     four: "#E9E9EA",
+    grey: "#E5E5E5",
   },
 
   breakpoints: {
@@ -197,6 +199,7 @@ function App() {
               position: "relative",
               zIndex: 50,
               top: "60px",
+              backgroundColor: "#fafafa",
             }}
           >
             <ThemeProvider theme={theme}>
