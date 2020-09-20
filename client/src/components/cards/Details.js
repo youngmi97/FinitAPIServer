@@ -89,7 +89,11 @@ export default function ResponsiveDialog(props) {
   return (
     <div>
       <ButtonBase onClick={handleClickOpen}>
-        <HoveringCard name={props.name} />
+        <HoveringCard
+          name={props.name}
+          price={props.price}
+          plan={props.planName}
+        />
       </ButtonBase>
       <Dialog
         fullScreen={fullScreen}

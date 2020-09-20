@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 500,
   },
   list: {
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: "white",
     padding: 12,
   },
   small: {

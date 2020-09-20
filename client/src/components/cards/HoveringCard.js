@@ -87,9 +87,9 @@ class HoveringCard extends Component {
         <Background {...this.props}>
           <DisplayOver>
             <Hover>
-              <SubTitle>Netflix</SubTitle>
+              <SubTitle>{this.props.name}</SubTitle>
               <Paragraph>
-                USD $12.00/mo
+                {this.props.price}
                 <br />
                 Next payment is in 3 days
               </Paragraph>

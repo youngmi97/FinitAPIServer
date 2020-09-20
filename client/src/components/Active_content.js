@@ -45,7 +45,12 @@ export default function Active_content(props) {
             {props.cards.map((card, index) => {
               return (
                 <Grid item xs className={classes.root}>
-                  <Details name={card.name} key={index} />
+                  <Details
+                    name={card.name}
+                    price={card.price}
+                    plan={card.planName}
+                    key={index}
+                  />
                 </Grid>
               );
             })}

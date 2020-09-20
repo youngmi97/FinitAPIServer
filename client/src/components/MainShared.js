@@ -121,6 +121,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down(1024)]: {
       width: 0,
     },
+    backgroundColor: "white",
   },
   mainbreak: {
     marginLeft: 256,

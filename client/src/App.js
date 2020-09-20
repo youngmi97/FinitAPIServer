@@ -34,6 +34,10 @@ const theme = createMuiTheme({
       main: "#666666",
       grey4: "#EFEFF4",
     },
+    background: {
+      default: "#000000",
+      paper: "#FAFAFA",
+    },
   },
   background: {
     default: "#FAFAFA",
@@ -167,7 +171,12 @@ const theme = createMuiTheme({
 function App() {
   return (
     <AuthProvider>
-      <div>
+      <div
+        style={{
+          backgroundColor: "#FAFAFA",
+          height: "100vh",
+        }}
+      >
         <Router>
           <div
             style={{
@@ -183,7 +192,13 @@ function App() {
               <MenuBar />
             </Sticky>
           </div>
-          <div style={{ position: "relative", zIndex: 50, top: "60px" }}>
+          <div
+            style={{
+              position: "relative",
+              zIndex: 50,
+              top: "60px",
+            }}
+          >
             <ThemeProvider theme={theme}>
               <Route exact path="/subscriptions" component={Main} />
               <Route exact path="/shared" component={MainShared} />

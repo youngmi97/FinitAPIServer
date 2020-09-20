@@ -4,8 +4,6 @@ import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import { fade, makeStyles, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import clsx from "clsx";
 import React, { useLayoutEffect, useState } from "react";
 
@@ -123,6 +121,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down(1024)]: {
       width: 0,
     },
+    backgroundColor: "white",
   },
   mainbreak: {
     marginLeft: 256,
@@ -232,6 +231,7 @@ export default function Main(props) {
   const classes = useStyles();
   const [width] = useWindowSize();
   const isReduced = width <= 1023;
+  const [sortvariable, setsortvariable] = React.useState("Alphabetical");
 
   const [open, setOpen] = React.useState(false);
   const [state, setState] = React.useState(1);
@@ -256,27 +256,93 @@ export default function Main(props) {
   );
 
   const cards = [
-    { name: "Netflix", order: 3, planName: "Standard", price: "USD 12.00/mo" },
-    { name: "Spotify", order: 1, planName: "Basic", price: "USD $8.00/mo" },
-    { name: "Netflix", order: 5, planName: "Premium", price: "USD $9.00/mo" },
-    { name: "Notability", order: 2, planName: "Basic", price: "USD $8.00/mo" },
+    {
+      name: "Netflix",
+      order: 3,
+      planName: "Standard",
+      price: "USD 12.00/mo",
+      realPrice: 12,
+    },
+    {
+      name: "Spotify",
+      order: 1,
+      planName: "Basic",
+      price: "USD $8.00/mo",
+      realPrice: 8,
+    },
+    {
+      name: "Netflix",
+      order: 5,
+      planName: "Premium",
+      price: "USD $9.00/mo",
+      realPrice: 9,
+    },
+    {
+      name: "Notability",
+      order: 2,
+      planName: "Basic",
+      price: "USD $8.00/mo",
+      realPrice: 8,
+    },
     {
       name: "GoogleDrive",
       order: 7,
       planName: "Standard",
       price: "USD $12.00/mo",
+      realPrice: 12,
     },
-    { name: "Spotify", order: 4, planName: "Standard", price: "USD $10.00/mo" },
-    { name: "Youtube", order: 6, planName: "Premium", price: "USD $11.00/mo" },
-    { name: "Youtube", order: 8, planName: "Standard", price: "USD $12.00/mo" },
+    {
+      name: "Spotify",
+      order: 4,
+      planName: "Standard",
+      price: "USD $10.00/mo",
+      realPrice: 10,
+    },
+    {
+      name: "Youtube",
+      order: 6,
+      planName: "Premium",
+      price: "USD $11.00/mo",
+      realPrice: 11,
+    },
+    {
+      name: "Youtube",
+      order: 8,
+      planName: "Standard",
+      price: "USD $12.00/mo",
+      realPrice: 12,
+    },
   ];
 
-  cards.sort((a, b) => (a.order - b.order) * state);
+  switch (sortvariable) {
+    case "Alphabetical":
+      cards.sort(function (a, b) {
+        if (a.name === b.name) {
+          return (a.realPrice - b.realPrice) * state;
+        }
+        return a.name > b.name ? 1 * state : -1 * state;
+      });
+      break;
+    case "Price":
+      cards.sort(function (a, b) {
+        if (a.realPrice === b.realPrice) {
+          return a.name > b.name ? 1 * state : -1 * state;
+        }
+        return a.realPrice > b.realPrice ? 1 * state : -1 * state;
+      });
+      break;
+    case "Date Added":
+      cards.sort((a, b) => (a.order - b.order) * state);
+      break;
+    default:
+      break;
+  }
+
   return (
     <div>
       <Box
         display="flex"
-        bgcolor="white"
+        bgcolor="background.paper"
         borderColor="grey.500"
         boxShadow="0px 0.5px 0px rgba(0, 0, 0, 0.3)"
         className={classes.toolBar}
@@ -294,7 +360,7 @@ export default function Main(props) {
       >
         <LIST_ITEM_DISCOVER />
       </Drawer>
-      <main
+      <div
         className={clsx(classes.content, {
           [classes.contentShift]: open,
         })}
@@ -305,6 +371,7 @@ export default function Main(props) {
               <SubscriptionToolbar
                 changeView={() => setView(!view)}
                 changeSort={() => handleState()}
+                changeKind={(kind) => setsortvariable(kind)}
               />
             </div>
             <main className={classes.content}>
@@ -316,7 +383,7 @@ export default function Main(props) {
             </main>
           </Grid>
         </Box>
-      </main>
+      </div>
       {/* <Drawer
         className={classes.drawer2}
         variant="persistent"

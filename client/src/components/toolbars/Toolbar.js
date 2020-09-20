@@ -90,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     borderRadius: 8,
     border: "1px solid #EFEFF4",
-    backgroundColor: fade(theme.palette.common.white, 0.15),
+    backgroundColor: "white",
     marginRight: 2,
     height: "40px",
     width: "auto",
@@ -165,6 +165,7 @@ const useStyles = makeStyles((theme) => ({
   inputInput: {
     padding: "10.5px 26px 10.5px 12px",
     fontSize: 16,
+
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
@@ -200,6 +201,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     // border: "1px solid #EFEFF4",
     color: theme.palette.grey.main,
+    backgroundColor: "white",
     "&:focus": {
       boxShadow: "0 0 0 0.2rem rgba(239, 239, 244, 0.25)",
     },
@@ -219,8 +221,10 @@ const useStyles = makeStyles((theme) => ({
   },
   sortButton: {
     padding: "9.5px",
-    borderRadius: "0px 8px 8px 0px",
+    borderRadius: "8px 8px 8px 8px",
+    margin: theme.spacing(1),
     color: theme.palette.grey.main,
+    backgroundColor: "white",
   },
   formControl: {
     minWidth: 120,
@@ -404,10 +408,14 @@ function ArrowTooltip3(props) {
   return <Tooltip arrow classes={classes} {...props} />;
 }
 
-export default function SubscriptionToolbar({ changeView, changeSort }) {
+export default function SubscriptionToolbar({
+  changeView,
+  changeSort,
+  changeKind,
+}) {
   const classes = useStyles();
   const [listView, setListView] = React.useState(1);
-  const [setValue] = React.useState("");
+  const [Value, setValue] = React.useState("Alphabetical");
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const [secondary] = React.useState(false);
@@ -431,6 +439,7 @@ export default function SubscriptionToolbar({ changeView, changeSort }) {
 
   const handleChange = (event) => {
     setValue(event.target.value);
+    changeKind(event.target.value);
   };
   const handleClickOpen = () => {
     setOpen(true);
@@ -501,17 +510,20 @@ export default function SubscriptionToolbar({ changeView, changeSort }) {
             <Select
               labelId="customized-select-label"
               id="customized-select"
-              defaultValue={0}
+              defaultValue={"Alphabetical"}
               onChange={handleChange}
               input={<BootstrapInput />}
             >
-              <MenuItem value={0} className={classes.menuItemStyle}>
+              <MenuItem
+                value={"Alphabetical"}
+                className={classes.menuItemStyle}
+              >
                 Alphabetical
               </MenuItem>
-              <MenuItem value={10} className={classes.menuItemStyle}>
+              <MenuItem value={"Price"} className={classes.menuItemStyle}>
                 Price
               </MenuItem>
-              <MenuItem value={20} className={classes.menuItemStyle}>
+              <MenuItem value={"Date Added"} className={classes.menuItemStyle}>
                 Date Added
               </MenuItem>
             </Select>
