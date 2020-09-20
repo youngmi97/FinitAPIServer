@@ -2,7 +2,7 @@
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
-import { Typography } from "@material-ui/core";
+import { Typography, Grid } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import AddSubscription from "./AddSubscription";
 import Modal from "@material-ui/core/Modal";
@@ -11,6 +11,14 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    margin: 16,
+    minWidth: 217,
+    maxWidth: 217,
+    minHeight: 217,
+    maxHeight: 217,
+    backgroundColor: "rgba(255, 255, 255, 0.6 )",
+  },
   ListItemSize5: {
     color: "white",
     borderColor: "white",
@@ -24,6 +32,10 @@ const useStyles = makeStyles((theme) => ({
   },
   ListItemSize2: {
     fontSize: "14px",
+  },
+  nomarginButton: {
+    margin: 0,
+    padding: 0,
   },
   modal: {
     display: "flex",
@@ -57,12 +69,17 @@ export default function Active_content() {
         alignItems="center"
         flexDirection="column"
       >
-        <Box p={1}>
-          <img src={"static/images/sitting 1.svg"} alt={"text"}></img>
-        </Box>
+        <Grid container className={classes.mainbreak} justify="flex-start">
+          <Grid item xs className={classes.root}>
+            <Button className={classes.nomarginButton}>
+              <img src="static/images/AddIcon.svg"></img>
+            </Button>
+          </Grid>
+        </Grid>
         <Box p={1}>
           <Typography className={classes.ListItemSize2}>
-            No subscriptions to show
+            Click the '+' button or link account to begin managing your
+            subscriptions
           </Typography>
         </Box>
         <Box p={1}>
@@ -71,7 +88,7 @@ export default function Active_content() {
             variant="outlined"
             onClick={handleOpen}
           >
-            Add subscriptions
+            Link Bank Account
           </Button>
         </Box>
       </Box>
@@ -91,7 +108,6 @@ export default function Active_content() {
           <AddSubscription />
         </Fade>
       </Modal>
-
       {/* </Box> */}
     </div>
   );

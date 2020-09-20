@@ -215,7 +215,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   divider: {
-    width: "1250px",
+    width: "82%",
     height: "1px",
     backgroundColor: "#e5e5e5",
     marginLeft: "272px",
@@ -390,7 +390,7 @@ export default function Main(props) {
         })}
       >
         <Box mx="auto" bgcolor="background.paper" className={classes.mainbreak}>
-          <Grid item className={classes.drawerPaper3} alignContent="center">
+          <Grid item alignContent="center">
             <div className={classes.grow}>
               <SubscriptionToolbar
                 changeView={() => setView(!view)}

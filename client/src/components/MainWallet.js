@@ -212,7 +212,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 305,
   },
   divider: {
-    width: "1250px",
+    width: "82%",
     height: "1px",
     backgroundColor: "#e5e5e5",
     marginLeft: "272px",
@@ -245,7 +245,7 @@ export default function MainWallet(props) {
 
   //console.log("isReduced", isReduced);
   const classes = useStyles();
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -308,7 +308,7 @@ export default function MainWallet(props) {
           </Box>
         </Box>
       </main>
-      <Drawer
+      {/* <Drawer
         className={classes.drawer2}
         variant="persistent"
         classes={{
@@ -331,7 +331,7 @@ export default function MainWallet(props) {
         <IconButton onClick={handleDrawerOpen}>
           <ArrowBackIosIcon />
         </IconButton>
-      </div>
+      </div> */}
     </div>
   );
 }

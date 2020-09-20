@@ -215,7 +215,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   divider: {
-    width: "1250px",
+    width: "82%",
     height: "1px",
     backgroundColor: "#e5e5e5",
     marginLeft: "272px",
@@ -247,7 +247,7 @@ export default function Main(props) {
   const [width] = useWindowSize();
   const isReduced = width <= 1023;
 
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const [view, setView] = React.useState(false);
 
   const menuTitle = isReduced ? (
@@ -310,7 +310,7 @@ export default function Main(props) {
           </Grid>
         </Box>
       </main>
-      <Drawer
+      {/* <Drawer
         className={classes.drawer2}
         variant="persistent"
         classes={{
@@ -333,7 +333,7 @@ export default function Main(props) {
         <IconButton onClick={handleDrawerOpen}>
           <ArrowBackIosIcon />
         </IconButton>
-      </div>
+      </div> */}
     </div>
   );
 }

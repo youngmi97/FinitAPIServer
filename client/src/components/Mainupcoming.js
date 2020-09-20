@@ -214,7 +214,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 305,
   },
   divider: {
-    width: "1250px",
+    width: "82%",
     height: "1px",
     backgroundColor: "#e5e5e5",
     marginLeft: "272px",

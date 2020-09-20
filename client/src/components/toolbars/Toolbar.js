@@ -249,6 +249,7 @@ const useStyles = makeStyles((theme) => ({
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"',
     ].join(","),
+    backgroundColor: "#FFFFFF",
   },
   margins: {
     marginTop: 24,
@@ -375,15 +376,14 @@ const BootstrapInput = withStyles((theme) => ({
     height: "40px",
     width: "auto",
     borderRadius: 8,
-    backgroundColor: "#fafafa",
+    backgroundColor: "#ffffff",
   },
   input: {
     borderRadius: 8,
     position: "relative",
     backgroundColor: theme.palette.common.white,
     fontSize: 16,
-    backgroundColor: "#fafafa",
-    // color: "#666666",
+    backgroundColor: "#ffffff",
     padding: "10.5px 26px 10.5px 12px",
     transition: theme.transitions.create(["border-color", "box-shadow"]),
     "&:hover, &:focus": {
@@ -532,7 +532,7 @@ export default function SubscriptionToolbar({
               </MenuItem>
             </Select>
           </FormControl>
-          <Divider orientation="vertical" flexItem />
+          {/* <Divider orientation="vertical" flexItem /> */}
           <ArrowTooltip2
             title={sort ? "Ascending" : "Descending"}
             TransitionComponent={Fade}
