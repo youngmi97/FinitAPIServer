@@ -27,7 +27,7 @@ function MenuBar() {
         <img
           style={{ height: "24px", width: "102px" }}
           alt="logo"
-          src="surplusLogo2.svg"
+          src="LogoSurplus2.png"
         />
       </Menu.Item>
 
@@ -61,7 +61,7 @@ function MenuBar() {
         <img
           style={{ height: "24px", width: "102px" }}
           alt="logo"
-          src="surplusLogo2.svg"
+          src="LogoSurplus2.png"
         />
       </Menu.Item>
 
