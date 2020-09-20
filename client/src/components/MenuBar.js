@@ -25,9 +25,9 @@ function MenuBar() {
         to="/subscriptions"
       >
         <img
-          style={{ height: "37px", width: "108px" }}
+          style={{ height: "24px", width: "102px" }}
           alt="logo"
-          src="surplusLogo.svg"
+          src="surplusLogo2.svg"
         />
       </Menu.Item>
 
@@ -59,9 +59,9 @@ function MenuBar() {
         to="/"
       >
         <img
-          style={{ height: "37px", width: "108px" }}
+          style={{ height: "24px", width: "102px" }}
           alt="logo"
-          src="surplusLogo.svg"
+          src="surplusLogo2.svg"
         />
       </Menu.Item>
 
