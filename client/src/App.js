@@ -17,7 +17,6 @@ import Register_Local from "./pages/Register_Local";
 import { Sticky } from "semantic-ui-react";
 import AuthenticatedRoute from "./routes/AuthenticatedRoute";
 import UnauthenticatedRoute from "./routes/UnauthenticatedRoute";
-import "./App.css";
 
 const theme = createMuiTheme({
   palette: {

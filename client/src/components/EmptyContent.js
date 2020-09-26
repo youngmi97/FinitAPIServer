@@ -6,6 +6,7 @@ import { Typography, Grid } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import AddSubscription from "./AddSubscription";
 import Modal from "@material-ui/core/Modal";
+import AddRoundedIcon from "@material-ui/icons/AddRounded";
 
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
@@ -70,9 +71,25 @@ export default function Active_content() {
         flexDirection="column"
       >
         <Grid container className={classes.mainbreak} justify="flex-start">
-          <Grid item xs className={classes.root}>
-            <Button className={classes.nomarginButton}>
-              <img src="static/images/AddIcon.svg"></img>
+          <Grid
+            item
+            xs
+            className={classes.root}
+            style={{ pading: 0, margin: 0 }}
+          >
+            <Button
+              className={classes.root}
+              style={{
+                backgroundColor: "rgba(255, 255, 255, 0.6)",
+                borderStyle: "dashed",
+                borderWidth: 1,
+                borderColor: "#C8C7CC",
+                borderRadius: "6px",
+                margin: 0,
+                padding: 63,
+              }}
+            >
+              <AddRoundedIcon style={{ color: "#8a8a8f", fontSize: 60 }} />
             </Button>
           </Grid>
         </Grid>

@@ -149,142 +149,150 @@ function Login_Local(props) {
   }
 
   return (
-    <Box display="flex" justifyContent="center">
-      <div className={classes.root}>
-        <Paper variant="outlined">
-          <Box display="flex" justifyContent="center">
-            <PurpleTextTypography1
-              display="fixed"
-              className={classes.title}
-              variant="h6"
-              noWrap
-            >
-              surPlus
-            </PurpleTextTypography1>
-          </Box>
-          <Box display="flex" justifyContent="center">
-            <TextTypography1
-              display="fixed"
-              className={classes.title}
-              variant="h6"
-              noWrap
-            >
-              Welcome Back.
-            </TextTypography1>
-          </Box>
-          <Box display="flex" justifyContent="center">
-            <TextTypography2
-              display="fixed"
-              className={classes.title}
-              variant="subtitle2"
-              noWrap
-            >
-              Stay on top of your subscriptions with Surplus.
-            </TextTypography2>
-          </Box>
-          <Box display="flex" justifyContent="center" marginTop="24px">
-            <Box p={1}>
-              <Avatar variant="circle" src="Facebook.svg" />
+    <div
+      style={{
+        height: "100vh",
+        backgroundColor: "#FFFFFF",
+        top: "60px",
+      }}
+    >
+      <Box display="flex" justifyContent="center">
+        <div className={classes.root}>
+          <Paper variant="outlined" style={{ backgroundColor: "#FFFFFF" }}>
+            <Box display="flex" justifyContent="center">
+              <PurpleTextTypography1
+                display="fixed"
+                className={classes.title}
+                variant="h6"
+                noWrap
+              >
+                surPlus
+              </PurpleTextTypography1>
             </Box>
-            <Box p={1}>
-              <Avatar variant="circle" src="Google New.svg" />
+            <Box display="flex" justifyContent="center">
+              <TextTypography1
+                display="fixed"
+                className={classes.title}
+                variant="h6"
+                noWrap
+              >
+                Welcome Back.
+              </TextTypography1>
             </Box>
-            <Box p={1}>
-              <Avatar variant="circle" src="Apple.svg" />
-            </Box>
-          </Box>
-          <Box display="flex" justifyContent="center">
-            <TextTypography3
-              display="fixed"
-              className={classes.title}
-              variant="subtitle2"
-              noWrap
-            >
-              OR
-            </TextTypography3>
-          </Box>
-          <Box display="flex" justifyContent="center">
-            <Form
-              onSubmit={onSubmit}
-              noValidate
-              className={loading ? "loading" : ""}
-            >
-              <Form.Input
-                label="Email"
-                placeholder="Email..."
-                name="email"
-                type="email"
-                value={values.email}
-                error={errors.email ? true : false}
-                onChange={onChange}
-                style={{
-                  width: "300px",
-                }}
-              />
-              <Form.Input
-                label="Password"
-                placeholder="Password..."
-                name="password"
-                type="password"
-                value={values.password}
-                error={errors.password ? true : false}
-                onChange={onChange}
-                style={{
-                  width: "300px",
-                }}
-              />
-              <Box display="flex" justifyContent="center">
-                <StyledButton type="submit">Login</StyledButton>
-              </Box>
-            </Form>
-          </Box>
-
-          <Box
-            display="flex"
-            justifyContent="flex_start"
-            marginLeft="41px"
-            marginRight="41px"
-          >
-            <PurpleTextTypography2
-              display="fixed"
-              className={classes.title}
-              variant="subtitle2"
-              noWrap
-            >
-              Forgot your email?
-            </PurpleTextTypography2>
-          </Box>
-          <Box display="flex" marginLeft="41px" marginTop="30px">
-            <Box margin="0px">
-              <TextTypography4
+            <Box display="flex" justifyContent="center">
+              <TextTypography2
                 display="fixed"
                 className={classes.title}
                 variant="subtitle2"
                 noWrap
               >
-                Not a member?
-              </TextTypography4>
+                Stay on top of your subscriptions with Surplus.
+              </TextTypography2>
             </Box>
-            <Box marginLeft="5px">
-              <StyledButton1 {...{ to: "/register" }} component={Link}>
-                Create One
-              </StyledButton1>
+            <Box display="flex" justifyContent="center" marginTop="24px">
+              <Box p={1}>
+                <Avatar variant="circle" src="Facebook.svg" />
+              </Box>
+              <Box p={1}>
+                <Avatar variant="circle" src="Google New.svg" />
+              </Box>
+              <Box p={1}>
+                <Avatar variant="circle" src="Apple.svg" />
+              </Box>
             </Box>
-          </Box>
-          <Box display="flex" marginLeft="41px" marginTop="30px">
-            {Object.keys(errors).length > 0 && (
-              <div className="ui error message">
-                <ul className="list">
-                  {Object.values(errors).map((value) => (
-                    <li key={value}>{value}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </Box>
-        </Paper>
-      </div>
-    </Box>
+            <Box display="flex" justifyContent="center">
+              <TextTypography3
+                display="fixed"
+                className={classes.title}
+                variant="subtitle2"
+                noWrap
+              >
+                OR
+              </TextTypography3>
+            </Box>
+            <Box display="flex" justifyContent="center">
+              <Form
+                onSubmit={onSubmit}
+                noValidate
+                className={loading ? "loading" : ""}
+              >
+                <Form.Input
+                  label="Email"
+                  placeholder="Email..."
+                  name="email"
+                  type="email"
+                  value={values.email}
+                  error={errors.email ? true : false}
+                  onChange={onChange}
+                  style={{
+                    width: "300px",
+                  }}
+                />
+                <Form.Input
+                  label="Password"
+                  placeholder="Password..."
+                  name="password"
+                  type="password"
+                  value={values.password}
+                  error={errors.password ? true : false}
+                  onChange={onChange}
+                  style={{
+                    width: "300px",
+                  }}
+                />
+                <Box display="flex" justifyContent="center">
+                  <StyledButton type="submit">Login</StyledButton>
+                </Box>
+              </Form>
+            </Box>
+
+            <Box
+              display="flex"
+              justifyContent="flex_start"
+              marginLeft="41px"
+              marginRight="41px"
+            >
+              <PurpleTextTypography2
+                display="fixed"
+                className={classes.title}
+                variant="subtitle2"
+                noWrap
+              >
+                Forgot your email?
+              </PurpleTextTypography2>
+            </Box>
+            <Box display="flex" marginLeft="41px" marginTop="30px">
+              <Box margin="0px">
+                <TextTypography4
+                  display="fixed"
+                  className={classes.title}
+                  variant="subtitle2"
+                  noWrap
+                >
+                  Not a member?
+                </TextTypography4>
+              </Box>
+              <Box marginLeft="5px">
+                <StyledButton1 {...{ to: "/register" }} component={Link}>
+                  Create One
+                </StyledButton1>
+              </Box>
+            </Box>
+            <Box display="flex" marginLeft="41px" marginTop="30px">
+              {Object.keys(errors).length > 0 && (
+                <div className="ui error message">
+                  <ul className="list">
+                    {Object.values(errors).map((value) => (
+                      <li key={value}>{value}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </Box>
+          </Paper>
+        </div>
+      </Box>
+    </div>
   );
 }
 

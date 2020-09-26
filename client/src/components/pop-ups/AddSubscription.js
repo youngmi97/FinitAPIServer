@@ -28,7 +28,6 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import DialogContent from "@material-ui/core/DialogContent";
 import Tooltip from "@material-ui/core/Tooltip";
 import Fade from "@material-ui/core/Fade";
-import AddSubscription from "../pop-ups/AddSubscription";
 
 import Dialog from "@material-ui/core/Dialog";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
@@ -70,8 +69,9 @@ const useStyles = makeStyles((theme) => ({
     height: "40px",
   },
   Dialog: {
-    minWidth: "375px",
     height: "600px",
+    width: "375px",
+    overflowX: "auto",
   },
   Dialog1: {
     width: "448px",
@@ -79,6 +79,7 @@ const useStyles = makeStyles((theme) => ({
   },
   Avatar: {
     marginTop: "24px",
+    Width: "375px",
   },
   Avatar1: {
     backgroundColor: "rgba(0, 0, 0, 0.04)",
@@ -286,6 +287,7 @@ const useStyles = makeStyles((theme) => ({
   ListItemSize4: {
     fontSize: 11,
     height: 32,
+    minWidth: "330px",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -411,19 +413,11 @@ function ArrowTooltip3(props) {
   return <Tooltip arrow classes={classes} {...props} />;
 }
 
-export default function SubscriptionToolbar({
-  changeView,
-  changeSort,
-  changeKind,
-}) {
+export default function Subscription(props) {
   const classes = useStyles();
-  const [listView, setListView] = React.useState(1);
-  const [Value, setValue] = React.useState("Alphabetical");
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  const [secondary] = React.useState(false);
-  const [sort, setSort] = React.useState(true);
-  const [open, setOpen] = React.useState(false);
+
   const [index, setIndex] = React.useState(0);
   const [plan, setPlan] = React.useState("");
   const [price, setPrice] = React.useState("");
@@ -440,18 +434,8 @@ export default function SubscriptionToolbar({
 
   const [open1, setOpen1] = React.useState(false);
 
-  const handleChange = (event) => {
-    setValue(event.target.value);
-    changeKind(event.target.value);
-  };
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
   const changeName = (name) => {
     setName(name);
-  };
-  const handleClose = () => {
-    setOpen(false);
   };
 
   const handleClickOpen1 = () => {
@@ -484,114 +468,233 @@ export default function SubscriptionToolbar({
   const Netflix_price = ["", "$8.99", "$12.99", "$15.99"];
 
   return (
-    <div className={classes.root}>
-      <Toolbar variant="dense">
-        <Grid container alignItems="center" className={classes.sortStyle}>
-          <ArrowTooltip
-            style={{ backgroundColor: "#ffffff" }}
-            title={listView ? "List View" : "Card View"}
-            TransitionComponent={Fade}
-            enterDelay={500}
-            enterNextDelay={500}
-          >
-            <IconButton
-              edge="start"
-              className={classes.sortButton}
-              disableRipple={true}
-              onClick={() => {
-                changeView();
-                setListView(!listView);
-              }}
-            >
-              {listView ? (
-                <img src="static/icons/symbols/ListView.svg"></img>
-              ) : (
-                <img src="static/icons/symbols/GridView.svg"></img>
-              )}
-            </IconButton>
-          </ArrowTooltip>
-          <FormControl variant="outlined">
-            <Select
-              labelId="customized-select-label"
-              id="customized-select"
-              defaultValue={"Alphabetical"}
-              onChange={handleChange}
-              input={<BootstrapInput />}
-            >
-              <MenuItem
-                value={"Alphabetical"}
-                className={classes.menuItemStyle}
-              >
-                Alphabetical
-              </MenuItem>
-              <MenuItem value={"Price"} className={classes.menuItemStyle}>
-                Price
-              </MenuItem>
-              <MenuItem value={"Date Added"} className={classes.menuItemStyle}>
-                Date Added
-              </MenuItem>
-            </Select>
-          </FormControl>
-          {/* <Divider orientation="vertical" flexItem /> */}
-          <ArrowTooltip2
-            title={sort ? "Ascending" : "Descending"}
-            TransitionComponent={Fade}
-            margin={0}
-          >
-            <IconButton
-              className={classes.sortButton}
-              disableRipple={true}
-              onChange={handleChange}
-              onClick={() => {
-                setSort(!sort);
-                changeSort();
-              }}
-            >
-              {sort ? (
-                <ArrowUpwardRoundedIcon fontSize="small" />
-              ) : (
-                <ArrowDownwardRoundedIcon fontSize="small" />
-              )}
-            </IconButton>
-          </ArrowTooltip2>
-        </Grid>
-        <Box className={classes.marginStyle} noWrap></Box>
-        <div className={classes.search}>
-          <div className={classes.searchIcon}>
-            <SearchRoundedIcon />
-          </div>
-          <InputBase
-            placeholder="Search…"
-            classes={{
-              root: classes.inputRoot,
-              input: classes.inputInput,
-            }}
-            inputProps={{ "aria-label": "search" }}
-          />
-        </div>
-        <ArrowTooltip3
-          title="Add Subscription"
-          TransitionComponent={Fade}
-          enterDelay={500}
-        >
+    <div>
+      <Dialog
+        fullScreen={fullScreen}
+        open={props.open}
+        onClose={props.handleClose}
+      >
+        <div className={classes.Dialog}>
+          <DialogContent className={classes.Avatar}>
+            <Typography align="center" className={classes.Title}>
+              Add Subscriptions
+            </Typography>
+            <div className={classes.search1}>
+              <div className={classes.searchIcon}>
+                <SearchRoundedIcon />
+              </div>
+              <InputBase
+                placeholder="Search Subscriptions"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput1,
+                }}
+                inputProps={{ "aria-label": "search" }}
+              />
+            </div>
+            <div>
+              <List className={classes.List}>
+                <ListSubheader component="div" id="nested-list-subheader">
+                  <Typography className={classes.ListItemSize4}>ALL</Typography>
+                </ListSubheader>
+                {lists.map((name) => {
+                  return (
+                    <ListItem
+                      button
+                      className={classes.List}
+                      onClick={() => {
+                        handleClickOpen1();
+                        props.handleClose();
+                        changeName(name);
+                      }}
+                    >
+                      <ListItemIcon className={classes.ListItemSize}>
+                        <img
+                          className={classes.imageIcon}
+                          src={"/static/avatar/" + name + "[48].svg"}
+                          alt="upcoming"
+                        />
+                      </ListItemIcon>
+                      {name}
+                      <ListItemSecondaryAction>
+                        <img src="/static/icons/symbols/MovetoPage.svg" />
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                  );
+                })}
+              </List>
+            </div>
+          </DialogContent>
+
           <IconButton
-            className={classes.highlightButton}
+            aria-label="close"
+            className={classes.closeButton}
+            onClick={props.handleClose}
             disableRipple={true}
-            onClick={handleClickOpen}
+            disableFocusRipple={true}
           >
-            <AddRoundedIcon
-              fontSize="small"
-              alignItems="center"
-              // alignSelf="flex-end"
-            />
+            <img src="static/icons/symbols/Exit.svg" />
           </IconButton>
-        </ArrowTooltip3>
-        <AddSubscription
-          open={open}
-          handleClose={() => handleClose()}
-          handleClickOpen={() => handleClickOpen()}
-        />
-      </Toolbar>
+        </div>
+      </Dialog>
+
+      <Dialog
+        fullScreen={fullScreen}
+        open={open1}
+        onClose={() => {
+          props.handleClickOpen();
+          handleClose1();
+        }}
+      >
+        <div className={classes.Dialog1}>
+          <DialogContent className={classes.Avatar1}>
+            <div className={classes.margins}>
+              <Typography align="center" className={classes.Title}>
+                <img
+                  className={classes.imageIcon}
+                  src={"/static/avatar/" + temporalname + "[48].svg"}
+                  alt="upcoming"
+                />
+              </Typography>
+              <Typography align="center" className={classes.Title}>
+                {temporalname}
+              </Typography>
+              <Typography align="center" className={classes.Title1}>
+                {plan}
+              </Typography>
+              <Typography align="center" className={classes.Title1}>
+                {price}
+              </Typography>
+            </div>
+          </DialogContent>
+          <div>
+            <div className={classes.left}>
+              <FormControl className={classes.formControl}>
+                <InputLabel shrink htmlFor="age-native-simple">
+                  Plan
+                </InputLabel>
+                <Select
+                  value={index}
+                  onChange={(event) => {
+                    handleIndex(event);
+                  }}
+                  displayEmpty
+                  className={classes.selectEmpty}
+                  label="hihi"
+                  inputProps={{
+                    name: "age",
+                    id: "age-native-simple",
+                  }}
+                >
+                  <MenuItem value={0} disabled>
+                    Select Plan
+                  </MenuItem>
+                  <MenuItem value={1}>Basic</MenuItem>
+                  <MenuItem value={2}>Standard</MenuItem>
+                  <MenuItem value={3}>Premium</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
+
+            <div className={classes.left1}>
+              <Grid container spacing={0} alignItems="center">
+                <Grid item className={classes.forgrid}>
+                  <Grid container spacing={1} alignItems="center">
+                    <Grid item>
+                      <AttachMoneyRoundedIcon />
+                    </Grid>
+                    <Grid item>
+                      <InputLabel shrink htmlFor="standard-adornment-password">
+                        Price
+                      </InputLabel>
+                      <TextField
+                        id="standard-adornment-password"
+                        disabled
+                        value={price}
+                        className={classes.inputmargin}
+                      />
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <Grid item className={classes.forgrid1}>
+                  <Grid container spacing={1} alignItems="center">
+                    <Grid item>
+                      <UpdateRoundedIcon />
+                    </Grid>
+                    <Grid item>
+                      <TextField
+                        id="standard-select-currency"
+                        select
+                        label="Cycle"
+                        value={index}
+                        onChange={(event) => {
+                          handleIndex(event);
+                        }}
+                        className={classes.selectEmpty1}
+                      >
+                        <MenuItem value={1}>Monthly</MenuItem>
+                        <MenuItem value={2}>Monthly</MenuItem>
+                        <MenuItem value={3}>Monthly</MenuItem>
+                      </TextField>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </div>
+            <div className={classes.left}>
+              <Grid container spacing={1} alignItems="center">
+                <Grid item>
+                  <EventRoundedIcon />
+                </Grid>
+                <Grid item>
+                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <DatePicker
+                      value={selectedDate}
+                      onChange={handleDateChange}
+                    />
+                  </MuiPickersUtilsProvider>
+                </Grid>
+              </Grid>
+            </div>
+          </div>
+          <div className={classes.left1}>
+            <Box display="flex" p={1} padding={0} margin={0}>
+              <Box p={1} flexGrow={1}>
+                <Typography className={classes.remind}>Remind Me</Typography>
+              </Box>
+              <Box p={1}>
+                <Switch
+                  className={classes.Switchstyle}
+                  checked={state.checkedA}
+                  onChange={handleChangeSwitch}
+                  name="checkedA"
+                  inputProps={{ "aria-label": "secondary checkbox" }}
+                />
+              </Box>
+            </Box>
+          </div>
+          <Box display="flex" justifyContent="center">
+            <Box p={1}>
+              <Button className={classes.ListItemSize5} variant="outlined">
+                Add subscriptions
+              </Button>
+            </Box>
+          </Box>
+
+          <IconButton
+            aria-label="back"
+            className={classes.closeButton1}
+            onClick={() => {
+              props.handleClickOpen();
+              handleClose1();
+            }}
+            disableRipple={true}
+            disableFocusRipple={true}
+          >
+            <img src="static/icons/symbols/Back.svg" />
+          </IconButton>
+        </div>
+      </Dialog>
     </div>
   );
 }
