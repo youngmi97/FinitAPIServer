@@ -8,15 +8,15 @@ import { attemptSignIn, signOut } from "../auth";
 export default {
   Query: {
     me: async (root, args, context, info) => {
-      //Auth.checkSignedIn(context.req)
-      //console.log(User.findById(context.req.session.userId));
+      // Auth.checkSignedIn(context.req);
+      // console.log(User.findById(context.req.session.userId));
       return await User.findById(context.req.session.userId);
     },
 
     users: (root, args, { req }, info) => {
       // req.session.userId
       // console.log(req.session)
-      //Auth.checkSignedIn(req);
+      // Auth.checkSignedIn(req);
 
       return User.find({});
     },

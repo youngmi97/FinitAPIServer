@@ -12,7 +12,6 @@ var moment = require("moment");
 const express = require("express");
 const redis = require("redis");
 const graphqlHTTP = require("express-graphql");
-const schema = require("./schema.js");
 const plaid = require("plaid");
 const path = require("path");
 const dotenv = require("dotenv").config({
