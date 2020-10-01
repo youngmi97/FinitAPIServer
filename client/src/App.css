@@ -10,7 +10,66 @@
   width: 400px;
   margin: auto;
 }
+.DayPicker:focus {
+  outline: none;
+}
 
+.DayPicker-wrapper:focus {
+  outline: none;
+}
+.DayPicker-Caption {
+  display: table-caption;
+  margin: 0;
+  margin-left: -10px;
+  font-size: 24px;
+  padding: 0px;
+
+  text-align: start;
+}
+.DayPicker-Caption > div {
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+}
+.DayPicker-Month {
+  display: table;
+  margin: 0;
+  padding: 0;
+  margin-top: auto;
+  border-spacing: 0;
+  border-collapse: collapse;
+  user-select: none;
+  border-radius: 0rem;
+}
+
+.DayPicker-Day {
+  display: none;
+  padding: 0px;
+  border: 1px solid #d0d4d9;
+  vertical-align: middle;
+
+  text-align: center;
+  height: 45px;
+  width: 42px;
+  margin: 0px;
+}
+.DayPicker-Day_outside {
+  display: table-cell;
+  padding: 0px;
+  border-radius: 0px;
+  margin: 0px;
+  background-color: black;
+  border: 1px solid #d0d4d9;
+  vertical-align: top;
+  text-align: center;
+  height: 45px;
+  width: 40px;
+  margin: 0px;
+}
+
+.DayPicker-Day:focus {
+  outline: none;
+}
 .MuiToolbar-dense {
   height: 40px;
 }

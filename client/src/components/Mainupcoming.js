@@ -1,19 +1,13 @@
 import Box from "@material-ui/core/Box";
 import Drawer from "@material-ui/core/Drawer";
-import Grid from "@material-ui/core/Grid";
-import IconButton from "@material-ui/core/IconButton";
 import { fade, makeStyles, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import clsx from "clsx";
 import React, { useLayoutEffect, useState } from "react";
 
-import ACTIVE_CONTENT from "./Active_content";
+import Calendar from "./calendar/calendar";
+import Event from "./calendar/event";
 import LIST_ITEM_DISCOVER from "./Listupcoming";
-import LIST_ITEM_RIGHT from "./List_item_right";
-import LIST_VIEWBREAK from "./List_viewbreak";
-import SubscriptionToolbar from "./toolbars/Toolbar";
 import LIST_ITEM_DISCOVER_MINI from "./List_item_discover_mini";
 
 const drawerWidth = 256;
@@ -125,7 +119,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "white",
   },
   mainbreak: {
-    marginLeft: 256,
+    marginLeft: 400,
     [theme.breakpoints.down(1024)]: {
       marginLeft: 0,
     },
@@ -247,6 +241,7 @@ export default function Main(props) {
   const isReduced = width <= 1023;
   const [open, setOpen] = React.useState(true);
   const [view, setView] = React.useState(false);
+  const [selected, setSelected] = React.useState(null);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -259,7 +254,7 @@ export default function Main(props) {
   const menuTitle = isReduced ? (
     <LIST_ITEM_DISCOVER_MINI index="0" />
   ) : (
-    <TextTypography1>My Wallet</TextTypography1>
+    <TextTypography1>Calendar</TextTypography1>
   );
 
   const underlineBar = isReduced ? (
@@ -274,12 +269,12 @@ export default function Main(props) {
         display="flex"
         bgcolor="white"
         borderColor="grey.500"
-        boxShadow="0px 0.5px 0px rgba(0, 0, 0, 0.3)"
         className={classes.toolBar}
         alignItems="center"
       >
         {menuTitle}
       </Box>
+
       {underlineBar}
       <Drawer
         className={classes.drawer}
@@ -296,18 +291,22 @@ export default function Main(props) {
           [classes.contentShift]: open,
         })}
       >
-        <Box mx="auto" bgcolor="background.paper" className={classes.mainbreak}>
-          <Grid item className={classes.drawerPaper3} alignContent="center">
-            <div className={classes.grow}>
-              <SubscriptionToolbar changeView={() => setView(!view)} />
-            </div>
-            <main className={classes.content}>
-              {view !== true ? <ACTIVE_CONTENT /> : <LIST_VIEWBREAK />}
-            </main>
-          </Grid>
+        <Box
+          mx="auto"
+          display="flex"
+          p={1}
+          bgcolor="background.paper"
+          className={classes.mainbreak}
+        >
+          <Box p={1}>
+            <Calendar selected={selected} setSelected={(a) => setSelected(a)} />
+          </Box>
+          <Box p={1} style={{ marginLeft: 32 }}>
+            <Event selected={selected} />
+          </Box>
         </Box>
       </main>
-      <Drawer
+      {/* <Drawer
         className={classes.drawer2}
         variant="persistent"
         classes={{
@@ -330,7 +329,7 @@ export default function Main(props) {
         <IconButton onClick={handleDrawerOpen}>
           <ArrowBackIosIcon />
         </IconButton>
-      </div>
+      </div> */}
     </div>
   );
 }
