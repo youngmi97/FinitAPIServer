@@ -5,12 +5,18 @@ module.exports = model(
   new Schema({
     userId: {
       type: Schema.Types.ObjectId,
+      ref: "User",
       required: true,
     },
-    availableProducts: Array,
-    billedProducts: Array,
-    institutionId: String,
-    itemId: String,
-    webhook: String,
+    accountId: String,
+    amount: String,
+    category: [String],
+    categoryId: String,
+    date: String,
+    isoCurrencyCode: String,
+    name: String,
+    paymentChannel: String,
+    transactionId: String,
+    transactionType: String,
   })
 );

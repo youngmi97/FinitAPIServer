@@ -8,8 +8,6 @@ import { attemptSignIn, signOut } from "../auth";
 export default {
   Query: {
     me: async (root, args, context, info) => {
-      // Auth.checkSignedIn(context.req);
-      // console.log(User.findById(context.req.session.userId));
       return await User.findById(context.req.session.userId);
     },
 
@@ -23,8 +21,7 @@ export default {
 
     user: (root, { id }, { req }, info) => {
       // TODO: auth, projection, pagination
-
-      //Auth.checkSignedOut(req);
+      // Auth.checkSignedOut(req);
 
       if (mongoose.Types.ObjectId.isValid(id)) {
         throw new UserInputError(`{id} is not valid user ID`);

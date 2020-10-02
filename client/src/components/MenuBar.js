@@ -6,14 +6,13 @@ import "../App.css";
 
 function MenuBar() {
   const { user, logout } = useContext(AuthContext);
-  //const pathname = window.location.pathname;
+  // const pathname = window.location.pathname;
+  // configure path name parsing logic;
+  // const path = pathname === "/" ? "home" : pathname.substr(1);
+  // const [activeItem, setActiveItem] = useState(path);
+  // const handleItemClick = (e, { name }) => setActiveItem(name);
 
-  // configure path name parsing logic
-  //const path = pathname === "/" ? "home" : pathname.substr(1);
-  //const [activeItem, setActiveItem] = useState(path);
-  //const handleItemClick = (e, { name }) => setActiveItem(name);
-
-  //identify login state
+  // Identify Login State
   const menuBar = user ? (
     <Menu secondary size="massive" style={{ marginBottom: "0px" }}>
       <Menu.Item

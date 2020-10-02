@@ -4,21 +4,16 @@ module.exports = model(
   "PlaidAccount",
   new Schema({
     plaidItemId: {
-      type: Schema.Types.ObjectId,
+      type: String,
       required: true,
     },
     accountId: {
       type: String,
       required: true,
     },
+    userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
     mask: String,
-    balances: {
-      available: Number,
-      current: Number,
-      limit: Number,
-      isoCurrencyCode: String,
-      unofficialCurrencyCode: String,
-    },
+    balances: String,
     name: {
       type: String,
       required: true,

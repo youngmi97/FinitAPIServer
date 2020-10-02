@@ -1,5 +1,5 @@
-import user from './user';
+import user from "./user";
+import account from "./account";
+import transaction from "./transaction";
 
-export default [
-    user
-]
+export default [user, account, transaction];
