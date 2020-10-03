@@ -5,14 +5,17 @@ import IconButton from "@material-ui/core/IconButton";
 import { fade, makeStyles, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import clsx from "clsx";
-import React, { useLayoutEffect, useState } from "react";
+import { useQuery } from "@apollo/react-hooks";
+import React, { useLayoutEffect, useState, useContext } from "react";
 
+import gql from "graphql-tag";
 import ACTIVE_CONTENT from "./Active_content";
 import LIST_ITEM_DISCOVER from "./List_item_discover";
 import LIST_ITEM_RIGHT from "./List_item_right";
 import LIST_VIEWBREAK from "./List_viewbreak";
 import SubscriptionToolbar from "./toolbars/Toolbar";
 import LIST_ITEM_DISCOVER_MINI from "./List_item_discover_mini";
+import { AuthContext } from "../context/auth";
 
 const drawerWidth = 256;
 const drawerWidth2 = 305;
@@ -232,7 +235,6 @@ function useWindowSize() {
   const [size, setSize] = useState([0, 0]);
   useLayoutEffect(() => {
     function updateSize() {
-      console.log("window width", window.innerWidth);
       setSize([window.innerWidth, window.innerHeight]);
     }
     window.addEventListener("resize", updateSize);
@@ -271,70 +273,93 @@ export default function Main(props) {
     <TextTypography1>All Subscriptions</TextTypography1>
   );
 
+  const { loading, error, data } = useQuery(GET_SUBSCRIPTIONS);
+  var cards = [];
+  if (loading) {
+    console.log("loading");
+  } else {
+    console.log(
+      "data",
+      data["users"][0]["accounts"][0]["transactions"][0]["name"]
+    );
+    cards = data["users"][0]["accounts"][0]["transactions"].map(get_data);
+    console.log("card", cards);
+  }
+
+  function get_data(item) {
+    return {
+      name: item["name"],
+      order: 1,
+      planName: "Standard",
+      price: item["isoCurrencyCode"] + " $" + item["amount"] + "/mo",
+      realPrice: parseInt(item["amount"]),
+    };
+  }
+
   const underlineBar = isReduced ? (
     <div className={classes.dividerReduced}></div>
   ) : (
     <div className={classes.divider}></div>
   );
 
-  const cards = [
-    {
-      name: "Netflix",
-      order: 3,
-      planName: "Standard",
-      price: "USD 12.00/mo",
-      realPrice: 12,
-    },
-    {
-      name: "Spotify",
-      order: 1,
-      planName: "Basic",
-      price: "USD $8.00/mo",
-      realPrice: 8,
-    },
-    {
-      name: "Netflix",
-      order: 5,
-      planName: "Premium",
-      price: "USD $9.00/mo",
-      realPrice: 9,
-    },
-    {
-      name: "Notability",
-      order: 2,
-      planName: "Basic",
-      price: "USD $8.00/mo",
-      realPrice: 8,
-    },
-    {
-      name: "GoogleDrive",
-      order: 7,
-      planName: "Standard",
-      price: "USD $12.00/mo",
-      realPrice: 12,
-    },
-    {
-      name: "Spotify",
-      order: 4,
-      planName: "Standard",
-      price: "USD $10.00/mo",
-      realPrice: 10,
-    },
-    {
-      name: "Youtube",
-      order: 6,
-      planName: "Premium",
-      price: "USD $11.00/mo",
-      realPrice: 11,
-    },
-    {
-      name: "Youtube",
-      order: 8,
-      planName: "Standard",
-      price: "USD $12.00/mo",
-      realPrice: 12,
-    },
-  ];
+  // const cards = [
+  //   {
+  //     name: "Netflix",
+  //     order: 3,
+  //     planName: "Standard",
+  //     price: "USD 12.00/mo",
+  //     realPrice: 12,
+  //   },
+  //   {
+  //     name: "Spotify",
+  //     order: 1,
+  //     planName: "Basic",
+  //     price: "USD $8.00/mo",
+  //     realPrice: 8,
+  //   },
+  //   {
+  //     name: "Netflix",
+  //     order: 5,
+  //     planName: "Premium",
+  //     price: "USD $9.00/mo",
+  //     realPrice: 9,
+  //   },
+  //   {
+  //     name: "Notability",
+  //     order: 2,
+  //     planName: "Basic",
+  //     price: "USD $8.00/mo",
+  //     realPrice: 8,
+  //   },
+  //   {
+  //     name: "GoogleDrive",
+  //     order: 7,
+  //     planName: "Standard",
+  //     price: "USD $12.00/mo",
+  //     realPrice: 12,
+  //   },
+  //   {
+  //     name: "Spotify",
+  //     order: 4,
+  //     planName: "Standard",
+  //     price: "USD $10.00/mo",
+  //     realPrice: 10,
+  //   },
+  //   {
+  //     name: "Youtube",
+  //     order: 6,
+  //     planName: "Premium",
+  //     price: "USD $11.00/mo",
+  //     realPrice: 11,
+  //   },
+  //   {
+  //     name: "Youtube",
+  //     order: 8,
+  //     planName: "Standard",
+  //     price: "USD $12.00/mo",
+  //     realPrice: 12,
+  //   },
+  // ];
 
   switch (sortvariable) {
     case "Alphabetical":
@@ -436,3 +461,23 @@ export default function Main(props) {
     </div>
   );
 }
+
+const GET_SUBSCRIPTIONS = gql`
+  query {
+    users {
+      id
+      accounts {
+        id
+        transactions {
+          id
+          name
+          category
+          amount
+          date
+          paymentChannel
+          isoCurrencyCode
+        }
+      }
+    }
+  }
+`;

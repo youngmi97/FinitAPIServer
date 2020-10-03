@@ -365,7 +365,7 @@ function MenuBar() {
                       </Box>
                       <Box p={1} margin={0} padding={0}>
                         <Typography style={{ fontSize: 14, color: "black" }}>
-                          Elice
+                          {user.name}
                         </Typography>
                       </Box>
                     </Box>
@@ -415,9 +415,13 @@ function MenuBar() {
                           </Box>
                           <Box p={1} alignItems="center">
                             <Typography
-                              style={{ fontSize: 17, color: "black" }}
+                              style={{
+                                fontSize: 17,
+                                color: "black",
+                                textTransform: "capitalize",
+                              }}
                             >
-                              Elice Yoo
+                              {user.name}
                             </Typography>
                           </Box>
                         </Box>

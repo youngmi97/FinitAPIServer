@@ -21,6 +21,7 @@ const StyledButton = withStyles({
     fontSize: "1rem",
     paddingLeft: 20,
     paddingRight: 20,
+    marginTop: 30,
     "&:hover": {
       backgroundColor: "#5C0DB8",
       color: "white",
@@ -31,7 +32,8 @@ const StyledButton = withStyles({
     },
   },
   label: {
-    fontSize: "3",
+    fontSize: "14px",
+    fontWeight: 600,
     textTransform: "capitalize",
   },
 })(Button);
@@ -56,12 +58,12 @@ const StyledButton1 = withStyles({
   root: {
     color: "#7610EB",
     fontSize: "0.8rem",
-    marginTop: "4px",
     paddingLeft: 5,
     paddingRight: 5,
+    marginTop: 30,
   },
   label: {
-    fontSize: "3",
+    fontSize: "14px",
     textTransform: "capitalize",
   },
 })(Button);
@@ -95,7 +97,8 @@ const TextTypography3 = withStyles({
 })(Typography);
 const TextTypography4 = withStyles({
   root: {
-    marginTop: "10px",
+    marginTop: 30,
+
     color: "grey",
   },
 })(Typography);
@@ -173,16 +176,15 @@ function Register_Local(props) {
       }}
     >
       <Box display="flex" justifyContent="center">
-        <div
-          className={classes.root}
-          style={{
-            boxShadow: "1px 2px 4px rgba(0, 0, 0, 0.1)",
-            borderRadius: 12,
-          }}
-        >
+        <div className={classes.root}>
           <Paper
             variant="outlined"
-            style={{ height: "700px", backgroundColor: "#FFFFFF" }}
+            style={{
+              height: "700px",
+              backgroundColor: "#FFFFFF",
+              borderRadius: 12,
+              boxShadow: "1px 2px 4px rgba(0, 0, 0, 0.1)",
+            }}
           >
             <Box display="flex" justifyContent="center">
               <PurpleTextTypography1
@@ -332,30 +334,34 @@ function Register_Local(props) {
                   variant="outlined"
                   label="Confirm Password"
                 />
-
-                <Box display="flex" justifyContent="center">
-                  <StyledButton type="submit">Register</StyledButton>
+                <Box
+                  display="flex"
+                  alignItems="center"
+                  marginLeft="10px"
+                  marginRight="10px"
+                >
+                  <Box margin="0px">
+                    <TextTypography4
+                      display="fixed"
+                      className={classes.title}
+                      variant="subtitle2"
+                      noWrap
+                    >
+                      Already a member?
+                    </TextTypography4>
+                  </Box>
+                  <Box marginLeft="0px" flexGrow={1}>
+                    <StyledButton1 {...{ to: "/login" }} component={Link}>
+                      Log In
+                    </StyledButton1>
+                  </Box>
+                  <Box display="flex" justifyContent="center">
+                    <StyledButton type="submit">Continue</StyledButton>
+                  </Box>
                 </Box>
               </form>
             </Box>
 
-            <Box display="flex" marginLeft="41px" marginTop="30px">
-              <Box margin="0px">
-                <TextTypography4
-                  display="fixed"
-                  className={classes.title}
-                  variant="subtitle2"
-                  noWrap
-                >
-                  Already a member?
-                </TextTypography4>
-              </Box>
-              <Box marginLeft="5px">
-                <StyledButton1 {...{ to: "/login" }} component={Link}>
-                  Log In
-                </StyledButton1>
-              </Box>
-            </Box>
             <Box display="flex" marginLeft="41px" marginTop="30px">
               {Object.keys(errors).length > 0 && (
                 <div className="ui error message">
