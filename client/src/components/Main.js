@@ -5,14 +5,17 @@ import IconButton from "@material-ui/core/IconButton";
 import { fade, makeStyles, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import clsx from "clsx";
-import React, { useLayoutEffect, useState } from "react";
+import { useQuery } from "@apollo/react-hooks";
+import React, { useLayoutEffect, useState, useContext } from "react";
 
+import gql from "graphql-tag";
 import ACTIVE_CONTENT from "./Active_content";
 import LIST_ITEM_DISCOVER from "./List_item_discover";
 import LIST_ITEM_RIGHT from "./List_item_right";
 import LIST_VIEWBREAK from "./List_viewbreak";
 import SubscriptionToolbar from "./toolbars/Toolbar";
 import LIST_ITEM_DISCOVER_MINI from "./List_item_discover_mini";
+import { AuthContext } from "../context/auth";
 
 const drawerWidth = 256;
 const drawerWidth2 = 305;
@@ -232,7 +235,6 @@ function useWindowSize() {
   const [size, setSize] = useState([0, 0]);
   useLayoutEffect(() => {
     function updateSize() {
-      console.log("window width", window.innerWidth);
       setSize([window.innerWidth, window.innerHeight]);
     }
     window.addEventListener("resize", updateSize);
@@ -250,6 +252,7 @@ export default function Main(props) {
 
   const [open, setOpen] = React.useState(false);
   const [state, setState] = React.useState(1);
+  const [drawer, setDrawer] = React.useState(0);
   const [view, setView] = React.useState(false);
 
   const handleState = () => {
@@ -269,6 +272,14 @@ export default function Main(props) {
   ) : (
     <TextTypography1>All Subscriptions</TextTypography1>
   );
+
+  const updatedCards = [];
+  const { loading, error, data } = useQuery(GET_SUBSCRIPTIONS);
+  if (loading) {
+    console.log("loading");
+  } else {
+    console.log("data", data);
+  }
 
   const underlineBar = isReduced ? (
     <div className={classes.dividerReduced}></div>
@@ -382,7 +393,7 @@ export default function Main(props) {
         }}
         anchor="left"
       >
-        <LIST_ITEM_DISCOVER />
+        <LIST_ITEM_DISCOVER drawer={drawer} setDrawer={(a) => setDrawer(a)} />
       </Drawer>
       <div
         className={clsx(classes.content, {
@@ -435,3 +446,22 @@ export default function Main(props) {
     </div>
   );
 }
+
+const GET_SUBSCRIPTIONS = gql`
+  query {
+    me {
+      id
+      accounts {
+        id
+        transactions {
+          id
+          name
+          category
+          amount
+          date
+          paymentChannel
+        }
+      }
+    }
+  }
+`;
