@@ -15,7 +15,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Popover from "@material-ui/core/Popover";
 import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
 import clsx from "clsx";
@@ -96,6 +96,8 @@ function MenuBar() {
   const [alarm, setAlarm] = React.useState(false);
   const [profile, setProfile] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const location = useLocation();
+  const path = location.pathname;
 
   const handleClick = (event) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
@@ -120,7 +122,7 @@ function MenuBar() {
 
   // Identify Login State
   const menuBar = user ? (
-    <Menu secondary size="massive" style={{ marginBottom: "0px" }}>
+    <Menu secondary size="massive" style={{ marginBottom: "0px", height: 60 }}>
       <Menu.Item
         className={"logo"}
         name="Subscriptions"
@@ -363,7 +365,7 @@ function MenuBar() {
                       </Box>
                       <Box p={1} margin={0} padding={0}>
                         <Typography style={{ fontSize: 14, color: "black" }}>
-                          Elice
+                          {user.name}
                         </Typography>
                       </Box>
                     </Box>
@@ -413,9 +415,13 @@ function MenuBar() {
                           </Box>
                           <Box p={1} alignItems="center">
                             <Typography
-                              style={{ fontSize: 17, color: "black" }}
+                              style={{
+                                fontSize: 17,
+                                color: "black",
+                                textTransform: "capitalize",
+                              }}
                             >
-                              Elice Yoo
+                              {user.name}
                             </Typography>
                           </Box>
                         </Box>
@@ -642,49 +648,177 @@ function MenuBar() {
       </Menu.Menu>
     </Menu>
   ) : (
-    <Menu secondary style={{ marginBottom: "0px" }} size="massive">
-      <Menu.Item
-        className={"logo"}
-        name="home"
-        //active={activeItem === "home"}
-        //onClick={handleItemClick}
-        as={Link}
-        to="/"
-      >
-        <img
-          style={{ height: "24px", width: "102px" }}
-          alt="logo"
-          src="LogoSurplus2.png"
-        />
-      </Menu.Item>
+    <div>
+      {(() => {
+        if (path == "/login") {
+          return (
+            <Menu
+              secondary
+              style={{
+                marginBottom: "0px",
+                backgroundColor: "#2f0459",
+                height: 60,
+              }}
+              size="massive"
+            >
+              <Menu.Item
+                className={"logo"}
+                name="home"
+                //active={activeItem === "home"}
+                //onClick={handleItemClick}
+                as={Link}
+                to="/"
+              >
+                <img
+                  style={{ height: "24px", width: "102px" }}
+                  alt="logo"
+                  src="LogoSurplus1.png"
+                />
+              </Menu.Item>
 
-      <Menu.Menu position="right">
-        <Menu.Item
-          style={{ fontSize: "14px", fontWeight: "400" }}
-          name="login"
-          //active={activeItem === "login"}
-          //onClick={handleItemClick}
-          as={Link}
-          to="/login"
-        />
-        <Menu.Item
-          style={{
-            backgroundColor: "#7610EB",
-            color: "#ffffff",
-            alignSelf: "center",
-            marginRight: "20px",
-            fontSize: "14px",
-            fontWeight: "400",
-          }}
-          position="right"
-          name="register"
-          //active={activeItem === "register"}
-          //onClick={handleItemClick}
-          as={Link}
-          to="/register"
-        />
-      </Menu.Menu>
-    </Menu>
+              <Menu.Menu position="right">
+                <Menu.Item
+                  style={{
+                    fontSize: "14px",
+                    color: "white",
+                    fontWeight: "400",
+                  }}
+                  name="login"
+                  //active={activeItem === "login"}
+                  //onClick={handleItemClick}
+                  as={Link}
+                  to="/login"
+                />
+                <Menu.Item
+                  style={{
+                    backgroundColor: "#7610EB",
+                    color: "#ffffff",
+                    alignSelf: "center",
+                    marginRight: "20px",
+                    fontSize: "14px",
+                    fontWeight: "400",
+                  }}
+                  position="right"
+                  name="register"
+                  //active={activeItem === "register"}
+                  //onClick={handleItemClick}
+                  as={Link}
+                  to="/register"
+                />
+              </Menu.Menu>
+            </Menu>
+          );
+        } else if (path == "/register") {
+          return (
+            <Menu
+              secondary
+              style={{
+                marginBottom: "0px",
+                backgroundColor: "#2f0459",
+                height: 60,
+              }}
+              size="massive"
+            >
+              <Menu.Item
+                className={"logo"}
+                name="home"
+                //active={activeItem === "home"}
+                //onClick={handleItemClick}
+                as={Link}
+                to="/"
+              >
+                <img
+                  style={{ height: "24px", width: "102px" }}
+                  alt="logo"
+                  src="LogoSurplus1.png"
+                />
+              </Menu.Item>
+
+              <Menu.Menu position="right">
+                <Menu.Item
+                  style={{
+                    fontSize: "14px",
+                    color: "white",
+                    fontWeight: "400",
+                  }}
+                  name="login"
+                  //active={activeItem === "login"}
+                  //onClick={handleItemClick}
+                  as={Link}
+                  to="/login"
+                />
+                <Menu.Item
+                  style={{
+                    backgroundColor: "#7610EB",
+                    color: "#ffffff",
+                    alignSelf: "center",
+                    marginRight: "20px",
+                    fontSize: "14px",
+                    fontWeight: "400",
+                  }}
+                  position="right"
+                  name="register"
+                  //active={activeItem === "register"}
+                  //onClick={handleItemClick}
+                  as={Link}
+                  to="/register"
+                />
+              </Menu.Menu>
+            </Menu>
+          );
+        } else {
+          return (
+            <Menu
+              secondary
+              style={{ marginBottom: "0px", height: 60 }}
+              size="massive"
+            >
+              <Menu.Item
+                className={"logo"}
+                name="home"
+                //active={activeItem === "home"}
+                //onClick={handleItemClick}
+                as={Link}
+                to="/"
+              >
+                <img
+                  style={{ height: "24px", width: "102px" }}
+                  alt="logo"
+                  src="LogoSurplus2.png"
+                />
+              </Menu.Item>
+
+              <Menu.Menu position="right">
+                <Menu.Item
+                  style={{ fontSize: "14px", fontWeight: "400" }}
+                  name="login"
+                  //active={activeItem === "login"}
+                  //onClick={handleItemClick}
+                  as={Link}
+                  to="/login"
+                />
+                <Menu.Item
+                  style={{
+                    backgroundColor: "#7610EB",
+                    color: "#ffffff",
+                    alignSelf: "center",
+                    marginRight: "20px",
+                    fontSize: "14px",
+                    fontWeight: "400",
+                  }}
+                  position="right"
+                  name="register"
+                  //active={activeItem === "register"}
+                  //onClick={handleItemClick}
+                  as={Link}
+                  to="/register"
+                />
+              </Menu.Menu>
+            </Menu>
+          );
+        }
+      })()}
+    </div>
   );
 
   return menuBar;

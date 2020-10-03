@@ -6,12 +6,17 @@ import { fade, makeStyles, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import clsx from "clsx";
 import { useQuery } from "@apollo/react-hooks";
+<<<<<<< HEAD
 import React, { useLayoutEffect, useState, useContext } from "react";
+=======
+import React, { useLayoutEffect, useState, useContext, useEffect } from "react";
+>>>>>>> 3e80d9c2a5e4ff719fbcaf2308fb34f21aa3c472
 
 import gql from "graphql-tag";
 import ACTIVE_CONTENT from "./Active_content";
 import LIST_ITEM_DISCOVER from "./List_item_discover";
 import LIST_ITEM_RIGHT from "./List_item_right";
+import EmptyContent from "./EmptyContent";
 import LIST_VIEWBREAK from "./List_viewbreak";
 import SubscriptionToolbar from "./toolbars/Toolbar";
 import LIST_ITEM_DISCOVER_MINI from "./List_item_discover_mini";
@@ -272,6 +277,32 @@ export default function Main(props) {
   ) : (
     <TextTypography1>All Subscriptions</TextTypography1>
   );
+  var empty = false;
+  var cards = [];
+  const { loading, error, data } = useQuery(GET_SUBSCRIPTIONS);
+
+  if (loading) {
+    console.log("loading");
+  } else {
+    console.log("card1", data["me"]);
+    if (data["me"]["accounts"][0]["transactions"].length > 0) {
+      cards = data["me"]["accounts"][0]["transactions"].map(get_data);
+      console.log("card", cards);
+    } else {
+      empty = true;
+    }
+  }
+
+  useEffect(() => {}, [empty]);
+  function get_data(item) {
+    return {
+      name: item["name"],
+      order: 1,
+      planName: "Standard",
+      price: item["isoCurrencyCode"] + " $" + item["amount"] + "/mo",
+      realPrice: parseInt(item["amount"]),
+    };
+  }
 
   const updatedCards = [];
   const { loading, error, data } = useQuery(GET_SUBSCRIPTIONS);
@@ -287,64 +318,64 @@ export default function Main(props) {
     <div className={classes.divider}></div>
   );
 
-  const cards = [
-    {
-      name: "Netflix",
-      order: 3,
-      planName: "Standard",
-      price: "USD 12.00/mo",
-      realPrice: 12,
-    },
-    {
-      name: "Spotify",
-      order: 1,
-      planName: "Basic",
-      price: "USD $8.00/mo",
-      realPrice: 8,
-    },
-    {
-      name: "Netflix",
-      order: 5,
-      planName: "Premium",
-      price: "USD $9.00/mo",
-      realPrice: 9,
-    },
-    {
-      name: "Notability",
-      order: 2,
-      planName: "Basic",
-      price: "USD $8.00/mo",
-      realPrice: 8,
-    },
-    {
-      name: "GoogleDrive",
-      order: 7,
-      planName: "Standard",
-      price: "USD $12.00/mo",
-      realPrice: 12,
-    },
-    {
-      name: "Spotify",
-      order: 4,
-      planName: "Standard",
-      price: "USD $10.00/mo",
-      realPrice: 10,
-    },
-    {
-      name: "Youtube",
-      order: 6,
-      planName: "Premium",
-      price: "USD $11.00/mo",
-      realPrice: 11,
-    },
-    {
-      name: "Youtube",
-      order: 8,
-      planName: "Standard",
-      price: "USD $12.00/mo",
-      realPrice: 12,
-    },
-  ];
+  // const cards = [
+  //   {
+  //     name: "Netflix",
+  //     order: 3,
+  //     planName: "Standard",
+  //     price: "USD 12.00/mo",
+  //     realPrice: 12,
+  //   },
+  //   {
+  //     name: "Spotify",
+  //     order: 1,
+  //     planName: "Basic",
+  //     price: "USD $8.00/mo",
+  //     realPrice: 8,
+  //   },
+  //   {
+  //     name: "Netflix",
+  //     order: 5,
+  //     planName: "Premium",
+  //     price: "USD $9.00/mo",
+  //     realPrice: 9,
+  //   },
+  //   {
+  //     name: "Notability",
+  //     order: 2,
+  //     planName: "Basic",
+  //     price: "USD $8.00/mo",
+  //     realPrice: 8,
+  //   },
+  //   {
+  //     name: "GoogleDrive",
+  //     order: 7,
+  //     planName: "Standard",
+  //     price: "USD $12.00/mo",
+  //     realPrice: 12,
+  //   },
+  //   {
+  //     name: "Spotify",
+  //     order: 4,
+  //     planName: "Standard",
+  //     price: "USD $10.00/mo",
+  //     realPrice: 10,
+  //   },
+  //   {
+  //     name: "Youtube",
+  //     order: 6,
+  //     planName: "Premium",
+  //     price: "USD $11.00/mo",
+  //     realPrice: 11,
+  //   },
+  //   {
+  //     name: "Youtube",
+  //     order: 8,
+  //     planName: "Standard",
+  //     price: "USD $12.00/mo",
+  //     realPrice: 12,
+  //   },
+  // ];
 
   switch (sortvariable) {
     case "Alphabetical":
@@ -370,7 +401,77 @@ export default function Main(props) {
       break;
   }
 
-  return (
+  return empty ? (
+    <div>
+      <Box
+        display="flex"
+        bgcolor="background.paper"
+        borderColor="grey.500"
+        //boxShadow="0px 0.5px 0px rgba(0, 0, 0, 0.3)"
+        className={classes.toolBar}
+        alignItems="center"
+      >
+        {menuTitle}
+      </Box>
+
+      {underlineBar}
+
+      <Drawer
+        className={classes.drawer}
+        variant="permanent"
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+        anchor="left"
+      >
+        <LIST_ITEM_DISCOVER drawer={drawer} setDrawer={(a) => setDrawer(a)} />
+      </Drawer>
+      <div
+        className={clsx(classes.content, {
+          [classes.contentShift]: open,
+        })}
+      >
+        <Box mx="auto" bgcolor="background.paper" className={classes.mainbreak}>
+          <Grid item alignContent="center">
+            <div className={classes.grow}>
+              <SubscriptionToolbar
+                changeView={() => setView(!view)}
+                changeSort={() => handleState()}
+                changeKind={(kind) => setsortvariable(kind)}
+              />
+            </div>
+            <main className={classes.content}>
+              <EmptyContent />
+            </main>
+          </Grid>
+        </Box>
+      </div>
+      {/* <Drawer
+        className={classes.drawer2}
+        variant="persistent"
+        classes={{
+          paper: classes.drawerPaper2,
+        }}
+        anchor="right"
+        open={open}
+      >
+        <LIST_ITEM_RIGHT />
+        <div className={classes.overlay1}>
+          <IconButton
+            className={classes.Buttoncolor}
+            onClick={handleDrawerClose}
+          >
+            <ArrowForwardIosIcon />
+          </IconButton>
+        </div>
+      </Drawer> */}
+      {/* <div className={classes.overlay}>
+        <IconButton onClick={handleDrawerOpen}>
+          <ArrowBackIosIcon />
+        </IconButton>
+      </div> */}
+    </div>
+  ) : (
     <div>
       <Box
         display="flex"
@@ -460,6 +561,10 @@ const GET_SUBSCRIPTIONS = gql`
           amount
           date
           paymentChannel
+<<<<<<< HEAD
+=======
+          isoCurrencyCode
+>>>>>>> 3e80d9c2a5e4ff719fbcaf2308fb34f21aa3c472
         }
       }
     }

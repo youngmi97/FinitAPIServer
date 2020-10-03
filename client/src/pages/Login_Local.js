@@ -10,11 +10,27 @@ import {
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import gql from "graphql-tag";
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
-import { Form } from "semantic-ui-react";
+import { Link, useLocation } from "react-router-dom";
 import "../App.css";
 import { AuthContext } from "../context/auth";
 import { useForm } from "../hooks";
+import { TextField } from "@material-ui/core";
+
+const CssTextField = withStyles({
+  root: {
+    "& label.Mui-focused": {
+      color: "#7610Eb",
+    },
+    "& .MuiOutlinedInput-root": {
+      "&:hover fieldset": {
+        borderColor: "#7610Eb",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "#7610Eb",
+      },
+    },
+  },
+})(TextField);
 
 const StyledButton = withStyles({
   root: {
@@ -23,9 +39,19 @@ const StyledButton = withStyles({
     fontSize: "1rem",
     paddingLeft: 20,
     paddingRight: 20,
+    marginTop: 30,
+    "&:hover": {
+      backgroundColor: "#5C0DB8",
+      color: "white",
+    },
+    "&:focus": {
+      backgroundColor: "#430985",
+      color: "white",
+    },
   },
   label: {
-    fontSize: "3",
+    fontSize: "14px",
+    fontWeight: 600,
     textTransform: "capitalize",
   },
 })(Button);
@@ -33,12 +59,12 @@ const StyledButton1 = withStyles({
   root: {
     color: "#7610EB",
     fontSize: "0.8rem",
-    marginTop: "4px",
     paddingLeft: 5,
     paddingRight: 5,
+    marginTop: 30,
   },
   label: {
-    fontSize: "3",
+    fontSize: "14px",
     textTransform: "capitalize",
   },
 })(Button);
@@ -78,8 +104,8 @@ const TextTypography3 = withStyles({
 })(Typography);
 const TextTypography4 = withStyles({
   root: {
-    marginTop: "10px",
     color: "grey",
+    marginTop: 30,
   },
 })(Typography);
 
@@ -88,9 +114,11 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexWrap: "wrap",
     marginTop: "100px",
+    width: "448",
+    height: "50",
     "& > *": {
       width: "448px",
-      height: "500px",
+      height: "530px",
     },
   },
 }));
@@ -117,7 +145,6 @@ function Login_Local(props) {
     // this function will be triggered if mutation is executed successfully
     update(_, { data: { signIn: userData } }) {
       //redirect to home page
-      console.log("userData", userData);
       context.login(userData);
       props.history.push("/subscriptions");
     },
@@ -158,7 +185,14 @@ function Login_Local(props) {
     >
       <Box display="flex" justifyContent="center">
         <div className={classes.root}>
-          <Paper variant="outlined" style={{ backgroundColor: "#FFFFFF" }}>
+          <Paper
+            variant="outlined"
+            style={{
+              backgroundColor: "#FFFFFF",
+              borderRadius: 12,
+              boxShadow: "1px 2px 4px rgba(0, 0, 0, 0.1)",
+            }}
+          >
             <Box display="flex" justifyContent="center">
               <PurpleTextTypography1
                 display="fixed"
@@ -211,73 +245,87 @@ function Login_Local(props) {
               </TextTypography3>
             </Box>
             <Box display="flex" justifyContent="center">
-              <Form
+              <form
                 onSubmit={onSubmit}
                 noValidate
                 className={loading ? "loading" : ""}
               >
-                <Form.Input
-                  label="Email"
-                  placeholder="Email..."
+                <CssTextField
                   name="email"
                   type="email"
                   value={values.email}
                   error={errors.email ? true : false}
                   onChange={onChange}
                   style={{
-                    width: "300px",
+                    width: "366px",
+                    height: "54px",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    margin: 10,
                   }}
+                  variant="outlined"
+                  label="Email or Phone"
                 />
-                <Form.Input
-                  label="Password"
-                  placeholder="Password..."
+                <CssTextField
                   name="password"
                   type="password"
                   value={values.password}
                   error={errors.password ? true : false}
                   onChange={onChange}
                   style={{
-                    width: "300px",
+                    width: "366px",
+                    height: "54px",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    margin: 10,
                   }}
+                  variant="outlined"
+                  label="Password"
                 />
-                <Box display="flex" justifyContent="center">
-                  <StyledButton type="submit">Login</StyledButton>
+                <Button
+                  style={{ margin: 0, padding: 0, textTransform: "none" }}
+                >
+                  <Typography
+                    style={{
+                      color: "#7610EB",
+                      marginLeft: 10,
+                      padding: 0,
+                      fontSize: 14,
+                    }}
+                  >
+                    Forgot your email or password?
+                  </Typography>
+                </Button>
+                <Box
+                  display="flex"
+                  alignItems="center"
+                  marginLeft="10px"
+                  marginRight="10px"
+                >
+                  <Box margin="0px">
+                    <TextTypography4
+                      display="fixed"
+                      className={classes.title}
+                      variant="subtitle2"
+                      noWrap
+                    >
+                      Not a member?
+                    </TextTypography4>
+                  </Box>
+                  <Box marginLeft="5px" flexGrow={1}>
+                    <StyledButton1 {...{ to: "/register" }} component={Link}>
+                      Create One
+                    </StyledButton1>
+                  </Box>
+                  <Box display="flex" justifyContent="center">
+                    <StyledButton type="submit">Log In</StyledButton>
+                  </Box>
                 </Box>
-              </Form>
+              </form>
             </Box>
 
-            <Box
-              display="flex"
-              justifyContent="flex_start"
-              marginLeft="41px"
-              marginRight="41px"
-            >
-              <PurpleTextTypography2
-                display="fixed"
-                className={classes.title}
-                variant="subtitle2"
-                noWrap
-              >
-                Forgot your email?
-              </PurpleTextTypography2>
-            </Box>
-            <Box display="flex" marginLeft="41px" marginTop="30px">
-              <Box margin="0px">
-                <TextTypography4
-                  display="fixed"
-                  className={classes.title}
-                  variant="subtitle2"
-                  noWrap
-                >
-                  Not a member?
-                </TextTypography4>
-              </Box>
-              <Box marginLeft="5px">
-                <StyledButton1 {...{ to: "/register" }} component={Link}>
-                  Create One
-                </StyledButton1>
-              </Box>
-            </Box>
             <Box display="flex" marginLeft="41px" marginTop="30px">
               {Object.keys(errors).length > 0 && (
                 <div className="ui error message">

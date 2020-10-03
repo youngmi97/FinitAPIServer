@@ -10,7 +10,7 @@ import React, { useLayoutEffect, useState } from "react";
 import MY_WALLET from "./wallet/Mywallet";
 import PAYMENT_METHODS from "./wallet/Payment";
 import WALLET_HISTORY from "./wallet/WalletHistory";
-import LIST_ITEM_DISCOVER from "./Listwallet";
+import LIST_ITEM_DISCOVER from "./List_item_discover";
 import LIST_ITEM_RIGHT from "./List_item_right";
 import LIST_ITEM_DISCOVER_MINI from "./List_item_discover_mini";
 
@@ -242,6 +242,7 @@ function useWindowSize() {
 export default function MainWallet(props) {
   const [width] = useWindowSize();
   const isReduced = width <= 1023;
+  const [drawer, setDrawer] = React.useState(4);
 
   //console.log("isReduced", isReduced);
   const classes = useStyles();
@@ -289,7 +290,7 @@ export default function MainWallet(props) {
         }}
         anchor="left"
       >
-        <LIST_ITEM_DISCOVER />
+        <LIST_ITEM_DISCOVER drawer={drawer} setDrawer={(a) => setDrawer(a)} />
       </Drawer>
       <main
         className={clsx(classes.content, {

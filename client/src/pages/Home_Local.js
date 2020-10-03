@@ -61,6 +61,14 @@ const StyledButton = withStyles({
     paddingRight: 15,
     paddingTop: 10,
     paddingBottom: 10,
+    "&:hover": {
+      backgroundColor: "#5C0DB8",
+      color: "white",
+    },
+    "&:focus": {
+      backgroundColor: "#430985",
+      color: "white",
+    },
   },
   label: {
     fontSize: "3",

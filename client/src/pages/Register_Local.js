@@ -1,10 +1,16 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Avatar, Box, Button, Paper, Typography } from "@material-ui/core";
+import {
+  Avatar,
+  Box,
+  Button,
+  Paper,
+  Typography,
+  TextField,
+} from "@material-ui/core";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import gql from "graphql-tag";
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { Form } from "semantic-ui-react";
 import { AuthContext } from "../context/auth";
 import { useForm } from "../hooks";
 
@@ -15,22 +21,49 @@ const StyledButton = withStyles({
     fontSize: "1rem",
     paddingLeft: 20,
     paddingRight: 20,
+    marginTop: 30,
+    "&:hover": {
+      backgroundColor: "#5C0DB8",
+      color: "white",
+    },
+    "&:focus": {
+      backgroundColor: "#430985",
+      color: "white",
+    },
   },
   label: {
-    fontSize: "3",
+    fontSize: "14px",
+    fontWeight: 600,
     textTransform: "capitalize",
   },
 })(Button);
+
+const CssTextField = withStyles({
+  root: {
+    "& label.Mui-focused": {
+      color: "#7610Eb",
+    },
+    "& .MuiOutlinedInput-root": {
+      "&:hover fieldset": {
+        borderColor: "#7610Eb",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "#7610Eb",
+      },
+    },
+  },
+})(TextField);
+
 const StyledButton1 = withStyles({
   root: {
     color: "#7610EB",
     fontSize: "0.8rem",
-    marginTop: "4px",
     paddingLeft: 5,
     paddingRight: 5,
+    marginTop: 30,
   },
   label: {
-    fontSize: "3",
+    fontSize: "14px",
     textTransform: "capitalize",
   },
 })(Button);
@@ -64,7 +97,8 @@ const TextTypography3 = withStyles({
 })(Typography);
 const TextTypography4 = withStyles({
   root: {
-    marginTop: "10px",
+    marginTop: 30,
+
     color: "grey",
   },
 })(Typography);
@@ -74,6 +108,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexWrap: "wrap",
     marginTop: "100px",
+    width: 448,
 
     "& > *": {
       width: "448px",
@@ -89,9 +124,9 @@ function Register_Local(props) {
   const [errors, setErrors] = useState({});
 
   const initialState = {
+    name: "",
     username: "",
     email: "",
-    name: "",
     password: "",
     confirmPassword: "",
   };
@@ -144,7 +179,12 @@ function Register_Local(props) {
         <div className={classes.root}>
           <Paper
             variant="outlined"
-            style={{ height: "700px", backgroundColor: "#FFFFFF" }}
+            style={{
+              height: "700px",
+              backgroundColor: "#FFFFFF",
+              borderRadius: 12,
+              boxShadow: "1px 2px 4px rgba(0, 0, 0, 0.1)",
+            }}
           >
             <Box display="flex" justifyContent="center">
               <PurpleTextTypography1
@@ -199,95 +239,129 @@ function Register_Local(props) {
             </Box>
 
             <Box display="flex" justifyContent="center">
-              <Form
+              <form
                 onSubmit={onSubmit}
                 noValidate
                 className={loading ? "loading" : ""}
               >
-                <Form.Input
-                  label="Email"
-                  placeholder="Email..."
+                <Box display="flex" p={1} style={{ margin: 10, padding: 0 }}>
+                  <Box p={1} style={{ margin: 0, padding: 0 }}>
+                    <CssTextField
+                      name="name"
+                      type="name"
+                      value={values.name}
+                      error={errors.name ? true : false}
+                      onChange={onChange}
+                      style={{
+                        width: "179px",
+                        height: "54px",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                      }}
+                      variant="outlined"
+                      label="First Name"
+                    />
+                  </Box>
+                  <Box p={1} style={{ marginLeft: 8, padding: 0 }}>
+                    <CssTextField
+                      name="username"
+                      type="name"
+                      value={values.username}
+                      error={errors.username ? true : false}
+                      onChange={onChange}
+                      style={{
+                        width: "179px",
+                        height: "54px",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                      }}
+                      variant="outlined"
+                      label="Last Name"
+                    />
+                  </Box>
+                </Box>
+
+                <CssTextField
                   name="email"
                   type="email"
                   value={values.email}
                   error={errors.email ? true : false}
                   onChange={onChange}
                   style={{
-                    width: "300px",
+                    width: "366px",
+                    height: "54px",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    margin: 10,
                   }}
+                  variant="outlined"
+                  label="Email or Phone"
                 />
-
-                <Form.Input
-                  label="Name"
-                  placeholder="Name..."
-                  name="name"
-                  type="text"
-                  value={values.name}
-                  error={errors.name ? true : false}
-                  onChange={onChange}
-                  style={{
-                    width: "300px",
-                  }}
-                />
-                <Form.Input
-                  label="Username"
-                  placeholder="Username..."
-                  name="username"
-                  type="text"
-                  value={values.username}
-                  error={errors.username ? true : false}
-                  onChange={onChange}
-                  style={{
-                    width: "300px",
-                  }}
-                />
-                <Form.Input
-                  label="Password"
-                  placeholder="Password..."
+                <CssTextField
                   name="password"
                   type="password"
                   value={values.password}
                   error={errors.password ? true : false}
                   onChange={onChange}
                   style={{
-                    width: "300px",
+                    width: "366px",
+                    height: "54px",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    margin: 10,
                   }}
+                  variant="outlined"
+                  label="Password"
                 />
-                <Form.Input
-                  label="Confirm Password"
-                  placeholder="Confirm Password..."
+                <CssTextField
                   name="confirmPassword"
                   type="password"
                   value={values.confirmPassword}
                   error={errors.confirmPassword ? true : false}
                   onChange={onChange}
                   style={{
-                    width: "300px",
+                    width: "366px",
+                    height: "54px",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    margin: 10,
                   }}
+                  variant="outlined"
+                  label="Confirm Password"
                 />
-                <Box display="flex" justifyContent="center">
-                  <StyledButton type="submit">Register</StyledButton>
+                <Box
+                  display="flex"
+                  alignItems="center"
+                  marginLeft="10px"
+                  marginRight="10px"
+                >
+                  <Box margin="0px">
+                    <TextTypography4
+                      display="fixed"
+                      className={classes.title}
+                      variant="subtitle2"
+                      noWrap
+                    >
+                      Already a member?
+                    </TextTypography4>
+                  </Box>
+                  <Box marginLeft="0px" flexGrow={1}>
+                    <StyledButton1 {...{ to: "/login" }} component={Link}>
+                      Log In
+                    </StyledButton1>
+                  </Box>
+                  <Box display="flex" justifyContent="center">
+                    <StyledButton type="submit">Continue</StyledButton>
+                  </Box>
                 </Box>
-              </Form>
+              </form>
             </Box>
 
-            <Box display="flex" marginLeft="41px" marginTop="30px">
-              <Box margin="0px">
-                <TextTypography4
-                  display="fixed"
-                  className={classes.title}
-                  variant="subtitle2"
-                  noWrap
-                >
-                  Already a member?
-                </TextTypography4>
-              </Box>
-              <Box marginLeft="5px">
-                <StyledButton1 {...{ to: "/login" }} component={Link}>
-                  Log In
-                </StyledButton1>
-              </Box>
-            </Box>
             <Box display="flex" marginLeft="41px" marginTop="30px">
               {Object.keys(errors).length > 0 && (
                 <div className="ui error message">

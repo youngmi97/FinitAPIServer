@@ -11,7 +11,7 @@ import React, { useLayoutEffect, useState } from "react";
 
 import Chart from "./Insight/Chart";
 import Spendlist from "./Insight/spendlist";
-import LIST_ITEM_DISCOVER from "./Listinsight";
+import LIST_ITEM_DISCOVER from "./List_item_discover";
 import LIST_ITEM_RIGHT from "./List_item_right";
 import LIST_ITEM_DISCOVER_MINI from "./List_item_discover_mini";
 
@@ -243,6 +243,7 @@ function useWindowSize() {
 export default function Main(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [drawer, setDrawer] = React.useState(3);
   // const [view, setView] = React.useState(false);
 
   const [width] = useWindowSize();
@@ -289,7 +290,7 @@ export default function Main(props) {
         }}
         anchor="left"
       >
-        <LIST_ITEM_DISCOVER />
+        <LIST_ITEM_DISCOVER drawer={drawer} setDrawer={(a) => setDrawer(a)} />
       </Drawer>
       <main
         className={clsx(classes.content, {
