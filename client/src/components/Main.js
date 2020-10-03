@@ -250,6 +250,7 @@ export default function Main(props) {
 
   const [open, setOpen] = React.useState(false);
   const [state, setState] = React.useState(1);
+  const [drawer, setDrawer] = React.useState(0);
   const [view, setView] = React.useState(false);
 
   const handleState = () => {
@@ -382,7 +383,7 @@ export default function Main(props) {
         }}
         anchor="left"
       >
-        <LIST_ITEM_DISCOVER />
+        <LIST_ITEM_DISCOVER drawer={drawer} setDrawer={(a) => setDrawer(a)} />
       </Drawer>
       <div
         className={clsx(classes.content, {

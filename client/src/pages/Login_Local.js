@@ -10,11 +10,27 @@ import {
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import gql from "graphql-tag";
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
-import { Form } from "semantic-ui-react";
+import { Link, useLocation } from "react-router-dom";
 import "../App.css";
 import { AuthContext } from "../context/auth";
 import { useForm } from "../hooks";
+import { TextField } from "@material-ui/core";
+
+const CssTextField = withStyles({
+  root: {
+    "& label.Mui-focused": {
+      color: "#7610Eb",
+    },
+    "& .MuiOutlinedInput-root": {
+      "&:hover fieldset": {
+        borderColor: "#7610Eb",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "#7610Eb",
+      },
+    },
+  },
+})(TextField);
 
 const StyledButton = withStyles({
   root: {
@@ -23,6 +39,14 @@ const StyledButton = withStyles({
     fontSize: "1rem",
     paddingLeft: 20,
     paddingRight: 20,
+    "&:hover": {
+      backgroundColor: "#5C0DB8",
+      color: "white",
+    },
+    "&:focus": {
+      backgroundColor: "#430985",
+      color: "white",
+    },
   },
   label: {
     fontSize: "3",
@@ -157,7 +181,13 @@ function Login_Local(props) {
       }}
     >
       <Box display="flex" justifyContent="center">
-        <div className={classes.root}>
+        <div
+          className={classes.root}
+          style={{
+            boxShadow: "1px 2px 4px rgba(0, 0, 0, 0.1)",
+            borderRadius: 12,
+          }}
+        >
           <Paper variant="outlined" style={{ backgroundColor: "#FFFFFF" }}>
             <Box display="flex" justifyContent="center">
               <PurpleTextTypography1
@@ -211,14 +241,12 @@ function Login_Local(props) {
               </TextTypography3>
             </Box>
             <Box display="flex" justifyContent="center">
-              <Form
+              <form
                 onSubmit={onSubmit}
                 noValidate
                 className={loading ? "loading" : ""}
               >
-                <Form.Input
-                  label="Email"
-                  placeholder="Email..."
+                <CssTextField
                   name="email"
                   type="email"
                   value={values.email}
@@ -226,11 +254,16 @@ function Login_Local(props) {
                   onChange={onChange}
                   style={{
                     width: "300px",
+                    height: "54px",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    margin: 10,
                   }}
+                  variant="outlined"
+                  label="Email or Phone"
                 />
-                <Form.Input
-                  label="Password"
-                  placeholder="Password..."
+                <CssTextField
                   name="password"
                   type="password"
                   value={values.password}
@@ -238,12 +271,20 @@ function Login_Local(props) {
                   onChange={onChange}
                   style={{
                     width: "300px",
+                    height: "54px",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    margin: 10,
                   }}
+                  variant="outlined"
+                  label="Password"
                 />
+
                 <Box display="flex" justifyContent="center">
                   <StyledButton type="submit">Login</StyledButton>
                 </Box>
-              </Form>
+              </form>
             </Box>
 
             <Box
