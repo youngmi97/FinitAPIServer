@@ -74,16 +74,24 @@ export default function Home_Local() {
       {/* <AppBar position="fixed">
                 <Launches />
             </AppBar> */}
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        css={{ height: 600 }}
+      <div
+        style={{
+          height: "100vh",
+          backgroundColor: "#FFFFFF",
+          top: "60px",
+        }}
       >
-        <StyledButton {...{ to: "/register" }} component={Link}>
-          Get Started
-        </StyledButton>
-      </Box>
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          css={{ height: 600 }}
+        >
+          <StyledButton {...{ to: "/register" }} component={Link}>
+            Get Started
+          </StyledButton>
+        </Box>
+      </div>
     </MuiThemeProvider>
   );
 }

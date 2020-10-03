@@ -133,165 +133,176 @@ function Register_Local(props) {
   }
 
   return (
-    <Box display="flex" justifyContent="center">
-      <div className={classes.root}>
-        <Paper variant="outlined" style={{ height: "700px" }}>
-          <Box display="flex" justifyContent="center">
-            <PurpleTextTypography1
-              display="fixed"
-              className={classes.title}
-              variant="h6"
-              noWrap
-            >
-              surPlus
-            </PurpleTextTypography1>
-          </Box>
-          <Box display="flex" justifyContent="center">
-            <TextTypography1
-              display="fixed"
-              className={classes.title}
-              variant="h6"
-              noWrap
-            >
-              Join Surplus.
-            </TextTypography1>
-          </Box>
-          <Box display="flex" justifyContent="center">
-            <TextTypography2
-              display="fixed"
-              className={classes.title}
-              variant="subtitle2"
-              noWrap
-            >
-              Create an account to stay on top of your subscriptions.
-            </TextTypography2>
-          </Box>
-          <Box display="flex" justifyContent="center" marginTop="24px">
-            <Box p={1}>
-              <Avatar variant="circle" src="Facebook.svg" />
+    <div
+      style={{
+        height: "100vh",
+        backgroundColor: "#FFFFFF",
+        top: "60px",
+      }}
+    >
+      <Box display="flex" justifyContent="center">
+        <div className={classes.root}>
+          <Paper
+            variant="outlined"
+            style={{ height: "700px", backgroundColor: "#FFFFFF" }}
+          >
+            <Box display="flex" justifyContent="center">
+              <PurpleTextTypography1
+                display="fixed"
+                className={classes.title}
+                variant="h6"
+                noWrap
+              >
+                surPlus
+              </PurpleTextTypography1>
             </Box>
-            <Box p={1}>
-              <Avatar variant="circle" src="Google New.svg" />
+            <Box display="flex" justifyContent="center">
+              <TextTypography1
+                display="fixed"
+                className={classes.title}
+                variant="h6"
+                noWrap
+              >
+                Join Surplus.
+              </TextTypography1>
             </Box>
-            <Box p={1}>
-              <Avatar variant="circle" src="Apple.svg" />
-            </Box>
-          </Box>
-          <Box display="flex" justifyContent="center">
-            <TextTypography3
-              display="fixed"
-              className={classes.title}
-              variant="subtitle2"
-              noWrap
-            >
-              OR
-            </TextTypography3>
-          </Box>
-
-          <Box display="flex" justifyContent="center">
-            <Form
-              onSubmit={onSubmit}
-              noValidate
-              className={loading ? "loading" : ""}
-            >
-              <Form.Input
-                label="Email"
-                placeholder="Email..."
-                name="email"
-                type="email"
-                value={values.email}
-                error={errors.email ? true : false}
-                onChange={onChange}
-                style={{
-                  width: "300px",
-                }}
-              />
-
-              <Form.Input
-                label="Name"
-                placeholder="Name..."
-                name="name"
-                type="text"
-                value={values.name}
-                error={errors.name ? true : false}
-                onChange={onChange}
-                style={{
-                  width: "300px",
-                }}
-              />
-              <Form.Input
-                label="Username"
-                placeholder="Username..."
-                name="username"
-                type="text"
-                value={values.username}
-                error={errors.username ? true : false}
-                onChange={onChange}
-                style={{
-                  width: "300px",
-                }}
-              />
-              <Form.Input
-                label="Password"
-                placeholder="Password..."
-                name="password"
-                type="password"
-                value={values.password}
-                error={errors.password ? true : false}
-                onChange={onChange}
-                style={{
-                  width: "300px",
-                }}
-              />
-              <Form.Input
-                label="Confirm Password"
-                placeholder="Confirm Password..."
-                name="confirmPassword"
-                type="password"
-                value={values.confirmPassword}
-                error={errors.confirmPassword ? true : false}
-                onChange={onChange}
-                style={{
-                  width: "300px",
-                }}
-              />
-              <Box display="flex" justifyContent="center">
-                <StyledButton type="submit">Register</StyledButton>
-              </Box>
-            </Form>
-          </Box>
-
-          <Box display="flex" marginLeft="41px" marginTop="30px">
-            <Box margin="0px">
-              <TextTypography4
+            <Box display="flex" justifyContent="center">
+              <TextTypography2
                 display="fixed"
                 className={classes.title}
                 variant="subtitle2"
                 noWrap
               >
-                Already a member?
-              </TextTypography4>
+                Create an account to stay on top of your subscriptions.
+              </TextTypography2>
             </Box>
-            <Box marginLeft="5px">
-              <StyledButton1 {...{ to: "/login" }} component={Link}>
-                Log In
-              </StyledButton1>
+            <Box display="flex" justifyContent="center" marginTop="24px">
+              <Box p={1}>
+                <Avatar variant="circle" src="Facebook.svg" />
+              </Box>
+              <Box p={1}>
+                <Avatar variant="circle" src="Google New.svg" />
+              </Box>
+              <Box p={1}>
+                <Avatar variant="circle" src="Apple.svg" />
+              </Box>
             </Box>
-          </Box>
-          <Box display="flex" marginLeft="41px" marginTop="30px">
-            {Object.keys(errors).length > 0 && (
-              <div className="ui error message">
-                <ul className="list">
-                  {Object.values(errors).map((value) => (
-                    <li key={value}>{value}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </Box>
-        </Paper>
-      </div>
-    </Box>
+            <Box display="flex" justifyContent="center">
+              <TextTypography3
+                display="fixed"
+                className={classes.title}
+                variant="subtitle2"
+                noWrap
+              >
+                OR
+              </TextTypography3>
+            </Box>
+
+            <Box display="flex" justifyContent="center">
+              <Form
+                onSubmit={onSubmit}
+                noValidate
+                className={loading ? "loading" : ""}
+              >
+                <Form.Input
+                  label="Email"
+                  placeholder="Email..."
+                  name="email"
+                  type="email"
+                  value={values.email}
+                  error={errors.email ? true : false}
+                  onChange={onChange}
+                  style={{
+                    width: "300px",
+                  }}
+                />
+
+                <Form.Input
+                  label="Name"
+                  placeholder="Name..."
+                  name="name"
+                  type="text"
+                  value={values.name}
+                  error={errors.name ? true : false}
+                  onChange={onChange}
+                  style={{
+                    width: "300px",
+                  }}
+                />
+                <Form.Input
+                  label="Username"
+                  placeholder="Username..."
+                  name="username"
+                  type="text"
+                  value={values.username}
+                  error={errors.username ? true : false}
+                  onChange={onChange}
+                  style={{
+                    width: "300px",
+                  }}
+                />
+                <Form.Input
+                  label="Password"
+                  placeholder="Password..."
+                  name="password"
+                  type="password"
+                  value={values.password}
+                  error={errors.password ? true : false}
+                  onChange={onChange}
+                  style={{
+                    width: "300px",
+                  }}
+                />
+                <Form.Input
+                  label="Confirm Password"
+                  placeholder="Confirm Password..."
+                  name="confirmPassword"
+                  type="password"
+                  value={values.confirmPassword}
+                  error={errors.confirmPassword ? true : false}
+                  onChange={onChange}
+                  style={{
+                    width: "300px",
+                  }}
+                />
+                <Box display="flex" justifyContent="center">
+                  <StyledButton type="submit">Register</StyledButton>
+                </Box>
+              </Form>
+            </Box>
+
+            <Box display="flex" marginLeft="41px" marginTop="30px">
+              <Box margin="0px">
+                <TextTypography4
+                  display="fixed"
+                  className={classes.title}
+                  variant="subtitle2"
+                  noWrap
+                >
+                  Already a member?
+                </TextTypography4>
+              </Box>
+              <Box marginLeft="5px">
+                <StyledButton1 {...{ to: "/login" }} component={Link}>
+                  Log In
+                </StyledButton1>
+              </Box>
+            </Box>
+            <Box display="flex" marginLeft="41px" marginTop="30px">
+              {Object.keys(errors).length > 0 && (
+                <div className="ui error message">
+                  <ul className="list">
+                    {Object.values(errors).map((value) => (
+                      <li key={value}>{value}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </Box>
+          </Paper>
+        </div>
+      </Box>
+    </div>
   );
 }
 
