@@ -6,11 +6,7 @@ import { fade, makeStyles, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import clsx from "clsx";
 import { useQuery } from "@apollo/react-hooks";
-<<<<<<< HEAD
-import React, { useLayoutEffect, useState, useContext } from "react";
-=======
 import React, { useLayoutEffect, useState, useContext, useEffect } from "react";
->>>>>>> 3e80d9c2a5e4ff719fbcaf2308fb34f21aa3c472
 
 import gql from "graphql-tag";
 import ACTIVE_CONTENT from "./Active_content";
@@ -561,10 +557,7 @@ const GET_SUBSCRIPTIONS = gql`
           amount
           date
           paymentChannel
-<<<<<<< HEAD
-=======
           isoCurrencyCode
->>>>>>> 3e80d9c2a5e4ff719fbcaf2308fb34f21aa3c472
         }
       }
     }
