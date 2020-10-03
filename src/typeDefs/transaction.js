@@ -2,38 +2,37 @@ import { gql } from "apollo-server-express";
 
 export default gql`
   extend type Query {
-    transactions(userId: String!, accountId: String!): [Transaction!]!
-      @auth
-      @linked
-    getTransaction(transactionId: String!): Transaction @auth @linked
+    transactions(userId: String!, accountId: String!): [Transaction!]! @auth
   }
 
   extend type Mutation {
     # have to check that the account id is unique
     addTransaction(
-      userId: String!
-      accountId: String!
+      accountId: ID!
       amount: String!
       category: [String!]!
       date: String!
       isoCurrencyCode: String!
       name: String!
       paymentChannel: String!
-      transactionId: String!
       transactionType: String!
-    ): Transaction @auth @linked
+    ): Transaction @auth
   }
 
+  # FIXED
   type Transaction {
-    userId: String!
-    accountId: String!
+    id: ID!
+    user: User!
+    account: Account!
     amount: String!
     category: [String!]!
+    categoryId: String!
     date: String!
     isoCurrencyCode: String!
     name: String!
     paymentChannel: String!
-    transactionId: String!
     transactionType: String!
+    createdAt: String!
+    updatedAt: String!
   }
 `;

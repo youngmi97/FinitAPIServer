@@ -1,41 +1,36 @@
-import { PlaidAccount } from "../models";
+import { PlaidAccount, PlaidItem, User } from "../models";
+import { syncAccount } from "../objectSchemas";
 import mongoose from "mongoose";
+const Joi = require("@hapi/joi");
 
 export default {
-  Query: {
-    accounts: (root, { userId }, { req }, info) => {
-      // Returns all accounts under the given userId
-      // There is an internal Server Error --> UnhandledPromiseRejectionWarning Needs to be Resolved(?)
-      return PlaidAccount.find({ userId: userId });
-    },
-
-    getAccount: (root, { userId, accountId }, { req }, info) => {
-      // if (mongoose.Types.ObjectId.isValid(userId)) {
-      //   throw new UserInputError(`{id} is not valid account ID`);
-      // }
-
-      // TODO:
-      // Relay Real Access Token
-      // AWS Raw Data Store and Visualization
-      // GraphQL Accounts Model --> save to DB
-
-      return PlaidAccount.find({ userId: userId, accountId: accountId });
-    },
-  },
-
   Mutation: {
     addAccount: async (root, args, { req }, info) => {
-      //const result = await signUp.validateAsync(args);
-      console.log("Account Create", args);
+      const { userId } = args;
+      //console.log("userId", userId);
+      //console.log("Finding User", User.findOne({ _id: args.userId }));
+      await syncAccount.validateAsync({ userId });
       const account = await PlaidAccount.create(args);
+
+      //add the newly created account to the User
+      await User.updateOne(
+        { _id: userId },
+        {
+          $push: { accounts: account },
+        }
+      );
       return account;
     },
 
     removeAccount: async (root, { accountId, userId }, { req }, info) => {
       PlaidAccount.deleteOne({ accountId: accountId, userId, userID });
-
       //have to check that delete query was valid before returning
       return true;
+    },
+  },
+  Account: {
+    transactions: (account, args, context, info) => {
+      return PlaidItem.find({ accountId: account.accountId });
     },
   },
 };

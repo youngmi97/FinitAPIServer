@@ -23,8 +23,8 @@ export default {
       // TODO: auth, projection, pagination
       // Auth.checkSignedOut(req);
 
-      if (mongoose.Types.ObjectId.isValid(id)) {
-        throw new UserInputError(`{id} is not valid user ID`);
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        throw new UserInputError(`User ID is not valid Object ID`);
       }
 
       return User.findById(id);
@@ -66,6 +66,13 @@ export default {
       //Auth.checkSignedIn(context.req);
       //console.log("context.req.session", context.req.session);
       return signOut(context.req, context.res);
+    },
+  },
+
+  // query for accounts didnt work before this
+  User: {
+    accounts: async (user, args, context, info) => {
+      return (await user.populate("accounts").execPopulate()).accounts;
     },
   },
 };

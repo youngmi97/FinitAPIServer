@@ -10,7 +10,7 @@ mutation {
 }
 
 mutation {
-  signIn(email: "finit@gmail.com", password: "Finit7331!") {
+  signIn(email: "testest@gmail.com", password: "Finit7331!") {
     id
   }
 }
@@ -21,34 +21,30 @@ mutation {
 
 mutation {
   addAccount(
-    plaidItemId: "12312312"
-    accountId: "12312312"
-    userId: "5f0f18dd2e6b6b1e6e69dd54"
-    mask: "mask"
-    balances: "10000"
-    name: "name"
+    accountId: "12345678"
+    plaidId: "12312312"
+    userId: "5f2e5f87b9ac424151a20002"
+    name: "demoAccount"
     officialName: "officialName"
-    type: "type"
-    subtype: "subtype"
+    balance: "600"
+    type: "special"
   ) {
     id
-    name
   }
 }
 
 mutation {
   addTransaction(
-    userId: "5f759a64278ebc612d6141b8"
-    accountId: "asdasd"
-    amount: "50"
+    accountId: "12345678"
+    amount: "500"
     category: ["Health", "Care"]
     date: "2020-8-12"
     isoCurrencyCode: "USD"
     name: "Netflix"
     paymentChannel: "from home"
-    transactionId: "asd6as8d6a78s6"
     transactionType: "special"
   ) {
+    id
     name
     amount
   }
@@ -78,5 +74,21 @@ mutation {
 {
   user(id: "5f218c1e3fffd56ef2f45075") {
     id
+  }
+}
+
+{
+  users {
+    name
+    id
+    accounts {
+      id
+      user {
+        id
+      }
+      transactions {
+        id
+      }
+    }
   }
 }

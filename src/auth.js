@@ -56,10 +56,10 @@ export const checkAccountLinked = async (req) => {
   var keys = [];
   for (var k in req) keys.push(k);
 
-  console.log("keys", keys);
-  console.log("params", req.params);
-  console.log("body", req.body);
-  console.log("session", req.session);
+  //console.log("keys", keys);
+  //console.log("params", req.params);
+  //console.log("body", req.body);
+  //console.log("session", req.session);
 
   // session userId is different from the user id
   const accounts = await PlaidAccount.findOne({

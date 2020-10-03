@@ -1,33 +1,30 @@
-const { model, Schema } = require("mongoose");
+import mongoose, { Schema } from "mongoose";
 
-module.exports = model(
-  "PlaidAccount",
-  new Schema({
-    plaidItemId: {
-      type: String,
-      required: true,
+const { ObjectId } = Schema.Types;
+
+const plaidAccountSchema = new Schema(
+  {
+    accountId: String,
+    plaidId: String,
+    user: {
+      type: ObjectId,
+      ref: "User",
     },
-    accountId: {
-      type: String,
-      required: true,
-    },
-    userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
-    mask: String,
-    balances: String,
-    name: {
-      type: String,
-      required: true,
-    },
-    officialName: {
-      type: String,
-    },
-    subtype: {
-      type: String,
-      required: true,
-    },
-    type: {
-      type: String,
-      required: true,
-    },
-  })
+    transactions: [
+      {
+        type: ObjectId,
+        ref: "Transaction",
+      },
+    ],
+    name: String,
+    officialName: String,
+    balance: String,
+    type: String,
+  },
+  {
+    timestamps: true,
+  }
 );
+
+const PlaidAccount = mongoose.model("PlaidAccount", plaidAccountSchema);
+export default PlaidAccount;

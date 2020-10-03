@@ -1,27 +1,24 @@
-import { PlaidItem } from "../models";
+import { PlaidItem, PlaidAccount } from "../models";
+import { syncTransaction } from "../objectSchemas";
 const mongoose = require("mongoose");
 
 export default {
-  Query: {
-    transactions: (root, { userId, accountId }, { req }, info) => {
-      // Returns all accounts under the given userId
-      // There is an internal Server Error --> UnhandledPromiseRejectionWarning Needs to be Resolved(?)
-      return PlaidItem.find({ userId: userId, accountId: accountId });
-    },
-
-    getTransaction: (root, { transactionId }, { req }, info) => {
-      return PlaidAccount.find({
-        transactionId: transactionId,
-      });
-    },
-  },
-
   Mutation: {
     addTransaction: async (root, args, { req }, info) => {
-      //const result = await signUp.validateAsync(args);
-      args.userId = mongoose.Types.ObjectId(args.userId);
-      const account = await PlaidItem.create(args);
-      return account;
+      const { accountId } = args;
+      //console.log("userId", userId);
+      //console.log("Finding User", User.findOne({ _id: args.userId }));
+
+      await syncTransaction.validateAsync({ accountId });
+      const transaction = await PlaidItem.create(args);
+      //add the newly created account to the User
+      await PlaidAccount.updateOne(
+        { accountId: accountId },
+        {
+          $push: { transactions: transaction },
+        }
+      );
+      return transaction;
     },
   },
 };
