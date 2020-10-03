@@ -126,6 +126,7 @@ app.post("/auth/public_token", async (req, res) => {
   // First, receive the public token and set it to a variable
   let PUBLIC_TOKEN = req.body.public_token;
   // Second, exchange the public token for an access token
+  // When does the access token expire ??
   client.exchangePublicToken(PUBLIC_TOKEN, function (error, tokenResponse) {
     ACCESS_TOKEN = tokenResponse.access_token;
     ITEM_ID = tokenResponse.item_id;
@@ -156,7 +157,18 @@ app.get("/transactions", async (req, res) => {
       res.json({ transactions: transactionsResponse });
       // TRANSACTIONS LOGGED BELOW!
       // They will show up in the terminal that you are running nodemon in.
-      console.log(transactionsResponse);
+      console.log("----------------------------------");
+      console.log("No. Accounts", transactionsResponse["accounts"].length);
+      console.log("accounts info", transactionsResponse["accounts"]);
+      console.log("----------------------------------");
+      console.log(
+        "No. Transactions",
+        transactionsResponse["transactions"].length
+      );
+      console.log("transaction info", transactionsResponse["transactions"]);
+
+      // transactionsResponse Structure
+      //
     }
   );
 

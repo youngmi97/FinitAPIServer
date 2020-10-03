@@ -1,16 +1,23 @@
-const { model, Schema } = require("mongoose");
+import mongoose, { Schema } from "mongoose";
 
-module.exports = model(
-  "PlaidItem",
-  new Schema({
-    userId: {
-      type: Schema.Types.ObjectId,
-      required: true,
-    },
-    availableProducts: Array,
-    billedProducts: Array,
-    institutionId: String,
-    itemId: String,
-    webhook: String,
-  })
+const { ObjectId } = Schema.Types;
+
+const plaidItemSchema = mongoose.Schema(
+  {
+    accountId: String,
+    amount: String,
+    category: [String],
+    categoryId: String,
+    date: String,
+    isoCurrencyCode: String,
+    name: String,
+    paymentChannel: String,
+    transactionType: String,
+  },
+  {
+    timestamps: true,
+  }
 );
+
+const PlaidItem = mongoose.model("PlaidItem", plaidItemSchema);
+export default PlaidItem;
