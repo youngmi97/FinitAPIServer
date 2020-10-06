@@ -8,6 +8,7 @@ import { attemptSignIn, signOut } from "../auth";
 export default {
   Query: {
     me: async (root, args, context, info) => {
+      console.log("Me query", context.req.session);
       return await User.findById(context.req.session.userId);
     },
 
