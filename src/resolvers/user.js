@@ -8,8 +8,7 @@ import { attemptSignIn, signOut } from "../auth";
 export default {
   Query: {
     me: async (root, args, context, info) => {
-      // Auth.checkSignedIn(context.req);
-      // console.log(User.findById(context.req.session.userId));
+      console.log("Me query", context.req.session);
       return await User.findById(context.req.session.userId);
     },
 
@@ -23,11 +22,10 @@ export default {
 
     user: (root, { id }, { req }, info) => {
       // TODO: auth, projection, pagination
+      // Auth.checkSignedOut(req);
 
-      //Auth.checkSignedOut(req);
-
-      if (mongoose.Types.ObjectId.isValid(id)) {
-        throw new UserInputError(`{id} is not valid user ID`);
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        throw new UserInputError(`User ID is not valid Object ID`);
       }
 
       return User.findById(id);
@@ -69,6 +67,13 @@ export default {
       //Auth.checkSignedIn(context.req);
       //console.log("context.req.session", context.req.session);
       return signOut(context.req, context.res);
+    },
+  },
+
+  // query for accounts didnt work before this
+  User: {
+    accounts: async (user, args, context, info) => {
+      return (await user.populate("accounts").execPopulate()).accounts;
     },
   },
 };

@@ -10,7 +10,7 @@ import clsx from "clsx";
 import React, { useLayoutEffect, useState } from "react";
 
 // import ACTIVE_CONTENT from "./Active_content";
-import LIST_ITEM_DISCOVER from "./Listshared";
+import LIST_ITEM_DISCOVER from "./List_item_discover";
 import LIST_ITEM_RIGHT from "./List_item_right";
 import EmptyContent from "./EmptyContent";
 import SubscriptionToolbar from "./toolbars/Toolbar";
@@ -230,6 +230,7 @@ const useStyles = makeStyles((theme) => ({
 
 function useWindowSize() {
   const [size, setSize] = useState([0, 0]);
+
   useLayoutEffect(() => {
     function updateSize() {
       console.log("window width", window.innerWidth);
@@ -246,6 +247,7 @@ export default function Main(props) {
   const classes = useStyles();
   const [width] = useWindowSize();
   const isReduced = width <= 1023;
+  const [drawer, setDrawer] = React.useState(1);
 
   const [open, setOpen] = React.useState(false);
   const [view, setView] = React.useState(false);
@@ -292,7 +294,7 @@ export default function Main(props) {
         }}
         anchor="left"
       >
-        <LIST_ITEM_DISCOVER />
+        <LIST_ITEM_DISCOVER drawer={drawer} setDrawer={(a) => setDrawer(a)} />
       </Drawer>
       <main
         className={clsx(classes.content, {

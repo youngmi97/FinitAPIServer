@@ -7,7 +7,7 @@ import React, { useLayoutEffect, useState } from "react";
 
 import Calendar from "./calendar/calendar";
 import Event from "./calendar/event";
-import LIST_ITEM_DISCOVER from "./Listupcoming";
+import LIST_ITEM_DISCOVER from "./List_item_discover";
 import LIST_ITEM_DISCOVER_MINI from "./List_item_discover_mini";
 
 const drawerWidth = 256;
@@ -237,6 +237,7 @@ function useWindowSize() {
 
 export default function Main(props) {
   const classes = useStyles();
+  const [drawer, setDrawer] = React.useState(2);
   const [width] = useWindowSize();
   const isReduced = width <= 1023;
   const [open, setOpen] = React.useState(true);
@@ -284,7 +285,7 @@ export default function Main(props) {
         }}
         anchor="left"
       >
-        <LIST_ITEM_DISCOVER />
+        <LIST_ITEM_DISCOVER drawer={drawer} setDrawer={(a) => setDrawer(a)} />
       </Drawer>
       <main
         className={clsx(classes.content, {

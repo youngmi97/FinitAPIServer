@@ -5,14 +5,18 @@ import IconButton from "@material-ui/core/IconButton";
 import { fade, makeStyles, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import clsx from "clsx";
-import React, { useLayoutEffect, useState } from "react";
+import { useQuery } from "@apollo/react-hooks";
+import React, { useLayoutEffect, useState, useContext, useEffect } from "react";
 
+import gql from "graphql-tag";
 import ACTIVE_CONTENT from "./Active_content";
 import LIST_ITEM_DISCOVER from "./List_item_discover";
 import LIST_ITEM_RIGHT from "./List_item_right";
+import EmptyContent from "./EmptyContent";
 import LIST_VIEWBREAK from "./List_viewbreak";
 import SubscriptionToolbar from "./toolbars/Toolbar";
 import LIST_ITEM_DISCOVER_MINI from "./List_item_discover_mini";
+import { AuthContext } from "../context/auth";
 
 const drawerWidth = 256;
 const drawerWidth2 = 305;
@@ -232,7 +236,6 @@ function useWindowSize() {
   const [size, setSize] = useState([0, 0]);
   useLayoutEffect(() => {
     function updateSize() {
-      console.log("window width", window.innerWidth);
       setSize([window.innerWidth, window.innerHeight]);
     }
     window.addEventListener("resize", updateSize);
@@ -250,7 +253,10 @@ export default function Main(props) {
 
   const [open, setOpen] = React.useState(false);
   const [state, setState] = React.useState(1);
+  const [drawer, setDrawer] = React.useState(0);
   const [view, setView] = React.useState(false);
+
+  const { user } = useContext(AuthContext);
 
   const handleState = () => {
     setState(state * -1);
@@ -269,71 +275,42 @@ export default function Main(props) {
   ) : (
     <TextTypography1>All Subscriptions</TextTypography1>
   );
+  var empty = false;
+  var cards = [];
+
+  console.log("user details", user);
+  const { loading, error, data } = useQuery(GET_SUBSCRIPTIONS, {
+    variables: { id: user.id },
+  });
+
+  if (loading) {
+    console.log("loading");
+  } else {
+    //console.log("User ID", data["user"]["id"]);
+    if (data["user"]["accounts"][0]["transactions"].length > 0) {
+      cards = data["user"]["accounts"][0]["transactions"].map(get_data);
+      //console.log("card", cards);
+    } else {
+      empty = true;
+    }
+  }
+
+  useEffect(() => {}, [empty]);
+  function get_data(item) {
+    return {
+      name: item["name"],
+      order: 1,
+      planName: "Standard",
+      price: item["isoCurrencyCode"] + " $" + item["amount"] + "/mo",
+      realPrice: parseInt(item["amount"]),
+    };
+  }
 
   const underlineBar = isReduced ? (
     <div className={classes.dividerReduced}></div>
   ) : (
     <div className={classes.divider}></div>
   );
-
-  const cards = [
-    {
-      name: "Netflix",
-      order: 3,
-      planName: "Standard",
-      price: "USD 12.00/mo",
-      realPrice: 12,
-    },
-    {
-      name: "Spotify",
-      order: 1,
-      planName: "Basic",
-      price: "USD $8.00/mo",
-      realPrice: 8,
-    },
-    {
-      name: "Netflix",
-      order: 5,
-      planName: "Premium",
-      price: "USD $9.00/mo",
-      realPrice: 9,
-    },
-    {
-      name: "Notability",
-      order: 2,
-      planName: "Basic",
-      price: "USD $8.00/mo",
-      realPrice: 8,
-    },
-    {
-      name: "GoogleDrive",
-      order: 7,
-      planName: "Standard",
-      price: "USD $12.00/mo",
-      realPrice: 12,
-    },
-    {
-      name: "Spotify",
-      order: 4,
-      planName: "Standard",
-      price: "USD $10.00/mo",
-      realPrice: 10,
-    },
-    {
-      name: "Youtube",
-      order: 6,
-      planName: "Premium",
-      price: "USD $11.00/mo",
-      realPrice: 11,
-    },
-    {
-      name: "Youtube",
-      order: 8,
-      planName: "Standard",
-      price: "USD $12.00/mo",
-      realPrice: 12,
-    },
-  ];
 
   switch (sortvariable) {
     case "Alphabetical":
@@ -359,7 +336,7 @@ export default function Main(props) {
       break;
   }
 
-  return (
+  return empty ? (
     <div>
       <Box
         display="flex"
@@ -382,7 +359,53 @@ export default function Main(props) {
         }}
         anchor="left"
       >
-        <LIST_ITEM_DISCOVER />
+        <LIST_ITEM_DISCOVER drawer={drawer} setDrawer={(a) => setDrawer(a)} />
+      </Drawer>
+      <div
+        className={clsx(classes.content, {
+          [classes.contentShift]: open,
+        })}
+      >
+        <Box mx="auto" bgcolor="background.paper" className={classes.mainbreak}>
+          <Grid item alignContent="center">
+            <div className={classes.grow}>
+              <SubscriptionToolbar
+                changeView={() => setView(!view)}
+                changeSort={() => handleState()}
+                changeKind={(kind) => setsortvariable(kind)}
+              />
+            </div>
+            <main className={classes.content}>
+              <EmptyContent />
+            </main>
+          </Grid>
+        </Box>
+      </div>
+    </div>
+  ) : (
+    <div>
+      <Box
+        display="flex"
+        bgcolor="background.paper"
+        borderColor="grey.500"
+        //boxShadow="0px 0.5px 0px rgba(0, 0, 0, 0.3)"
+        className={classes.toolBar}
+        alignItems="center"
+      >
+        {menuTitle}
+      </Box>
+
+      {underlineBar}
+
+      <Drawer
+        className={classes.drawer}
+        variant="permanent"
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+        anchor="left"
+      >
+        <LIST_ITEM_DISCOVER drawer={drawer} setDrawer={(a) => setDrawer(a)} />
       </Drawer>
       <div
         className={clsx(classes.content, {
@@ -408,30 +431,26 @@ export default function Main(props) {
           </Grid>
         </Box>
       </div>
-      {/* <Drawer
-        className={classes.drawer2}
-        variant="persistent"
-        classes={{
-          paper: classes.drawerPaper2,
-        }}
-        anchor="right"
-        open={open}
-      >
-        <LIST_ITEM_RIGHT />
-        <div className={classes.overlay1}>
-          <IconButton
-            className={classes.Buttoncolor}
-            onClick={handleDrawerClose}
-          >
-            <ArrowForwardIosIcon />
-          </IconButton>
-        </div>
-      </Drawer> */}
-      {/* <div className={classes.overlay}>
-        <IconButton onClick={handleDrawerOpen}>
-          <ArrowBackIosIcon />
-        </IconButton>
-      </div> */}
     </div>
   );
 }
+
+const GET_SUBSCRIPTIONS = gql`
+  query user($id: ID!) {
+    user(id: $id) {
+      id
+      accounts {
+        id
+        transactions {
+          id
+          name
+          category
+          amount
+          date
+          paymentChannel
+          isoCurrencyCode
+        }
+      }
+    }
+  }
+`;

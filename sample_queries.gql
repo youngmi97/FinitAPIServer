@@ -1,37 +1,91 @@
-
 mutation {
-    signUp (email: "finit@gmail.com", name: "Finit", username: "finit", password: "Finit7331!") {
-        id
-    }
-}
-
-mutation {
-    signIn (email: "finit@gmail.com", password: "Finit7331!") {
-        id
-    }
+  signUp(
+    email: "finit@gmail.com"
+    name: "Finit"
+    username: "finit"
+    password: "Finit7331!"
+  ) {
+    id
+  }
 }
 
 mutation {
-    signOut
+  signIn(email: "testest@gmail.com", password: "Finit7331!") {
+    id
+  }
+}
+
+mutation {
+  signOut
+}
+
+mutation {
+  addAccount(
+    accountId: "12345678"
+    plaidId: "12312312"
+    userId: "5f2e5f87b9ac424151a20002"
+    name: "demoAccount"
+    officialName: "officialName"
+    balance: "600"
+    type: "special"
+  ) {
+    id
+  }
+}
+
+mutation {
+  addTransaction(
+    accountId: "12345678"
+    amount: "500"
+    category: ["Health", "Care"]
+    date: "2020-8-12"
+    isoCurrencyCode: "USD"
+    name: "Netflix"
+    paymentChannel: "from home"
+    transactionType: "special"
+  ) {
+    id
+    name
+    amount
+  }
 }
 
 {
-    me {
-        id
-        name
-        email
-    }
+  accounts(userId: "5f0f18dd2e6b6b1e6e69dd54") {
+    name
+    officialName
+  }
 }
 
 {
-    users {
-        id
-    }
+  me {
+    id
+    name
+    email
+  }
 }
 
 {
-    user(id: "5f218c1e3fffd56ef2f45075"){
-        id
-    }
+  users {
+    id
+  }
 }
 
+{
+  user(id: "5f218c1e3fffd56ef2f45075") {
+    id
+  }
+}
+
+{
+  users {
+    name
+    id
+    accounts {
+      id
+      transactions {
+        id
+      }
+    }
+  }
+}
