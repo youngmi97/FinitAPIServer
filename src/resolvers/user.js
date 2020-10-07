@@ -75,5 +75,8 @@ export default {
     accounts: async (user, args, context, info) => {
       return (await user.populate("accounts").execPopulate()).accounts;
     },
+    services: async (user, args, context, info) => {
+      return (await user.populate("services").execPopulate()).services;
+    },
   },
 };
