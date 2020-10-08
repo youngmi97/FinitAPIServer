@@ -275,11 +275,12 @@ export default function Main(props) {
   );
   var empty = false;
   var cards = [];
-  const { loading, error, data } = useQuery(GET_SUBSCRIPTIONS);
+  const { loading, error, data, refetch } = useQuery(GET_SUBSCRIPTIONS);
 
   if (loading) {
     console.log("loading");
   } else {
+    refetch();
     console.log("card1", data["me"]);
     if (data["me"]["accounts"][0]["transactions"].length > 0) {
       cards = data["me"]["accounts"][0]["transactions"].map(get_data);
@@ -289,7 +290,10 @@ export default function Main(props) {
     }
   }
 
-  useEffect(() => {}, [empty]);
+  useEffect(() => {
+    refetch();
+  }, [empty]);
+
   function get_data(item) {
     return {
       name: item["name"],

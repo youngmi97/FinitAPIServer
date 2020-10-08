@@ -139,7 +139,7 @@ function Register_Local(props) {
     update(_, { data: { signUp: userData } }) {
       //redirect to home page
       context.login(userData);
-      props.history.push("/subscriptions");
+      props.history.push("/link");
     },
     onError(err) {
       console.log("graphQlErrors", err.graphQLErrors);

@@ -14,6 +14,8 @@ import { AuthProvider } from "./context/auth";
 import Home_Local from "./pages/Home_Local";
 import Login_Local from "./pages/Login_Local";
 import Register_Local from "./pages/Register_Local";
+import Link_Local from "./pages/Link_Local";
+import Linkplaid_Local from "./pages/Linkplaid_Local";
 import { Sticky } from "semantic-ui-react";
 import AuthenticatedRoute from "./routes/AuthenticatedRoute";
 import UnauthenticatedRoute from "./routes/UnauthenticatedRoute";
@@ -181,16 +183,7 @@ function App() {
         }}
       >
         <Router>
-          <div
-            style={{
-              zIndex: 100,
-              position: "fixed",
-              height: "60px",
-              width: "100%",
-              backgroundColor: "#ffffff",
-              borderBottom: "1px solid #D3D3D3",
-            }}
-          >
+          <div>
             <Sticky>
               <MenuBar />
             </Sticky>
@@ -232,6 +225,12 @@ function App() {
                 exact
                 path="/register"
                 component={Register_Local}
+              />
+              <UnauthenticatedRoute exact path="/link" component={Link_Local} />
+              <UnauthenticatedRoute
+                exact
+                path="/linkplaid"
+                component={Linkplaid_Local}
               />
             </ThemeProvider>
           </div>

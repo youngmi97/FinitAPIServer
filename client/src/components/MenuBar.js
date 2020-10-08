@@ -122,7 +122,18 @@ function MenuBar() {
 
   // Identify Login State
   const menuBar = user ? (
-    <Menu secondary size="massive" style={{ marginBottom: "0px", height: 60 }}>
+    <Menu
+      secondary
+      size="massive"
+      style={{
+        zIndex: 100,
+        position: "fixed",
+        height: "60px",
+        width: "100%",
+        backgroundColor: "#ffffff",
+        borderBottom: "1px solid #D3D3D3",
+      }}
+    >
       <Menu.Item
         className={"logo"}
         name="Subscriptions"
@@ -652,169 +663,226 @@ function MenuBar() {
       {(() => {
         if (path == "/login") {
           return (
-            <Menu
-              secondary
+            <div
               style={{
-                marginBottom: "0px",
-                backgroundColor: "#2f0459",
-                height: 60,
+                zIndex: 100,
+                position: "fixed",
+                height: "60px",
+                width: "100%",
+                backgroundColor: "#ffffff",
+                borderBottom: "1px solid #D3D3D3",
               }}
-              size="massive"
             >
-              <Menu.Item
-                className={"logo"}
-                name="home"
-                //active={activeItem === "home"}
-                //onClick={handleItemClick}
-                as={Link}
-                to="/"
+              <Menu
+                secondary
+                style={{
+                  marginBottom: "0px",
+                  backgroundColor: "#2f0459",
+                  height: 60,
+                }}
+                size="massive"
               >
-                <img
-                  style={{ height: "24px", width: "102px" }}
-                  alt="logo"
-                  src="LogoSurplus1.png"
-                />
-              </Menu.Item>
+                <Menu.Item
+                  className={"logo"}
+                  name="home"
+                  //active={activeItem === "home"}
+                  //onClick={handleItemClick}
+                  as={Link}
+                  to="/"
+                >
+                  <img
+                    style={{ height: "24px", width: "102px" }}
+                    alt="logo"
+                    src="LogoSurplus1.png"
+                  />
+                </Menu.Item>
 
-              <Menu.Menu position="right">
-                <Menu.Item
-                  style={{
-                    fontSize: "14px",
-                    color: "white",
-                    fontWeight: "400",
-                  }}
-                  name="login"
-                  //active={activeItem === "login"}
-                  //onClick={handleItemClick}
-                  as={Link}
-                  to="/login"
-                />
-                <Menu.Item
-                  style={{
-                    backgroundColor: "#7610EB",
-                    color: "#ffffff",
-                    alignSelf: "center",
-                    marginRight: "20px",
-                    fontSize: "14px",
-                    fontWeight: "400",
-                  }}
-                  position="right"
-                  name="register"
-                  //active={activeItem === "register"}
-                  //onClick={handleItemClick}
-                  as={Link}
-                  to="/register"
-                />
-              </Menu.Menu>
-            </Menu>
+                <Menu.Menu position="right">
+                  <Menu.Item
+                    style={{
+                      fontSize: "14px",
+                      color: "white",
+                      fontWeight: "400",
+                    }}
+                    name="login"
+                    //active={activeItem === "login"}
+                    //onClick={handleItemClick}
+                    as={Link}
+                    to="/login"
+                  />
+                  <Menu.Item
+                    style={{
+                      backgroundColor: "#7610EB",
+                      color: "#ffffff",
+                      alignSelf: "center",
+                      marginRight: "20px",
+                      fontSize: "14px",
+                      fontWeight: "400",
+                    }}
+                    position="right"
+                    name="register"
+                    //active={activeItem === "register"}
+                    //onClick={handleItemClick}
+                    as={Link}
+                    to="/register"
+                  />
+                </Menu.Menu>
+              </Menu>
+            </div>
           );
         } else if (path == "/register") {
           return (
-            <Menu
-              secondary
+            <div
               style={{
-                marginBottom: "0px",
-                backgroundColor: "#2f0459",
-                height: 60,
+                zIndex: 100,
+                position: "fixed",
+                height: "60px",
+                width: "100%",
+                backgroundColor: "#ffffff",
+                borderBottom: "1px solid #D3D3D3",
               }}
-              size="massive"
             >
-              <Menu.Item
-                className={"logo"}
-                name="home"
-                //active={activeItem === "home"}
-                //onClick={handleItemClick}
-                as={Link}
-                to="/"
+              <Menu
+                secondary
+                style={{
+                  marginBottom: "0px",
+                  backgroundColor: "#2f0459",
+                  height: 60,
+                }}
+                size="massive"
               >
-                <img
-                  style={{ height: "24px", width: "102px" }}
-                  alt="logo"
-                  src="LogoSurplus1.png"
-                />
-              </Menu.Item>
+                <Menu.Item
+                  className={"logo"}
+                  name="home"
+                  //active={activeItem === "home"}
+                  //onClick={handleItemClick}
+                  as={Link}
+                  to="/"
+                >
+                  <img
+                    style={{ height: "24px", width: "102px" }}
+                    alt="logo"
+                    src="LogoSurplus1.png"
+                  />
+                </Menu.Item>
 
-              <Menu.Menu position="right">
-                <Menu.Item
-                  style={{
-                    fontSize: "14px",
-                    color: "white",
-                    fontWeight: "400",
-                  }}
-                  name="login"
-                  //active={activeItem === "login"}
-                  //onClick={handleItemClick}
-                  as={Link}
-                  to="/login"
-                />
-                <Menu.Item
-                  style={{
-                    backgroundColor: "#7610EB",
-                    color: "#ffffff",
-                    alignSelf: "center",
-                    marginRight: "20px",
-                    fontSize: "14px",
-                    fontWeight: "400",
-                  }}
-                  position="right"
-                  name="register"
-                  //active={activeItem === "register"}
-                  //onClick={handleItemClick}
-                  as={Link}
-                  to="/register"
-                />
-              </Menu.Menu>
-            </Menu>
+                <Menu.Menu position="right">
+                  <Menu.Item
+                    style={{
+                      fontSize: "14px",
+                      color: "white",
+                      fontWeight: "400",
+                    }}
+                    name="login"
+                    //active={activeItem === "login"}
+                    //onClick={handleItemClick}
+                    as={Link}
+                    to="/login"
+                  />
+                  <Menu.Item
+                    style={{
+                      backgroundColor: "#7610EB",
+                      color: "#ffffff",
+                      alignSelf: "center",
+                      marginRight: "20px",
+                      fontSize: "14px",
+                      fontWeight: "400",
+                    }}
+                    position="right"
+                    name="register"
+                    //active={activeItem === "register"}
+                    //onClick={handleItemClick}
+                    as={Link}
+                    to="/register"
+                  />
+                </Menu.Menu>
+              </Menu>
+            </div>
+          );
+        } else if (path == "/link") {
+          return (
+            <div
+              style={{
+                zIndex: 100,
+                position: "fixed",
+                height: "60px",
+                width: "100%",
+                backgroundColor: "#ffffff",
+              }}
+            ></div>
+          );
+        } else if (path == "/linkplaid") {
+          return (
+            <div
+              style={{
+                zIndex: 100,
+                position: "fixed",
+                height: "60px",
+                width: "100%",
+                backgroundColor: "#ffffff",
+              }}
+            ></div>
           );
         } else {
           return (
-            <Menu
-              secondary
-              style={{ marginBottom: "0px", height: 60 }}
-              size="massive"
+            <div
+              style={{
+                zIndex: 100,
+                position: "fixed",
+                height: "60px",
+                width: "100%",
+                backgroundColor: "#ffffff",
+                borderBottom: "1px solid #D3D3D3",
+              }}
             >
-              <Menu.Item
-                className={"logo"}
-                name="home"
-                //active={activeItem === "home"}
-                //onClick={handleItemClick}
-                as={Link}
-                to="/"
+              <Menu
+                secondary
+                style={{ marginBottom: "0px", height: 60 }}
+                size="massive"
               >
-                <img
-                  style={{ height: "24px", width: "102px" }}
-                  alt="logo"
-                  src="LogoSurplus2.png"
-                />
-              </Menu.Item>
+                <Menu.Item
+                  className={"logo"}
+                  name="home"
+                  //active={activeItem === "home"}
+                  //onClick={handleItemClick}
+                  as={Link}
+                  to="/"
+                >
+                  <img
+                    style={{ height: "24px", width: "102px" }}
+                    alt="logo"
+                    src="LogoSurplus2.png"
+                  />
+                </Menu.Item>
 
-              <Menu.Menu position="right">
-                <Menu.Item
-                  style={{ fontSize: "14px", fontWeight: "400" }}
-                  name="login"
-                  //active={activeItem === "login"}
-                  //onClick={handleItemClick}
-                  as={Link}
-                  to="/login"
-                />
-                <Menu.Item
-                  style={{
-                    backgroundColor: "#7610EB",
-                    color: "#ffffff",
-                    alignSelf: "center",
-                    marginRight: "20px",
-                    fontSize: "14px",
-                    fontWeight: "400",
-                  }}
-                  position="right"
-                  name="register"
-                  //active={activeItem === "register"}
-                  //onClick={handleItemClick}
-                  as={Link}
-                  to="/register"
-                />
-              </Menu.Menu>
-            </Menu>
+                <Menu.Menu position="right">
+                  <Menu.Item
+                    style={{ fontSize: "14px", fontWeight: "400" }}
+                    name="login"
+                    //active={activeItem === "login"}
+                    //onClick={handleItemClick}
+                    as={Link}
+                    to="/login"
+                  />
+                  <Menu.Item
+                    style={{
+                      backgroundColor: "#7610EB",
+                      color: "#ffffff",
+                      alignSelf: "center",
+                      marginRight: "20px",
+                      fontSize: "14px",
+                      fontWeight: "400",
+                    }}
+                    position="right"
+                    name="register"
+                    //active={activeItem === "register"}
+                    //onClick={handleItemClick}
+                    as={Link}
+                    to="/register"
+                  />
+                </Menu.Menu>
+              </Menu>
+            </div>
           );
         }
       })()}
