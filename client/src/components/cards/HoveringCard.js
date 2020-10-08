@@ -48,16 +48,18 @@ const Paragraph = styled.p({
 });
 
 const Background = styled1.div`
-  backgroundSize: cover;
-  backgroundRepeat: no-repeat;
-  color: #FFF;
+  background-size: 96px 96px;
+  background-repeat: no-repeat;
+  background-color: #FFFFFF;
   position: relative;
   width: 217px;
   height: 217px;
   cursor: pointer;
-  borderRadius: 6;
-  background-image: url(/static/images/cardBackgrounds/${(props) =>
-    props.name}.svg) ;
+  border-radius: 6px;
+  border: 1px solid #C8C7CC;
+  background-image: url(/static/avatar/${(props) => props.name}[48].svg) ;
+  background-position: center;
+
   &:hover {
     ${DisplayOver} {
       background-color: rgba(0,0,0,.5);
