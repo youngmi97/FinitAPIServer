@@ -8,6 +8,7 @@ import { attemptSignIn, signOut } from "../auth";
 export default {
   Query: {
     me: async (root, args, context, info) => {
+      console.log("Me query", context.req.session);
       return await User.findById(context.req.session.userId);
     },
 
@@ -73,6 +74,9 @@ export default {
   User: {
     accounts: async (user, args, context, info) => {
       return (await user.populate("accounts").execPopulate()).accounts;
+    },
+    services: async (user, args, context, info) => {
+      return (await user.populate("services").execPopulate()).services;
     },
   },
 };

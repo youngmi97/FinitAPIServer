@@ -23,6 +23,12 @@ const userSchema = mongoose.Schema(
         ref: "PlaidAccount",
       },
     ],
+    services: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "SubscriptionItem",
+      },
+    ],
     name: String,
     password: String,
   },

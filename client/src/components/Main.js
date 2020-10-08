@@ -256,6 +256,8 @@ export default function Main(props) {
   const [drawer, setDrawer] = React.useState(0);
   const [view, setView] = React.useState(false);
 
+  const { user } = useContext(AuthContext);
+
   const handleState = () => {
     setState(state * -1);
   };
@@ -275,16 +277,19 @@ export default function Main(props) {
   );
   var empty = false;
   var cards = [];
-  const { loading, error, data, refetch } = useQuery(GET_SUBSCRIPTIONS);
+
+  console.log("user details", user);
+  const { loading, error, data } = useQuery(GET_SUBSCRIPTIONS, {
+    variables: { id: user.id },
+  });
 
   if (loading) {
     console.log("loading");
   } else {
-    refetch();
-    console.log("card1", data["me"]);
-    if (data["me"]["accounts"][0]["transactions"].length > 0) {
-      cards = data["me"]["accounts"][0]["transactions"].map(get_data);
-      console.log("card", cards);
+    //console.log("User ID", data["user"]["id"]);
+    if (data["user"]["accounts"][0]["transactions"].length > 0) {
+      cards = data["user"]["accounts"][0]["transactions"].map(get_data);
+      //console.log("card", cards);
     } else {
       empty = true;
     }
@@ -309,65 +314,6 @@ export default function Main(props) {
   ) : (
     <div className={classes.divider}></div>
   );
-
-  // const cards = [
-  //   {
-  //     name: "Netflix",
-  //     order: 3,
-  //     planName: "Standard",
-  //     price: "USD 12.00/mo",
-  //     realPrice: 12,
-  //   },
-  //   {
-  //     name: "Spotify",
-  //     order: 1,
-  //     planName: "Basic",
-  //     price: "USD $8.00/mo",
-  //     realPrice: 8,
-  //   },
-  //   {
-  //     name: "Netflix",
-  //     order: 5,
-  //     planName: "Premium",
-  //     price: "USD $9.00/mo",
-  //     realPrice: 9,
-  //   },
-  //   {
-  //     name: "Notability",
-  //     order: 2,
-  //     planName: "Basic",
-  //     price: "USD $8.00/mo",
-  //     realPrice: 8,
-  //   },
-  //   {
-  //     name: "GoogleDrive",
-  //     order: 7,
-  //     planName: "Standard",
-  //     price: "USD $12.00/mo",
-  //     realPrice: 12,
-  //   },
-  //   {
-  //     name: "Spotify",
-  //     order: 4,
-  //     planName: "Standard",
-  //     price: "USD $10.00/mo",
-  //     realPrice: 10,
-  //   },
-  //   {
-  //     name: "Youtube",
-  //     order: 6,
-  //     planName: "Premium",
-  //     price: "USD $11.00/mo",
-  //     realPrice: 11,
-  //   },
-  //   {
-  //     name: "Youtube",
-  //     order: 8,
-  //     planName: "Standard",
-  //     price: "USD $12.00/mo",
-  //     realPrice: 12,
-  //   },
-  // ];
 
   switch (sortvariable) {
     case "Alphabetical":
@@ -438,30 +384,6 @@ export default function Main(props) {
           </Grid>
         </Box>
       </div>
-      {/* <Drawer
-        className={classes.drawer2}
-        variant="persistent"
-        classes={{
-          paper: classes.drawerPaper2,
-        }}
-        anchor="right"
-        open={open}
-      >
-        <LIST_ITEM_RIGHT />
-        <div className={classes.overlay1}>
-          <IconButton
-            className={classes.Buttoncolor}
-            onClick={handleDrawerClose}
-          >
-            <ArrowForwardIosIcon />
-          </IconButton>
-        </div>
-      </Drawer> */}
-      {/* <div className={classes.overlay}>
-        <IconButton onClick={handleDrawerOpen}>
-          <ArrowBackIosIcon />
-        </IconButton>
-      </div> */}
     </div>
   ) : (
     <div>
@@ -512,37 +434,13 @@ export default function Main(props) {
           </Grid>
         </Box>
       </div>
-      {/* <Drawer
-        className={classes.drawer2}
-        variant="persistent"
-        classes={{
-          paper: classes.drawerPaper2,
-        }}
-        anchor="right"
-        open={open}
-      >
-        <LIST_ITEM_RIGHT />
-        <div className={classes.overlay1}>
-          <IconButton
-            className={classes.Buttoncolor}
-            onClick={handleDrawerClose}
-          >
-            <ArrowForwardIosIcon />
-          </IconButton>
-        </div>
-      </Drawer> */}
-      {/* <div className={classes.overlay}>
-        <IconButton onClick={handleDrawerOpen}>
-          <ArrowBackIosIcon />
-        </IconButton>
-      </div> */}
     </div>
   );
 }
 
 const GET_SUBSCRIPTIONS = gql`
-  query {
-    me {
+  query user($id: ID!) {
+    user(id: $id) {
       id
       accounts {
         id

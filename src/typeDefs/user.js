@@ -28,6 +28,7 @@ export default gql`
     username: String!
     name: String!
     accounts: [Account!]!
+    services: [Service!]!
     createdAt: String!
     updatedAt: String!
   }
