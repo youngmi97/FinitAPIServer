@@ -115,7 +115,7 @@ const client = new plaid.Client(
   process.env.PLAID_CLIENT_ID,
   process.env.PLAID_SECRET,
   process.env.PLAID_PUBLIC_KEY,
-  plaid.environments.development
+  plaid.environments.sandbox
 );
 
 var PUBLIC_TOKEN = null;
