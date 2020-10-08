@@ -295,10 +295,7 @@ export default function Main(props) {
     }
   }
 
-  useEffect(() => {
-    refetch();
-  }, [empty]);
-
+  useEffect(() => {}, [empty]);
   function get_data(item) {
     return {
       name: item["name"],
