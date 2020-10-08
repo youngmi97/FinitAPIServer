@@ -115,10 +115,43 @@ export default function ResponsiveDialog(props) {
   };
 
   function get_date(today, day) {
-    console.log("today", today);
-    console.log("day", day);
+    return parseInt((day - today) / 86400000);
   }
-  get_date(today, props.lastdate);
+
+  const date = get_date(
+    today,
+    new Date(
+      props.lastdate.split(/[^0-9]/)[0],
+      props.lastdate.split(/[^0-9]/)[1],
+      props.lastdate.split(/[^0-9]/)[2],
+      0,
+      0,
+      0
+    )
+  );
+  const day = new Date(
+    props.lastdate.split(/[^0-9]/)[0],
+    props.lastdate.split(/[^0-9]/)[1],
+    props.lastdate.split(/[^0-9]/)[2],
+    0,
+    0,
+    0
+  );
+
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
   return (
     <div>
@@ -127,7 +160,7 @@ export default function ResponsiveDialog(props) {
           name={props.name}
           price={props.price}
           plan={props.plan}
-          lastdate={props.lastdate}
+          date={date}
         />
       </ButtonBase>
       <Dialog
@@ -138,7 +171,10 @@ export default function ResponsiveDialog(props) {
       >
         <div className={classes.root}>
           <DialogTitle className={classes.Avatar}>
-            <Avatar variant="square" src="static/images/Medium.svg" />
+            <Avatar
+              variant="square"
+              src={"/static/avatar/" + props.name + "[32].svg"}
+            />
 
             <Box
               display="flex"
@@ -156,7 +192,7 @@ export default function ResponsiveDialog(props) {
                   </Typography>
                 </div>
               </Box>
-              <Box p={1}>
+              {/* <Box p={1}>
                 <AvatarGroup max={4}>
                   <Avatar
                     alt="Remy Sharp"
@@ -179,7 +215,7 @@ export default function ResponsiveDialog(props) {
                     src="/static/images/avatars/Ellipse 14.svg"
                   />
                 </AvatarGroup>
-              </Box>
+              </Box>*/}
             </Box>
           </DialogTitle>
           <DialogContent className={classes.Avatar}>
@@ -187,7 +223,8 @@ export default function ResponsiveDialog(props) {
               {props.price}
             </Typography>
             <Typography className={classes.ListItemSize1}>
-              Next payment is in 3 days, scheduled for July 30, 2020.
+              Next payment is in {date} days, scheduled for{" "}
+              {monthNames[day.getMonth()]} {day.getDay()}, {day.getFullYear()}.
             </Typography>
             <Typography className={classes.ListItemSize3}>
               Payment Method

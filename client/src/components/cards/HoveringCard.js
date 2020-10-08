@@ -48,17 +48,19 @@ const Paragraph = styled.p({
 });
 
 const Background = styled1.div`
+
   background-size: 96px 96px;
   background-repeat: no-repeat;
-  background-color: #FFFFFF;
   position: relative;
   width: 217px;
+  color: #fff;
   height: 217px;
   cursor: pointer;
   border-radius: 6px;
   border: 1px solid #C8C7CC;
   background-image: url(/static/avatar/${(props) => props.name}[48].svg) ;
   background-position: center;
+  
 
   &:hover {
     ${DisplayOver} {
@@ -86,14 +88,14 @@ class HoveringCard extends Component {
   render() {
     return (
       <div className="HoveringCard">
-        <Background {...this.props}>
+        <Background {...this.props} style={{ backgroundColor: "black" }}>
           <DisplayOver>
             <Hover>
               <SubTitle>{this.props.name}</SubTitle>
               <Paragraph>
                 {this.props.price}
                 <br />
-                Next payment is in 3 days
+                Next payment is in {this.props.date} days
               </Paragraph>
               <CTA>View Details</CTA>
             </Hover>
