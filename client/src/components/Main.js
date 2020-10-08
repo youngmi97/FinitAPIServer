@@ -287,8 +287,8 @@ export default function Main(props) {
     console.log("loading");
   } else {
     //console.log("User ID", data["user"]["id"]);
-    if (data["user"]["accounts"][0]["transactions"].length > 0) {
-      cards = data["user"]["accounts"][0]["transactions"].map(get_data);
+    if (data["user"]["services"].length > 0) {
+      cards = data["user"]["services"].map(get_data);
       //console.log("card", cards);
     } else {
       empty = true;
@@ -298,15 +298,21 @@ export default function Main(props) {
   useEffect(() => {}, [empty]);
 
   function get_data(item) {
-    var a = item["date"].split(/[^0-9]/);
+    //var a = item["createdAt"].split(/[^0-9]/);
 
     return {
       name: item["name"],
-      order: 1,
-      planName: "Standard",
-      price: item["isoCurrencyCode"] + " $" + item["amount"] + "/mo",
+      planName: item["plan"],
+      price:
+        item["isoCurrencyCode"] +
+        " $" +
+        item["amount"] +
+        "/" +
+        item["period"].slice(0, 2),
       realPrice: parseInt(item["amount"]),
-      startdate: new Date(a[0], a[1] - 1, a[2], 0, 0, 0),
+      lastDate: item["lastDate"],
+      startdate: item["createdAt"],
+      period: item["period"],
     };
   }
 
@@ -335,11 +341,10 @@ export default function Main(props) {
       break;
     case "Date Added":
       cards.sort(function (a, b) {
-        console.log(a);
-        if (Date.parse(a.startdate) === Date.parse(b.startdate)) {
+        if (parseInt(a.startdate) === parseInt(b.startdate)) {
           return a.name > b.name ? 1 * state : -1 * state;
         }
-        return Date.parse(a.startdate) > Date.parse(b.startdate)
+        return parseInt(a.startdate) > parseInt(b.startdate)
           ? 1 * state
           : -1 * state;
       });
@@ -451,17 +456,15 @@ const GET_SUBSCRIPTIONS = gql`
   query user($id: ID!) {
     user(id: $id) {
       id
-      accounts {
+      services {
         id
-        transactions {
-          id
-          name
-          category
-          amount
-          date
-          paymentChannel
-          isoCurrencyCode
-        }
+        name
+        amount
+        isoCurrencyCode
+        plan
+        lastDate
+        period
+        createdAt
       }
     }
   }
