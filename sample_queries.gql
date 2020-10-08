@@ -50,6 +50,22 @@ mutation {
   }
 }
 
+mutation {
+  addSubscription(
+    userId: "5f2e5f87b9ac424151a20002"
+    name: "Notion"
+    amount: "50"
+    lastDate: "2020-10-06"
+    category: []
+    period: "monthly"
+    isoCurrencyCode: "USD"
+    plan: "Premium"
+    plaidGenerated: true
+  ) {
+    id
+  }
+}
+
 {
   accounts(userId: "5f0f18dd2e6b6b1e6e69dd54") {
     name
