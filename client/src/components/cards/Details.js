@@ -114,7 +114,8 @@ export default function ResponsiveDialog(props) {
         <HoveringCard
           name={props.name}
           price={props.price}
-          plan={props.planName}
+          plan={props.plan}
+          lastdate={props.lastdate}
         />
       </ButtonBase>
       <Dialog
@@ -136,10 +137,10 @@ export default function ResponsiveDialog(props) {
               <Box p={1} flexGrow={1} className={classes.List1}>
                 <div className={classes.he}>
                   <Typography className={classes.ListItemSize}>
-                    Notion
+                    {props.name}
                   </Typography>
                   <Typography className={classes.ListItemSize1}>
-                    Team plan, monthly payment • 8 members
+                    {props.plan}, {props.period} payment
                   </Typography>
                 </div>
               </Box>
@@ -171,7 +172,7 @@ export default function ResponsiveDialog(props) {
           </DialogTitle>
           <DialogContent className={classes.Avatar}>
             <Typography className={classes.ListItemSize2}>
-              US $8.00/mo
+              {props.price}
             </Typography>
             <Typography className={classes.ListItemSize1}>
               Next payment is in 3 days, scheduled for July 30, 2020.

@@ -49,6 +49,8 @@ export default function Active_content(props) {
                     name={card.name}
                     price={card.price}
                     plan={card.planName}
+                    lastdate={card.lastdate}
+                    period={card.period}
                     key={index}
                   />
                 </Grid>
