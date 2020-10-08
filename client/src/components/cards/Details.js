@@ -96,6 +96,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ResponsiveDialog(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const today = new Date();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const [secondary] = React.useState(false);
@@ -107,6 +108,12 @@ export default function ResponsiveDialog(props) {
   const handleClose = () => {
     setOpen(false);
   };
+
+  function get_date(today, day) {
+    console.log("today", today);
+    console.log("day", day);
+  }
+  get_date(today, props.lastdate);
 
   return (
     <div>
