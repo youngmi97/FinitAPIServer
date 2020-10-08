@@ -98,26 +98,8 @@ function MenuBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const location = useLocation();
   const path = location.pathname;
-
-  const handleClick = (event) => {
-    setAnchorEl(anchorEl ? null : event.currentTarget);
-  };
   const open = Boolean(anchorEl);
   const id = open ? "simple-popper" : undefined;
-  const circle = (
-    <div className={clsx(classes.shape, classes.shapeCircle)}>
-      <IconButton
-        style={{
-          color: "#666666",
-          fontSize: "24px",
-          padding: "8px",
-        }}
-        onClick={handleClick}
-      >
-        <NotificationsIcon />
-      </IconButton>
-    </div>
-  );
   //const pathname = window.location.pathname;
 
   // Identify Login State

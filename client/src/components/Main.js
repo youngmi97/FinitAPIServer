@@ -296,13 +296,17 @@ export default function Main(props) {
   }
 
   useEffect(() => {}, [empty]);
+
   function get_data(item) {
+    var a = item["date"].split(/[^0-9]/);
+
     return {
       name: item["name"],
       order: 1,
       planName: "Standard",
       price: item["isoCurrencyCode"] + " $" + item["amount"] + "/mo",
       realPrice: parseInt(item["amount"]),
+      startdate: new Date(a[0], a[1] - 1, a[2], 0, 0, 0),
     };
   }
 
@@ -330,7 +334,15 @@ export default function Main(props) {
       });
       break;
     case "Date Added":
-      cards.sort((a, b) => (a.order - b.order) * state);
+      cards.sort(function (a, b) {
+        console.log(a);
+        if (Date.parse(a.startdate) === Date.parse(b.startdate)) {
+          return a.name > b.name ? 1 * state : -1 * state;
+        }
+        return Date.parse(a.startdate) > Date.parse(b.startdate)
+          ? 1 * state
+          : -1 * state;
+      });
       break;
     default:
       break;
