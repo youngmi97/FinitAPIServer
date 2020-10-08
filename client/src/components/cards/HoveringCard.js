@@ -48,9 +48,10 @@ const Paragraph = styled.p({
 });
 
 const Background = styled1.div`
+
   background-size: 96px 96px;
   background-repeat: no-repeat;
-  background-color: #FFFFFF;
+ 
   position: relative;
   width: 217px;
   height: 217px;
@@ -59,6 +60,7 @@ const Background = styled1.div`
   border: 1px solid #C8C7CC;
   background-image: url(/static/avatar/${(props) => props.name}[48].svg) ;
   background-position: center;
+  
 
   &:hover {
     ${DisplayOver} {
@@ -93,7 +95,7 @@ class HoveringCard extends Component {
               <Paragraph>
                 {this.props.price}
                 <br />
-                Next payment is in 3 days
+                Next payment is in {this.props.date} days
               </Paragraph>
               <CTA>View Details</CTA>
             </Hover>
