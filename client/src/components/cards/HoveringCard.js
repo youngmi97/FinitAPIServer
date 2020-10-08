@@ -51,9 +51,9 @@ const Background = styled1.div`
 
   background-size: 96px 96px;
   background-repeat: no-repeat;
- 
   position: relative;
   width: 217px;
+  color: #fff;
   height: 217px;
   cursor: pointer;
   border-radius: 6px;
@@ -88,7 +88,7 @@ class HoveringCard extends Component {
   render() {
     return (
       <div className="HoveringCard">
-        <Background {...this.props}>
+        <Background {...this.props} style={{ backgroundColor: "black" }}>
           <DisplayOver>
             <Hover>
               <SubTitle>{this.props.name}</SubTitle>
