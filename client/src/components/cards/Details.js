@@ -101,6 +101,11 @@ export default function ResponsiveDialog(props) {
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const [secondary] = React.useState(false);
 
+  const backgrounds = {
+    AppleMusic: "linear-gradient(0deg, #FA233B 0.39%, #FB5C74 97.84%);",
+    Spotify: "",
+  };
+
   const handleClickOpen = () => {
     setOpen(true);
   };
