@@ -47,20 +47,19 @@ const Paragraph = styled.p({
   textAlign: "left",
 });
 
+//url(/static/avatar/${(props) => props.name}[48].svg)
 const Background = styled1.div`
-
   background-size: 96px 96px;
   background-repeat: no-repeat;
   position: relative;
   width: 217px;
-  color: #fff;
+  background-color: ${(props) => props.background};
   height: 217px;
   cursor: pointer;
   border-radius: 6px;
+  background-image: url(/static/avatar/${(props) => props.name}[48].svg);
   border: 1px solid #C8C7CC;
-  background-image: url(/static/avatar/${(props) => props.name}[48].svg) ;
   background-position: center;
-  
 
   &:hover {
     ${DisplayOver} {
@@ -88,7 +87,7 @@ class HoveringCard extends Component {
   render() {
     return (
       <div className="HoveringCard">
-        <Background {...this.props} style={{ backgroundColor: "black" }}>
+        <Background {...this.props}>
           <DisplayOver>
             <Hover>
               <SubTitle>{this.props.name}</SubTitle>

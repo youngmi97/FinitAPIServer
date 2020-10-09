@@ -158,8 +158,15 @@ export default function ResponsiveDialog(props) {
     console.log("today", today);
     console.log("day", day);
   }
-  get_date(today, props.lastdate);
 
+  function get_background(name) {
+    const color = backgrounds[name];
+    console.log("background color", color);
+    return color;
+  }
+
+  get_date(today, props.lastdate);
+  get_background(props.name);
   return (
     <div>
       <ButtonBase onClick={handleClickOpen}>
@@ -168,6 +175,7 @@ export default function ResponsiveDialog(props) {
           price={props.price}
           plan={props.plan}
           lastdate={props.lastdate}
+          background={get_background(props.name)}
         />
       </ButtonBase>
       <Dialog
