@@ -9,11 +9,11 @@ export default gql`
       name: String!
       amount: String!
       lastDate: String!
-      category: [String]!
+      category: [String!]!
       period: String!
       isoCurrencyCode: String!
       plan: String!
-      transactionType: String
+      transactionType: String!
       plaidGenerated: Boolean!
     ): Service @auth
 
@@ -28,10 +28,11 @@ export default gql`
     name: String!
     amount: String!
     lastDate: String!
+    category: [String!]!
     period: String!
     isoCurrencyCode: String!
     plan: String!
-    transactionType: String
+    transactionType: String!
     plaidGenerated: Boolean!
     createdAt: String!
     updatedAt: String!

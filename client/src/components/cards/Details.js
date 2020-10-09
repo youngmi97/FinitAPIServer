@@ -104,7 +104,6 @@ export default function ResponsiveDialog(props) {
   const backgrounds = {
     Adobe: "#E6001F",
     Amazon: "#FF9201",
-
     AppleMusic: "linear-gradient(0deg, #FA233B 0.39%, #FB5C74 97.84%)",
     AppleTV: "#FFFFFF",
     Avast: "#160e53",
@@ -166,7 +165,6 @@ export default function ResponsiveDialog(props) {
   }
 
   get_date(today, props.lastdate);
-  get_background(props.name);
   return (
     <div>
       <ButtonBase onClick={handleClickOpen}>

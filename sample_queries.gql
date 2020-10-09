@@ -56,11 +56,12 @@ mutation {
     name: "Notion"
     amount: "50"
     lastDate: "2020-10-06"
-    category: []
+    category: ["entertainment", "music"]
     period: "monthly"
     isoCurrencyCode: "USD"
-    plan: "Premium"
-    plaidGenerated: true
+    plan: "Free"
+    transactionType: "special"
+    plaidGenerated: True
   ) {
     id
   }
