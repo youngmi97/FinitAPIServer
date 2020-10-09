@@ -101,6 +101,51 @@ export default function ResponsiveDialog(props) {
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const [secondary] = React.useState(false);
 
+  const backgrounds = {
+    Adobe: "#E6001F",
+    Amazon: "#FF9201",
+
+    AppleMusic: "linear-gradient(0deg, #FA233B 0.39%, #FB5C74 97.84%)",
+    AppleTV: "#FFFFFF",
+    Avast: "#160e53",
+    BarkBox: "#46b0df",
+    Blinkist: "#FFFFFF",
+    Bloomberg: "#FFFFFF",
+    BlueApron: "#FFFFFF",
+    BirchBox: "#231f20",
+    Coursera: "#FFFFFF",
+
+    DisneyPlus: "#1F2161",
+    DollarShaveClub: "#FFFFFF",
+    DropBox: "#FFFFFF",
+    Economist: "#e3120b",
+    GoogleDrive: "#FFFFFF",
+    GooglePlayPass: "#FFFFFF",
+    Grammarly: "FFFFFF",
+    HelloFresh: "#91c11e",
+    Hulu: "#000000",
+    iCloud: "#FFFFFF",
+    Ipsy: "#f5978d",
+    JetBrains: "#FFFFFF",
+    LeetCode: "#FFFFFF",
+    LinkedIn: "#0077B4",
+    Todist: "#E44332",
+    Twitch: "#9147FF",
+    Medium: "#FFFFFF",
+    Miro: "#ffd02f",
+    Netflix: "#000000",
+    Notion: "#FFFFFF",
+    Office365: "#FFFFFF",
+    OnePassword: "#FFFFFF",
+    Play: "#FFFFFF",
+    Protopie: "#FFFFFF",
+    Skillshare: "#FFFFFF",
+    Spotify: "#000000",
+    Swit: "#ff595d",
+    Youtube: "#FF0000",
+    Xbox: "#107C10",
+  };
+
   const handleClickOpen = () => {
     setOpen(true);
   };
