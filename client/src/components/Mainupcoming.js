@@ -3,12 +3,14 @@ import Drawer from "@material-ui/core/Drawer";
 import { fade, makeStyles, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import clsx from "clsx";
-import React, { useLayoutEffect, useState } from "react";
-
+import React, { useLayoutEffect, useState, useContext, useEffect } from "react";
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
 import Calendar from "./calendar/calendar";
 import Event from "./calendar/event";
 import LIST_ITEM_DISCOVER from "./List_item_discover";
 import LIST_ITEM_DISCOVER_MINI from "./List_item_discover_mini";
+import { AuthContext } from "../context/auth";
 
 const drawerWidth = 256;
 const drawerWidth2 = 305;
@@ -251,12 +253,68 @@ export default function Main(props) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  const { user } = useContext(AuthContext);
 
   const menuTitle = isReduced ? (
     <LIST_ITEM_DISCOVER_MINI index="0" />
   ) : (
     <TextTypography1>Calendar</TextTypography1>
   );
+
+  var empty = false;
+  var cards = [];
+
+  console.log("user details", user);
+  const { loading, error, data } = useQuery(GET_SUBSCRIPTIONS, {
+    variables: { id: user.id },
+  });
+
+  if (loading) {
+    console.log("loading");
+  } else {
+    //console.log("User ID", data["user"]["id"]);
+    if (data["user"]["services"].length > 0) {
+      cards = data["user"]["services"].map(get_data);
+      //console.log("card", cards);
+    } else {
+      empty = true;
+    }
+  }
+
+  useEffect(() => {}, [empty]);
+
+  function get_data(item) {
+    //var a = item["createdAt"].split(/[^0-9]/);
+
+    return {
+      name: item["name"],
+      planName: item["plan"],
+      price:
+        item["isoCurrencyCode"] +
+        " $" +
+        item["amount"] +
+        "/" +
+        item["period"].slice(0, 2),
+      realPrice: parseInt(item["amount"]),
+      lastDate: new Date(
+        item["lastDate"].split(/[^0-9]/)[0],
+        item["lastDate"].split(/[^0-9]/)[1],
+        item["lastDate"].split(/[^0-9]/)[2],
+        0,
+        0,
+        0
+      ),
+      startdate: item["createdAt"],
+      period: item["period"],
+    };
+  }
+
+  cards.sort(function (a, b) {
+    if (parseInt(a.lastDate) === parseInt(b.lastDate)) {
+      return a.name > b.name ? 1 : -1;
+    }
+    return parseInt(a.lastDate) > parseInt(b.lastDate) ? 1 : -1;
+  });
 
   const underlineBar = isReduced ? (
     <div className={classes.dividerReduced}></div>
@@ -300,7 +358,11 @@ export default function Main(props) {
           className={classes.mainbreak}
         >
           <Box p={1}>
-            <Calendar selected={selected} setSelected={(a) => setSelected(a)} />
+            <Calendar
+              selected={selected}
+              cards={cards}
+              setSelected={(a) => setSelected(a)}
+            />
           </Box>
           <Box p={1} style={{ marginLeft: 32 }}>
             <Event selected={selected} />
@@ -334,3 +396,20 @@ export default function Main(props) {
     </div>
   );
 }
+const GET_SUBSCRIPTIONS = gql`
+  query user($id: ID!) {
+    user(id: $id) {
+      id
+      services {
+        id
+        name
+        amount
+        isoCurrencyCode
+        plan
+        lastDate
+        period
+        createdAt
+      }
+    }
+  }
+`;

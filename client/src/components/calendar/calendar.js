@@ -12,7 +12,7 @@ const event = {
   15: [1],
 };
 
-function renderDay(day, selected) {
+function renderDay(day, selected, cards) {
   const date = day.getDate();
   const today = isToday(day);
   const bool = selected.split(".")[2];
@@ -265,7 +265,7 @@ export default function Example(props) {
         showOutsideDays
         selectedDays={props.selected}
         onDayClick={handleDayClick}
-        renderDay={(day) => renderDay(day, date)}
+        renderDay={(day) => renderDay(day, date, props.cards)}
       />
     </div>
   );
