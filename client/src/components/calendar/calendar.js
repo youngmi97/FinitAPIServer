@@ -6,16 +6,9 @@ import { isToday } from "date-fns";
 import "../../App.css";
 import { Typography, Box, Grid } from "@material-ui/core";
 
-const event = {
-  29: [1],
-  1: [1, 2],
-  15: [1],
-};
-
 function renderDay(day, selected, cards) {
   const date = day.getDate();
   const today = isToday(day);
-  const bool = selected.split(".")[2];
 
   const dateStyle = {
     position: "absolute",
@@ -62,7 +55,7 @@ function renderDay(day, selected, cards) {
             case false:
               return (
                 <div>
-                  {parseInt(bool) == date ? (
+                  {day == selected.toString() ? (
                     <div>
                       <div style={dateStyle}>
                         <div
@@ -90,8 +83,8 @@ function renderDay(day, selected, cards) {
                           justify="center"
                           style={{ margin: 0, padding: 0, paddingTop: 28 }}
                         >
-                          {event[date] &&
-                            event[date].map((name, i) => (
+                          {cards[day] &&
+                            cards[day].map((name, i) => (
                               <Grid item xs={3}>
                                 <Typography
                                   style={{
@@ -122,8 +115,8 @@ function renderDay(day, selected, cards) {
                             paddingTop: 28,
                           }}
                         >
-                          {event[date] &&
-                            event[date].map((name, i) => (
+                          {cards[day] &&
+                            cards[day].map((name, i) => (
                               <Grid item xs={3}>
                                 <Typography
                                   style={{
@@ -171,8 +164,8 @@ function renderDay(day, selected, cards) {
                       justify="center"
                       style={{ margin: 0, padding: 0, paddingTop: 28 }}
                     >
-                      {event[date] &&
-                        event[date].map((name, i) => (
+                      {cards[day] &&
+                        cards[day].map((name, i) => (
                           <Grid item xs={3}>
                             <Typography
                               style={{
@@ -197,10 +190,8 @@ function renderDay(day, selected, cards) {
 }
 
 export default function Example(props) {
-  const date = props.selected
-    ? props.selected.toLocaleDateString()
-    : "00.00.00";
-
+  const date = props.selected ? props.selected : 0;
+  console.log("selected", props.selected);
   const handleDayClick = (day, { selected }) => {
     props.setSelected(selected ? undefined : day);
   };

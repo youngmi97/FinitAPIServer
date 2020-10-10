@@ -93,7 +93,7 @@ export default function ResponsiveDialog(props) {
   return (
     <div>
       {(() => {
-        if (parseInt(props.card[0].date) == "0") {
+        if (parseInt(props.card[0].date) == 0) {
           return (
             <div className={classes.root_today}>
               <Typography className={classes.ListItemSize2}>
@@ -111,7 +111,7 @@ export default function ResponsiveDialog(props) {
                       <Avatar
                         variant="square"
                         style={{ width: 48, height: 48, margin: 0, padding: 0 }}
-                        src={"static/avatar/" + value.name + "[48].svg"}
+                        src={"static/avatar/" + value.name + "/[48].svg"}
                       />
                     </Box>
                     <Box p={1} flexGrow={1}>
@@ -144,7 +144,7 @@ export default function ResponsiveDialog(props) {
               })}
             </div>
           );
-        } else if (props.day == props.card[0].day.split(" ")[1]) {
+        } else if (props.day == props.card[0].realday.toString()) {
           return (
             <div className={classes.root_focus}>
               <Typography className={classes.ListItemSize2}>
@@ -162,7 +162,7 @@ export default function ResponsiveDialog(props) {
                       <Avatar
                         variant="square"
                         style={{ width: 48, height: 48, margin: 0, padding: 0 }}
-                        src={"static/avatar/" + value.name + "[48].svg"}
+                        src={"static/avatar/" + value.name + "/[48].svg"}
                       />
                     </Box>
                     <Box p={1} flexGrow={1}>
@@ -217,7 +217,7 @@ export default function ResponsiveDialog(props) {
                       <Avatar
                         variant="square"
                         style={{ width: 48, height: 48, margin: 0, padding: 0 }}
-                        src={"static/avatar/" + value.name + "[48].svg"}
+                        src={"static/avatar/" + value.name + "/[48].svg"}
                       />
                     </Box>
                     <Box p={1} flexGrow={1}>
@@ -286,7 +286,7 @@ export default function ResponsiveDialog(props) {
                       <Avatar
                         variant="square"
                         style={{ width: 48, height: 48, margin: 0, padding: 0 }}
-                        src={"static/avatar/" + value.name + "[48].svg"}
+                        src={"static/avatar/" + value.name + "/[48].svg"}
                       />
                     </Box>
                     <Box p={1} flexGrow={1}>

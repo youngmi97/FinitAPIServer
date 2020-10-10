@@ -75,92 +75,101 @@ export default function ResponsiveDialog(props) {
   const handleClose = () => {
     setOpen(false);
   };
-
+  console.log(props.card);
   return (
     <div>
       <div className={classes.root}>
         <Typography className={classes.ListItemSize2}>
-          RENEWS ON {props.day}
+          RENEWS ON {props.card[0].day}
         </Typography>
-        <Box display="flex" alignItems="center" p={1} className={classes.List1}>
-          <Box p={1} style={{ paddingLeft: 0 }}>
-            <Avatar
-              variant="square"
-              style={{ width: 48, height: 48, margin: 0, padding: 0 }}
-              src={"static/avatar/" + props.name + "[48].svg"}
-            />
-          </Box>
-          <Box p={1} flexGrow={1}>
-            <Typography className={classes.ListItemSize}>
-              {props.name}
-            </Typography>
-            <Typography className={classes.ListItemSize1}>
-              {props.card}
-            </Typography>
-          </Box>
-          <Box p={1}>
-            {(() => {
-              if (parseInt(props.date) <= 7) {
-                return (
-                  <div
-                    style={{
-                      borderRadius: 12,
-                      width: 41,
-                      height: 24,
-                      backgroundColor: "rgba(255, 0, 0, 0.1)",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      color: "#FF3B30",
-                      fontSize: 13,
-                      fontWeight: 600,
-                    }}
-                  >
-                    D-{props.date}
-                  </div>
-                );
-              } else {
-                return (
-                  <div
-                    style={{
-                      borderRadius: 12,
-                      width: 41,
-                      height: 24,
-                      backgroundColor: "rgba(30, 215, 96, 0.1)",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      color: "#4CD964",
-                      fontSize: 13,
-                      fontWeight: 600,
-                    }}
-                  >
-                    D-{props.date}
-                  </div>
-                );
-              }
-            })()}
-          </Box>
-          <Box p={1}>
-            <div
-              style={{
-                borderRadius: 12,
-                width: 68,
-                height: 20,
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                fontSize: 17,
-                fontWeight: 400,
-              }}
+        {props.card.map((value, index) => {
+          return (
+            <Box
+              display="flex"
+              alignItems="center"
+              p={1}
+              className={classes.List1}
             >
-              - ${props.price}
-            </div>
-          </Box>
-        </Box>
+              <Box p={1} style={{ paddingLeft: 0 }}>
+                <Avatar
+                  variant="square"
+                  style={{ width: 48, height: 48, margin: 0, padding: 0 }}
+                  src={"static/avatar/" + value.name + "/[48].svg"}
+                />
+              </Box>
+              <Box p={1} flexGrow={1}>
+                <Typography className={classes.ListItemSize}>
+                  {value.name}
+                </Typography>
+                <Typography className={classes.ListItemSize1}>
+                  {value.card}
+                </Typography>
+              </Box>
+              <Box p={1}>
+                {(() => {
+                  if (parseInt(value.date) <= 7) {
+                    return (
+                      <div
+                        style={{
+                          borderRadius: 12,
+                          width: 41,
+                          height: 24,
+                          backgroundColor: "rgba(255, 0, 0, 0.1)",
+                          display: "flex",
+                          flexDirection: "column",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          color: "#FF3B30",
+                          fontSize: 13,
+                          fontWeight: 600,
+                        }}
+                      >
+                        D-{value.date}
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <div
+                        style={{
+                          borderRadius: 12,
+                          width: 41,
+                          height: 24,
+                          backgroundColor: "rgba(30, 215, 96, 0.1)",
+                          display: "flex",
+                          flexDirection: "column",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          color: "#4CD964",
+                          fontSize: 13,
+                          fontWeight: 600,
+                        }}
+                      >
+                        D-{value.date}
+                      </div>
+                    );
+                  }
+                })()}
+              </Box>
+              <Box p={1}>
+                <div
+                  style={{
+                    borderRadius: 12,
+                    width: 68,
+                    height: 20,
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    fontSize: 17,
+                    fontWeight: 400,
+                  }}
+                >
+                  - ${value.price}
+                </div>
+              </Box>
+            </Box>
+          );
+        })}
       </div>
     </div>
   );

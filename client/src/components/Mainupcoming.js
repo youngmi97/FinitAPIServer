@@ -262,7 +262,7 @@ export default function Main(props) {
   );
 
   var empty = false;
-  var cards = [];
+  let cards = [];
 
   console.log("user details", user);
   const { loading, error, data } = useQuery(GET_SUBSCRIPTIONS, {
@@ -300,7 +300,7 @@ export default function Main(props) {
         item["lastDate"].split(/[^0-9]/)[0],
         item["lastDate"].split(/[^0-9]/)[1],
         item["lastDate"].split(/[^0-9]/)[2],
-        0,
+        12,
         0,
         0
       ),
@@ -315,6 +315,37 @@ export default function Main(props) {
     }
     return parseInt(a.lastDate) > parseInt(b.lastDate) ? 1 : -1;
   });
+
+  function make_list(list) {
+    var a = list;
+    for (let index = 0; index < list.length; index++) {
+      a[index]["lastDate"] = new Date(
+        new Date(a[index]["lastDate"]).setMonth(
+          new Date(a[index]["lastDate"]).getMonth() - 1
+        )
+      );
+    }
+    return a;
+  }
+  const freecard = JSON.parse(JSON.stringify(cards));
+  const d = JSON.parse(JSON.stringify(cards));
+  function get_list(list) {
+    var result = new Object();
+    for (let index = 0; index < list.length; index++) {
+      if (!Object.keys(result).includes(list[index]["lastDate"].toString())) {
+        result[list[index]["lastDate"]] = [list[index]];
+      } else {
+        result[list[index]["lastDate"]] = result[
+          list[index]["lastDate"]
+        ].concat([list[index]]);
+      }
+    }
+    return result;
+  }
+
+  cards = { ...get_list(cards), ...get_list(make_list(d)) };
+
+  console.log("card", cards);
 
   const underlineBar = isReduced ? (
     <div className={classes.dividerReduced}></div>
@@ -365,7 +396,11 @@ export default function Main(props) {
             />
           </Box>
           <Box p={1} style={{ marginLeft: 32 }}>
-            <Event selected={selected} />
+            <Event
+              selected={selected}
+              cards={cards}
+              freecard={get_list(freecard)}
+            />
           </Box>
         </Box>
       </main>

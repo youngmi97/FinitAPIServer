@@ -101,7 +101,7 @@ export default function Card_internal(props) {
             aria-label="subscription"
             variant="rounded"
             className={classes.avatar}
-            src={"/static/avatar/" + props.name + "[48].svg"}
+            src={"/static/avatar/" + props.name + "/[48].svg"}
           ></Avatar>
         }
         title={<Typography className={classes.title}>{props.name}</Typography>}
