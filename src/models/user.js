@@ -31,6 +31,7 @@ const userSchema = mongoose.Schema(
     ],
     name: String,
     password: String,
+    access_token: String,
   },
   {
     timestamps: true,

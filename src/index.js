@@ -115,7 +115,7 @@ const client = new plaid.Client(
   process.env.PLAID_CLIENT_ID,
   process.env.PLAID_SECRET,
   process.env.PLAID_PUBLIC_KEY,
-  plaid.environments.sandbox
+  plaid.environments.development
 );
 
 var PUBLIC_TOKEN = null;
@@ -142,7 +142,7 @@ app.post("/auth/public_token", async (req, res) => {
 
 app.get("/transactions", async (req, res) => {
   // Pull transactions for the last 30 days
-  let startDate = moment().subtract(30, "days").format("YYYY-MM-DD");
+  let startDate = moment().subtract(60, "days").format("YYYY-MM-DD");
   let endDate = moment().format("YYYY-MM-DD");
   console.log("made it past variables");
   client.getTransactions(
@@ -150,7 +150,7 @@ app.get("/transactions", async (req, res) => {
     startDate,
     endDate,
     {
-      count: 250,
+      count: 400,
       offset: 0,
     },
     function (error, transactionsResponse) {

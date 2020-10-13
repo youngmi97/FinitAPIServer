@@ -20,6 +20,7 @@ export default gql`
     # Not adding ! on the returned User as the operation may fail and return an error
     signIn(email: String!, password: String!): User @guest
     signOut: Boolean @auth
+    updateAccessToken(userId: ID!, access_token: String): User @auth
   }
 
   type User {
@@ -29,6 +30,7 @@ export default gql`
     name: String!
     accounts: [Account!]!
     services: [Service!]!
+    access_token: String
     createdAt: String!
     updatedAt: String!
   }

@@ -68,6 +68,30 @@ export default {
       //console.log("context.req.session", context.req.session);
       return signOut(context.req, context.res);
     },
+
+    //have to be able to update the ACCESS_TOKEN of user after the PlaidLink evnt happens
+    updateAccessToken: async (
+      root,
+      { userId, access_token },
+      context,
+      info
+    ) => {
+      // take userId and ACCESS_TOKEN as arguments
+      // find by user by userId, update ACCESS_TOKEN, return the updated User object
+      if (!mongoose.Types.ObjectId.isValid(userId)) {
+        throw new UserInputError(`User ID is not valid Object ID`);
+      }
+      //const user = await User.findById(userId);
+      //user.update({ access_token: access_token }, { upsert: true });
+      const user = await User.findOneAndUpdate(
+        { _id: userId },
+        { access_token: access_token },
+        { upsert: true }
+      );
+
+      const updatedUser = await User.findById(userId);
+      return updatedUser;
+    },
   },
 
   // query for accounts didnt work before this

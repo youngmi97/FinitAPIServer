@@ -4,6 +4,67 @@ import { withStyles } from "@material-ui/styles";
 import Button from "@material-ui/core/Button";
 import axios from "axios";
 import "../App.css";
+import gql from "graphql-tag";
+
+const UPDATE_ACCESS_TOKEN = gql`
+  mutation UpdateAccessToken($userId: ID!, $access_token: String!) {
+    updateAccessToken(userId: $userId, access_token: $access_token) {
+      id
+      name
+      access_token
+    }
+  }
+`;
+
+const ADD_ACCOUNTS = gql`
+  mutation addAccount(
+    $accountId: String!
+    $plaidId: String!
+    $userId: String!
+    $name: String!
+    $officialName: String!
+    $balance: String!
+    $type: String!
+  ) {
+    addAccount(
+      accountId: $accountId
+      plaidId: $plaidId
+      userId: $userId
+      name: $name
+      officialName: $officialName
+      balance: $balance
+      type: $type
+    ) {
+      id
+    }
+  }
+`;
+
+const ADD_TRANSACTION = gql`
+  mutation addTransaction(
+    $accountId: String!
+    $amount: String!
+    $category: [String!]!
+    $date: String!
+    $isoCurrencyCode: String!
+    $name: String!
+    $paymentChannel: String!
+    $transactionType: String!
+  ) {
+    addTransaction(
+      accountId: $accountId
+      amount: $amount
+      category: $category
+      date: $date
+      isoCurrencyCode: $isoCurrencyCode
+      name: $name
+      paymentChannel: $paymentChannel
+      transactionType: $transactionType
+    ) {
+      id
+    }
+  }
+`;
 
 const useStyles = (theme) => ({
   root: {
@@ -75,7 +136,7 @@ class PlaidLogin extends Component {
     return (
       <PlaidLink
         clientName="React Plaid Setup"
-        env="sandbox"
+        env="development"
         product={["auth", "transactions"]}
         publicKey="d74564d1fca97dd00ec3f9f421eae9"
         onExit={this.handleOnExit}

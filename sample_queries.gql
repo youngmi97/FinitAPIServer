@@ -67,6 +67,17 @@ mutation {
   }
 }
 
+mutation {
+  updateAccessToken(
+    userId: "5f2e5f87b9ac424151a20002"
+    access_token: "testest1234accessToken"
+  ) {
+    id
+    name
+    access_token
+  }
+}
+
 {
   accounts(userId: "5f0f18dd2e6b6b1e6e69dd54") {
     name
