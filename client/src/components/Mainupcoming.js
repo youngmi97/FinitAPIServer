@@ -3,12 +3,14 @@ import Drawer from "@material-ui/core/Drawer";
 import { fade, makeStyles, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import clsx from "clsx";
-import React, { useLayoutEffect, useState } from "react";
-
+import React, { useLayoutEffect, useState, useContext, useEffect } from "react";
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
 import Calendar from "./calendar/calendar";
 import Event from "./calendar/event";
 import LIST_ITEM_DISCOVER from "./List_item_discover";
 import LIST_ITEM_DISCOVER_MINI from "./List_item_discover_mini";
+import { AuthContext } from "../context/auth";
 
 const drawerWidth = 256;
 const drawerWidth2 = 305;
@@ -251,12 +253,99 @@ export default function Main(props) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  const { user } = useContext(AuthContext);
 
   const menuTitle = isReduced ? (
     <LIST_ITEM_DISCOVER_MINI index="0" />
   ) : (
     <TextTypography1>Calendar</TextTypography1>
   );
+
+  var empty = false;
+  let cards = [];
+
+  console.log("user details", user);
+  const { loading, error, data } = useQuery(GET_SUBSCRIPTIONS, {
+    variables: { id: user.id },
+  });
+
+  if (loading) {
+    console.log("loading");
+  } else {
+    //console.log("User ID", data["user"]["id"]);
+    if (data["user"]["services"].length > 0) {
+      cards = data["user"]["services"].map(get_data);
+      //console.log("card", cards);
+    } else {
+      empty = true;
+    }
+  }
+
+  useEffect(() => {}, [empty]);
+
+  function get_data(item) {
+    //var a = item["createdAt"].split(/[^0-9]/);
+
+    return {
+      name: item["name"],
+      planName: item["plan"],
+      price:
+        item["isoCurrencyCode"] +
+        " $" +
+        item["amount"] +
+        "/" +
+        item["period"].slice(0, 2),
+      realPrice: parseInt(item["amount"]),
+      lastDate: new Date(
+        item["lastDate"].split(/[^0-9]/)[0],
+        item["lastDate"].split(/[^0-9]/)[1],
+        item["lastDate"].split(/[^0-9]/)[2],
+        12,
+        0,
+        0
+      ),
+      startdate: item["createdAt"],
+      period: item["period"],
+    };
+  }
+
+  cards.sort(function (a, b) {
+    if (parseInt(a.lastDate) === parseInt(b.lastDate)) {
+      return a.name > b.name ? 1 : -1;
+    }
+    return parseInt(a.lastDate) > parseInt(b.lastDate) ? 1 : -1;
+  });
+
+  function make_list(list) {
+    var a = list;
+    for (let index = 0; index < list.length; index++) {
+      a[index]["lastDate"] = new Date(
+        new Date(a[index]["lastDate"]).setMonth(
+          new Date(a[index]["lastDate"]).getMonth() - 1
+        )
+      );
+    }
+    return a;
+  }
+  const freecard = JSON.parse(JSON.stringify(cards));
+  const d = JSON.parse(JSON.stringify(cards));
+  function get_list(list) {
+    var result = new Object();
+    for (let index = 0; index < list.length; index++) {
+      if (!Object.keys(result).includes(list[index]["lastDate"].toString())) {
+        result[list[index]["lastDate"]] = [list[index]];
+      } else {
+        result[list[index]["lastDate"]] = result[
+          list[index]["lastDate"]
+        ].concat([list[index]]);
+      }
+    }
+    return result;
+  }
+
+  cards = { ...get_list(cards), ...get_list(make_list(d)) };
+
+  console.log("card", cards);
 
   const underlineBar = isReduced ? (
     <div className={classes.dividerReduced}></div>
@@ -300,10 +389,18 @@ export default function Main(props) {
           className={classes.mainbreak}
         >
           <Box p={1}>
-            <Calendar selected={selected} setSelected={(a) => setSelected(a)} />
+            <Calendar
+              selected={selected}
+              cards={cards}
+              setSelected={(a) => setSelected(a)}
+            />
           </Box>
           <Box p={1} style={{ marginLeft: 32 }}>
-            <Event selected={selected} />
+            <Event
+              selected={selected}
+              cards={cards}
+              freecard={get_list(freecard)}
+            />
           </Box>
         </Box>
       </main>
@@ -334,3 +431,20 @@ export default function Main(props) {
     </div>
   );
 }
+const GET_SUBSCRIPTIONS = gql`
+  query user($id: ID!) {
+    user(id: $id) {
+      id
+      services {
+        id
+        name
+        amount
+        isoCurrencyCode
+        plan
+        lastDate
+        period
+        createdAt
+      }
+    }
+  }
+`;

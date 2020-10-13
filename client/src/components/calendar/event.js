@@ -82,86 +82,165 @@ export default function ResponsiveDialog(props) {
   const handleClose = () => {
     setOpen(false);
   };
-  const a = props.selected ? props.selected.toLocaleDateString() : "00.00.00";
+  const a = props.selected ? props.selected : 0;
 
-  const b = a.split(".")[2];
+  const d = JSON.parse(JSON.stringify(props.cards));
 
-  const c = parseInt(b);
+  function get_list(obj) {
+    const a = Object.keys(obj);
+    for (let index = 0; index < a.length; index++) {
+      for (let index1 = 0; index1 < obj[a[index]].length; index1++) {
+        if (obj[a[index]][index1]["planName"] === "Free") {
+          obj[a[index]].splice(index1, 1);
+          index1 = index1 - 1;
+        }
+      }
+    }
+    var b = [];
+    b = a.map((x) => new Date(x));
 
-  const lists = [
-    {
-      name: "Netflix",
-      card: "Visa • 3366",
-      day: "OCTOBER 6",
-      date: "3",
-      price: "12.99",
-    },
-    {
-      name: "Notion",
-      card: "Visa • 3366",
-      day: "OCTOBER 10",
-      date: "7",
-      price: "8",
-    },
-    {
-      name: "Hulu",
-      card: "Visa • 3366",
-      day: "OCTOBER 15",
-      date: "20",
-      price: "5",
-    },
+    b.sort(function (a, b) {
+      // Turn your strings into dates, and then subtract them
+      // to get a value that is either negative, positive, or zero.
+      return new Date(b) - new Date(a);
+    });
+    b = b.reverse();
+    const c = {};
+    for (let index = 0; index < b.length; index++) {
+      c[b[index].toString()] = obj[b[index].toString()];
+    }
+    return c;
+  }
+
+  function get_list1(obj) {
+    const a = Object.keys(obj);
+    for (let index = 0; index < a.length; index++) {
+      for (let index1 = 0; index1 < obj[a[index]].length; index1++) {
+        if (!(obj[a[index]][index1]["planName"] === "Free")) {
+          obj[a[index]].splice(index1, 1);
+          index1 = index1 - 1;
+        }
+      }
+    }
+    return obj;
+  }
+
+  // const lists = [
+  //   {
+  //     name: "Netflix",
+  //     card: "Visa • 3366",
+  //     day: "OCTOBER 6",
+  //     date: "3",
+  //     price: "12.99",
+  //   },
+  //   {
+  //     name: "Notion",
+  //     card: "Visa • 3366",
+  //     day: "OCTOBER 10",
+  //     date: "7",
+  //     price: "8",
+  //   },
+  //   {
+  //     name: "Hulu",
+  //     card: "Visa • 3366",
+  //     day: "OCTOBER 15",
+  //     date: "20",
+  //     price: "5",
+  //   },
+  // ];
+  // const paymentlists = [
+  //   [
+  //     {
+  //       name: "Netflix",
+  //       card: "Visa • 3366",
+  //       day: "SEPTEMBER 20",
+  //       date: "-3",
+  //       price: "12.99",
+  //     },
+  //   ],
+  //   [
+  //     {
+  //       name: "Notion",
+  //       card: "Visa • 3366",
+  //       day: "SEPTEMBER 29",
+  //       date: "-7",
+  //       price: "8",
+  //     },
+  //   ],
+
+  //   [
+  //     {
+  //       name: "Hulu",
+  //       card: "Visa • 3366",
+  //       day: "OCTOBER 1",
+  //       date: "0",
+  //       price: "20",
+  //     },
+  //     {
+  //       name: "Spotify",
+  //       card: "Visa • 3366",
+  //       day: "OCTOBER 1",
+  //       date: "0",
+  //       price: "1.25",
+  //     },
+  //   ],
+  //   [
+  //     {
+  //       name: "Hulu",
+  //       card: "Visa • 3366",
+  //       day: "OCTOBER 15",
+  //       date: "20",
+  //       price: "5",
+  //     },
+  //   ],
+  // ];
+
+  const today = new Date();
+
+  var paymentlists = get_list(d);
+
+  var lists = get_list1(props.freecard);
+  const monthNames = [
+    "JANUARY",
+    "FEBRUARY",
+    "MARCH",
+    "APRIL",
+    "MAY",
+    "JUNE",
+    "JULY",
+    "AUGUST",
+    "SEPTEMBER",
+    "OCTOBER",
+    "NOVEMBER",
+    "DECEMBER",
   ];
-  const paymentlists = [
-    [
-      {
-        name: "Netflix",
-        card: "Visa • 3366",
-        day: "SEPTEMBER 20",
-        date: "-3",
-        price: "12.99",
-      },
-    ],
-    [
-      {
-        name: "Notion",
-        card: "Visa • 3366",
-        day: "SEPTEMBER 29",
-        date: "-7",
-        price: "8",
-      },
-    ],
 
-    [
-      {
-        name: "Hulu",
-        card: "Visa • 3366",
-        day: "OCTOBER 1",
-        date: "0",
-        price: "20",
-      },
-      {
-        name: "Spotify",
-        card: "Visa • 3366",
-        day: "OCTOBER 1",
-        date: "0",
-        price: "1.25",
-      },
-    ],
-    [
-      {
-        name: "Hulu",
-        card: "Visa • 3366",
-        day: "OCTOBER 15",
-        date: "20",
-        price: "5",
-      },
-    ],
-  ];
-  const name = "Netflix";
-  const card = "Visa • 3366";
-  const day = "OCTOBER 6";
-  const date = "20";
-  const price = "12.99";
+  function get_date(today, day) {
+    return parseInt((day - today) / 86400000);
+  }
+
+  function make_payment(obj) {
+    var result = new Array();
+    const a = Object.keys(obj);
+    for (let index = 0; index < a.length; index++) {
+      result.push([]);
+      for (let index1 = 0; index1 < obj[a[index]].length; index1++) {
+        let date = new Date(obj[a[index]][index1]["lastDate"]);
+        result[index].push({
+          name: obj[a[index]][index1]["name"],
+          card: "Visa • 3366",
+          day: monthNames[date.getMonth()] + " " + date.getDate(),
+          realday: date,
+          date: get_date(today, date),
+          price: obj[a[index]][index1]["realPrice"],
+        });
+      }
+    }
+    return result;
+  }
+
+  paymentlists = make_payment(paymentlists);
+  lists = make_payment(lists);
   return (
     <div>
       <Typography
@@ -174,18 +253,14 @@ export default function ResponsiveDialog(props) {
         Free Trial
       </Typography>
       <List className={classes.List}>
-        {lists.map((card, index) => {
-          return (
-            <ListItem>
-              <Freetrial
-                name={card.name}
-                card={card.card}
-                day={card.day}
-                date={card.date}
-                price={card.price}
-              />
-            </ListItem>
-          );
+        {Object.entries(lists).map((card, index) => {
+          if (card[1].length > 0) {
+            return (
+              <ListItem>
+                <Freetrial card={card[1]} />
+              </ListItem>
+            );
+          }
         })}
       </List>
       <Typography
@@ -199,10 +274,10 @@ export default function ResponsiveDialog(props) {
         Recurring Payments
       </Typography>
       <List className={classes.List}>
-        {paymentlists.map((card, index) => {
+        {Object.entries(paymentlists).map((card, index) => {
           return (
             <ListItem>
-              <Recurring card={card} day={c} />
+              <Recurring card={card[1]} day={a} />
             </ListItem>
           );
         })}

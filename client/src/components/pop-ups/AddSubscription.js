@@ -511,7 +511,7 @@ export default function Subscription(props) {
                       <ListItemIcon className={classes.ListItemSize}>
                         <img
                           className={classes.imageIcon}
-                          src={"/static/avatar/" + name + "[48].svg"}
+                          src={"/static/avatar/" + name + "/[48].svg"}
                           alt="upcoming"
                         />
                       </ListItemIcon>
@@ -552,7 +552,7 @@ export default function Subscription(props) {
               <Typography align="center" className={classes.Title}>
                 <img
                   className={classes.imageIcon}
-                  src={"/static/avatar/" + temporalname + "[48].svg"}
+                  src={"/static/avatar/" + temporalname + "/[48].svg"}
                   alt="upcoming"
                 />
               </Typography>

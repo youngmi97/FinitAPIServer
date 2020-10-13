@@ -64,6 +64,7 @@ const Background = styled1.div`
   background-repeat: no-repeat;
   position: relative;
   background-color: transparent;
+  color:#FFF;
   width: 217px;
   height: 217px;
   cursor: pointer;
@@ -75,7 +76,7 @@ const Background = styled1.div`
 
   &:hover {
     ${DisplayOver} {
-      background-color: rgba(0,0,0,.5);
+      background-color: rgba(0,0,0,0.5);
     }
     ${SubTitle} {
       transform: translate3d(0,0,0);
