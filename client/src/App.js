@@ -226,8 +226,8 @@ function App() {
                 path="/register"
                 component={Register_Local}
               />
-              <UnauthenticatedRoute exact path="/link" component={Link_Local} />
-              <UnauthenticatedRoute
+              <AuthenticatedRoute exact path="/link" component={Link_Local} />
+              <AuthenticatedRoute
                 exact
                 path="/linkplaid"
                 component={Linkplaid_Local}
