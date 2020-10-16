@@ -6,6 +6,7 @@ import {
   BarSeries,
   ArgumentAxis,
 } from "@devexpress/dx-react-chart-material-ui";
+import { ResponsiveBar } from "@nivo/bar";
 
 import { Animation, Stack } from "@devexpress/dx-react-chart";
 
@@ -24,32 +25,81 @@ const data = [
 ];
 
 export default function Chart_func() {
-  return (
-    <Paper>
-      <Chart data={data} height="275">
-        <ArgumentAxis showLine={false} showTicks={false} />
-        <BarSeries
-          color="#C4C4C4"
-          name="Before"
-          valueField="Before"
-          argumentField="year"
-        />
-        <BarSeries
-          color="#7610EB"
-          name="now"
-          valueField="now"
-          argumentField="year"
-        />
-        <BarSeries
-          color="#EFEFF4"
-          name="future"
-          valueField="future"
-          argumentField="year"
-        />
-        <Stack stacks={[{ series: ["Before", "now", "future"] }]} />
+  const data1 = [
+    {
+      country: "May",
+      Entertainment: 100,
+      Music: 50,
+      "Creativity and Design": 0,
+    },
+    {
+      country: "June",
+      Entertainment: 100,
 
-        <Animation />
-      </Chart>
+      Music: 50,
+      "Creativity and Design": 0,
+    },
+    {
+      country: "July",
+      Entertainment: 100,
+
+      Music: 50,
+
+      "Creativity and Design": 0,
+    },
+  ];
+  return (
+    <Paper style={{ width: 590, height: 359 }}>
+      <ResponsiveBar
+        data={data1}
+        keys={["Entertainment", "Music", "Creativity and Design"]}
+        indexBy="country"
+        margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+        padding={0.3}
+        colors={["#7610EB", "#D98E04", "#F2E205"]}
+        borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
+        axisTop={null}
+        axisLeft={null}
+        axisRight={null}
+        width={400}
+        axisBottom={{
+          tickSize: 5,
+          tickPadding: 5,
+          tickRotation: 0,
+          legend: "country",
+          legendPosition: "middle",
+          legendOffset: 32,
+        }}
+        enableLabel={false}
+        enableGridY={false}
+        legends={[
+          {
+            dataFrom: "keys",
+            anchor: "right",
+            direction: "column",
+            justify: false,
+            translateX: 120,
+            translateY: 0,
+            itemsSpacing: 2,
+            itemWidth: 269,
+            itemHeight: 20,
+            itemDirection: "left-to-right",
+            itemOpacity: 0.85,
+            symbolSize: 20,
+            effects: [
+              {
+                on: "hover",
+                style: {
+                  itemOpacity: 1,
+                },
+              },
+            ],
+          },
+        ]}
+        animate={true}
+        motionStiffness={90}
+        motionDamping={15}
+      />
     </Paper>
   );
 }

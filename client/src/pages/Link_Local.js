@@ -6,13 +6,18 @@ import {
   Paper,
   Typography,
   TextField,
+  Snackbar,
+  SnackbarContent,
 } from "@material-ui/core";
+import Slide from "@material-ui/core/Slide";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import gql from "graphql-tag";
 import React, { useContext, useState } from "react";
+import Fade from "@material-ui/core/Fade";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth";
 import { useForm } from "../hooks";
+import { ToastContainer, toast } from "react-toastify";
 
 const StyledButton = withStyles({
   root: {
@@ -71,7 +76,7 @@ const StyledButton1 = withStyles({
 
 const PurpleTextTypography1 = withStyles({
   root: {
-    marginTop: "48px",
+    marginTop: "40px",
     color: "#7610EB",
   },
 })(Typography);
@@ -117,12 +122,16 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+function SlideTransition(props) {
+  return <Slide {...props} direction="up" />;
+}
 
 function Register_Local(props) {
   const classes = useStyles();
-
-  // Using custom hook defined in hooks.js
-
+  const [state, setState] = React.useState(true);
+  const handleClose = () => {
+    setState(false);
+  };
   return (
     <div
       style={{
@@ -130,12 +139,37 @@ function Register_Local(props) {
         backgroundColor: "#FFFFFF",
       }}
     >
+      <Snackbar
+        open={state}
+        TransitionComponent={Fade}
+        style={{ marginTop: 60 }}
+        onClose={handleClose}
+        autoHideDuration={4000}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+      >
+        <SnackbarContent
+          style={{
+            backgroundColor: "#7610EB",
+            color: "White",
+            maxWidth: 170,
+            height: 36,
+            justifyContent: "center",
+            borderRadius: 8,
+            boxShadow: "0px 8px 24px rgba(47, 4, 89, 0.25)",
+          }}
+          message={<span id="client-snackbar">Sign Up Success! 👍</span>}
+        />
+      </Snackbar>
       <Box display="flex" justifyContent="center">
         <div className={classes.root}>
           <Paper
             variant="outlined"
             style={{
               height: "700px",
+              marginTop: 92,
               backgroundColor: "#FFFFFF",
               borderRadius: 12,
               boxShadow: "1px 2px 4px rgba(0, 0, 0, 0.1)",
