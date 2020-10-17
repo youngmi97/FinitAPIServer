@@ -76,13 +76,12 @@ export default {
       context,
       info
     ) => {
-      // take userId and ACCESS_TOKEN as arguments
-      // find by user by userId, update ACCESS_TOKEN, return the updated User object
       if (!mongoose.Types.ObjectId.isValid(userId)) {
         throw new UserInputError(`User ID is not valid Object ID`);
       }
-      //const user = await User.findById(userId);
-      //user.update({ access_token: access_token }, { upsert: true });
+
+      console.log("Updating Token");
+
       const user = await User.findOneAndUpdate(
         { _id: userId },
         { access_token: access_token },

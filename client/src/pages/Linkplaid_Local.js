@@ -1,4 +1,4 @@
-import { useMutation } from "@apollo/react-hooks";
+//import { useMutation } from "@apollo/react-hooks";
 import {
   Avatar,
   Box,
@@ -8,11 +8,9 @@ import {
   TextField,
 } from "@material-ui/core";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import gql from "graphql-tag";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth";
-import { useForm } from "../hooks";
 import PlaidLogin from "../components/PlaidLogin";
 
 const StyledButton = withStyles({
@@ -120,6 +118,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Register_Local(props) {
   const classes = useStyles();
+  const { user } = useContext(AuthContext);
 
   // Using custom hook defined in hooks.js
 
@@ -188,7 +187,9 @@ function Register_Local(props) {
               justifyContent="center"
               style={{ marginTop: 32 }}
             >
-              <PlaidLogin />
+              <AuthContext.Consumer>
+                {(context) => <PlaidLogin context={context} />}
+              </AuthContext.Consumer>
             </Box>
             <Box
               display="flex"

@@ -1,10 +1,14 @@
 import React, { Component } from "react";
+import { Mutation } from "react-apollo";
 import { PlaidLink } from "react-plaid-link";
 import { withStyles } from "@material-ui/styles";
-import Button from "@material-ui/core/Button";
+//import Button from "@material-ui/core/Button";
+import { print } from "graphql";
 import axios from "axios";
 import "../App.css";
 import gql from "graphql-tag";
+import { AuthContext } from "../context/auth";
+import { withRouter } from "react-router-dom";
 
 const UPDATE_ACCESS_TOKEN = gql`
   mutation UpdateAccessToken($userId: ID!, $access_token: String!) {
@@ -92,8 +96,10 @@ const useStyles = (theme) => ({
 });
 
 class PlaidLogin extends Component {
-  constructor(props) {
-    super(props);
+  //declaring contextType should behave the same as useContext API for functional components
+  static contextType = AuthContext;
+  constructor(props, context) {
+    super(props, context);
 
     this.state = {
       transactions: [],
@@ -101,12 +107,10 @@ class PlaidLogin extends Component {
 
     this.handleClick = this.handleClick.bind(this);
     this.handleOnSuccess = this.handleOnSuccess.bind(this);
+    this.handleOnExit = this.handleOnExit.bind(this);
   }
 
   handleOnSuccess(public_token, metadata) {
-    // send token to client server
-    // make a TRANSACTIONS Request Here? --> Right after exchanging for access token
-    // Make an update function
     axios
       .post("http://localhost:5000/auth/public_token", {
         public_token: public_token,
@@ -114,14 +118,23 @@ class PlaidLogin extends Component {
       .then((response) =>
         axios.get("http://localhost:5000/transactions").then((res) => {
           this.setState({ transactions: res.data });
-          console.log(this.state.transactions);
+
+          axios
+            .post("http://localhost:5000/graphql", {
+              query: print(UPDATE_ACCESS_TOKEN),
+              variables: {
+                userId: this.props.context.user.id,
+                access_token: response.data.access_token,
+              },
+            })
+            .then((res) => this.props.history.push("/subscriptions"))
+            .catch((err) => console.log(err));
         })
       );
   }
 
   handleOnExit() {
     // handle the case when your user exits Link
-    // For the sake of this tutorial, we're not going to be doing anything here.
     console.log("User has exited plaid link prompt");
   }
 
@@ -131,22 +144,33 @@ class PlaidLogin extends Component {
     });
   }
 
+  // 1. Have to call Mutation from PlaidLink Component after the access_token state has been set
+  // 2. Have to call the updateAccessToken function in one of the events --> not working well
+
   render() {
     const { classes } = this.props;
+    const { user } = this.context;
     return (
-      <PlaidLink
-        clientName="React Plaid Setup"
-        env="development"
-        product={["auth", "transactions"]}
-        publicKey="d74564d1fca97dd00ec3f9f421eae9"
-        onExit={this.handleOnExit}
-        onSuccess={this.handleOnSuccess}
-        className={classes.ListItemSize5}
+      <Mutation
+        mutation={UPDATE_ACCESS_TOKEN}
+        variables={{ userId: user.id, access_token: this.state.access_token }}
       >
-        + Add Payment Methods
-      </PlaidLink>
+        {(updateAccessToken) => (
+          <PlaidLink
+            clientName="React Plaid Setup"
+            env="sandbox"
+            product={["auth", "transactions"]}
+            publicKey="d74564d1fca97dd00ec3f9f421eae9"
+            onExit={this.handleOnExit}
+            onSuccess={this.handleOnSuccess}
+            className={classes.ListItemSize5}
+          >
+            + Add Payment Methods
+          </PlaidLink>
+        )}
+      </Mutation>
     );
   }
 }
 
-export default withStyles(useStyles)(PlaidLogin);
+export default withRouter(withStyles(useStyles)(PlaidLogin));

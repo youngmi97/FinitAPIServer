@@ -9,6 +9,7 @@ import resolvers from "./resolvers";
 import schemaDirectives from "./directives";
 
 var moment = require("moment");
+const { request } = require("graphql-request");
 const express = require("express");
 const redis = require("redis");
 const graphqlHTTP = require("express-graphql");
@@ -115,7 +116,7 @@ const client = new plaid.Client(
   process.env.PLAID_CLIENT_ID,
   process.env.PLAID_SECRET,
   process.env.PLAID_PUBLIC_KEY,
-  plaid.environments.development
+  plaid.environments.sandbox
 );
 
 var PUBLIC_TOKEN = null;
@@ -123,10 +124,8 @@ var ACCESS_TOKEN = null;
 var ITEM_ID = null;
 
 app.post("/auth/public_token", async (req, res) => {
-  // First, receive the public token and set it to a variable
   let PUBLIC_TOKEN = req.body.public_token;
-  // Second, exchange the public token for an access token
-  // When does the access token expire ??
+
   client.exchangePublicToken(PUBLIC_TOKEN, function (error, tokenResponse) {
     ACCESS_TOKEN = tokenResponse.access_token;
     ITEM_ID = tokenResponse.item_id;
@@ -134,9 +133,6 @@ app.post("/auth/public_token", async (req, res) => {
       access_token: ACCESS_TOKEN,
       item_id: ITEM_ID,
     });
-    console.log("access token below");
-    console.log("ACCESS_TOKEN", ACCESS_TOKEN);
-    console.log("PUBLIC_TOKEN", PUBLIC_TOKEN);
   });
 });
 
@@ -157,27 +153,20 @@ app.get("/transactions", async (req, res) => {
       res.json({ transactions: transactionsResponse });
       // TRANSACTIONS LOGGED BELOW!
       // They will show up in the terminal that you are running nodemon in.
-      console.log("----------------------------------");
-      console.log("No. Accounts", transactionsResponse["accounts"].length);
-      console.log("accounts info", transactionsResponse["accounts"]);
-      console.log("----------------------------------");
-      console.log(
-        "No. Transactions",
-        transactionsResponse["transactions"].length
-      );
-      console.log("transaction info", transactionsResponse["transactions"]);
+      //console.log("----------------------------------");
+      //console.log("No. Accounts", transactionsResponse["accounts"].length);
+      //console.log("accounts info", transactionsResponse["accounts"]);
+      //console.log("----------------------------------");
+      //console.log(
+      //  "No. Transactions",
+      //  transactionsResponse["transactions"].length
+      //);
+      //console.log("transaction info", transactionsResponse["transactions"]);
 
       // transactionsResponse Structure
       //
     }
   );
-
-  /* client.getCategories(function (err, response) {
-    // Handle err
-    var categories = response.categories;
-	console.log(categories);
-	
-  }); */
 });
 
 // LOOKUP LINK TOKEN --> from Plaid documentation --> why is it better??
