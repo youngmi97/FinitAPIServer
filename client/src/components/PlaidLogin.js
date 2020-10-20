@@ -103,6 +103,7 @@ class PlaidLogin extends Component {
 
     this.state = {
       transactions: [],
+      accounts: [],
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -117,7 +118,8 @@ class PlaidLogin extends Component {
       })
       .then((response) =>
         axios.get("http://localhost:5000/transactions").then((res) => {
-          this.setState({ transactions: res.data });
+          this.setState({ transactions: res.data.transactions.transactions });
+          this.setState({ accounts: res.data.transactions.accounts });
 
           axios
             .post("http://localhost:5000/graphql", {
@@ -127,8 +129,60 @@ class PlaidLogin extends Component {
                 access_token: response.data.access_token,
               },
             })
-            .then((res) => this.props.history.push("/subscriptions"))
+            .then(() => {
+              let accountPromises = [];
+              let transactionPromises = [];
+
+              console.log("this state accounts", this.state.accounts);
+              this.state.accounts.forEach((account) => {
+                accountPromises.push(
+                  axios.post("http://localhost:5000/graphql", {
+                    query: print(ADD_ACCOUNTS),
+                    variables: {
+                      accountId: account.account_id,
+                      plaidId: "plaidId" || "",
+                      userId: this.props.context.user.id,
+                      name: account.name || "",
+                      officialName: account.officialName || "",
+                      balance: account.balances.current.toString(),
+                      type: account.type || "",
+                    },
+                  })
+                );
+              });
+              Promise.all(accountPromises).catch((err) => {
+                console.log("accounts bulk add err", err);
+              });
+              console.log("Added accounts");
+
+              //Mutation call for each transaction element
+              console.log("transactions", this.state.transactions);
+              this.state.transactions.forEach((transaction) => {
+                transactionPromises.push(
+                  axios.post("http://localhost:5000/graphql", {
+                    query: print(ADD_TRANSACTION),
+                    variables: {
+                      accountId: transaction.account_id,
+                      amount: transaction.amount.toString() || "",
+                      category: transaction.category,
+                      date: transaction.date || "",
+                      isoCurrencyCode: transaction.iso_currency_code || "",
+                      name: transaction.name || "",
+                      paymentChannel: transaction.payment_channel || "",
+                      transactionType: transaction.transaction_type || "",
+                    },
+                  })
+                );
+              });
+              console.log("transactionPromises", transactionPromises);
+              Promise.all(transactionPromises).catch((err) => {
+                console.log("transaction bulk add err", err);
+              });
+              console.log("Added transactions");
+            })
             .catch((err) => console.log(err));
+
+          this.props.history.push("/subscriptions");
         })
       );
   }
@@ -149,26 +203,18 @@ class PlaidLogin extends Component {
 
   render() {
     const { classes } = this.props;
-    const { user } = this.context;
     return (
-      <Mutation
-        mutation={UPDATE_ACCESS_TOKEN}
-        variables={{ userId: user.id, access_token: this.state.access_token }}
+      <PlaidLink
+        clientName="React Plaid Setup"
+        env="sandbox"
+        product={["auth", "transactions"]}
+        publicKey="d74564d1fca97dd00ec3f9f421eae9"
+        onExit={this.handleOnExit}
+        onSuccess={this.handleOnSuccess}
+        className={classes.ListItemSize5}
       >
-        {(updateAccessToken) => (
-          <PlaidLink
-            clientName="React Plaid Setup"
-            env="sandbox"
-            product={["auth", "transactions"]}
-            publicKey="d74564d1fca97dd00ec3f9f421eae9"
-            onExit={this.handleOnExit}
-            onSuccess={this.handleOnSuccess}
-            className={classes.ListItemSize5}
-          >
-            + Add Payment Methods
-          </PlaidLink>
-        )}
-      </Mutation>
+        + Add Payment Methods
+      </PlaidLink>
     );
   }
 }

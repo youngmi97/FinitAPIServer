@@ -11,12 +11,12 @@ export default gql`
     addAccount(
       accountId: String!
       plaidId: String!
-      userId: ID!
+      userId: String!
       name: String!
       officialName: String!
       balance: String!
       type: String!
-    ): Account @auth
+    ): Account
     # Not adding ! on the returned User as the operation may fail and return an error
     removeAccount(accountId: ID!, userId: String!): Boolean @auth
   }

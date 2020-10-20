@@ -8,7 +8,7 @@ export default gql`
   extend type Mutation {
     # have to check that the account id is unique
     addTransaction(
-      accountId: ID!
+      accountId: String!
       amount: String!
       category: [String!]!
       date: String!
@@ -16,7 +16,7 @@ export default gql`
       name: String!
       paymentChannel: String!
       transactionType: String!
-    ): Transaction @auth
+    ): Transaction
   }
 
   # FIXED
