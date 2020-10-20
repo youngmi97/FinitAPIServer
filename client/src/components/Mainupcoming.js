@@ -304,8 +304,11 @@ export default function Main(props) {
         0,
         0
       ),
+      lastDate1: item["lastDate"],
+      plan: item["plan"],
       startdate: item["createdAt"],
       period: item["period"],
+      stringprice: item["price"],
     };
   }
 

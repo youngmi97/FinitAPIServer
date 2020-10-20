@@ -231,8 +231,12 @@ export default function ResponsiveDialog(props) {
           card: "Visa • 3366",
           day: monthNames[date.getMonth()] + " " + date.getDate(),
           realday: date,
+          plan: obj[a[index]][index1]["plan"],
+          period: obj[a[index]][index1]["period"],
           date: get_date(today, date),
           price: obj[a[index]][index1]["realPrice"],
+          stringprice: obj[a[index]][index1]["price"],
+          lastDate1: obj[a[index]][index1]["lastDate1"],
         });
       }
     }
