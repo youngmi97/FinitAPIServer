@@ -15,6 +15,7 @@ export default gql`
       plan: String!
       transactionType: String!
       plaidGenerated: Boolean!
+      firstAddedDate: String!
     ): Service @auth
 
     removeSubscription(userId: String!, name: String!): Boolean @auth
@@ -34,6 +35,7 @@ export default gql`
     plan: String!
     transactionType: String!
     plaidGenerated: Boolean!
+    firstAddedDate: String!
     createdAt: String!
     updatedAt: String!
   }

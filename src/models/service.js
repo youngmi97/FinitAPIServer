@@ -21,6 +21,7 @@ const userSubscriptionServiceItem = mongoose.Schema(
     plan: String,
     transactionType: String,
     plaidGenerated: Boolean,
+    firstAddedDate: String,
   },
   {
     timestamps: true,
