@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Mutation } from "react-apollo";
 import { PlaidLink } from "react-plaid-link";
 import { withStyles } from "@material-ui/styles";
 //import Button from "@material-ui/core/Button";
@@ -155,8 +154,6 @@ class PlaidLogin extends Component {
               });
               console.log("Added accounts");
 
-              //Mutation call for each transaction element
-              console.log("transactions", this.state.transactions);
               this.state.transactions.forEach((transaction) => {
                 transactionPromises.push(
                   axios.post("http://localhost:5000/graphql", {
@@ -174,7 +171,6 @@ class PlaidLogin extends Component {
                   })
                 );
               });
-              console.log("transactionPromises", transactionPromises);
               Promise.all(transactionPromises).catch((err) => {
                 console.log("transaction bulk add err", err);
               });

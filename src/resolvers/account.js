@@ -7,7 +7,7 @@ export default {
   Mutation: {
     addAccount: async (root, args, { req }, info) => {
       const { userId } = args;
-      console.log("Adding account userId", userId);
+      //console.log("Adding account userId", userId);
       //console.log("Finding User", User.findOne({ _id: args.userId }));
       await syncAccount.validateAsync({ userId });
       const account = await PlaidAccount.create(args);
