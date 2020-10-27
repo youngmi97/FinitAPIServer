@@ -36,6 +36,7 @@
     "material-ui-popup-state": "^1.6.1",
     "moment": "^2.27.0",
     "mongoose": "^5.9.24",
+    "node-cron": "^2.0.3",
     "path": "^0.12.7",
     "plaid": "^5.1.0",
     "react-day-picker": "^7.4.8",

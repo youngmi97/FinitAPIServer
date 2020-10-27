@@ -9,6 +9,7 @@ import resolvers from "./resolvers";
 import schemaDirectives from "./directives";
 
 var moment = require("moment");
+const cron = require("node-cron");
 const { request } = require("graphql-request");
 const express = require("express");
 const redis = require("redis");
@@ -24,11 +25,14 @@ const connectRedis = require("connect-redis");
 
 const cors = require("cors");
 const connectDB = require("./models/connection.js");
+const monitorUserChange = require("./changestream");
 
 const PORT = process.env.PORT || 5000;
 
 //Connect to Database
-connectDB();
+connectDB().then(async () => {
+  await monitorUserChange();
+});
 
 const app = express();
 app.disable("x-powered-by");
@@ -170,6 +174,8 @@ app.get("/transactions", async (req, res) => {
 });
 
 // LOOKUP LINK TOKEN --> from Plaid documentation --> why is it better??
+
+// Change Stream Functions --> Monitor and act upon changes in the DB
 
 app.use(express.static("public"));
 
