@@ -5,15 +5,18 @@ import IconButton from "@material-ui/core/IconButton";
 import { fade, makeStyles, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import { useQuery } from "@apollo/react-hooks";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import clsx from "clsx";
-import React, { useLayoutEffect, useState } from "react";
-
+import React, { useLayoutEffect, useState, useContext, useEffect } from "react";
+import { AuthContext } from "../context/auth";
+import gql from "graphql-tag";
 import Chart from "./Insight/Chart";
 import Spendlist from "./Insight/spendlist";
 import LIST_ITEM_DISCOVER from "./List_item_discover";
 import LIST_ITEM_RIGHT from "./List_item_right";
 import LIST_ITEM_DISCOVER_MINI from "./List_item_discover_mini";
+import moment from "moment";
 
 const drawerWidth = 256;
 const drawerWidth2 = 305;
@@ -245,7 +248,7 @@ export default function Main(props) {
   const [open, setOpen] = React.useState(false);
   const [drawer, setDrawer] = React.useState(3);
   // const [view, setView] = React.useState(false);
-
+  const today = new Date();
   const [width] = useWindowSize();
   const isReduced = width <= 1023;
 
@@ -262,6 +265,77 @@ export default function Main(props) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  const { user } = useContext(AuthContext);
+
+  var empty = false;
+  let cards = [];
+
+  console.log("user details", user);
+  const { loading, error, data } = useQuery(GET_SUBSCRIPTIONS, {
+    variables: { id: user.id },
+  });
+
+  if (loading) {
+    console.log("loading");
+  } else {
+    //console.log("User ID", data["user"]["id"]);
+    if (data["user"]["services"].length > 0) {
+      cards = data["user"]["services"].map(get_data);
+      //console.log("card", cards);
+    } else {
+      empty = true;
+    }
+  }
+
+  useEffect(() => {}, [empty]);
+
+  function get_data(item) {
+    //var a = item["createdAt"].split(/[^0-9]/);
+
+    return {
+      name: item["name"],
+      category: item["category"][0],
+      planName: item["plan"],
+      price:
+        item["isoCurrencyCode"] +
+        " $" +
+        item["amount"] +
+        "/" +
+        item["period"].slice(0, 2),
+      realPrice: parseInt(item["amount"]),
+      lastDate: new Date(
+        item["lastDate"].split(/[^0-9]/)[0],
+        item["lastDate"].split(/[^0-9]/)[1],
+        item["lastDate"].split(/[^0-9]/)[2],
+        12,
+        0,
+        0
+      ),
+      lastDate1: item["lastDate"],
+      plan: item["plan"],
+      startdate: item["createdAt"],
+      period: item["period"],
+      stringprice: item["price"],
+      firstAddedDate: moment(today).diff(
+        new Date(
+          item["firstAddedDate"].split(/[^0-9]/)[0],
+          item["firstAddedDate"].split(/[^0-9]/)[1],
+          item["firstAddedDate"].split(/[^0-9]/)[2],
+          12,
+          0,
+          0
+        ),
+        "months"
+      ),
+    };
+  }
+  cards.sort(function (a, b) {
+    if (a.realPrice * a.firstAddedDate === b.realPrice * b.firstAddedDate) {
+      return a.name > b.name ? 1 : -1;
+    }
+    return a.realPrice > b.realPrice ? 1 : -1;
+  });
+  const freecard = JSON.parse(JSON.stringify(cards));
 
   const menuTitle = isReduced ? (
     <LIST_ITEM_DISCOVER_MINI index="4" />
@@ -298,7 +372,7 @@ export default function Main(props) {
         })}
       >
         <Box mx="auto" bgcolor="background.paper" className={classes.mainbreak}>
-          <Chart />
+          <Chart freecard={freecard} />
           <Spendlist />
         </Box>
       </main>
@@ -329,3 +403,22 @@ export default function Main(props) {
     </div>
   );
 }
+const GET_SUBSCRIPTIONS = gql`
+  query user($id: ID!) {
+    user(id: $id) {
+      id
+      services {
+        id
+        name
+        amount
+        category
+        isoCurrencyCode
+        plan
+        lastDate
+        period
+        createdAt
+        firstAddedDate
+      }
+    }
+  }
+`;
