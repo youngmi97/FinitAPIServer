@@ -5,6 +5,7 @@ import {
   Button,
   Paper,
   Typography,
+  CircularProgress,
   // Grid,
 } from "@material-ui/core";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
@@ -127,6 +128,10 @@ function Login_Local(props) {
   const classes = useStyles();
 
   const context = useContext(AuthContext);
+
+  const onLoading = () => {
+    //setLoading(true);
+  };
 
   const [errors, setErrors] = useState({});
 
@@ -335,6 +340,11 @@ function Login_Local(props) {
                     ))}
                   </ul>
                 </div>
+              )}
+              {loading ? (
+                <CircularProgress style={{ marginLeft: 150 }} />
+              ) : (
+                <div />
               )}
             </Box>
           </Paper>
