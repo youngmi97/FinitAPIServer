@@ -5,19 +5,11 @@ function monitorUserChange() {
   const db = client.db("test");
   const collection = db.collection("users");
   const changeStream = collection.watch();
-  changeStream.on("change", (next) => {
+  changeStream.on("change", (changeEvent) => {
     console.log("Change happened");
+    console.log("changeEvent", changeEvent);
+    console.log("operationType", changeEvent.operationType);
   });
 }
-
-// function closeChangeStream(timeInMs = 60000, changeStream) {
-//   return new Promise((resolve) => {
-//     setTimeout(() => {
-//       console.log("Closing the change stream");
-//       changeStream.close();
-//       resolve();
-//     }, timeInMs);
-//   });
-// }
 
 module.exports = monitorUserChange;
