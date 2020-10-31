@@ -15,6 +15,7 @@ import Home_Local from "./pages/Home_Local";
 import Login_Local from "./pages/Login_Local";
 import Register_Local from "./pages/Register_Local";
 import Link_Local from "./pages/Link_Local";
+import Profile_Local from "./components/Profile/Profile_main";
 import Linkplaid_Local from "./pages/Linkplaid_Local";
 import { Sticky } from "semantic-ui-react";
 import AuthenticatedRoute from "./routes/AuthenticatedRoute";
@@ -231,6 +232,11 @@ function App() {
                 exact
                 path="/linkplaid"
                 component={Linkplaid_Local}
+              />
+              <UnauthenticatedRoute
+                exact
+                path="/profile"
+                component={Profile_Local}
               />
             </ThemeProvider>
           </div>
