@@ -805,6 +805,18 @@ function MenuBar() {
               }}
             ></div>
           );
+        } else if (path == "/profile") {
+          return (
+            <div
+              style={{
+                zIndex: 50,
+                position: "fixed",
+                height: "60px",
+                width: "100%",
+                backgroundColor: "#ffffff",
+              }}
+            ></div>
+          );
         } else {
           return (
             <div
