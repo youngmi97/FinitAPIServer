@@ -25,13 +25,17 @@ const connectRedis = require("connect-redis");
 
 const cors = require("cors");
 const connectDB = require("./models/connection.js");
-const monitorUserChange = require("./changestream");
+const {
+  monitorUserChange,
+  regularSubscriptionExtract,
+} = require("./changestream");
 
 const PORT = process.env.PORT || 5000;
 
 //Connect to Database
 connectDB().then(async () => {
   await monitorUserChange();
+  await regularSubscriptionExtract();
 });
 
 const app = express();
