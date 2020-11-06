@@ -146,7 +146,7 @@ app.post("/auth/public_token", async (req, res) => {
 
 app.get("/transactions", async (req, res) => {
   // Pull transactions for the last 30 days
-  let startDate = moment().subtract(60, "days").format("YYYY-MM-DD");
+  let startDate = moment().subtract(365, "days").format("YYYY-MM-DD");
   let endDate = moment().format("YYYY-MM-DD");
   console.log("made it past variables");
   client.getTransactions(
