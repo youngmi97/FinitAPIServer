@@ -35,7 +35,7 @@ const PORT = process.env.PORT || 5000;
 //Connect to Database
 connectDB().then(async () => {
   await monitorUserChange();
-  await regularSubscriptionExtract();
+  //await regularSubscriptionExtract();
 });
 
 const app = express();

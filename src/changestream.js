@@ -2,7 +2,14 @@ import mongoose from "mongoose";
 const cron = require("node-cron");
 import { User, PlaidItem, PlaidAccount, SubscriptionItem } from "./models";
 
-const serviceList = ["Spotify", "Netflix", "Notion"];
+// 1. Fix Reload and Client Cookie Persistence on Re-route
+// 2. Add a reload prompt on the Main page
+// 3. Edit and Delete Subscription Services Mutation
+
+const serviceList = ["Spotify", "Netflix", "Notion", ""];
+
+// Methods to Reference
+// unshift(), findIndex(condition)
 
 // Could apply changeStream on other Collections too (e.g. plaiditems, subscriptionitems)
 function monitorUserChange() {
@@ -17,29 +24,46 @@ function monitorUserChange() {
   });
 }
 
+function monitorTransactionUpdate() {
+  const client = mongoose.connection.client;
+  const db = client.db("test");
+  const collection = db.collection("plaiditems");
+  const changeStream = collection.watch();
+  changeStream.on("change", (changeEvent) => {
+    // Make the ServiceList Update here
+    console.log("Change happened");
+    console.log("changeEvent", changeEvent);
+    console.log("operationType", changeEvent.operationType);
+  });
+}
+
 // The following is called for each userId
 function addServiceDirect(userId, transactionList) {
   transactionList.forEach(async function (transaction) {
     // 1. Filter Subscription Services
-    // More comprehensive filter should be place inside the if statement !
+    // More comprehensive filter should be placed inside the if statement !
     if (serviceList.includes(transaction.name)) {
       console.log("userId", userId);
       console.log(transaction.name);
 
       // 2. Find Existing Service from corresponding userId
-      User.findById(mongoose.Types.ObjectId(userId), function (err, docs) {
+      User.findById(mongoose.Types.ObjectId(userId), function (err, foundUser) {
         // Get the companies whose founders are in that set.
+        console.log("user", foundUser);
+
         SubscriptionItem.findOne({ name: transaction.name }, function (
           err,
-          docs
+          existingService
         ) {
-          //
-          // 3. If not null, record of the service exists for the user == UPDATE
-          // docs --> object of the instance
-
-          console.log(docs);
-
-          // 4. Renew the record / Create one if null == CREATE
+          console.log(existingService);
+          if (existingService) {
+            // 3. If not null, record of the service exists for the user == UPDATE
+            // docs --> object of the instance
+            console.log("service exists");
+          } else {
+            // 4. Renew the record / Create one if null == CREATE
+            console.log("new service");
+          }
         });
       });
 
@@ -113,6 +137,7 @@ function regularSubscriptionExtract() {
                     err,
                     item
                   ) {
+                    //
                     // Have access to:
                     // - Transaction Information
                     // - Corresponding User
