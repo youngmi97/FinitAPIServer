@@ -31,12 +31,9 @@ export default {
     removeSubscription: async (root, { userId, name, plan }, { req }, info) => {
       // !! Have to make sure that name/plan pair for each user is unique
       // Q: Difference between findoneandremove and findoneanddelete --> choose delete unless have good reason not to
-      console.log("Delete Subscription Called");
+      //console.log("Delete Subscription Called");
 
       User.findById(mongoose.Types.ObjectId(userId), function (err, foundUser) {
-        console.log("foundUser", foundUser);
-        console.log("name", name);
-        console.log("plan", plan);
         SubscriptionItem.findOneAndDelete({ name: name, plan: plan });
       });
       //have to check that delete query was valid before returning
@@ -44,8 +41,35 @@ export default {
       return true;
     },
 
-    editSubscription: async (root, args, { req }, info) => {
-      SubscriptionItem.findOneAndUpdate(args);
+    editSubscription: async (
+      root,
+      {
+        userId,
+        name,
+        amount,
+        lastDate,
+        period,
+        plan,
+        plaidGenerated,
+        firstAddedDate,
+      },
+      { req },
+      info
+    ) => {
+      console.log("edit Subscription called");
+
+      User.findById(mongoose.Types.ObjectId(userId), function (err, foundUser) {
+        SubscriptionItem.findOneAndUpdate({
+          name: name,
+          amount: amount,
+          lastDate: lastDate,
+          period: period,
+          plan: plan,
+          plaidGenerated: plaidGenerated,
+          firstAddedDate: firstAddedDate,
+        });
+      });
+
       return true;
     },
   },

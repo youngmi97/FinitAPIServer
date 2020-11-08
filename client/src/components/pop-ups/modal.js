@@ -306,26 +306,53 @@ const DELETE_SUBSCRIPTION = gql`
   }
 `;
 
+const EDIT_SUBSCRIPTIONS = gql`
+  mutation editSubscription(
+    $userId: ID!
+    $name: String!
+    $amount: String!
+    $lastDate: String! #check consistency in date format
+    $period: String! #cycle
+    $plan: String!
+    $plaidGenerated: Boolean! #false
+    $firstAddedDate: String! #check consistency in date format
+  ) {
+    editSubscription(
+      userId: $userId
+      name: $name
+      amount: $amount
+      lastDate: $lastDate
+      period: $period
+      plan: $plan
+      plaidGenerated: $plaidGenerated
+      firstAddedDate: $firstAddedDate
+    )
+  }
+`;
+
+// Have Fields: Plan, Price, Cycle, FirstAddedDate
+// NEED ALERT FIELD
+
 export default function ResponsiveDialog(props) {
   const { user } = useContext(AuthContext);
   const classes = useStyles();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const [onDeleteSubscription, { data, loading, error }] = useMutation(
-    DELETE_SUBSCRIPTION,
-    {
-      onError(err) {
-        console.log("delete service err", err.graphQLErrors);
-      },
-    }
-  );
+  const [
+    onDeleteSubscription,
+    { deleteData, deleteLoading, deleteError },
+  ] = useMutation(DELETE_SUBSCRIPTION, {
+    onError(err) {
+      console.log("delete service err", err.graphQLErrors);
+    },
+  });
 
   useMemo(() => {
-    if (!error && !loading) {
+    if (!deleteError && !deleteLoading) {
       console.log("delete subscription success");
     }
-  }, [data, loading, error]);
+  }, [deleteData, deleteLoading, deleteError]);
 
   //Edit and Delete Mutations Here!!
 
