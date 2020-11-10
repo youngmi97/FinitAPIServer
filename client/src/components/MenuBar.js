@@ -108,7 +108,7 @@ function MenuBar() {
       secondary
       size="massive"
       style={{
-        zIndex: 100,
+        zIndex: 51,
         position: "fixed",
         height: "60px",
         width: "100%",
@@ -647,7 +647,7 @@ function MenuBar() {
           return (
             <div
               style={{
-                zIndex: 100,
+                zIndex: 51,
                 position: "fixed",
                 height: "60px",
                 width: "100%",
@@ -716,7 +716,7 @@ function MenuBar() {
           return (
             <div
               style={{
-                zIndex: 100,
+                zIndex: 51,
                 position: "fixed",
                 height: "60px",
                 width: "100%",
@@ -785,7 +785,7 @@ function MenuBar() {
           return (
             <div
               style={{
-                zIndex: 100,
+                zIndex: 51,
                 position: "fixed",
                 height: "60px",
                 width: "100%",
@@ -797,7 +797,7 @@ function MenuBar() {
           return (
             <div
               style={{
-                zIndex: 100,
+                zIndex: 51,
                 position: "fixed",
                 height: "60px",
                 width: "100%",
@@ -821,7 +821,7 @@ function MenuBar() {
           return (
             <div
               style={{
-                zIndex: 100,
+                zIndex: 51,
                 position: "fixed",
                 height: "60px",
                 width: "100%",

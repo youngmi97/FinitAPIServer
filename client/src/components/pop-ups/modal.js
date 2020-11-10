@@ -831,7 +831,7 @@ export default function ResponsiveDialog(props) {
           <Box display="flex" justifyContent="center">
             <Box p={1}>
               <Button className={classes.ListItemSize5} variant="outlined">
-                Add subscriptions
+                Edit subscriptions
               </Button>
             </Box>
           </Box>

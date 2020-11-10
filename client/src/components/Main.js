@@ -32,7 +32,7 @@ const TextTypography1 = withStyles({
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    zIndex: 50,
+    zIndex: 49,
     position: "relative",
   },
   paper: {

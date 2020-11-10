@@ -373,7 +373,6 @@ export default function Main(props) {
       >
         <Box mx="auto" bgcolor="background.paper" className={classes.mainbreak}>
           <Chart freecard={freecard} />
-          <Spendlist />
         </Box>
       </main>
       {/* <Drawer

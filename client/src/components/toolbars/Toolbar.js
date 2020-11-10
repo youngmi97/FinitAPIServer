@@ -28,7 +28,6 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import DialogContent from "@material-ui/core/DialogContent";
 import Tooltip from "@material-ui/core/Tooltip";
 import Fade from "@material-ui/core/Fade";
-import AddSubscription from "../pop-ups/AddSubscription";
 
 import Dialog from "@material-ui/core/Dialog";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
@@ -569,28 +568,6 @@ export default function SubscriptionToolbar({
             inputProps={{ "aria-label": "search" }}
           />
         </div>
-        <ArrowTooltip3
-          title="Add Subscription"
-          TransitionComponent={Fade}
-          enterDelay={500}
-        >
-          <IconButton
-            className={classes.highlightButton}
-            disableRipple={true}
-            onClick={handleClickOpen}
-          >
-            <AddRoundedIcon
-              fontSize="small"
-              alignItems="center"
-              // alignSelf="flex-end"
-            />
-          </IconButton>
-        </ArrowTooltip3>
-        <AddSubscription
-          open={open}
-          handleClose={() => handleClose()}
-          handleClickOpen={() => handleClickOpen()}
-        />
       </Toolbar>
     </div>
   );

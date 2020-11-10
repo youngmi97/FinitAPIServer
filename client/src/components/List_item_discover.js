@@ -8,7 +8,7 @@ import SvgIcon from "@material-ui/core/SvgIcon";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import { Link } from "react-router-dom";
-import AddSubscription from "./pop-ups/AddSubscription";
+import AddSubscription from "./pop-ups/Add";
 
 const drawerWidth = 300;
 const drawerWidth2 = 300;
@@ -34,13 +34,6 @@ const useStyles = makeStyles((theme) => ({
   },
   demo1: {
     backgroundColor: theme.palette.background.paper,
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    height: 10,
-  },
-  appBar2: {
-    width: `calc(100%)`,
   },
   customizeToolbar: {
     marginTop: 10,

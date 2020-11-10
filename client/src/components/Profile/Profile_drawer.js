@@ -9,7 +9,7 @@ import { fade, makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import Divider from "@material-ui/core/Divider";
 import { Link } from "react-router-dom";
-import AddSubscription from "../pop-ups/AddSubscription";
+import AddSubscription from "../pop-ups/Add";
 
 const drawerWidth = 300;
 const drawerWidth2 = 300;

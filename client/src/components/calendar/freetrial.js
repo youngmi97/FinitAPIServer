@@ -124,7 +124,7 @@ export default function ResponsiveDialog(props) {
                           fontWeight: 600,
                         }}
                       >
-                        D-{value.date}
+                        D{value.date}
                       </div>
                     );
                   } else {
@@ -144,7 +144,7 @@ export default function ResponsiveDialog(props) {
                           fontWeight: 600,
                         }}
                       >
-                        D-{value.date}
+                        D{value.date}
                       </div>
                     );
                   }

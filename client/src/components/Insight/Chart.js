@@ -11,6 +11,16 @@ import {
   Typography,
   Button,
 } from "@material-ui/core";
+import {
+  BarChart,
+  XAxis,
+  Tooltip,
+  Legend,
+  Bar,
+  Cell,
+  PieChart,
+  Pie,
+} from "recharts";
 import moment from "moment";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
 // import Box from "@material-ui/core/Box";
@@ -35,12 +45,32 @@ const useStyles = makeStyles((theme) => ({
     height: 12,
     backgroundColor: "#7610EB",
   },
+  List1: {
+    padding: 0,
+    margin: 0,
+    marginTop: 6,
+  },
   bust: {
     position: "absolute",
     width: 24,
     height: 24,
     minWidth: 24,
     maxWidth: 24,
+  },
+  ListItemSize: {
+    color: "Black",
+    fontWeight: 400,
+    fontSize: "17px",
+  },
+  ListItemSize1: {
+    color: "#4CD964",
+    fontSize: "15px",
+  },
+  ListItemSize2: {
+    color: "#666666",
+
+    fontSize: "11px",
+    margin: 0,
   },
 }));
 
@@ -103,18 +133,18 @@ export default function Chart_func(props) {
     "December",
   ];
   const shortmonth = [
-    "January",
-    "February",
-    "March",
-    "April",
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
     "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
   ];
 
   function short_return(state) {
@@ -169,41 +199,88 @@ export default function Chart_func(props) {
   const data1 = [
     {
       country: local_month[0],
-      Entertainment: 0,
-      Music: 0,
-      CreativityandDesign: 0,
-      grey:
+      value:
         category_value("Entertainment", lists, 2) +
         category_value("Music", lists, 2) +
         category_value("Creativity and Design", lists, 2),
+
+      svalue:
+        "$" +
+        (
+          category_value("Entertainment", lists, 2) +
+          category_value("Music", lists, 2) +
+          category_value("Creativity and Design", lists, 2)
+        ).toString(),
     },
     {
       country: local_month[1],
-      Entertainment: 0,
-      Music: 0,
-      CreativityandDesign: 0,
-      grey:
+      value:
         category_value("Entertainment", lists, 1) +
         category_value("Music", lists, 1) +
         category_value("Creativity and Design", lists, 1),
+
+      svalue:
+        "$" +
+        (
+          category_value("Entertainment", lists, 1) +
+          category_value("Music", lists, 1) +
+          category_value("Creativity and Design", lists, 1)
+        ).toString(),
     },
     {
       country: local_month[2],
-      Entertainment: category_value("Entertainment", lists, 0),
+      value:
+        category_value("Entertainment", lists, 0) +
+        category_value("Music", lists, 0) +
+        category_value("Creativity and Design", lists, 0),
 
-      Music: category_value("Music", lists, 0),
-
-      CreativityandDesign: category_value("Creativity and Design", lists, 0),
-      grey: 0,
+      svalue:
+        "$" +
+        (
+          category_value("Entertainment", lists, 0) +
+          category_value("Music", lists, 0) +
+          category_value("Creativity and Design", lists, 0)
+        ).toString(),
     },
   ];
-  const colors = {
-    Entertainment: "#7610EB",
-    Music: "#D98E04",
-    CreativityandDesign: "#F2E205",
-    grey: "#666666",
+  const data2 = [
+    {
+      name: "Entertainment",
+      value: category_value("Entertainment", lists, 0),
+      svalue: "$ " + category_value("Entertainment", lists, 0).toString(),
+      percent:
+        (
+          (100 * category_value("Entertainment", lists, 0)) /
+          data1[2]["value"]
+        ).toString() + "%",
+    },
+    {
+      name: "Music",
+      value: category_value("Music", lists, 0),
+      svalue: "$ " + category_value("Music", lists, 0).toString(),
+      percent:
+        (
+          (100 * category_value("Music", lists, 0)) /
+          data1[2]["value"]
+        ).toString() + "%",
+    },
+    {
+      name: "Creativity and Design",
+      value: category_value("Creativity and Design", lists, 0),
+      svalue:
+        "$ " + category_value("Creativity and Design", lists, 0).toString(),
+      percent:
+        (
+          (100 * category_value("Creativity and Design", lists, 0)) /
+          data1[2]["value"]
+        ).toString() + "%",
+    },
+  ];
+  const COLORS = ["#007AFF", "#4CD964", "#FFCC00", "#5856D6"];
+  const [focusBar, setFocusBar] = React.useState(null);
+  let renderLabel = function (entry) {
+    return entry.percent;
   };
-  const getColor = (bar) => colors[bar.id];
   return (
     <div
       style={{
@@ -213,43 +290,24 @@ export default function Chart_func(props) {
         alignItems: "center",
       }}
     >
-      <Box display="flex" stlye={{ margin: 0, padding: 0 }}>
-        <Box
-          p={1}
-          style={{
-            width: 267,
-            height: 420,
-          }}
-        >
-          <Box
-            display="flex"
-            stlye={{ margin: 0, padding: 0, width: 267, height: 61 }}
-          >
-            <Box p={1}>
-              <Typography>October</Typography>
-            </Box>
-            <Box p={1}>
-              <Typography>2020</Typography>
-            </Box>
-            <Box p={1}>
-              <Button
-                className={classes.bust}
-                style={{ padding: 0, maxWidth: 24, margin: 0 }}
-              >
-                <Typography style={{ width: 24, height: 24 }}>
-                  {left}
+      <Box display="flex">
+        <Box p={1}>
+          <Box p={1} style={{ marginTop: 10, padding: 0 }}>
+            <Box
+              display="flex"
+              stlye={{ margin: 0, padding: 0, width: 267, minHeight: 61 }}
+            >
+              <Box p={1}>
+                <Typography style={{ fontWeight: 700, fontSize: 24 }}>
+                  October
                 </Typography>
-              </Button>
-            </Box>
-            <Box p={1}>
-              <Button
-                className={classes.bust}
-                style={{ padding: 0, maxWidth: 24, margin: 0 }}
-              >
-                <Typography style={{ width: 24, height: 24 }}>
-                  {right}
+              </Box>
+              <Box p={1}>
+                <Typography style={{ fontWeight: 400, fontSize: 24 }}>
+                  2020
                 </Typography>
-              </Button>
+              </Box>
+              <Box p={1} flexGrow={1}></Box>
             </Box>
           </Box>
           <div
@@ -261,74 +319,145 @@ export default function Chart_func(props) {
               borderRadius: "8px",
             }}
           >
-            <ResponsiveBar
+            <BarChart
+              width={246}
+              height={359}
               data={data1}
-              keys={["Entertainment", "Music", "CreativityandDesign", "grey"]}
-              indexBy="country"
-              margin={{ top: 50, bottom: 50, left: 32, right: 32 }}
-              padding={0.3}
-              colors={getColor}
-              borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
-              axisTop={null}
-              axisLeft={null}
-              axisRight={null}
-              axisBottom={{
-                tickSize: 5,
-                tickPadding: 5,
-                tickRotation: 0,
-                legendPosition: "middle",
-                legendOffset: 32,
+              margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+              onMouseMove={(state) => {
+                if (state.isTooltipActive) {
+                  setFocusBar(state.activeTooltipIndex);
+                } else {
+                  setFocusBar(null);
+                }
               }}
-              enableLabel={false}
-              enableGridY={false}
-              animate={true}
-              motionStiffness={90}
-              motionDamping={15}
-            />
+            >
+              <XAxis
+                xAxisId={1}
+                dataKey="svalue"
+                axisLine={false}
+                tickLine={false}
+              />
+              <XAxis
+                xAxisId={0}
+                dataKey="country"
+                axisLine={false}
+                tickLine={false}
+              />
+              <Tooltip name="country" cursor={{ fill: "transparent" }} />
+              <Bar dataKey="value" radius={[4, 4, 4, 4]}>
+                <Cell
+                  cursor="pointer"
+                  fill={focusBar === 0 ? "#7610EB" : "rgba(44, 44, 44, 0.2)"}
+                  key={`cell-0`}
+                  fillOpacity={0.3}
+                />
+                <Cell
+                  cursor="pointer"
+                  fill={focusBar === 1 ? "#7610EB" : "rgba(44, 44, 44, 0.2)"}
+                  key={`cell-1`}
+                  fillOpacity={0.3}
+                />
+                <Cell cursor="pointer" fill={"#7610EB"} key={`cell-2`} />
+              </Bar>
+            </BarChart>
           </div>
         </Box>
-        <Box>
-          <List style={{ marginTop: 123, marginLeft: 36 }}>
-            <ListItem>
-              <ListItemAvatar>
-                <div
-                  style={{ width: 12, height: 12, backgroundColor: "#7610EB" }}
-                />
-              </ListItemAvatar>
-              <ListItemText primary="Entertainment" secondary={null} />
-              <ListItemSecondaryAction>
-                <Typography style={{ color: "grey" }}>
-                  {category_value("Entertainment", lists, 0)}
-                </Typography>
-              </ListItemSecondaryAction>
-            </ListItem>
-            <ListItem>
-              <ListItemAvatar>
-                <div
-                  style={{ width: 12, height: 12, backgroundColor: "#D98E04" }}
-                />
-              </ListItemAvatar>
-              <ListItemText primary="Music" secondary={null} />
-              <ListItemSecondaryAction>
-                <Typography style={{ color: "grey" }}>
-                  {category_value("Music", lists, 0)}
-                </Typography>
-              </ListItemSecondaryAction>
-            </ListItem>
-            <ListItem>
-              <ListItemAvatar>
-                <div
-                  style={{ width: 12, height: 12, backgroundColor: "#F2E205" }}
-                />
-              </ListItemAvatar>
-              <ListItemText primary="Creativity and Design" />
-              <ListItemSecondaryAction>
-                <Typography style={{ color: "grey" }}>
-                  {category_value("CreativityandDesign", lists, 0)}
-                </Typography>
-              </ListItemSecondaryAction>
-            </ListItem>
-          </List>
+        <Box p={1}>
+          <div
+            style={{
+              marginTop: 61,
+              width: 700,
+              height: 359,
+              backgroundColor: "white",
+              border: "1px solid #C8C7CC",
+              borderRadius: "8px",
+            }}
+          >
+            <Box display="flex">
+              <Box p={1}>
+                <PieChart width={395} height={328} padding={0}>
+                  <text
+                    x={207}
+                    y={130}
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    style={{ fontWeight: 600, fontSize: 17 }}
+                  >
+                    Subscriptions
+                  </text>
+                  <text
+                    x={207}
+                    y={164}
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    style={{ fontWeight: 600, fontSize: 34 }}
+                  >
+                    ${data1[2]["value"]}
+                  </text>
+                  <text
+                    x={207}
+                    y={190}
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    color="#666666"
+                    style={{ fontWeight: 600, fontSize: 17 }}
+                  >
+                    {smallmonth[mon]}
+                  </text>
+                  <Pie
+                    data={data2}
+                    cx={207}
+                    cy={164}
+                    innerRadius={130}
+                    outerRadius={150}
+                    fill="#8884d8"
+                    paddingAngle={1}
+                    label={renderLabel}
+                  >
+                    {data2.map((entry, index) => (
+                      <Cell fill={COLORS[index % COLORS.length]} />
+                    ))}
+                  </Pie>
+                </PieChart>
+              </Box>
+              <Box p={1}>
+                <List>
+                  {data2.map((entry, index) => (
+                    <ListItem>
+                      <Box
+                        display="flex"
+                        alignItems="center"
+                        p={1}
+                        className={classes.List1}
+                      >
+                        <Box p={1} style={{ paddingLeft: 0 }}>
+                          <Avatar
+                            variant="square"
+                            style={{
+                              width: 48,
+                              height: 48,
+                              margin: 0,
+                              padding: 0,
+                            }}
+                            src={"static/avatar/" + entry.name + "/[48].svg"}
+                          />
+                        </Box>
+                        <Box p={1} flexGrow={1}>
+                          <Typography className={classes.ListItemSize}>
+                            {entry.name}
+                          </Typography>
+                          <Typography className={classes.ListItemSize1}>
+                            {entry.svalue}
+                          </Typography>
+                        </Box>
+                      </Box>
+                    </ListItem>
+                  ))}
+                </List>
+              </Box>
+            </Box>
+          </div>
         </Box>
       </Box>
       <Box style={{ margin: 0, padding: 0 }}>
@@ -339,7 +468,7 @@ export default function Chart_func(props) {
             marginBottom: 16,
           }}
         >
-          Free Trial
+          Most Spent
         </Typography>
         <List className={classes.List}>
           {Object.entries(make_payment(lists)).map((card, index) => {

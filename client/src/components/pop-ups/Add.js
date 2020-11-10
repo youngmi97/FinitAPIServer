@@ -31,7 +31,13 @@ import Fade from "@material-ui/core/Fade";
 
 import Dialog from "@material-ui/core/Dialog";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-
+import Toolbar from "@material-ui/core/Toolbar";
+import AddRoundedIcon from "@material-ui/icons/AddRounded";
+import FormatListBulletedRoundedIcon from "@material-ui/icons/FormatListBulletedRounded";
+import SearchRoundedIcon from "@material-ui/icons/SearchRounded";
+import ArrowUpwardRoundedIcon from "@material-ui/icons/ArrowUpwardRounded";
+import ArrowDownwardRoundedIcon from "@material-ui/icons/ArrowDownwardRounded";
+import ViewModuleRoundedIcon from "@material-ui/icons/ViewModuleRounded";
 import React from "react";
 import { ButtonBase, Typography, Avatar, Box } from "@material-ui/core";
 //Sort
@@ -465,6 +471,74 @@ export default function Subscription(props) {
     <div>
       <Dialog
         fullScreen={fullScreen}
+        open={props.open}
+        onClose={props.handleClose}
+      >
+        <div className={classes.Dialog}>
+          <DialogContent className={classes.Avatar}>
+            <Typography align="center" className={classes.Title}>
+              Add Subscriptions
+            </Typography>
+            <div className={classes.search1}>
+              <div className={classes.searchIcon}>
+                <SearchRoundedIcon />
+              </div>
+              <InputBase
+                placeholder="Search Subscriptions"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput1,
+                }}
+                inputProps={{ "aria-label": "search" }}
+              />
+            </div>
+            <div>
+              <List className={classes.List}>
+                <ListSubheader component="div" id="nested-list-subheader">
+                  <Typography className={classes.ListItemSize4}>ALL</Typography>
+                </ListSubheader>
+                {lists.map((name) => {
+                  return (
+                    <ListItem
+                      button
+                      className={classes.List}
+                      onClick={() => {
+                        handleClickOpen1();
+                        props.handleClose();
+                        changeName(name);
+                      }}
+                    >
+                      <ListItemIcon className={classes.ListItemSize}>
+                        <img
+                          className={classes.imageIcon}
+                          src={"/static/avatar/" + name + "/[48].svg"}
+                          alt="upcoming"
+                        />
+                      </ListItemIcon>
+                      {name}
+                      <ListItemSecondaryAction>
+                        <img src="/static/icons/symbols/MovetoPage.svg" />
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                  );
+                })}
+              </List>
+            </div>
+          </DialogContent>
+
+          <IconButton
+            aria-label="close"
+            className={classes.closeButton}
+            onClick={props.handleClose}
+            disableRipple={true}
+            disableFocusRipple={true}
+          >
+            <img src="static/icons/symbols/Exit.svg" />
+          </IconButton>
+        </div>
+      </Dialog>
+      <Dialog
+        fullScreen={fullScreen}
         open={open1}
         onClose={() => {
           props.handleClickOpen();
@@ -477,7 +551,7 @@ export default function Subscription(props) {
               <Typography align="center" className={classes.Title}>
                 <img
                   className={classes.imageIcon}
-                  src={"/static/avatar/" + temporalname + "/[48].svg"}
+                  src={"/static/avatar/" + temporalname + "[48].svg"}
                   alt="upcoming"
                 />
               </Typography>

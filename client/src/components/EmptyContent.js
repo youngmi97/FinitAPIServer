@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import { Typography, Grid } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import AddSubscription from "./AddSubscription";
+import AddSubscription from "./pop-ups/Add";
 import Modal from "@material-ui/core/Modal";
 import AddRoundedIcon from "@material-ui/icons/AddRounded";
 

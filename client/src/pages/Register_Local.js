@@ -6,6 +6,7 @@ import {
   Paper,
   Typography,
   TextField,
+  CircularProgress,
 } from "@material-ui/core";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import gql from "graphql-tag";
@@ -373,6 +374,11 @@ function Register_Local(props) {
                 </div>
               )}
             </Box>
+            {loading ? (
+              <CircularProgress style={{ marginLeft: 150 }} />
+            ) : (
+              <div />
+            )}
           </Paper>
         </div>
       </Box>
