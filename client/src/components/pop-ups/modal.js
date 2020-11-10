@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState, useMemo } from "react";
 import Dialog from "@material-ui/core/Dialog";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -24,6 +24,9 @@ import InputBase from "@material-ui/core/InputBase";
 import { Select } from "@material-ui/core";
 
 import MenuItem from "@material-ui/core/MenuItem";
+import { useMutation } from "@apollo/react-hooks";
+import gql from "graphql-tag";
+import { AuthContext } from "../../context/auth";
 
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
@@ -297,10 +300,61 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const DELETE_SUBSCRIPTION = gql`
+  mutation removeSubscription($userId: ID!, $name: String!, $plan: String!) {
+    removeSubscription(userId: $userId, name: $name, plan: $plan)
+  }
+`;
+
+const EDIT_SUBSCRIPTIONS = gql`
+  mutation editSubscription(
+    $userId: ID!
+    $name: String!
+    $amount: String!
+    $lastDate: String! #check consistency in date format
+    $period: String! #cycle
+    $plan: String!
+    $plaidGenerated: Boolean! #false
+    $firstAddedDate: String! #check consistency in date format
+  ) {
+    editSubscription(
+      userId: $userId
+      name: $name
+      amount: $amount
+      lastDate: $lastDate
+      period: $period
+      plan: $plan
+      plaidGenerated: $plaidGenerated
+      firstAddedDate: $firstAddedDate
+    )
+  }
+`;
+
+// Have Fields: Plan, Price, Cycle, FirstAddedDate
+// NEED ALERT FIELD
+
 export default function ResponsiveDialog(props) {
+  const { user } = useContext(AuthContext);
   const classes = useStyles();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const [
+    onDeleteSubscription,
+    { deleteData, deleteLoading, deleteError },
+  ] = useMutation(DELETE_SUBSCRIPTION, {
+    onError(err) {
+      console.log("delete service err", err.graphQLErrors);
+    },
+  });
+
+  useMemo(() => {
+    if (!deleteError && !deleteLoading) {
+      console.log("delete subscription success");
+    }
+  }, [deleteData, deleteLoading, deleteError]);
+
+  //Edit and Delete Mutations Here!!
 
   const [open1, setOpen1] = React.useState(false);
   const [secondary] = React.useState(false);
@@ -650,6 +704,15 @@ export default function ResponsiveDialog(props) {
                       disableRipple={true}
                       className={classes.poplist}
                       style={{ margin: 0, padding: 0 }}
+                      onClick={() =>
+                        onDeleteSubscription({
+                          variables: {
+                            userId: user.id,
+                            name: props.name,
+                            plan: props.plan,
+                          },
+                        })
+                      }
                     >
                       <Box
                         display="flex"

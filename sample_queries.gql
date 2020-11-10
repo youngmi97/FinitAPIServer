@@ -61,7 +61,8 @@ mutation {
     isoCurrencyCode: "USD"
     plan: "Free"
     transactionType: "special"
-    plaidGenerated: True
+    plaidGenerated: true
+    firstAddedDate: "2020-01-01"
   ) {
     id
   }

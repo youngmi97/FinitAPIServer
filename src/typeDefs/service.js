@@ -18,7 +18,19 @@ export default gql`
       firstAddedDate: String!
     ): Service @auth
 
-    removeSubscription(userId: String!, name: String!): Boolean @auth
+    removeSubscription(userId: ID!, name: String!, plan: String!): Boolean @auth
+
+    #How to identify the corresponding service that I have added
+    editSubscription(
+      userId: ID!
+      name: String!
+      amount: String!
+      lastDate: String!
+      period: String!
+      plan: String!
+      plaidGenerated: Boolean!
+      firstAddedDate: String!
+    ): Boolean @auth
   }
 
   # FIXED

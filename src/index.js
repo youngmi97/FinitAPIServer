@@ -9,6 +9,7 @@ import resolvers from "./resolvers";
 import schemaDirectives from "./directives";
 
 var moment = require("moment");
+const cron = require("node-cron");
 const { request } = require("graphql-request");
 const express = require("express");
 const redis = require("redis");
@@ -24,11 +25,18 @@ const connectRedis = require("connect-redis");
 
 const cors = require("cors");
 const connectDB = require("./models/connection.js");
+const {
+  monitorUserChange,
+  regularSubscriptionExtract,
+} = require("./changestream");
 
 const PORT = process.env.PORT || 5000;
 
 //Connect to Database
-connectDB();
+connectDB().then(async () => {
+  await monitorUserChange();
+  //await regularSubscriptionExtract();
+});
 
 const app = express();
 app.disable("x-powered-by");
@@ -138,7 +146,7 @@ app.post("/auth/public_token", async (req, res) => {
 
 app.get("/transactions", async (req, res) => {
   // Pull transactions for the last 30 days
-  let startDate = moment().subtract(60, "days").format("YYYY-MM-DD");
+  let startDate = moment().subtract(365, "days").format("YYYY-MM-DD");
   let endDate = moment().format("YYYY-MM-DD");
   console.log("made it past variables");
   client.getTransactions(
@@ -170,6 +178,8 @@ app.get("/transactions", async (req, res) => {
 });
 
 // LOOKUP LINK TOKEN --> from Plaid documentation --> why is it better??
+
+// Change Stream Functions --> Monitor and act upon changes in the DB
 
 app.use(express.static("public"));
 
