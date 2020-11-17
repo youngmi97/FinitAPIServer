@@ -245,12 +245,14 @@ function useWindowSize() {
 
 export default function Main(props) {
   const classes = useStyles();
+  const [up, setUp] = React.useState(1);
   const [open, setOpen] = React.useState(false);
   const [drawer, setDrawer] = React.useState(3);
   // const [view, setView] = React.useState(false);
   const today = new Date();
   const [width] = useWindowSize();
   const isReduced = width <= 1023;
+  const [index, setIndex] = React.useState(0);
 
   const underlineBar = isReduced ? (
     <div className={classes.dividerReduced}></div>
@@ -329,12 +331,36 @@ export default function Main(props) {
       ),
     };
   }
-  cards.sort(function (a, b) {
-    if (a.realPrice * a.firstAddedDate === b.realPrice * b.firstAddedDate) {
-      return a.name > b.name ? 1 : -1;
-    }
-    return a.realPrice > b.realPrice ? 1 : -1;
-  });
+  switch (index) {
+    case 0:
+      cards.sort(function (a, b) {
+        if (a.firstAddedDate === b.firstAddedDate) {
+          return a.name > b.name ? 1 * up : -1 * up;
+        }
+        return a.firstAddedDate > b.firstAddedDate ? 1 * up : -1 * up;
+      });
+      break;
+
+    case 1:
+      cards.sort(function (a, b) {
+        if (a.realPrice * a.firstAddedDate === b.realPrice * b.firstAddedDate) {
+          return a.name > b.name ? 1 * up : -1 * up;
+        }
+        return a.realPrice * a.firstAddedDate > b.realPrice * b.firstAddedDate
+          ? 1 * up
+          : -1 * up;
+      });
+      break;
+    case 2:
+      cards.sort(function (a, b) {
+        if (a.realPrice === b.realPrice) {
+          return a.name > b.name ? 1 * up : -1 * up;
+        }
+        return a.realPrice > b.realPrice ? 1 * up : -1 * up;
+      });
+      break;
+  }
+
   const freecard = JSON.parse(JSON.stringify(cards));
 
   const menuTitle = isReduced ? (
@@ -372,7 +398,13 @@ export default function Main(props) {
         })}
       >
         <Box mx="auto" bgcolor="background.paper" className={classes.mainbreak}>
-          <Chart freecard={freecard} />
+          <Chart
+            freecard={freecard}
+            index={index}
+            setIndex={setIndex}
+            up={up}
+            setUp={setUp}
+          />
         </Box>
       </main>
       {/* <Drawer

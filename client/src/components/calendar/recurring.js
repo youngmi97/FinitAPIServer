@@ -148,7 +148,7 @@ export default function ResponsiveDialog(props) {
   function get_date(today, day) {
     return parseInt((day - today) / 86400000);
   }
-
+  console.log(props.card);
   const monthNames = [
     "January",
     "February",

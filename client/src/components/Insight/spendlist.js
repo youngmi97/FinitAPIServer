@@ -1,97 +1,131 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import ListItemText from "@material-ui/core/ListItemText";
-import Avatar from "@material-ui/core/Avatar";
-// import IconButton from "@material-ui/core/IconButton";
-// import FormGroup from "@material-ui/core/FormGroup";
-// import FormControlLabel from "@material-ui/core/FormControlLabel";
-// import Checkbox from "@material-ui/core/Checkbox";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-// import FolderIcon from "@material-ui/icons/Folder";
-// import DeleteIcon from "@material-ui/icons/Delete";
-// import Divider from "@material-ui/core/Divider";
+
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { useTheme, makeStyles } from "@material-ui/core/styles";
+
+import { ButtonBase, Typography, Avatar, Box } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
-    maxWidth: 752,
+    width: "448px",
+    height: "97px",
   },
-  demo: {
-    backgroundColor: theme.palette.background.paper,
+  overlay: {
+    position: "absolute",
+    top: "10px",
+    right: "10px",
+    width: "28px",
+    height: "28px",
   },
-  title: {
-    margin: theme.spacing(4, 0, 2),
+  List: {
+    padding: 0,
+    marginTop: 8,
+  },
+  List1: {
+    padding: 0,
+    margin: 0,
+    marginTop: 6,
+  },
+  he: { height: 70 },
+  ListItemSize: {
+    color: "Black",
+    fontWeight: 400,
+    fontSize: "17px",
+  },
+  ListItemSize1: {
+    color: "#666666",
+    fontSize: "15px",
+  },
+  ListItemSize2: {
+    color: "#666666",
+
+    fontSize: "11px",
+    margin: 0,
+  },
+  ListItemSize3: {
+    color: "Black",
+    fontWeight: 600,
+    fontSize: "14px",
+    marginTop: "69px",
+  },
+  ListItemSize4: {
+    color: "Black",
+    fontWeight: 600,
+    fontSize: "14px",
+    marginTop: "24px",
+  },
+  rect: {
+    width: theme.spacing(6),
+    height: theme.spacing(4),
+    marginRight: 8,
+    marginBottom: 8,
   },
 }));
 
-function generate(element) {
-  return [0, 1, 2].map((value) =>
-    React.cloneElement(element, {
-      key: value,
-    })
-  );
-}
-
-export default function InteractiveList() {
+export default function ResponsiveDialog(props) {
   const classes = useStyles();
-  const [dense] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const [secondary] = React.useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
+  const handleClose = () => {
+    setOpen(false);
+  };
+  console.log(props.card);
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12} md={6}>
-        <Typography variant="h6" className={classes.title}>
-          MOST SPENT
+    <div>
+      <div className={classes.root}>
+        <Typography className={classes.ListItemSize2}>
+          RENEWS ON {props.card[0].day}
         </Typography>
-        <div className={classes.demo}>
-          <List dense={dense}>
-            <ListItem divider>
-              <ListItemAvatar>
-                <Avatar src="Netflix_small.png"></Avatar>
-              </ListItemAvatar>
-              <ListItemText
-                primary="Notability"
-                secondary={secondary ? "Secondary text" : null}
-              />
-              <ListItemText
-                primary="Team Plan"
-                secondary={secondary ? "Secondary text" : null}
-              />
-              <ListItemSecondaryAction>
-                <ListItemText
-                  primary="$ 8.00"
-                  secondary={secondary ? "Secondary text" : null}
+        {props.card.map((value, index) => {
+          return (
+            <Box
+              display="flex"
+              alignItems="center"
+              p={1}
+              className={classes.List1}
+            >
+              <Box p={1} style={{ paddingLeft: 0 }}>
+                <Avatar
+                  variant="square"
+                  style={{ width: 48, height: 48, margin: 0, padding: 0 }}
+                  src={"static/avatar/" + value.name + "/[48].svg"}
                 />
-              </ListItemSecondaryAction>
-            </ListItem>
-
-            {generate(
-              <ListItem divider>
-                <ListItemAvatar></ListItemAvatar>
-                <ListItemText
-                  primary="Service"
-                  secondary={secondary ? "Secondary text" : null}
-                />
-                <ListItemText
-                  primary="Detailed Service Plan"
-                  secondary={secondary ? "Secondary text" : null}
-                />
-                <ListItemSecondaryAction>
-                  <ListItemText
-                    primary="$ 8.00"
-                    secondary={secondary ? "Secondary text" : null}
-                  />
-                </ListItemSecondaryAction>
-              </ListItem>
-            )}
-          </List>
-        </div>
-      </Grid>
-    </Grid>
+              </Box>
+              <Box p={1} flexGrow={1}>
+                <Typography className={classes.ListItemSize}>
+                  {value.name}
+                </Typography>
+                <Typography className={classes.ListItemSize1}>
+                  {value.card}
+                </Typography>
+              </Box>
+              <Box p={1}>
+                <div
+                  style={{
+                    borderRadius: 12,
+                    width: 68,
+                    height: 20,
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    fontSize: 17,
+                    fontWeight: 400,
+                  }}
+                >
+                  - ${value.price}
+                </div>
+              </Box>
+            </Box>
+          );
+        })}
+      </div>
+    </div>
   );
 }

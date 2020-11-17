@@ -222,6 +222,7 @@ export default function ResponsiveDialog(props) {
   function make_payment(obj) {
     var result = new Array();
     const a = Object.keys(obj);
+    var result2 = new Array();
     for (let index = 0; index < a.length; index++) {
       result.push([]);
       for (let index1 = 0; index1 < obj[a[index]].length; index1++) {
@@ -240,7 +241,14 @@ export default function ResponsiveDialog(props) {
         });
       }
     }
-    return result;
+    for (let index = 0; index < result.length; index++) {
+      const element = result[index];
+      if (element.length != 0) {
+        result2.push(element);
+      }
+    }
+
+    return result2;
   }
 
   paymentlists = make_payment(paymentlists);

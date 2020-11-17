@@ -11,6 +11,7 @@ import {
   Typography,
   Button,
 } from "@material-ui/core";
+import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import {
   BarChart,
   XAxis,
@@ -24,7 +25,10 @@ import {
 import moment from "moment";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
 // import Box from "@material-ui/core/Box";
-import Freetrial from "../calendar/freetrial";
+import Spendlist from "./spendlist";
+
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 
 import { ResponsiveBar } from "@nivo/bar";
 import { func } from "joi";
@@ -91,16 +95,30 @@ const data = [
 export default function Chart_func(props) {
   const classes = useStyles();
   const left = "<";
+  const up = props.up;
+  const setUp = props.setUp;
   const today = new Date();
+
+  const index = props.index;
+  const setIndex = props.setIndex;
 
   function get_list1(obj) {
     const a = Object.keys(obj);
     return obj;
   }
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   var lists = get_list1(props.freecard);
-  console.log("list", props.freecard);
+
   const mon = today.getMonth();
-  console.log("today", today.getMonth());
+
   //console.log("diff", moment(today).diff(lists[0]["firstAddedDate"], "months"));
   const right = ">";
   const monthNames = [
@@ -152,7 +170,7 @@ export default function Chart_func(props) {
   }
 
   const local_month = short_return(0);
-
+  const sort = ["Accumulative", "Most Spent", "Unit Price"];
   function get_date(today, day) {
     return parseInt((day - today) / 86400000);
   }
@@ -195,7 +213,6 @@ export default function Chart_func(props) {
     return result;
   }
 
-  console.log(make_payment(lists));
   const data1 = [
     {
       country: local_month[0],
@@ -276,6 +293,8 @@ export default function Chart_func(props) {
         ).toString() + "%",
     },
   ];
+
+  console.log(data2);
   const COLORS = ["#007AFF", "#4CD964", "#FFCC00", "#5856D6"];
   const [focusBar, setFocusBar] = React.useState(null);
   let renderLabel = function (entry) {
@@ -435,12 +454,12 @@ export default function Chart_func(props) {
                           <Avatar
                             variant="square"
                             style={{
-                              width: 48,
-                              height: 48,
+                              width: 40,
+                              height: 40,
                               margin: 0,
                               padding: 0,
                             }}
-                            src={"static/avatar/" + entry.name + "/[48].svg"}
+                            src={"Bitmap.svg"}
                           />
                         </Box>
                         <Box p={1} flexGrow={1}>
@@ -468,14 +487,88 @@ export default function Chart_func(props) {
             marginBottom: 16,
           }}
         >
-          Most Spent
+          <Box display="flex">
+            <Box p={1} flexGrow={1}>
+              <Button
+                aria-controls="simple-menu"
+                aria-haspopup="true"
+                onClick={handleClick}
+                style={{ textTransform: "none" }}
+              >
+                <Box display="flex">
+                  <Box p={1} style={{ margin: 0, padding: 0 }}>
+                    {sort[index]}
+                  </Box>
+                  <Box p={1} style={{ margin: 0, padding: 0 }}>
+                    <KeyboardArrowDownIcon />
+                  </Box>
+                </Box>
+              </Button>
+            </Box>
+
+            <Box p={1}>
+              <Button
+                onClick={() => {
+                  setUp(up * -1);
+                }}
+              >
+                <Box>
+                  <svg
+                    width="16"
+                    height="14"
+                    viewBox="0 0 16 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M11.3203 13.1909C11.5029 13.1909 11.6772 13.1162 11.8184 12.9668L15.5122 9.18164C15.645 9.04883 15.7197 8.84961 15.7197 8.69189C15.7197 8.29346 15.4458 8.02783 15.064 8.02783C14.8647 8.02783 14.7236 8.09424 14.6074 8.21045L12.8975 9.97852L11.9097 11.1572L11.9844 9.62158V1.50342C11.9844 1.11328 11.7104 0.831055 11.3203 0.831055C10.9302 0.831055 10.6479 1.11328 10.6479 1.50342V9.62158L10.7227 11.1572L9.73486 9.97852L8.0249 8.21045C7.90869 8.09424 7.76758 8.02783 7.57666 8.02783C7.18652 8.02783 6.9126 8.29346 6.9126 8.69189C6.9126 8.84961 6.99561 9.04883 7.12012 9.18164L10.814 12.9668C10.9551 13.1162 11.1294 13.1909 11.3203 13.1909ZM4.67969 13.1909C5.06982 13.1909 5.34375 12.9087 5.34375 12.5186V4.40039L5.26904 2.86475L6.25684 4.04346L7.9668 5.81152C8.08301 5.92773 8.22412 5.99414 8.42334 5.99414C8.80518 5.99414 9.0791 5.72852 9.0791 5.33008C9.0791 5.17236 9.00439 4.97314 8.87158 4.84033L5.17773 1.05518C5.03662 0.905762 4.8623 0.831055 4.67969 0.831055C4.48877 0.831055 4.31445 0.905762 4.17334 1.05518L0.479492 4.84033C0.35498 4.97314 0.271973 5.17236 0.271973 5.33008C0.271973 5.72852 0.545898 5.99414 0.936035 5.99414C1.12695 5.99414 1.26807 5.92773 1.38428 5.81152L3.09424 4.04346L4.08203 2.86475L4.00732 4.40039V12.5186C4.00732 12.9087 4.28955 13.1909 4.67969 13.1909Z"
+                      fill="#666666"
+                    />
+                  </svg>
+                </Box>
+              </Button>
+            </Box>
+          </Box>
+
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <MenuItem
+              onClick={() => {
+                setIndex(0);
+                handleClose();
+              }}
+            >
+              {sort[0]}
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                setIndex(1);
+                handleClose();
+              }}
+            >
+              {sort[1]}
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                setIndex(2);
+                handleClose();
+              }}
+            >
+              {sort[2]}
+            </MenuItem>
+          </Menu>
         </Typography>
         <List className={classes.List}>
           {Object.entries(make_payment(lists)).map((card, index) => {
             if (card.length > 0) {
               return (
                 <ListItem>
-                  <Freetrial card={card[1]} />
+                  <Spendlist card={card[1]} />
                 </ListItem>
               );
             }
