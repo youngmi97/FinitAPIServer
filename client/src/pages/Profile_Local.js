@@ -40,7 +40,7 @@ export default function ResponsiveDialog(props) {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const [secondary] = React.useState(false);
-  console.log(props.card);
+
   return (
     <div>
       <div className={classes.root}>

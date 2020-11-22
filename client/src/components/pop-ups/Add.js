@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     bottom: 0,
-    backgroundColor: "#fafafa",
+    backgroundColor: "#ffffff",
   },
   ListItemSize5: {
     color: "white",
@@ -69,20 +69,22 @@ const useStyles = makeStyles((theme) => ({
     height: "40px",
   },
   Dialog: {
-    height: "600px",
-    width: "375px",
+    height: "800px",
+    width: "448px",
     overflowX: "auto",
+    backgroundColor: "#ffffff",
   },
   Dialog1: {
     width: "448px",
     height: "563px",
+    backgroundColor: "#ffffff",
   },
   Avatar: {
     marginTop: "24px",
     Width: "375px",
   },
   Avatar1: {
-    backgroundColor: "rgba(0, 0, 0, 0.04)",
+    backgroundColor: "#fafafa",
     height: 183,
   },
   marginStyle: {
@@ -266,8 +268,8 @@ const useStyles = makeStyles((theme) => ({
   },
   closeButton: {
     position: "absolute",
-    right: theme.spacing(1),
-    top: theme.spacing(1),
+    right: 16,
+    top: 16,
     fontSize: 32,
     "&:hover, &:focus": {
       backgroundColor: "#ffffff",
@@ -280,8 +282,8 @@ const useStyles = makeStyles((theme) => ({
     top: theme.spacing(1),
     fontSize: 32,
     "&:hover, &:focus": {
-      backgroundColor: "#ffffff",
-      borderColor: "#ffffff",
+      backgroundColor: "#fafafa",
+      borderColor: "#fafafa",
     },
   },
   ListItemSize4: {
@@ -452,16 +454,58 @@ export default function Subscription(props) {
   };
 
   const lists = [
-    "Netflix",
-    "Disney Plus",
-    "Apple TV Plus",
-    "Hulu",
-    "Spotify",
-    "Youtube",
-    "Notion",
+    "Aaptiv",
+    "Adobe",
     "Amazon",
+    "AppleMusic",
+    "AppleTV",
+    "AudiSelect",
+    "Avast",
+    "BarkBox",
+    "BirchBox",
+    "Blinkist",
+    "Bloomberg",
+    "BlueApron",
+    "Codeacademy",
+    "Coursera",
+    "DisneyPlus",
+    "DollarShaveClub",
+    "DropBox",
+    "Economist",
+    "Equinox",
+    "Glo",
+    "GoogleDrive",
+    "GooglePlayPass",
+    "Grammarly",
+    "HelloFresh",
+    "Hulu",
+    "iCloud",
+    "Ipsy",
+    "JetBrains",
+    "LeetCode",
+    "LinkedIn",
+    "Todist",
     "Twitch",
+    "Medium",
+    "Miro",
+    "Netflix",
+    "Notion",
+    "Office365",
+    "OnePassword",
+    "Peloton",
+    "PillPack",
+    "Play",
+    "Protopie",
+    "Skillshare",
+    "Spotify",
+    "StitchFix",
+    "SurfAir",
+    "Swit",
+    "Xbox",
+    "Youtube",
+    "ZipCar",
   ];
+
   lists.sort();
 
   const Netflix_plan = ["", "Basic", "Standard", "Premium"];
@@ -551,7 +595,7 @@ export default function Subscription(props) {
               <Typography align="center" className={classes.Title}>
                 <img
                   className={classes.imageIcon}
-                  src={"/static/avatar/" + temporalname + "[48].svg"}
+                  src={"/static/avatar/" + temporalname + "/[48].svg"}
                   alt="upcoming"
                 />
               </Typography>

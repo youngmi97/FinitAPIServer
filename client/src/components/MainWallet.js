@@ -269,7 +269,7 @@ export default function MainWallet(props) {
   );
 
   return (
-    <div>
+    <div style={{ paddingTop: 60 }}>
       <Box
         display="flex"
         bgcolor="white"

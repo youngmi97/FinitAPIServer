@@ -114,7 +114,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     flexWrap: "wrap",
-    marginTop: "100px",
+    marginTop: "120px",
     width: "448",
     height: "50",
     "& > *": {
@@ -185,7 +185,7 @@ function Login_Local(props) {
       style={{
         height: "100vh",
         backgroundColor: "#FFFFFF",
-        top: "60px",
+        top: "80px",
       }}
     >
       <Box display="flex" justifyContent="center">

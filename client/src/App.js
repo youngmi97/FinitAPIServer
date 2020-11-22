@@ -180,7 +180,7 @@ function App() {
       <div
         style={{
           backgroundColor: "#FAFAFA",
-          height: "100vh",
+          height: "120vh",
         }}
       >
         <Router>
@@ -193,7 +193,6 @@ function App() {
             style={{
               position: "relative",
               zIndex: 50,
-              top: "60px",
               backgroundColor: "#fafafa",
             }}
           >
@@ -233,7 +232,7 @@ function App() {
                 path="/linkplaid"
                 component={Linkplaid_Local}
               />
-              <UnauthenticatedRoute
+              <AuthenticatedRoute
                 exact
                 path="/profile"
                 component={Profile_Local}

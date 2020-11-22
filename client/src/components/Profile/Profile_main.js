@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import clsx from "clsx";
 import { useQuery } from "@apollo/react-hooks";
 import React, { useLayoutEffect, useState, useContext, useEffect } from "react";
-
+import { Link, useLocation } from "react-router-dom";
 import gql from "graphql-tag";
 import ACTIVE_CONTENT from "./Profile_content";
 import LIST_ITEM_DISCOVER from "./Profile_drawer";
@@ -251,7 +251,7 @@ export default function Main(props) {
   const [view, setView] = React.useState(false);
 
   return (
-    <div>
+    <div style={{ paddingTop: 52 }}>
       <Drawer
         className={classes.drawer}
         variant="permanent"
@@ -295,8 +295,21 @@ export default function Main(props) {
           </Box>
         </Box> */}
       </div>
-      <Button style={{ position: "absolute", top: -55, right: 5 }}>
-        close
+      <Button
+        {...{ to: "/subscriptions" }}
+        component={Link}
+        style={{
+          position: "absolute",
+          top: 20,
+          right: 20,
+          color: "grey",
+          maxWidth: 36,
+          maxHeight: 36,
+          margin: 0,
+          padding: 0,
+        }}
+      >
+        X
       </Button>
     </div>
   );

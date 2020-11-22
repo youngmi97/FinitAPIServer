@@ -354,7 +354,7 @@ export default function Main(props) {
   }
 
   return empty ? (
-    <div>
+    <div style={{ paddingTop: 60 }}>
       <Box
         display="flex"
         bgcolor="background.paper"
@@ -400,7 +400,7 @@ export default function Main(props) {
       </div>
     </div>
   ) : (
-    <div>
+    <div style={{ paddingTop: 60 }}>
       <Box
         display="flex"
         bgcolor="background.paper"
